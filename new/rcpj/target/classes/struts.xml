@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+	
+	
+<struts>
+
+	
+	 <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    
+  <package name="teacher" namespace="/teacher" extends="struts-default,json-default">
+     <action name="TeacherAction_*" class="com.ruicai.edu.action.TeacherAction" method="{1}">
+        <result name="loadManager">/pages/teacher/teacher_list.jsp</result>
+        <result name="loadTeachers" type="json">
+           <param name="root">teachers</param>
+        </result>
+        <result name="checkName" type="json">
+           <param name="root">msg</param>
+        </result>
+        <result name="addTeacher" type="json">
+           <param name="root">msg</param>
+        </result>
+        <result name="updateTeacher" type="json">
+           <param name="root">msg</param>
+        </result>
+        <result name="deleteTeacher" type="json">
+           <param name="root">msg</param>
+        </result>
+        <result name="getTeacherByID" type="json">
+           <param name="root">jsonMessage</param>
+        </result>
+        <result name="loadTeachersByFilter" type="json">
+           <param name="root">teachers</param>
+        </result>
+        <result name="loadAllteachersForSelect" type="json">
+           <param name="root">teachers</param>
+        </result>
+        <result name="loadTeachersByPages" type="json">
+           <param name="root">jsonMessage</param>
+        </result>
+
+     </action>
+  </package>
+  
+ <package name="student" namespace="/student" extends="struts-default,json-default">
+     <action name="StudentAction_*" class="com.ruicai.edu.action.StudentAction" method="{1}">
+         <result name="loadStudents" type="json">
+           <param name="root">students</param>
+          </result>
+         <result name="selectStudentsByTeacherid" type="json">
+           <param name="root">map</param>
+          </result>
+          <result name="loads" type="json">
+            	<param name="root">map</param>
+          </result>
+     </action>
+  </package>
+
+  
+  <package name="login" namespace = "/login" extends="struts-default">
+  <interceptors>
+  		<interceptor name="loginInterceptor" class="com.ruicai.edu.filter.LoginInterceptor"></interceptor>
+  		<interceptor-stack name="myStack">             
+  		  <interceptor-ref name="loginInterceptor">            
+  		     </interceptor-ref>                
+  		 <interceptor-ref name="defaultStack"></interceptor-ref>          
+  		   </interceptor-stack>        
+  		
+	</interceptors>
+<!--	  <default-interceptor-ref name="myStack">   </default-interceptor-ref>
+-->
+        
+		<action name="login" class = "com.ruicai.edu.action.LoginAction">
+		
+			<result name = "success">/pages/frame/main.jsp</result>
+			<result name = "admin_error">/login.jsp</result>
+			<result name = "student_login_ok">/index.jsp</result>
+			<result name = "student_login_error">/login.jsp</result>
+			<result name = "teacher_login_ok">/index.jsp</result>
+			<result name = "teacher_login_error">/login.jsp</result>
+			<result name = "login2">/login.jsp</result>
+			<result name = "login">/login.jsp</result>
+			<result name = "index">/index.jsp</result>
+<!--             引用拦截器： 拦截action      -->
+<!--            <interceptor-ref name="myStack"></interceptor-ref>-->
+		</action>
+	</package>
+	
+		<package name="liuyan" namespace="/liuyan" extends="struts-default,json-default">
+<!--后台页面显示所有数据-->
+		<action name="liuyanAll" class="com.ruicai.edu.action.BBS_Action" method="liuyanAll">
+			<result name="success" type="json" >
+			 <param name="root">list</param>
+			 <param name="contentType">text/html</param>
+			</result>
+		</action>
+<!--后台页面删除数据-->
+		<action name="liuyanDelete" class="com.ruicai.edu.action.BBS_Action" method="liuyanDelete">
+		 <result name="success" type="json">
+		  <param name="root">mag</param>
+		  <param name="contentType">text/html</param>
+		 </result>
+		</action>
+<!--后台页面查询数据-->
+		<action name="liuyanFind" class="com.ruicai.edu.action.BBS_Action" method="liuyanFind">
+		<result name="success" type="json"> 
+		<param name="root">list</param>
+		<param name="contentType">text/html</param>
+		</result>
+		</action>
+<!--前台页面显示数据-->
+		<action name="liuyanShow" class="com.ruicai.edu.action.BBS_Action" method="liuyanShow">
+		<result name="success" type="json">
+		<param name="root">tlist</param>
+		<param name="contenType">text/html</param>
+		</result>
+		</action>
+<!--显示留言-->
+        <action name="liuyanOnclick" class="com.ruicai.edu.action.BBS_Action" method="liuyanOnclick">
+		<result name="success" type="json">
+		<param name="root">list</param>
+		<param name="contenType">text/html</param>
+		</result>
+		</action>
+<!--添加留言-->
+        <action name="liuyanAdd" class="com.ruicai.edu.action.BBS_Action" method="liuyanAdd">
+         <result name="success" type="redirect">liuyanOnclick.action</result>
+        </action>
+	</package>
+	
+	<package name="evaluate" namespace="/evaluate" extends="struts-default,json-default">
+     <action name="EvaluateAction_*" class="com.ruicai.edu.action.EvaluateAction" method="{1}">
+        <result name="loadManager">/pages/lyandpj/pingjia_list.jsp</result>
+        <result name="loadEvaluates" type="json">
+        	<param name="root">evaluates</param>
+        </result>
+        <result name="deleteEvaluate" type="json">
+           <param name="root">msg</param>
+        </result>
+        <result name="addEvaluate" type="json">
+        	<param name="root">msg</param>
+        </result>
+        <result name="updateEvaluate" type="json">
+        	<param name="root">msg</param>
+        </result>
+        
+        <!-- 学生评教时跳转到评教界面  -->
+        <!-- 由于评价项在短期内不会进行修改，且json主要针对ajax异步刷新，该页面不适用于异步刷新，因此放入session中即可 -->
+        <result name="loadEvaluatesStu">/point_table.jsp</result>
+     </action>
+  </package>
+  
+  
+    <package name="pinjia" namespace="/pinjia"  extends="struts-default,json-default">
+		<action name="pin_*" class="com.ruicai.edu.action.PinJiaAction" method="{1}">
+		
+		<result name="error">/index.jsp</result>
+	
+		<result name="success" type="chain">
+		
+		<param name="actionName">EvaluateAction_execute</param>
+		<param name="namespace">/evaluate</param>
+		
+		</result><!--   -->
+		
+		</action>
+	</package>
+  
+  
+   <package name="grade" namespace="/grade" extends="struts-default,json-default">
+     <action name="Grade" class="com.ruicai.edu.action.GradeAction" >
+<!--     	-->
+<!--		<result name = "load">/pages/lyangpj/nopingjia_list.jsp-->
+<!--     	</result>-->
+<!--     	-->
+     	<result name = "loadStudent" type = "json">
+     		<param name="root">studentList</param>
+     	</result>
+     	
+     	<result name = "loadTeacher" type = "json">
+     		<param name="root">teacherList</param>
+     	</result>
+     	
+        <result name="success">/index.jsp</result>
+        
+        <result name="findsuccess" type="json">
+          <param name="root">list</param>
+        </result>
+        
+        <result name="bytimesuccess" type="json">
+          <param name="root">list</param>
+        </result>
+        <result name="findgradeByStudentID" type="json">
+          <param name="root">map</param>
+        </result>
+        
+        <result name="bynamesuccess" type="json">
+         <param name="root">list</param>
+        </result>
+        
+        <result name="allsuccess" type="json">
+          <param name="root">list</param>
+        </result>
+     </action>
+  </package>
+  
+  <package name="classes" namespace="/classes" extends="struts-default,json-default">
+       <action name="classesAction" class="com.ruicai.edu.action.ClassesAction">
+         <result name="clasuccess" type="json">
+           <param name="root">list</param>
+         </result>
+         
+         <result name="addsuccess" type="json" >
+          <param name="root">map</param>
+          <param name="contentType">text/html;charset=utf-8</param>
+         </result>
+         
+          <result name="updatesuccess" type="json" >
+          <param name="root">map</param>
+          <param name="contentType">text/html;charset=utf-8</param>
+         </result>
+         
+          <result name="findsuccess" type="json">
+           <param name="root">list</param>
+         </result>
+         
+         <result name="byidsuccess" type="json">
+           <param name="root">list</param>
+         </result>
+         <result name="tsuccess" type="json">
+          <param name="root">tlist</param>
+         </result>
+       </action>
+    </package>
+    
+    <package name="relation" namespace="/relation" extends="struts-default,json-default">
+      <action name="relationAction" class="com.ruicai.edu.action.RelationAction">
+         <result name="findsuccess" type="json">
+           <param name="root">list</param>
+         </result>
+      </action>
+    </package>
+  
+</struts>  
