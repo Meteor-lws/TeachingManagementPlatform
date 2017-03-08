@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="jdbc.properties" />
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driverClassName}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/ruicai/edu/mapper/studentMapper.xml" />
+
+		<mapper resource="com/ruicai/edu/mapper/teacherMapper.xml" />
+
+		<mapper resource="com/ruicai/edu/mapper/bbsMapper.xml" />
+
+		<mapper resource="com/ruicai/edu/mapper/evaluateMapper.xml" />
+
+		<mapper resource="com/ruicai/edu/mapper/pinjiaMapper.xml" />
+
+		<mapper resource="com/ruicai/edu/mapper/gradeMapper.xml" />
+		
+		<mapper resource="com/ruicai/edu/mapper/classesMapper.xml"/>
+		
+		<mapper resource="com/ruicai/edu/mapper/relationMapper.xml"/>
+	</mappers>
+
+</configuration>

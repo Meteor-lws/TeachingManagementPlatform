@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ruicai.edu.dao.RelationDao">
+   <select id="findbyid" parameterType="java.lang.Integer" resultType="com.ruicai.edu.entity.Relation" >
+     select * from relation where r_sid=#{r_sid}
+   </select>
+   </mapper>
