@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="teacher" location="30,10" size="280,280">
+    <action name="TeacherAction_*" location="65,64" size="150,167">
+      <result name="loadManager">
+        <resourceEdge source="loadManager" routing="0" target="teacher_list.jsp" />
+      </result>
+      <result name="loadTeachers" />
+      <result name="checkName" />
+      <result name="addTeacher" />
+      <result name="updateTeacher" />
+      <result name="deleteTeacher" />
+      <result name="getTeacherByID" />
+      <result name="loadTeachersByFilter" />
+      <result name="loadAllteachersForSelect" />
+      <result name="loadTeachersByPages" />
+    </action>
+  </package>
+  <package name="student" location="415,10" size="280,140">
+    <action name="StudentAction_*" location="0,0" size="0,0">
+      <result name="loadStudents" />
+      <result name="selectStudentsByTeacherid" />
+      <result name="loads" />
+    </action>
+  </package>
+  <package name="login" location="0,0" size="0,0">
+    <action name="login" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="main.jsp" />
+      </result>
+      <result name="admin_error">
+        <resourceEdge source="admin_error" routing="0" target="login.jsp" />
+      </result>
+      <result name="student_login_ok">
+        <resourceEdge source="student_login_ok" routing="0" target="index.jsp" />
+      </result>
+      <result name="student_login_error">
+        <resourceEdge source="student_login_error" routing="0" target="login.jsp" />
+      </result>
+      <result name="teacher_login_ok">
+        <resourceEdge source="teacher_login_ok" routing="0" target="index.jsp" />
+      </result>
+      <result name="teacher_login_error">
+        <resourceEdge source="teacher_login_error" routing="0" target="login.jsp" />
+      </result>
+      <result name="login2">
+        <resourceEdge source="login2" routing="0" target="login.jsp" />
+      </result>
+      <result name="login">
+        <resourceEdge source="login" routing="0" target="login.jsp" />
+      </result>
+      <result name="index">
+        <resourceEdge source="index" routing="0" target="index.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="liuyan" location="0,0" size="0,0">
+    <action name="liuyanAll" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="liuyanDelete" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="liuyanFind" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="liuyanShow" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="liuyanOnclick" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="liuyanAdd" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+  </package>
+  <package name="evaluate" location="0,0" size="0,0">
+    <action name="EvaluateAction_*" location="0,0" size="0,0">
+      <result name="loadManager" />
+      <result name="loadEvaluates" />
+      <result name="deleteEvaluate" />
+      <result name="addEvaluate" />
+      <result name="updateEvaluate" />
+      <result name="loadEvaluatesStu" />
+    </action>
+  </package>
+  <package name="pinjia" location="0,0" size="0,0">
+    <action name="pin_*" location="0,0" size="0,0">
+      <result name="error" />
+      <result name="success" />
+    </action>
+  </package>
+  <package name="grade" location="0,0" size="0,0">
+    <action name="Grade" location="0,0" size="0,0">
+      <result name="loadStudent" />
+      <result name="loadTeacher" />
+      <result name="success" />
+      <result name="findsuccess" />
+      <result name="bytimesuccess" />
+      <result name="findgradeByStudentID" />
+      <result name="bynamesuccess" />
+      <result name="allsuccess" />
+    </action>
+  </package>
+  <package name="classes" location="0,0" size="0,0">
+    <action name="classesAction" location="0,0" size="0,0">
+      <result name="clasuccess" />
+      <result name="addsuccess" />
+      <result name="updatesuccess" />
+      <result name="findsuccess" />
+      <result name="byidsuccess" />
+      <result name="tsuccess" />
+    </action>
+  </package>
+  <webResource name="teacher_list.jsp" path="/pages/teacher/teacher_list.jsp" location="69,345" size="150,55" />
+  <webResource name="student_list.jsp" path="/pages/student/student_list.jsp" location="454,205" size="150,55" />
+  <webResource name="main.jsp" path="/pages/frame/main.jsp" location="0,0" size="0,0" />
+  <webResource name="login.jsp" path="/login.jsp" location="0,0" size="0,0" />
+  <webResource name="index.jsp" path="/index.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

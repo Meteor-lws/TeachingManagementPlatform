@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ruicai.edu.dao.ClassesDao">
+    <select id="selectClass" parameterType="String" resultType="com.ruicai.edu.entity.Classes">
+     select c_id,c_name,t_name,to_char(c_stime,'YYYY-MM-DD') c_stime,to_char(c_etime,'YYYY-MM-DD') c_etime,c_tid from class c,teacher t where c.c_type=0 and c.c_tid=t_id and t.t_leixing='班主任'
+    </select>
+    
+    <insert id="addClass" parameterType="java.util.Map">
+       insert into class(c_id,c_name,c_tid,c_stime,c_etime,c_type) values(BBS_SEQUENCES.nextval,#{c_name},#{c_tid},to_date(#{c_stime},'yyyy-mm-dd'),to_date(#{c_etime},'yyyy-mm-dd'),#{c_type})
+    </insert> 
+    
+    <update id="updateClass" parameterType="com.ruicai.edu.entity.Classes">
+       update Class set c_name=#{c_name},c_tid=#{c_tid},c_type=#{c_type},c_stime=to_date(#{c_stime},'yyyy-mm-dd hh24:mi:ss'),c_etime=to_date(#{c_etime},'yyyy-mm-dd hh24:mi:ss') where c_id=#{c_id}
+    </update>
+    
+    <select id="findall" parameterType="String" resultType="com.ruicai.edu.entity.Classes">
+      select * from class 
+    </select>
+    
+    <select id="findbyid" parameterType="int" resultType="com.ruicai.edu.entity.Classes">
+      select c_id,c_name,t_name,to_char(c_stime,'YYYY-MM-DD') c_stime,to_char(c_etime,'YYYY-MM-DD') c_etime,c_tid from class,teacher where c_id=#{cid} AND c_tid=t_id
+    </select>
+    
+    <select id="findteacher" parameterType="String" resultType="com.ruicai.edu.entity.Teacher">
+     select t_id,t_name from teacher t where t.t_leixing='班主任'
+    </select>
+  </mapper>
