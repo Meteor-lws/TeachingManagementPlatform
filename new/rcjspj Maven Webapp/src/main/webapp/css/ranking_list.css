@@ -1,0 +1,29 @@
+@charset "gb2312";
+/* CSS Document */
+.container{ padding-bottom:220px; position:relative}
+/*µº∫Ω*/
+.nav2{ width:1000px; height:40px; margin:20px 50px 0px; overflow:hidden; background:#005bac}
+.nav2 li{height:40px; padding:0px 20px; float:left}
+.nav2 li:hover,.nav2 .curr_area{ background:#7d9533; text-shadow:0px -1px 0px white;-webkit-text-shadow:0px -1px 0px white;-moz-text-shadow:0px -1px 0px white;-o-text-shadow:0px -1px 0px white;}
+.nav2 a{ display:block; height:100%;font-size:18px; color:white; line-height:40px}
+ol li{width:1000px; height:200px;  padding:25px 0px; padding-right:0px; margin:20px auto 0px;box-shadow:0px 0px 10px 1px rgba(0,0,0,.05); overflow:hidden}
+.avatar{ width:200px; height:200px; margin-left:34px; overflow:hidden;}
+.avatar img{ width:100%; height:auto}
+.page{ overflow:hidden}
+dl,.comment,.go_page,.avatar{ float:left}
+ol li dl{ width:153px; padding-right:62px; margin-top:20px; height:160px; border-right:dotted 1px #7f7f7f; float:left}
+ol dt{ font-size:30px; color:#999;font-style:italic; margin-bottom:22px}
+ol dl dd{ font-size:18px; line-height:24px; color:#333333}
+.comment{ width:426px; margin:20px 62px}
+.comment p{ font-size:16px; line-height:24px; color:black}
+.comment h4{ font-size:20px; font-style:italic; margin-bottom:20px}
+ol li:nth-child(1) dt{ color:#c30d23}
+ol li:nth-child(2) dt{ color:#005bac}
+ol li:nth-child(3) dt{ color:#7d9533}
+/*∑÷“≥*/
+.page{ position:absolute; left:50%; bottom:100px; transform:translate(-50%); overflow:hidden; height:40px;}
+.page input,.go_page{ float: left; margin-right:10px}
+.page input[type='button']{ width:40px; height:40px; margin:0px; border-radius:4px; border:solid 1px #d6d6d6; color:#999; font-size:16px; background:linear-gradient(to top, #f1f1f1,white); margin-right:10px}
+.go_page span{ font-size:14px; text-indent:20px; line-height:40px; color:#a6a6a6; float:left}
+.go_page input[type='text']{ width:48px; height:38px; border:solid 1px #d6d6d6; margin-right:5px}
+.page input[type='button'].curr_page{ background:linear-gradient(to top,#7e9630,#8ca836); color:white}
