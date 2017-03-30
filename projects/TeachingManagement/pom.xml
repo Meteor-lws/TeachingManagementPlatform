@@ -1,17 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ruicai</groupId>
-  <artifactId>teaching-management</artifactId>
-  <packaging>war</packaging>
-  <version>1.0</version>
-  <name>teaching-management-platform</name>
-  <url>http://maven.apache.org</url>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ruicai</groupId>
+    <artifactId>teaching-management</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>teaching-management-platform</name>
+    <url>http://maven.apache.org</url>
 
-  <dependencies>
+    <properties>
+        <spring.version>4.3.6.RELEASE</spring.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <fastjson.version>1.2.24</fastjson.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <compiler-plugin.version>3.1</compiler-plugin.version>
+    </properties>
 
-  </dependencies>
-  <build>
-    <finalName>teaching-management</finalName>
-  </build>
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <finalName>teaching-management</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
