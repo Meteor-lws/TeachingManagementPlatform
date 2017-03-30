@@ -3,8 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ruicai</groupId>
     <artifactId>teaching-management</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>EvaluationOnline</module>
+        <module>ExaminationOnline</module>
+        <module>EducationManagement</module>
+        <module>SystemManagement</module>
+    </modules>
     <name>teaching-management</name>
     <url>http://maven.apache.org</url>
 
