@@ -1,0 +1,25 @@
+@charset "gb2312";
+/* CSS Document */
+*{ padding:0px; margin:0px; font-weight:normal}
+.container{ width:1100px; margin:10px auto 50px}
+select{ border:none; appearance:none;-webkit-appearance:none;-moz-appearance:none;-o-appearance:none; width:37px; height:17px;color:#808080; background: url(../images/select.png) right no-repeat}
+table{ margin:0px 50px}
+table caption{ line-height:60px; font-size:20px; color:#c30d23}
+table th{font-size:18px; color:#444444}
+tr{ height:50px; line-height:50px; font-size:16px; color:#808080}
+tr:nth-child(odd){ background:#f5f5f5}
+tr td:last-child,tr th:last-child{ text-align:center; border-left: solid 2px white}
+tr td:first-child{ text-indent:30px}
+.comment{ margin:90px 50px 100px; overflow:hidden}
+textarea{ width:1000px; height:175px; background:#f5f5f5; line-height:35px; border:none; color:#999; font-size:16px; padding:0px 10px; outline:none}
+
+.comment h4{ font-size:20px; line-height:40px; text-indent:10px}
+.comment em{ display:block; font-size:14px; color:#999; line-height:38px; margin-bottom:6px; float:right}
+.comment .sure{ width:70px; height:30px; background:#c30d23; font-size:18px; color:white; line-height:30px; text-align:center; clear:right; float:right; cursor:pointer}
+.set_btn{ margin-top:93px; text-align:center}
+.set_btn input{ border:none; outline:none; padding:0px; cursor:pointer;width:90px; height:40px; line-height:40px; color:white; background:#005bac; font-size:20px; display:inline-block; margin:0px 25px; margin-bottom:100px}
+
+/*ÌáÊ¾¿ò*/
+.prompt{ width:400px; height:280px; position:fixed; top:50%; left:50%; margin-left:-200px; margin-top:-140px; text-align:center; border-radius:6px;box-shadow:0px 0px 10px 1px rgba(0,0,0,.05); position:fixed; left:50%; top:50%; background:white; display:none}
+.prompt p{ width:280px; margin:80px auto 0px; text-align:justify; color:#666; font-size:18px; line-height:30px}
+.prompt input{ width:70px; height:30px; line-height:30px; text-align:center; color:white; background:#c30d23; font-size:18px; margin:64px 15px; border:none; cursor:pointer}

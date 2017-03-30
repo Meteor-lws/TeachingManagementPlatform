@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--namespace空间名称，唯一的  -->
+<mapper namespace="com.ruicai.edu.dao.BBS_Dao">
+<!--id：接口执行的sql语句 parameterType 前台给我传的值 resultType返回给后台的值   -->
+
+  <!--查询所有留言  -->
+  <select id="liuyanAll" parameterType="String"  resultType="com.ruicai.edu.entity.BBS">
+    SELECT b_id,b_ly,b_time,t_name,s_name FROM BBS,student,teacher where b_sid=s_id and b_tid=t_id ORDER BY b_id 
+  </select>
+<!--删除指定留言 -->
+  <delete id="liuyanDelete" parameterType="int" >
+   delete from bbs where b_id=#{ids}
+  </delete>
+<!-- 查询指定留言 -->
+  <select id="liuyanFind" parameterType="String" resultType="com.ruicai.edu.entity.BBS">
+  select s_name,t_name,b_ly,b_time from student,teacher,bbs where s_id=b_sid and t_id=b_tid and b_ly like #{b_ly}
+  </select>
+  
+<!--前台显示老师数据-->
+ <select id="liuyanShow" parameterType="int" resultType="com.ruicai.edu.entity.Teacher">
+     SELECT t_name,t_photo,t_zhuanye,t_leixing,t_jianjie FROM teacher where t_id=#{t_id} 
+ </select>
+<!-- 前台显示留言-->
+<select id="liuyanOnclick" parameterType="int" resultType="com.ruicai.edu.entity.BBS">
+SELECT b_id,b_ly,b_time,s_name FROM BBS,student,teacher where b_sid=s_id and b_tid=t_id and b_tid=#{t_id} ORDER BY b_id desc
+</select>
+<!--添加留言 -->
+ <insert id="liuyanAdd" parameterType="java.util.Map">
+   insert into BBS(b_id,b_ly,b_time,b_sid,b_tid) values (BBS_SEQUENCES.nextval,#{text},to_date(#{b_time},'yyyy-mm-dd hh24:mi:ss'),#{s_id},#{t_id})
+ </insert>
+</mapper>

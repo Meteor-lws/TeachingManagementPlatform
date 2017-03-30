@@ -1,0 +1,22 @@
+/*CSS Document*/
+.wrap{width:100%;height:auto;overflow:hidden;background:url("../images/13_bg.png");background-size:cover}
+/* 头部样式 */
+.header{height:140px;overflow:hidden;background:#fff}
+.head{width:1100px;height:140px;margin:0 auto}
+.top{height:40px;line-height:40px;color:#999}
+.top span{color:#c30d23;margin-right:20px}
+.top a{color:#c30d23}
+.logo{width:210px;height:100px;}
+.logo img{width:210px;height:60px;margin-top:20px}
+.nav{height:100px;overflow:hidden;}
+.nav li{float:left;width:110px;height:40px;margin-top:30px;}
+.nav a{display:block;height:40px;line-height:40px;text-align:center;font-size:20px}
+.nav a:hover{background:#005bac;color:#fff}
+.nav a.showMainNav{background:#005bac;color:#fff}
+
+/* 主体样式 */
+.container{width:1100px;margin:10px auto 60px;overflow:hidden;background:#fff}
+
+/* 尾部样式 */
+.footer{width:100%;height:50px;line-height:50px;text-align:center;background:#b5b5b5;color:#fff}
+.footer span{margin-left:40px}

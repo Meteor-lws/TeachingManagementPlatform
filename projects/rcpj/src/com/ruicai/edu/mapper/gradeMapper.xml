@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruicai.edu.dao.GradeDao">
+
+
+	<!-- 通过反射获得接口方法实现 -->
+	<!-- 如果通过反射细线，则 增删改查标签id只能和接口中方法名相同 -->
+	<!-- parameterType 参数的类型可以是基本数据类型，传入的参数类型相同；如果参数是引用类型，则写类的全路径 -->
+	<!-- resultType 如果是基本数据类型（int），则查询出来的字段是一个,如果是集合，可以不写  -->
+	<!-- sql中的占位符根据传入的参数类型取名，如果是map类型，则要和键名相同，如果是对象类型，要和对象中的属性相同 -->
+	<!-- 查找所有评价信息 -->
+    <select id="findgradeByStudentID" resultType="com.ruicai.edu.entity.Grade">
+        select e.e_name,g.g_time,g.g_mark from grade g,evaluate e where  g.g_tid=#{1} and e.e_id=g.g_eid and g.g_sid=#{0} and to_char(sysdate,'yyyy-mm')=to_char(g.g_time,'yyyy-mm')
+    </select>
+    <select id="findAdviceByStudentID" resultType="java.lang.String">
+        select g_advice from grade t where t.g_sid=#{0} and t.g_tid=#{1} and g_eid is null and to_char(sysdate,'yyyy-mm')=to_char(t.g_time,'yyyy-mm')
+    </select>
+    
+    <select id="loadGradeInfoByTeacherId" resultType="com.ruicai.edu.entity.GradeInfo">
+        select c.s_id,c.s_name,c.s_class,decode(c.summark,null,0,c.summark) sum,d.g_advice advice  from(select a.s_id,a.s_name,a.s_class,b.summark from (select s_id,s_name,s_class from student   where s_id in (select r_sid from relation where r_tid=#{tid})) a left join (select g.g_sid,sum(g.g_mark) SUMMARK from grade g where  g.g_tid=#{tid}  group by g.g_sid) b on a.s_id=b.g_sid )
+        c left join (select g_sid,g_advice from  grade  where g_tid=#{tid} and g_eid is null ) d on c.s_id=d.g_sid
+    </select>
+    <select id="getSumMark" resultType="java.lang.Integer">
+             select decode(sum(t.g_mark),null,0,sum(t.g_mark))  from grade t where t.g_tid=#{1} and t.g_sid=#{0} and to_char(sysdate,'yyyy-mm')=to_char(t.g_time,'yyyy-mm')
+    </select>
+
+	<!-- 添加评分项信息  -->
+	<insert id="addGrade" parameterType="com.ruicai.edu.entity.Grade">
+		insert into grade(g_id,g_tid,g_sid,g_mark,g_time,g_eid)
+		values(grade_SEQUENCES.nextval,#{g_tid},#{g_sid},#{g_mark},#{g_time},#{g_eid})
+	</insert>
+
+	<insert id="addGradeAdvice" parameterType="com.ruicai.edu.entity.Grade">
+		insert into
+		grade(g_id,g_tid,g_sid,g_time,g_advice)
+		values(grade_SEQUENCES.nextval,#{g_tid},#{g_sid},#{g_time},#{g_advice})
+	</insert>
+
+
+	<update id="changeRelation" parameterType="com.ruicai.edu.entity.Relation">
+		update relation set r_type=1 where r_tid=#{r_tid} and r_sid=#{r_sid}
+	</update>
+
+	<!--	开启下一轮投票-->
+	<update id="beginNext">
+		update relation set r_type=0
+	</update>
+	
+	<!--	查询未评价的学生-->
+	<select id="selectNoPinJia" resultType="com.ruicai.edu.entity.Student">
+		select s.s_name,s.s_sex, s.s_class,t.t_name
+  			from relation r, student s,teacher t
+ 			where r.r_type = 0
+  		 	and r.r_sid = s.s_id and t.t_class=s.s_class
+	</select>
+	
+	<select id="findgrade" parameterType="String" resultType="com.ruicai.edu.entity.Grade">
+      select t_name,s_name,g_time,g_eid,g_mark,e_name from grade,student,teacher,evaluate where g_sid=s_id and g_tid=t_id and e_id=g_eid
+   </select>
+	
+	<!--	查询每个教师月平均分的语句-->
+	<select id="selectAvg" parameterType="java.lang.String" resultType="com.ruicai.edu.entity.Grade">
+	 select t.t_name, t.t_id, avg(g.g_mark) avg
+   from teacher t, grade g
+  where t.t_id = g.g_tid
+    and g.g_advice is null
+    and to_char(g.g_time, 'yyyy-mm-dd') like CONCAT(CONCAT('%', #{g_time}), '%')
+  group by t.t_id, t.t_name order by avg desc
+	</select>
+<!--	 <resultMap id="allInfo" type="java.util.Map">-->
+<!--        <result column="t.t_name" property="t.t_name" jdbcType="VARCHAR"/>-->
+<!--        <result column="g.g_tid" property="g.g_tid" jdbcType="VARCHAR"/>-->
+<!--        <result column="avg(g.g_mark)" property="avg" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+	<select id="selectBYtime" parameterType="java.util.Map" resultType="com.ruicai.edu.entity.Grade">
+	 select t_name,s_name,g_time,g_eid,g_mark,e_name from grade,student,teacher,evaluate
+	 where g_sid=s_id 
+	 and g_tid=t_id 
+	 and e_id=g_eid
+	  and to_char(g_time, 'yyyy-mm-dd') like CONCAT(CONCAT('%', #{g_time}), '%')
+	</select>
+	
+	<select id="selectBYname" parameterType="String" resultType="com.ruicai.edu.entity.Grade">
+	 select t_name,s_name,g_time,g_eid,g_mark,e_name from grade,student,teacher,evaluate
+	   where g_sid=s_id 
+	   and g_tid=t_id 
+	   and e_id=g_eid
+	   and (s_name  LIKE CONCAT(CONCAT('%', #{g_name}), '%') or t_name LIKE CONCAT(CONCAT('%', #{g_name}), '%') ) 
+	</select>
+	
+	<select id="selectAll" parameterType="String" resultType="com.ruicai.edu.entity.Grade">
+	  select t_name,s_name,g_time,g_eid,g_mark,e_name from grade,student,teacher,evaluate
+	   where g_sid=s_id 
+	   and g_tid=t_id 
+	   and e_id=g_eid
+	   and (s_name  LIKE CONCAT(CONCAT('%', #{g_name}), '%') or t_name LIKE CONCAT(CONCAT('%', #{g_name}), '%') ) 
+	   and to_char(g_time, 'yyyy-mm-dd') like CONCAT(CONCAT('%', #{g_time}), '%')
+	</select>
+	
+</mapper>
