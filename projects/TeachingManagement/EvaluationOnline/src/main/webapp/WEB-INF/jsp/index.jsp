@@ -2,8 +2,8 @@
   Created by IntelliJ IDEA.
   User: lws
   Date: 2017/3/30
-  Time: 15:01
-  教学管理平台首页
+  Time: 15:02
+  在线评教首页
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -12,11 +12,10 @@
 %>
 <html>
 <head>
-    <title>教学管理平台</title>
+    <title>在线评教</title>
     <base href="<%=basePath%>">
 </head>
 <body>
-<h2>教学管理</h2>
-<a href="/EvaluationOnline">在线评教</a>
+<h2>在线评教</h2>
 </body>
 </html>
