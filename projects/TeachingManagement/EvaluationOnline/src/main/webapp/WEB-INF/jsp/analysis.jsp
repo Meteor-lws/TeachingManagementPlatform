@@ -1,9 +1,9 @@
 <%--
   Created by IntelliJ IDEA.
   User: lws
-  Date: 2017/3/30
-  Time: 16:55
-  在线评教首页
+  Date: 2017/3/31
+  Time: 16:04
+  评价分析页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -12,10 +12,10 @@
 %>
 <html>
 <head>
-    <title>在线评教</title>
+    <title>评价分析</title>
     <base href="<%=basePath%>">
 </head>
 <body>
-<h2>在线评教</h2>
+<h2>评价分析</h2>
 </body>
 </html>
