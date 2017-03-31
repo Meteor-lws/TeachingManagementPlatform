@@ -23,6 +23,12 @@
     <script src="js/message.js"></script>
 </head>
 <body>
-<h2>留言审核</h2>
+<div id="message-content" data-options="border:false"></div>
+<div id="message-search-option">
+    <div data-options="name:'content'">留言内容</div>
+    <div data-options="name:'from'">留言人</div>
+    <div data-options="name:'to'">留言对象</div>
+    <div data-options="name:'time'">留言时间</div>
+</div>
 </body>
 </html>

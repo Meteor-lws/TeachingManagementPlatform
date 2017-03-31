@@ -45,7 +45,7 @@ function showDatagrid() {
             handler: function () {
             }
         }, {
-            text: '<input id=\'item-search\' style=\'width: 300px\'>'
+            text: '<input id="item-search" style="width: 300px">'
         }]
     });
 }
