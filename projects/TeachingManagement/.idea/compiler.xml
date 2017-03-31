@@ -8,11 +8,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TeachingManagement" />
+        <module name="EducationManagement" />
+        <module name="EvaluationOnline" />
+        <module name="ExaminationOnline" />
+        <module name="SystemManagement" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="TeachingManagement" target="1.5" />
+      <module name="EducationManagement" target="1.8" />
+      <module name="EvaluationOnline" target="1.8" />
+      <module name="ExaminationOnline" target="1.8" />
+      <module name="SystemManagement" target="1.8" />
+      <module name="TeachingManagement" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
