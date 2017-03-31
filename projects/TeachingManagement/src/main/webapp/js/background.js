@@ -5,5 +5,7 @@
  */
 
 $(function () {
-
+    $('#back-nav').find('a').click(function () {
+        alert($(this).text());
+    });
 });

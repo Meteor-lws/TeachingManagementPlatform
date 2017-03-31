@@ -25,29 +25,29 @@
 <div data-options="region:'west',title:'后台管理',split:true" style="width: 230px">
     <div id="back-nav" class="easyui-accordion" data-options="multiple:true" style="width: 100%">
         <div title="系统管理">
-            <ul id="back-system">
+            <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">密码管理</a></li>
             </ul>
         </div>
-        <div title="在线评教子系统" data-options="selected:true">
-            <ul id="back-evaluation">
+        <div title="在线评教子系统">
+            <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">评价项管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">留言审核</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">评价分析</a></li>
             </ul>
         </div>
         <div title="在线考试子系统">
-            <ul id="back-examination">
+            <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">考试安排</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">试题管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">评分分析</a></li>
             </ul>
         </div>
         <div title="教务管理子系统">
-            <ul id="back-education">
+            <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">考勤管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">周报管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">课表管理</a></li>
