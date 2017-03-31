@@ -19,9 +19,39 @@
     <script src="easyui/jquery.min.js"></script>
     <script src="easyui/jquery.easyui.min.js"></script>
     <script src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/item.js"></script>
 </head>
 <body>
-<h2>评价项管理</h2>
+<div id="item-content" data-options="border:false"></div>
+<div id="item-search-option">
+    <div data-options="name:'content'">评价项</div>
+    <div data-options="name:'enable'">是否启用</div>
+    <div data-options="name:'type'">评价类型</div>
+</div>
+<table id="item-dialog" align="center">
+    <tr>
+        <td colspan="2" align="center">
+            <span id="evaluation-warning" style="font-size: smaller;color: red">&nbsp</span>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">是否启用:</td>
+        <td><input id="evaluation-enable" class="easyui-switchbutton" checked></td>
+    </tr>
+    <tr>
+        <td align="right">评价类型:</td>
+        <td>
+            <select id="evaluation-type" style="width: 140px"></select>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" style="vertical-align: top">评价项:</td>
+        <td>
+            <input id="evaluation-content" class="easyui-textbox" data-options="multiline:true"
+                   style="width: 140px;height: 70px">
+        </td>
+    </tr>
+</table>
 </body>
 </html>
