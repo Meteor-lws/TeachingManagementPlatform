@@ -17,6 +17,7 @@ function showDatagrid() {
         fitColumns: true,
         striped: true,
         rownumbers: true,
+        border: false,
         pagination: true,
         pageSize: 20,
         pageNumber: 1,
@@ -29,19 +30,19 @@ function showDatagrid() {
         toolbar: [{
             iconCls: 'icon-add',
             text: '添加',
-            width: 60,
+            width: 65,
             handler: function () {
             }
         }, {
             iconCls: 'icon-edit',
             text: '修改',
-            width: 60,
+            width: 65,
             handler: function () {
             }
         }, {
             iconCls: 'icon-remove',
             text: '删除',
-            width: 60,
+            width: 65,
             handler: function () {
             }
         }, {

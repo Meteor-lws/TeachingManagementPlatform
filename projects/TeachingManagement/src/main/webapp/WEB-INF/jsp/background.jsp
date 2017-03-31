@@ -23,7 +23,7 @@
 </head>
 <body class="easyui-layout">
 <div data-options="region:'west',title:'后台管理',split:true" style="width: 230px">
-    <div id="back-nav" class="easyui-accordion" data-options="multiple:true" style="width: 100%">
+    <div id="back-nav" class="easyui-accordion" data-options="multiple:true,border:false" style="width: 100%">
         <div title="系统管理">
             <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>

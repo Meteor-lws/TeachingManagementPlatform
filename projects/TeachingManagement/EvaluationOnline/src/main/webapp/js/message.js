@@ -16,6 +16,7 @@ function showContent() {
         fitColumns: true,
         striped: true,
         rownumbers: true,
+        border: false,
         pagination: true,
         pageSize: 20,
         pageNumber: 1,
@@ -29,7 +30,7 @@ function showContent() {
         toolbar: [{
             iconCls: 'icon-remove',
             text: '删除',
-            width: 60,
+            width: 65,
             handler: function () {
             }
         }, {
