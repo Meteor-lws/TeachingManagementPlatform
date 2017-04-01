@@ -1,17 +1,17 @@
-package com.ruicai.web.controller;
+package com.ruicai.teaching.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 主网页控制器
+ * 教学管理平台控制器
  *
- * Created by lws on 2017/4/1.
+ * Created by lws on 2017/3/30.
  */
 @SuppressWarnings("SameReturnValue")
 @Controller
-public class WebController {
+public class TeachingController {
 
     @RequestMapping(value = "/front", method = RequestMethod.GET)
     public String front() {
