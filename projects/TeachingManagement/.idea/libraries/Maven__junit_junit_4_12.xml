@@ -4,13 +4,9 @@
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="file://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.3.6.RELEASE" />
-      <root url="file://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/3.0.1" />
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.3.6.RELEASE" />
-      <root url="file://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/3.0.1" />
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-sources.jar!/" />
     </SOURCES>
   </library>
