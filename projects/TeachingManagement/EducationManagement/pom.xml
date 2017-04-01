@@ -15,6 +15,6 @@
     </dependencies>
 
     <build>
-        <finalName>education-management</finalName>
+        <finalName>education</finalName>
     </build>
 </project>

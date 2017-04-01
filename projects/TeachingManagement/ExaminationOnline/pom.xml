@@ -15,6 +15,6 @@
     </dependencies>
 
     <build>
-        <finalName>examination-online</finalName>
+        <finalName>examination</finalName>
     </build>
 </project>

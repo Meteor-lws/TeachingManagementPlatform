@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <title>后台管理侧</title>
+    <title>后台管理</title>
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" href="easyui/themes/icon.css"/>

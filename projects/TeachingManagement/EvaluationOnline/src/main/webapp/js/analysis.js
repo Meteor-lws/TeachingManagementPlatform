@@ -6,7 +6,7 @@
 
 $(function () {
     showResult();
-    bindSearchOption();
+    util.bindSearchOption('analysis-search', search);
     showDetail();
 });
 
@@ -40,29 +40,17 @@ function showResult() {
     });
 }
 
-function bindSearchOption() {
-    $('#analysis-search').searchbox({
-        searcher: function (value, name) {
-            console.log(name + ':' + value);
-        },
-        menu: '#analysis-search-option',
-        prompt: '请输入搜索内容'
-    });
+function search(value, name) {
+    console.log(name + ':' + value);
 }
 
 function showDetail() {
-    $('#analysis-detail').datagrid({
-        url: '',
-        fit: true,
-        fitColumns: true,
-        striped: true,
-        rownumbers: true,
-        border: false,
-        columns: [[
-            {field: 'evaluation', title: '评价项', width: 30},
-            {field: 'time', title: '评价时间', width: 20},
-            {field: 'score', title: '评分', width: 20},
-            {field: 'satisfaction', title: '满意度', width: 20}
-        ]]
-    });
+    var columns = [
+        {field: 'evaluation', title: '评价项', width: 30},
+        {field: 'time', title: '评价时间', width: 20},
+        {field: 'score', title: '评分', width: 20},
+        {field: 'satisfaction', title: '满意度', width: 20}
+    ];
+
+    util.datagrid('analysis-detail', '', columns, null);
 }
