@@ -10,6 +10,7 @@
         <module>ExaminationOnline</module>
         <module>EducationManagement</module>
         <module>SystemManagement</module>
+        <module>Web</module>
     </modules>
     <name>teaching-management</name>
     <url>http://maven.apache.org</url>
