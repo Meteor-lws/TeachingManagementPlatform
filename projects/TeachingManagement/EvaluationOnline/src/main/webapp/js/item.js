@@ -53,7 +53,7 @@ function showDatagrid() {
         text: '<input id="item-search" style="width: 300px">'
     }];
 
-    util.datagrid('item-content', 'evaluation-item', columns, tools);
+    util.datagrid('item-content', 'data/evaluation-item.json', columns, tools);
 }
 
 function bindEvaluationType() {
