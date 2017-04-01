@@ -1,0 +1,19 @@
+[
+  {
+    "id": "A",
+    "selected": true,
+    "text": "A"
+  },
+  {
+    "id": "B",
+    "text": "B"
+  },
+  {
+    "id": "C",
+    "text": "C"
+  },
+  {
+    "id": "D",
+    "text": "D"
+  }
+]

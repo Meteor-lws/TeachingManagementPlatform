@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "state": "open",
+    "text": "选择题"
+  },
+  {
+    "id": 2,
+    "state": "open",
+    "text": "判断题"
+  },
+  {
+    "id": 3,
+    "state": "open",
+    "text": "填空题"
+  },
+  {
+    "id": 4,
+    "state": "open",
+    "text": "编程题"
+  },
+  {
+    "id": 5,
+    "state": "open",
+    "text": "简答题"
+  }
+]
