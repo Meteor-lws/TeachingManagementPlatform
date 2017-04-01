@@ -29,29 +29,30 @@
     <div data-options="name:'enable'">是否启用</div>
     <div data-options="name:'type'">评价类型</div>
 </div>
-<table id="item-dialog" align="center">
-    <tr>
-        <td colspan="2" align="center">
-            <span id="evaluation-warning" style="font-size: smaller;color: red">&nbsp</span>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">是否启用:</td>
-        <td><input id="evaluation-enable" class="easyui-switchbutton" checked></td>
-    </tr>
-    <tr>
-        <td align="right">评价类型:</td>
-        <td>
-            <select id="evaluation-type" style="width: 140px"></select>
-        </td>
-    </tr>
-    <tr>
-        <td align="right" style="vertical-align: top">评价项:</td>
-        <td>
-            <input id="evaluation-content" class="easyui-textbox" data-options="multiline:true"
-                   style="width: 140px;height: 70px">
-        </td>
-    </tr>
-</table>
+<div id="item-dialog" align="center">
+    <table>
+        <tr>
+            <td colspan="2" align="center">
+                <span id="evaluation-warning" style="font-size: smaller;color: red">&nbsp</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" width="70px"><label for="evaluation-enable">是否启用:</label></td>
+            <td><input id="evaluation-enable" class="easyui-switchbutton" checked></td>
+        </tr>
+        <tr>
+            <td align="right"><label for="evaluation-type">评价类型:</label></td>
+            <td>
+                <select id="evaluation-type" style="width: 140px"></select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="vertical-align: top"><label for="evaluation-content">评价项:</label></td>
+            <td>
+                <input id="evaluation-content" class="easyui-textbox" data-options="multiline:true" style="width: 140px;height: 70px">
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

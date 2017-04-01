@@ -65,11 +65,43 @@ function bindEvaluationType() {
     });
 }
 
-function showDialog(index) {
-    console.log(index);
-    if (index === null) {
-        alert('添加');
+function showDialog(row) {
+    var title, buttonText, buttonIcon;
+    if (row === null) {
+        title = '添加评价项';
+        buttonText = '添加';
+        buttonIcon = 'icon-add';
     } else {
-        alert('修改');
+        title = '修改评价项';
+        buttonText = '修改';
+        buttonIcon = 'icon-edit';
     }
+    $('#item-dialog').dialog({
+        title: title,
+        width: 300,
+        height: 240,
+        modal: true,
+        closable: false,
+        resizable: false,
+        buttons: [{
+            width: 80,
+            text: buttonText,
+            iconCls: buttonIcon,
+            handler: function () {
+                closeDialog();
+            }
+        }, {
+            width: 80,
+            text: '取消',
+            iconCls: 'icon-cancel',
+            handler: function () {
+                closeDialog();
+            }
+        }]
+    });
+}
+
+function closeDialog() {
+    $('#evaluation-warning').val('&nbsp');
+    $('#item-dialog').dialog('close');
 }
