@@ -1,18 +1,19 @@
-package com.ruicai.education.controler;
+package com.ruicai.system.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 课件管理
+ * 教师管理
  * Created by XuMing on 2017/3/31.
  */
 @Controller
-@RequestMapping("/courseWares")
-public class CourseWaresAction {
+@RequestMapping("/teacher")
+public class TeacherAction {
 
     @RequestMapping("/index.action")
     public String index() {
-        return "coursewaresEdit";
+
+        return "teacherEdit";
     }
 }

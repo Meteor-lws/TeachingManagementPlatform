@@ -20,25 +20,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="225ccc4d-0bbe-4730-bef8-c7a1278dc614" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/ScheduleAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/WeeklyAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/WorkAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/coursewaresEdit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/weeklyEdit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/workEdit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/js/scheduleEdit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/js/weeklyEdit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/js/workEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/datagrid_data1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/ClassAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/PassAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/StudentAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/TeacherAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/resources/applicationContext.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/resources/springmvc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/classEdit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/passEdit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/studentEdit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/teacherEdit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/datagrid_data1.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/classEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/passEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/scheduleEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/studentEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/weeklyEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/workEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/list.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EducationManagement/src/main/webapp/easyui/jquery.min.js" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/easyui/jquery.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java" afterPath="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp" afterPath="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,11 +72,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/web.xml">
+      <file leaf-file-name="teacherEdit.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/teacherEdit.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="29" column="48" lean-forward="true" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
+            <state relative-caret-position="-60">
+              <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="datagrid_data1.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/datagrid_data1.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -116,7 +134,6 @@
         <option value="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/SystemManagement/pom.xml" />
-        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/background.js" />
         <option value="$PROJECT_DIR$/src/main/resources/teaching-servlet.xml" />
         <option value="$PROJECT_DIR$/EvaluationOnline/src/main/resources/evaluation-sevlet.xml" />
@@ -135,9 +152,18 @@
         <option value="$PROJECT_DIR$/EducationManagement/src/main/resources/springmvc.xml" />
         <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/workEdit.jsp" />
         <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/weeklyEdit.jsp" />
-        <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp" />
         <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/coursewaresEdit.jsp" />
         <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/js/index.js" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/TeacherAction.java" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/resources/springmvc.xml" />
+        <option value="$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp" />
+        <option value="$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/studentEdit.jsp" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/teacherEdit.jsp" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/passEdit.jsp" />
+        <option value="$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/classEdit.jsp" />
       </list>
     </option>
   </component>
@@ -223,6 +249,184 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SystemManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeachingManagement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="ExaminationOnline" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -280,6 +484,10 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -300,10 +508,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -336,11 +540,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Workspace\TeachingManagement\SystemManagement\src\main\webapp" />
+      <recent name="F:\Workspace\TeachingManagement\SystemManagement\src\main\java\com\ruicai\system\controller" />
+      <recent name="F:\Workspace\TeachingManagement\SystemManagement\src\main\webapp\WEB-INF\jsp" />
       <recent name="F:\Workspace\TeachingManagement\EducationManagement\src\main\webapp" />
-      <recent name="F:\Workspace\TeachingManagement\EducationManagement\src\main\java\com\ruicai\education\controler" />
-      <recent name="F:\Workspace\TeachingManagement\EducationManagement\src\main\webapp\easyui" />
-      <recent name="F:\Workspace\TeachingManagement\EducationManagement\src\main\webapp\WEB-INF\jsp" />
-      <recent name="F:\Workspace\TeachingManagement\EducationManagement\src\main\resources" />
+      <recent name="F:\Workspace\TeachingManagement\SystemManagement\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Work\TeachingManagement\SystemManagement\src\main\webapp\WEB-INF\jsp" />
@@ -898,7 +1102,7 @@
       <workItem from="1490950089213" duration="703000" />
       <workItem from="1490953335226" duration="8375000" />
       <workItem from="1491016612066" duration="175000" />
-      <workItem from="1491017615936" duration="1530000" />
+      <workItem from="1491017615936" duration="4419000" />
     </task>
     <task id="LOCAL-00001" summary="项目结构调整">
       <created>1490863607147</created>
@@ -1019,11 +1223,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491018298616</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="EducationManagement 模块的jsp ，web.xml，js,controler 完善">
+      <created>1491019382433</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1491019382433</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32088000" />
+    <option name="totallyTimeSpent" value="34977000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1036,6 +1247,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1050,7 +1262,7 @@
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25189108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25189108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1131,7 +1343,8 @@
     <MESSAGE value="上传留言审核基本页面" />
     <MESSAGE value="样式微调" />
     <MESSAGE value="EducationManagement 配置文件添加springmvc.xml  applicationContext.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="EducationManagement 配置文件添加springmvc.xml  applicationContext.xml" />
+    <MESSAGE value="EducationManagement 模块的jsp ，web.xml，js,controler 完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="EducationManagement 模块的jsp ，web.xml，js,controler 完善" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1145,53 +1358,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp" />
-    <entry file="file://$PROJECT_DIR$/ExaminationOnline/src/main/webapp/WEB-INF/jsp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExaminationOnline/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeachingManagement.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EducationManagement/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExaminationOnline/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/test.jsp" />
-    <entry file="file://$PROJECT_DIR$/target/teaching-management/index.jsp" />
-    <entry file="file://$PROJECT_DIR$/target/teaching-management/WEB-INF/web.xml" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.6.RELEASE/spring-web-4.3.6.RELEASE-sources.jar!/org/springframework/web/bind/annotation/RequestMapping.java" />
     <entry file="file://$PROJECT_DIR$/EvaluationOnline/src/main/resources/teaching-servlet.xml" />
     <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/front.jsp" />
     <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/background.jsp" />
@@ -1216,13 +1382,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1544,22 +1703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="11" column="92" lean-forward="true" selection-start-line="11" selection-start-column="92" selection-end-line="11" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/js/workEdit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1568,10 +1711,139 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <folding>
+            <marker date="1490959451844" expanded="true" signature="476:499" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="1064:1087" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="1651:1674" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="2229:2252" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="2813:2836" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="3402:3425" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="3999:4022" ph="..." />
+            <marker date="1490959451844" expanded="true" signature="4577:4600" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/datagrid_data1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/TeacherAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/ClassAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/java/com/ruicai/system/controller/PassAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="29" column="48" lean-forward="true" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
+        <state relative-caret-position="259">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="27" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/resources/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/studentEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/CourseWaresAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/webapp/WEB-INF/jsp/scheduleEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="79" lean-forward="false" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/passEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EducationManagement/src/main/java/com/ruicai/education/controler/ScheduleAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/classEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/teacherEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/datagrid_data1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

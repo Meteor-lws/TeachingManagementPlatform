@@ -12,7 +12,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
     <!--让easyUI支持中文-->
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/studentEdit.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scheduleEdit.js"></script>
     <title>课表管理</title>
 </head>
 <body>
