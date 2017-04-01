@@ -1,13 +1,10 @@
 package com.hjj.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 /**
  * Created by 朱高 on 2017/3/21.
  */
 public class ClassMessage {
     private String id;
-    @JSONField(serialize = false)
     private String ids;
     private String className;
     private String testPhase;
