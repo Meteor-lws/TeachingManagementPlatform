@@ -59,7 +59,7 @@
     </dependencies>
 
     <build>
-        <finalName>teaching</finalName>
+        <finalName>teaching-management</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
