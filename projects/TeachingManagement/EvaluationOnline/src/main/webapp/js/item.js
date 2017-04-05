@@ -10,22 +10,6 @@ $(function () {
     bindEvaluationType();
 });
 
-function add() {
-    showDialog(null);
-}
-
-function edit() {
-    showDialog(1);
-}
-
-function remove() {
-
-}
-
-function search(value, name) {
-    console.log(name + ':' + value);
-}
-
 function showDatagrid() {
     var columns = [
         {field: 'id', checkbox: true},
@@ -38,43 +22,61 @@ function showDatagrid() {
         iconCls: 'icon-add',
         text: '添加',
         width: 65,
-        handler: add
+        handler: function () {
+            showDialog(null);
+        }
     }, {
         iconCls: 'icon-edit',
         text: '修改',
         width: 65,
-        handler: edit
+        handler: function () {
+            var rows = util.selectedRows('item-content');
+            if (rows) {
+                showDialog(rows);
+            } else {
+                $.messager.alert('提示', '请选择要修改的评价项', 'warning');
+            }
+        }
     }, {
         iconCls: 'icon-remove',
         text: '删除',
         width: 65,
-        handler: remove
+        handler: function () {
+            var rows = util.selectedRows('item-content');
+            if (rows) {
+                remove(rows);
+            } else {
+                $.messager.alert('提示', '请选择要删除的评价项', 'warning');
+            }
+        }
     }, {
         text: '<input id="item-search" style="width: 300px">'
     }];
 
-    util.datagrid('item-content', 'data/evaluation-item.json', columns, tools);
+    util.datagrid('item-content', 'evaluationItem', columns, tools);
 }
 
 function bindEvaluationType() {
     $('#evaluation-type').combobox({
-        url: 'item-type',
+        url: 'evaluationType',
         valueField: 'id',
-        textField: 'type',
+        textField: 'value',
         limitToList: true
     });
 }
 
-function showDialog(row) {
-    var title, buttonText, buttonIcon;
-    if (row === null) {
+function showDialog(rows) {
+    var title, buttonText, buttonIcon, handle;
+    if (rows === null) {
         title = '添加评价项';
         buttonText = '添加';
         buttonIcon = 'icon-add';
+        handle = add;
     } else {
         title = '修改评价项';
         buttonText = '修改';
         buttonIcon = 'icon-edit';
+        handle = edit;
     }
     $('#item-dialog').dialog({
         title: title,
@@ -88,6 +90,7 @@ function showDialog(row) {
             text: buttonText,
             iconCls: buttonIcon,
             handler: function () {
+                handle(rows[0]);
                 closeDialog();
             }
         }, {
@@ -104,4 +107,20 @@ function showDialog(row) {
 function closeDialog() {
     $('#evaluation-warning').val('&nbsp');
     $('#item-dialog').dialog('close');
+}
+
+function add(data) {
+    console.log(data);
+}
+
+function edit(data) {
+    console.log(data);
+}
+
+function remove(rows) {
+    console.log(rows);
+}
+
+function search(value, name) {
+    console.log(name + ':' + value);
 }

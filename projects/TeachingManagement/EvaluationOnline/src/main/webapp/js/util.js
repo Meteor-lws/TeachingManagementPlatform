@@ -33,3 +33,8 @@ util.bindSearchOption = function (id, searcher) {
         prompt: '请输入搜索内容'
     });
 };
+
+util.selectedRows = function (id) {
+    var rows = $('#' + id).datagrid('getSelections');
+    return rows.length > 0 ? rows : null;
+};

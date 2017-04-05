@@ -9,7 +9,7 @@
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="defaultCharset" value="utf-8"/>
+                <property name="defaultCharset" value="UTF-8"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>

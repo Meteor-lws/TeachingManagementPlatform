@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruicai.evaluation.dao.MessageDao">
+    <select id="findAll" resultType="Message">
+        SELECT * FROM message
+    </select>
+
+    <delete id="deleteMessages" parameterType="Message">
+        <foreach collection="" open="DELETE FROM message WHERE id in (" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
