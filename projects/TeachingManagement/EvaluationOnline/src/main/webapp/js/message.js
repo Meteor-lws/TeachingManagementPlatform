@@ -39,7 +39,6 @@ function showContent() {
 }
 
 function remove(rows) {
-    console.log(rows);
     var ids = [];
     $.each(rows, function (index, data) {
         ids[index] = data.id;
