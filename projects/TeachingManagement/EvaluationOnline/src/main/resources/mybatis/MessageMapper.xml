@@ -6,9 +6,27 @@
         SELECT * FROM message
     </select>
 
-    <delete id="deleteMessages" parameterType="Message">
-        <foreach collection="" open="DELETE FROM message WHERE id in (" close=")" item="id" separator=",">
+    <delete id="deleteMessages" parameterType="int[]">
+        <foreach collection="array" open="DELETE FROM message WHERE id in (" close=")" item="id" separator=",">
             #{id}
         </foreach>
     </delete>
+
+    <insert id="addMessage" parameterType="Message">
+        INSERT INTO message (
+        type,
+        content,
+        `from`,
+        `to`,
+        time
+        )
+        VALUES
+        (
+        1,
+        '123456',
+        'fsf',
+        'ff',
+        '2017-03-24'
+        )
+    </insert>
 </mapper>

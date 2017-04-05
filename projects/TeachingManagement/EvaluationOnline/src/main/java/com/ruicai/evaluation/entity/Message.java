@@ -1,7 +1,5 @@
 package com.ruicai.evaluation.entity;
 
-import java.sql.Timestamp;
-
 /**
  * 留言实体类
  *
@@ -13,7 +11,7 @@ public class Message {
     private String content;
     private String from;
     private String to;
-    private Timestamp time;
+    private String time;
 
     public int getId() {
         return id;
@@ -55,12 +53,12 @@ public class Message {
         this.to = to;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setTime(String time) {
+        this.time = time.split("\\.")[0];
     }
 
     @Override
@@ -71,7 +69,7 @@ public class Message {
                 ", content='" + content + '\'' +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
-                ", time=" + time +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

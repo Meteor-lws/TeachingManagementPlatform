@@ -1,10 +1,8 @@
 package com.ruicai.evaluation.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.ruicai.evaluation.dao.EvaluationItemDao;
-import com.ruicai.evaluation.dao.EvaluationTypeDao;
-import com.ruicai.evaluation.entity.EvaluationItem;
-import com.ruicai.evaluation.entity.EvaluationType;
+import com.ruicai.evaluation.dao.MessageDao;
+import com.ruicai.evaluation.entity.Message;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -21,16 +20,16 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * 在线评教控制器
+ * 留言审核控制器
  *
- * Created by lws on 2017/3/31.
+ * Created by lws on 2017/4/5.
  */
 @SuppressWarnings("SameReturnValue")
 @Controller
-public class EvaluationController {
+public class MessageController {
     private SqlSessionFactory sessionFactory;
 
-    EvaluationController() {
+    MessageController() {
         Logger logger = LoggerFactory.getLogger(EvaluationController.class);
         try (InputStream mybatisConfig = Resources.getResourceAsStream("mybatis/config.xml")) {
             sessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfig);
@@ -39,35 +38,30 @@ public class EvaluationController {
         }
     }
 
-    @RequestMapping(value = "/item", method = RequestMethod.GET)
-    public String item() {
-        return "item";
-    }
-
-    @RequestMapping(value = "/analysis", method = RequestMethod.GET)
-    public String analysis() {
-        return "analysis";
+    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    public String message() {
+        return "message";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/evaluationType", method = RequestMethod.POST)
-    public String evaluationType() {
-        List<EvaluationType> types;
+    @RequestMapping(value = "/messageData", method = RequestMethod.POST)
+    public String messageData() {
+        List<Message> messages;
         try (SqlSession session = sessionFactory.openSession()) {
-            EvaluationTypeDao dao = session.getMapper(EvaluationTypeDao.class);
-            types = dao.findAll();
+            MessageDao dao = session.getMapper(MessageDao.class);
+            messages = dao.findAll();
         }
-        return JSON.toJSONString(types);
+        return JSON.toJSONString(messages);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/evaluationItem", method = RequestMethod.POST)
-    public String evaluationItem() {
-        List<EvaluationItem> items;
+    @RequestMapping(value = "/removeMessage", method = RequestMethod.POST)
+    public String removeMessage(@RequestParam(value = "ids[]") int[] ids) {
         try (SqlSession session = sessionFactory.openSession()) {
-            EvaluationItemDao dao = session.getMapper(EvaluationItemDao.class);
-            items = dao.findAll();
+            MessageDao dao = session.getMapper(MessageDao.class);
+            dao.deleteMessages(ids);
+            session.commit();
         }
-        return JSON.toJSONString(items);
+        return "删除留言成功";
     }
 }

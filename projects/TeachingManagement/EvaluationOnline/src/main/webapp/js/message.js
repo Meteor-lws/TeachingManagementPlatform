@@ -40,10 +40,15 @@ function showContent() {
 
 function remove(rows) {
     console.log(rows);
+    var ids = [];
+    $.each(rows, function (index, data) {
+        ids[index] = data.id;
+    });
+
     $.ajax({
         type: 'post',
         url: 'removeMessage',
-        data: {urls: ['www.test.com', 'www.qq.com']},
+        data: {ids: ids},
         success: function () {
             $('#message-content').datagrid('reload');
         },

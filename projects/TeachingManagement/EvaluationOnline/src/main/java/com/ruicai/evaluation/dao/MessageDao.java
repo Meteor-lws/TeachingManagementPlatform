@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface MessageDao {
     List<Message> findAll();
-    // --Commented out by Inspection (2017/4/4 23:07):void deleteMessages(List<Message> messages);
+
+    void deleteMessages(int[] ids);
 }
