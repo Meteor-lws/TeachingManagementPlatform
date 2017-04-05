@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,11 +93,13 @@ public class EvaluationController {
 
     @ResponseBody
     @RequestMapping(value = "/removeMessage", method = RequestMethod.POST)
-    public String removeMessage(ArrayList<Message> messages) {
-        for (Message message : messages) {
-            logger.debug(message.toString());
+    public String removeMessage(@RequestParam(value = "urls[]", required = false, defaultValue = "") String[] urls) {
+        for (String url : urls) {
+            logger.debug(url);
         }
-        logger.debug("removeMessage........");
+        // for (int id : data.getIds()) {
+        //     logger.debug(String.valueOf(id));
+        // }
         // try (SqlSession session = sessionFactory.openSession()) {
         //     MessageDao dao = session.getMapper(MessageDao.class);
         //     dao.deleteMessages(messages);

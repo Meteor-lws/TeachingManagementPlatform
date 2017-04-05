@@ -39,10 +39,11 @@ function showContent() {
 }
 
 function remove(rows) {
+    console.log(rows);
     $.ajax({
         type: 'post',
         url: 'removeMessage',
-        data: {'messages': rows},
+        data: {urls: ['www.test.com', 'www.qq.com']},
         success: function () {
             $('#message-content').datagrid('reload');
         },
