@@ -16,6 +16,6 @@
     <base href="<%=basePath%>">
 </head>
 <body>
-<h2>教务管理</h2>
+<h1>徐明nsgsd</h1>
 </body>
 </html>
