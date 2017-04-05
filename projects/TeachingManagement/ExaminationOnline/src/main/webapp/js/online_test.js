@@ -75,7 +75,7 @@ $(function () {
             var _this = this;
             if (data) {
                 $(data).each(function (index, value) {
-                    if (this.state == "closed") {
+                    if (this.state === 'closed') {
                         $(_this).tree('expandAll');
                     }
                 });
@@ -89,7 +89,7 @@ $(function () {
 
             if (length > 1) {
                 $.messager.alert('警告操作！', '编辑记录只能选定一条数据！', 'warning');
-            } else if (length == 1) {
+            } else if (length === 1) {
                 dialogOption("修改管理", "update");
                 $("#manager_add").dialog("open");
                 testComboTree($("#className"), "className");
@@ -132,13 +132,13 @@ $(function () {
         },
         remove: function () {
             var length = $("#table").datagrid("getSelections").length;
-            if (length == 0) {
+            if (length === 0) {
                 $.messager.alert('警告操作！', '为选择删除行！', 'warning');
             } else {
                 var ids = "";
                 var selections = $("#table").datagrid("getSelections");
                 for (var i = 0; i < selections.length; i++) {
-                    if (i == selections.length - 1) {
+                    if (i === selections.length - 1) {
                         ids = ids + selections[i].id;
                     } else {
                         ids = ids + selections[i].id + ",";
@@ -202,7 +202,7 @@ $(function () {
                 var _this = this;
                 if (data) {
                     $(data).each(function (index, value) {
-                        if (this.state == "closed") {
+                        if (this.state === 'closed') {
                             $(_this).tree('expandAll');
                         }
                     });
@@ -225,10 +225,10 @@ $(function () {
             success: function (data, response, status) {
                 $.messager.progress("close");
                 console.log(data);
-                if (url == "update") {
+                if (url === 'update') {
 
                 }
-                if (data != 0) {
+                if (data !== 0) {
                     $.messager.show({
                         title: "提示",
                         msg: "新增用户成功"
@@ -256,7 +256,7 @@ $(function () {
                     handler: function () {
                         if ($("#manager_add").form("validate")) {
                             var id = null;
-                            if (url != "add") {
+                            if (url !== 'add') {
                                 id = $("#table").datagrid("getSelected").id;
                             }
                             var data = {

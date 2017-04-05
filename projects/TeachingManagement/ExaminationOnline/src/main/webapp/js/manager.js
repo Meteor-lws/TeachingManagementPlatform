@@ -1,4 +1,6 @@
 /**
+ * field命名调整，负荷规范
+ *
  * Created by 朱高 on 2017/3/17.
  */
 $(function () {
@@ -132,7 +134,7 @@ $(function () {
             var _this = this;
             if (data) {
                 $(data).each(function (index, value) {
-                    if (this.state == "closed") {
+                    if (this.state === 'closed') {
                         $(_this).tree('expandAll');
                     }
                 });

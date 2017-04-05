@@ -1,6 +1,8 @@
 package com.hjj.vo;
 
 /**
+ * 实体类添加注释
+ *
  * Created by 朱高 on 2017/3/21.
  */
 public class ClassMessage {

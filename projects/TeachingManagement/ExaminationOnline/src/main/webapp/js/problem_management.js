@@ -91,17 +91,17 @@ $(function () {
                 textField: 'text',//显示的值
                 onSelect: function (record) {
                     //$("#answer").combobox("clear");
-                    if (record.id == 1) {
+                    if (record.id === 1) {
                         $("#answer_div").show();
                         $("#answer1_div").hide();
                         $("#answer2_div").hide();
                         answerSelect("json/answer.json");
-                    } else if (record.id == 2) {
+                    } else if (record.id === 2) {
                         $("#answer_div").show();
                         $("#answer1_div").hide();
                         $("#answer2_div").hide();
                         answerSelect("json/answer1.json");
-                    } else if (record.id == 3) {
+                    } else if (record.id === 3) {
                         $("#answer").combobox("clear");
                         $("#answer_div").hide();
                         $("#answer1_div").show();

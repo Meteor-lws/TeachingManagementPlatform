@@ -15,10 +15,11 @@ $(function () {
         plain: true,
         onClick: function () {
             var _this = $(this);
-            if ($("#tabs").tabs("exists", _this.text())) {//判断title = node.text这个选项卡是否存在
-                $("#tabs").tabs("select", _this.text());//存在就选中这个title = node.text的选项卡
+            var tabs = $('#tabs');
+            if (tabs.tabs('exists', _this.text())) {//判断title = node.text这个选项卡是否存在
+                tabs.tabs('select', _this.text());//存在就选中这个title = node.text的选项卡
             } else {
-                $("#tabs").tabs("add", {
+                tabs.tabs('add', {
                     title: _this.text(),
                     closable: true,
                     content: '<iframe width="100%" height="100%" frameborder="0"  src=' + (_this.attr("href")) + ' style="width:100%;height:100%;"></iframe>',

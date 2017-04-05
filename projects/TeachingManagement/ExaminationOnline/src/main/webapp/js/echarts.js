@@ -49,7 +49,7 @@ $(function () {
 
                 tp.name = obj.legend[i];
                 tp.data = obj.data[i];
-                if (i == 0) {
+                if (i === 0) {
                     tp.type = "bar";
                 } else {
                     tp.type = "line";

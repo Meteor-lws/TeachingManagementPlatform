@@ -3,7 +3,8 @@ package com.hjj.vo;
 /**
  * Created by 朱高 on 2017/3/17.
  */
-public class EasyUI {
+@SuppressWarnings("unused")
+class EasyUI {
     private String manager;
     private String password;
     private int id;

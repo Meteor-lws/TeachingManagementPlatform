@@ -41,7 +41,7 @@ $(function () {
                      title : "hh",
                      }),*/
                     success: function (data, response, state) {
-                        if (data == "0") {
+                        if (data === '0') {
                             location.href = "main.jsp";
                         } else {
                             /*

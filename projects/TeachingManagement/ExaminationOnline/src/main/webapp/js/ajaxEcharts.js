@@ -67,7 +67,7 @@ $(function () {
             var _this = this;
             if (data) {
                 $(data).each(function (index, value) {
-                    if (this.state == "closed") {
+                    if (this.state === 'closed') {
                         $(_this).tree('expandAll');
                     }
                 });
@@ -112,7 +112,7 @@ $(function () {
                 $.messager.progress('close');
                 var _data = data;
                 echartsContent("班级考试信息", "阶段", "平均分", "echartsTest");
-                if (data != null) {
+                if (data !== null) {
                     $("#stuName").combobox({
                         valueField: 'id',//传递的值
                         textField: 'text',//显示的值
