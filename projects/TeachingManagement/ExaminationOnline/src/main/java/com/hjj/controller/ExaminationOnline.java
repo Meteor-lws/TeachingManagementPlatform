@@ -1,7 +1,12 @@
 package com.hjj.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.hjj.vo.*;
+import com.hjj.vo.ClassMessage;
+import com.hjj.vo.Datagrid;
+import com.hjj.vo.Echarts;
+import com.hjj.vo.Question;
+import com.hjj.vo.Student;
+import com.hjj.vo.Tree;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 在线考试控制器
+ *
  * Created by 朱高 on 2017/4/1.
  */
+@SuppressWarnings("SameReturnValue")
 @Controller
 public class ExaminationOnline {
 
@@ -25,6 +33,7 @@ public class ExaminationOnline {
     public String toProblemManagement() {
         return "onlineExam/problemManagement";
     }
+
     @RequestMapping(value = "/examination", method = RequestMethod.GET)
     public String toExaminationArrangement() {
         return "onlineExam/examinationArrangement";
@@ -49,7 +58,7 @@ public class ExaminationOnline {
             classMessage.setTestTime("2014-05-02");
             list.add(classMessage);
         }
-        String json = "{\"total\":120,\"rows\":" + JSON.toJSONString((List) list) + "}";
+        String json = "{\"total\":120,\"rows\":" + JSON.toJSONString(list) + "}";
         System.out.println("json = " + json);
         return json;
     }
@@ -128,7 +137,7 @@ public class ExaminationOnline {
     @ResponseBody
     public String searchGrade(ClassMessage classMessage) {
         System.out.println(classMessage);
-        List list = new ArrayList();
+        List<Student> list = new ArrayList<>();
         System.out.println(classMessage.getClassName().equals("4"));
         for (int i = 1; i <= 20; i++) {
             Student student = new Student(i, "朱高" + i);
@@ -141,7 +150,7 @@ public class ExaminationOnline {
     @RequestMapping(value = "question", method = RequestMethod.POST)
     @ResponseBody
     public String questionFindAll() {
-        List list = new ArrayList();
+        List<Question> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             Question question;
             if (i % 4 == 0) {
@@ -163,40 +172,41 @@ public class ExaminationOnline {
     public String echartsTest() throws InterruptedException {
         Thread.sleep(2000);
         Echarts echarts = new Echarts();
-        List list = new ArrayList();
-        List data = new ArrayList();
+        List<String> list = new ArrayList<>();
+        List<List> data = new ArrayList<>();
         list.add("第一阶段");//"衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子";
         list.add("第二阶段");
         list.add("第三阶段");
         list.add("第四阶段");
         echarts.setCategories(list);
-        list = new ArrayList();
-        list.add(35);//data: [5, 20, 36, 10, 10, 20]
-        list.add(70);
-        list.add(86);
-        list.add(70);
-        data.add(list);
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(35);//data: [5, 20, 36, 10, 10, 20]
+        list1.add(70);
+        list1.add(86);
+        list1.add(70);
+        data.add(list1);
         //echarts.setData(data);
-        list = new ArrayList();
-        list.add(50);//data: [5, 20, 36, 10, 10, 20]
-        list.add(70);
-        list.add(80);
-        list.add(60);
-        data.add(list);
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(50);//data: [5, 20, 36, 10, 10, 20]
+        list2.add(70);
+        list2.add(80);
+        list2.add(60);
+        data.add(list2);
 
-        list = new ArrayList();
-        list.add(60);//data: [5, 20, 36, 10, 10, 20]
-        list.add(90);
-        list.add(77);
-        list.add(63);
+        List<Integer> list3 = new ArrayList<>();
+        list3.add(60);//data: [5, 20, 36, 10, 10, 20]
+        list3.add(90);
+        list3.add(77);
+        list3.add(63);
+        data.add(list3);
 
-        data.add(list);
         echarts.setData(data);
-        list = new ArrayList();
-        list.add("JAVA-1701");
-        list.add("JAVA-1702");
-        list.add("JAVA-1703");
-        echarts.setLegend(list);
+
+        List<String> list4 = new ArrayList<>();
+        list4.add("JAVA-1701");
+        list4.add("JAVA-1702");
+        list4.add("JAVA-1703");
+        echarts.setLegend(list4);
         String json = JSON.toJSONString(echarts);
         System.out.println(json);
 
@@ -207,7 +217,7 @@ public class ExaminationOnline {
     @ResponseBody
     public String searchPie() throws InterruptedException {
         Thread.sleep(2000);
-        List list = new ArrayList();
+        List<Echarts> list = new ArrayList<>();
         Echarts echarts = new Echarts("60分以下", 5);
         list.add(echarts);
         echarts = new Echarts("60--70", 10);
