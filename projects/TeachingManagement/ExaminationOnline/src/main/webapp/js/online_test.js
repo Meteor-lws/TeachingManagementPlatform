@@ -86,12 +86,13 @@ $(function () {
     manager_tool = {
         edit: function () {
             var length = $("#table").datagrid("getSelections").length;
+
             if (length > 1) {
                 $.messager.alert('警告操作！', '编辑记录只能选定一条数据！', 'warning');
             } else if (length == 1) {
                 dialogOption("修改管理", "update");
                 $("#manager_add").dialog("open");
-                testCombotree($("#className"), "className");
+                testComboTree($("#className"), "className");
                 var obj = $("#table").datagrid("getSelected");
                 var data = {
                     id: obj.id,
@@ -127,7 +128,7 @@ $(function () {
                 textField: 'text',//显示的值
                 url: "json/testPlace.json"
             });
-            testCombotree($("#className"), "className");
+            testComboTree($("#className"), "className");
         },
         remove: function () {
             var length = $("#table").datagrid("getSelections").length;
@@ -135,12 +136,12 @@ $(function () {
                 $.messager.alert('警告操作！', '为选择删除行！', 'warning');
             } else {
                 var ids = "";
-                var objs = $("#table").datagrid("getSelections");
-                for (var i = 0; i < objs.length; i++) {
-                    if (i == objs.length - 1) {
-                        ids = ids + objs[i].id;
+                var selections = $("#table").datagrid("getSelections");
+                for (var i = 0; i < selections.length; i++) {
+                    if (i == selections.length - 1) {
+                        ids = ids + selections[i].id;
                     } else {
-                        ids = ids + objs[i].id + ",";
+                        ids = ids + selections[i].id + ",";
                     }
                 }
                 $.ajax({
@@ -176,7 +177,7 @@ $(function () {
         }
     };
 
-    function testCombotree(idObject, url) {
+    function testComboTree(idObject, url) {
 
         idObject.combotree({
             url: url,
@@ -215,6 +216,7 @@ $(function () {
             url: url,
             type: "POST",
             data: data,
+            dataType: "json",
             beforeSend: function () {
                 $.messager.progress({
                     text: "正在新增中....."

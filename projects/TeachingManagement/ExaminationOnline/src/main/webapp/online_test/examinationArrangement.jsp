@@ -30,11 +30,11 @@
 </table>
 <div id="manager_tool" style="padding:5px;">
     <div style="margin-bottom:5px;">
-        <a class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="manager_tool.add();">添加</a>
-        <a class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="manager_tool.edit();">修改</a>
-        <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="manager_tool.remove();">删除</a>
-        <a class="easyui-linkbutton" iconCls="icon-save" plain="true" id="save">保存</a>
-        <a class="easyui-linkbutton" iconCls="icon-redo" plain="true" id="redo">取消编辑</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="manager_tool.add();">添加</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="manager_tool.edit();">修改</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="manager_tool.remove();">删除</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="save">保存</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-redo" plain="true" id="redo">取消编辑</a>
     </div>
     <div style="padding:0 0 0 7px;color:#333;">
         <label for="condition_Name">查询班级：</label><input id="condition_Name" type="text" class="textbox" name="user"
@@ -44,7 +44,7 @@
                                                               style="width:110px">
         <label for="condition_date_to">到：</label><input type="text" id="condition_date_to" name="date_to"
                                                         class="easyui-datebox" editable="false" style="width:110px">
-        <a class="easyui-linkbutton" iconCls="icon-search" onclick="manager_tool.search();">查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="manager_tool.search();">查询</a>
     </div>
 </div>
 
