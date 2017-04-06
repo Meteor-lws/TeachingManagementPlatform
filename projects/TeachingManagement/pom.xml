@@ -45,6 +45,11 @@
                 <version>${mybatis-spring.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc6</artifactId>
                 <version>${oracle.version}</version>
@@ -87,6 +92,10 @@
             <artifactId>mybatis-spring</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
         </dependency>
@@ -118,15 +127,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>${mybatis-generator.version}</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
                 </configuration>
             </plugin>
         </plugins>
