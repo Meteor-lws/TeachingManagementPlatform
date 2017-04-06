@@ -4,15 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 密码管理
- * Created by XuMing on 2017/3/31.
+ * Created by XuMing on 2017/4/5.
  */
 @Controller
-@RequestMapping("/pass")
-public class PassAction {
-
-    @RequestMapping("/index.action")
+public class DictionaryAction {
+    @RequestMapping("/dictionary")
     public String index() {
-        return "passEdit";
+        return "dictionaryEdit";
     }
+
 }

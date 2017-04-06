@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by XuMing on 2017/3/31.
  */
 @Controller
-@RequestMapping("/weekly")
 public class WeeklyAction {
 
-    @RequestMapping("/index.action")
+    @RequestMapping("/weekly")
     public String index() {
         return "weeklyEdit";
     }

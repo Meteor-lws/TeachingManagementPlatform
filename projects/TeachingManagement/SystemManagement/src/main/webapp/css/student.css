@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 20px;
+    font: 12px "微软雅黑";
+    background: #FFF;
+}
+
+ul li {
+    list-style: none;
+}
+
+#schoolName {
+    width: 170px;
+}
+
+.provinceSchool {
+    display: none;
+    position: absolute;
+    width: 580px;
+    height: 310px;
+    border: 1px solid #72B9D7;
+}
+
+.title span {
+    margin-left: 10px;
+    font-weight: 600;
+    color: #FFF;
+    line-height: 30px;
+}
+
+.proSelect {
+    width: 550px;
+    height: 22px;
+    margin: 10px 0 6px 20px;
+}
+
+.proSelect select {
+    width: 136px;
+}
+
+.proSelect input {
+    display: none;
+}
+
+.schoolList {
+    width: 550px;
+    height: 200px;
+    margin-left: 20px;
+    overflow-y: auto;
+    border: 1px solid #72B9D7;
+}
+
+.schoolList ul {
+    width: 510px;
+}
+
+.schoolList ul li {
+    float: left;
+    width: 158px;
+    height: 22px;
+    margin-left: 6px;
+    padding-left: 6px;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.schoolList ul li.DoubleWidthLi {
+    width: 328px;
+}
+
+.schoolList ul li:hover {
+    background: #72B9D7;
+}
+
+.button {
+    width: 100%;
+    height: 40px;
+    margin-top: 8px;
+}
+
+.tdLabel {
+    width: 100px;
+    height: 70px
+}
+
+.tdValue {
+    width: 200px;
+    height: 70px
+}
+

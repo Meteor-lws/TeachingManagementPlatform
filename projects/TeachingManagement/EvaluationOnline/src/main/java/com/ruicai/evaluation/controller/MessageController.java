@@ -19,11 +19,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
+/*
  * 留言审核控制器
  *
  * Created by lws on 2017/4/5.
- */
+*/
+
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class MessageController {

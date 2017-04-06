@@ -1,9 +1,28 @@
 ﻿$(function () {
     //定义变量接受行内容
     var rowValue;
-    $('#dg').datagrid({
+    $('#userDg').datagrid({
+        url: 'datagrid_data1.json',
+        fit: true,
+        fitColumns: false,
+        striped: true,
+        rownumbers: true,
+        border: false,
+        pagination: true,
+        pageSize: 20,
+        pageNumber: 1,
+        columns: [[
+            {field: 'code', itemid: 'ID', checkbox: true, width: 333},
+            {field: 'productid', title: '用户名', width: 520},
+            {field: 'productid', title: '密码', width: 520}
+        ]],
+        toolbar: '#userTb'
+    });
+
+
+    $('#userDg').datagrid({
         onDblClickCell: function (index, field, value) {
-            $('#w').window('open');
+            $('#userDialog').dialog('open');
 
         },
         onSelect: function (rowIndex, rowData) {
@@ -11,11 +30,11 @@
         }
     });
 
-    var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+    var pager = $('#userDg').datagrid().datagrid('getPager'); // get the pager of datagrid
 
-    $("#editStu").click(function () {
+    $("#editUse").click(function () {
 
-        var selects = $("#dg").datagrid("getSelections");
+        var selects = $("#userdg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
@@ -26,10 +45,10 @@
         }
 
         else {
-            $('#w').window({
+            $('#userDialog').dialog({
                 title: "密码修改"
             });
-            $("#w").window('open');
+            $("#userDialog").dialog('open');
             var selectRow = selects[0];
 
         }
@@ -47,7 +66,7 @@
 
 function submitForm() {
     $.messager.progress(); // 显示进度条
-    $('#ff').form('submit', {
+    $('#userForm').form('submit', {
         url: "/asada",
         onSubmit: function () {
             var isValid = $(this).form('validate');
@@ -58,13 +77,12 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#w").window("close")
+            $("#userDialog").dialog("close")
         }
     });
 
 }
-
 function cancel() {
-    $("#w").window("close");
+    $("#userDialog").dialog("close");
 }
 		

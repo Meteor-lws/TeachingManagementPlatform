@@ -1,9 +1,31 @@
 ﻿$(function () {
     //定义变量接受行内容
     var rowValue;
-    $('#dg').datagrid({
+
+
+    $('#roleDg').datagrid({
+        url: 'datagrid_data1.json',
+        fit: true,
+        fitColumns: true,
+        striped: true,
+        rownumbers: true,
+        border: false,
+        pagination: true,
+        pageSize: 20,
+        pageNumber: 1,
+        columns: [[
+            {field: 'code', itemid: 'ID', checkbox: true, width: 10},
+            {field: 'productid', title: '角色名称', width: 10},
+            {field: 'productid', title: '角色权限', width: 10},
+            {field: 'productid', title: '角色描述', width: 10}
+        ]],
+        toolbar: '#roleTb'
+    });
+
+
+    $('#roleDg').datagrid({
         onDblClickCell: function (index, field, value) {
-            $('#w').window('open');
+            $('#roleDialog').dialog('open');
             $("#name").val(rowValue.itemid);
 
         },
@@ -12,17 +34,17 @@
         }
     });
 
-    var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+    var pager = $('#roleDg').datagrid().datagrid('getPager'); // get the pager of datagrid
 
-    $("#addStu").click(function () {
-        $('#w').window({
+    $("#addRole").click(function () {
+        $('#roleDialog').dialog({
             title: "班级添加"
         });
-        $("#w").window('open');
+        $("#roleDialog").dialog('open');
     });
-    $("#editStu").click(function () {
+    $("#editRole").click(function () {
 
-        var selects = $("#dg").datagrid("getSelections");
+        var selects = $("#roleDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
@@ -33,17 +55,17 @@
         }
 
         else {
-            $('#w').window({
+            $('#roleDialog').dialog({
                 title: "班级修改"
             });
-            $("#w").window('open');
+            $("#roledialog").window('open');
             var selectRow = selects[0];
 
         }
     });
 
-    $("#removeStu").click(function () {
-        var selects = $("#dg").datagrid("getSelections");
+    $("#removeRole").click(function () {
+        var selects = $("#roleDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
@@ -58,12 +80,12 @@
     });
     $("#search").click(function () {
         var no = $("#noSearch").val();
-        $('#dg').datagrid('load', {
+        $('#roleDg').datagrid('load', {
             'no': no
         });
     });
 
-    $('#cc').combotree('tree').tree({
+    $('#roleNameSel').combotree('tree').tree({
         data: [{
             text: "JAVA",
             state: "closed",
@@ -109,13 +131,12 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#w").window("close")
+            $("#roleDialog").dialog("close")
         }
     });
 
 }
 
 function cancel() {
-    $("#w").window("close");
+    $("#roleDialog").dialog("close");
 }
-		

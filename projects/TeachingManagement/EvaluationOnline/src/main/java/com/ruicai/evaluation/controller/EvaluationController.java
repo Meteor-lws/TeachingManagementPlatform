@@ -20,11 +20,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
+/*
  * 在线评教控制器
  *
  * Created by lws on 2017/3/31.
- */
+*/
+
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class EvaluationController {

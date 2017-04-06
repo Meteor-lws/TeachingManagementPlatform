@@ -26,10 +26,10 @@
     <div id="back-nav" class="easyui-accordion" data-options="multiple:true,border:false" style="width: 100%">
         <div title="系统管理">
             <ul>
-                <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">密码管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">用户管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">角色管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">权限管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">字典管理</a></li>
             </ul>
         </div>
         <div title="在线评教子系统">
@@ -48,6 +48,9 @@
         </div>
         <div title="教务管理子系统">
             <ul>
+                <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">考勤管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">周报管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">课表管理</a></li>

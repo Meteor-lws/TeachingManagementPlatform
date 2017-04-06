@@ -9,35 +9,29 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/weeklyEdit.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/attendanceEdit.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>周报管理</title>
+    <title>考勤管理</title>
 </head>
 <body>
-<table id="weeDg" style="width:100%;height:100%">
-    <thead>
-    <div id="weeTb" align="left" style="height:60px">
-        <div align="left">
-            <a id="downWeekly" href="javascript:void(0)" class="easyui-linkbutton"
-               data-options="iconCls:'icon-remove',plain:true">批量下载</a>
-            <a id="removeWeekly" href="javascript:void(0)" class="easyui-linkbutton"
-               data-options="iconCls:'icon-remove',plain:true">批量删除</a>
-        </div>
-        <div align="left">
+<table id="attDg" style="width:100%;height:300px">
+</table>
+<div id="attTb" align="center" style="height:40px">
+        <div style="margin-top:5px" align="left">
             <label>
-                部门
+                班级
             </label>
-            <select id="depSel" class="easyui-combotree" style="width:120px;"></select>
-            上传者
-            <select id="uploderSel" class="easyui-combotree" style="width:120px;"></select>
+            <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
+            姓名
+            <input id="stuName" type="text" class="easyui-datebox" style="width:120px"></input>
             日期
-            <input id="time" type="text" class="easyui-datebox" style="width: 120px"></input>
+            <input id="date" type="text" class="easyui-datebox" style="width:120px"></input>
             &nbsp&nbsp&nbsp
             <a href="otherpage.php" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         </div>
 
     </div>
-    </thead>
-</table>
+
+
 </body>
 </html>

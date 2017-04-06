@@ -14,16 +14,25 @@ $(function () {
             var url = null;
             switch (title) {
                 case '教师管理':
-                    url = '/system/teacher';
+                    url = '/education/teacher';
                     break;
                 case '学生管理':
-                    url = '/system/student';
+                    url = '/education/student';
                     break;
                 case '班级管理':
-                    url = '/system/class';
+                    url = '/education/class';
                     break;
-                case '密码管理':
-                    url = '/system/password';
+                case '用户管理':
+                    url = '/system/user';
+                    break;
+                case '角色管理':
+                    url = '/system/role';
+                    break;
+                case '权限管理':
+                    url = '/system/premission';
+                    break;
+                case '字典管理':
+                    url = '/system/dictionary';
                     break;
                 case '评价项管理':
                     url = '/evaluation/item';

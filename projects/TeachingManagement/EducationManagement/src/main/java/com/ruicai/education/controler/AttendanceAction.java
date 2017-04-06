@@ -4,15 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 课件管理
+ * 考勤管理
  * Created by XuMing on 2017/3/31.
  */
 @Controller
-@RequestMapping("/courseWares")
-public class CourseWaresAction {
+public class AttendanceAction {
 
-    @RequestMapping("/index.action")
+    @RequestMapping("/attendance")
     public String index() {
-        return "coursewaresEdit";
+        return "attendanceEdit";
     }
 }

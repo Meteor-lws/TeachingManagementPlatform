@@ -508,14 +508,42 @@ var proSchool = {
 $(function () {
     //定义一个变量接受选中列对象
     var rowValue;
+
+    $('#stuDg').datagrid({
+        url: 'datagrid_data1.json',
+        fit: true,
+        fitColumns: true,
+        striped: true,
+        rownumbers: true,
+        border: false,
+        pagination: true,
+        pageSize: 20,
+        pageNumber: 1,
+        columns: [[
+            {field: 'productname', itemid: 'ID', checkbox: true, width: 10},
+            {field: 'productid', title: '姓名', width: 10},
+            {field: 'productid', title: '性别', width: 10},
+            {field: 'productid', title: '毕业学校', width: 10},
+            {field: 'productid', title: '毕业时间', width: 10},
+            {field: 'productid', title: '操行分', width: 10},
+            {field: 'productid', title: '本人联系方式', width: 10},
+            {field: 'productid', title: '家长联系方式', width: 10},
+            {field: 'productid', title: '身份证号码', width: 10},
+            {field: 'productid', title: '保险是否缴纳', width: 10},
+        ]],
+        toolbar: '#stuTb'
+    });
+
+
+
     //学校信息框隐藏
     $("#proSchool").window("close");
 
-    $('#dg').datagrid({
+    $('#stuDg').datagrid({
         //双击列
         onDblClickCell: function (index, field, value) {
             //弹出信息框
-            $('#w').window('open');
+            $('#stuDialog').dialog('open');
             $("#name").val(rowValue.itemid);
 
         },
@@ -528,22 +556,22 @@ $(function () {
     //点击添加按钮
     $("#addStu").click(function () {
         //弹出信息框
-        $('#w').window({
+        $('#stuDialog').dialog({
             title: "学生添加"
         });
-        $("#w").window('open');
+        $("#stuDialog").dialog('open');
     });
 
     //点击修改按钮
     $("#editStu").click(function () {
 
-        var selects = $("#dg").datagrid("getSelections");
+        var selects = $("#stuDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
 
-        $('#dg').datagrid({
+        $('#stuDg').datagrid({
             onSelect: function (rowIndex, rowData) {
                 //当前列对象
                 rowValue = rowData;
@@ -557,17 +585,17 @@ $(function () {
         }
 
         else {
-            $('#w').window({
+            $('#stuDialog').dialog({
                 title: "学生修改"
             });
-            $("#w").window('open');
+            $("#stuDialog").dialog('open');
             var selectRow = selects[0]
 
         }
     });
 
     $("#removeStu").click(function () {
-        var selects = $("#dg").datagrid("getSelections");
+        var selects = $("#stuDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
         } else {
@@ -583,13 +611,13 @@ $(function () {
 
     $("#search").click(function () {
         var no = $("#noSearch").val();
-        $('#dg').datagrid('load', {
+        $('#stuDg').datagrid('load', {
             'no': no
         });
     });
 
     //班级下拉框数据
-    $('#classes').combotree('tree').tree({
+    $('#classSel').combotree('tree').tree({
         data: [{
             text: "JAVA",
             state: "closed",
@@ -641,8 +669,9 @@ $(function () {
         ]
     });
 
+
     //毕业学校框
-    $("#schoolName").focus(function () {
+    $("input", $("#schoolName").next("span")).focus(function () {
         var top = $(this).position().top + 22;
         var left = $(this).position().left;
         $("div[class='provinceSchool']").css({
@@ -722,9 +751,17 @@ $(function () {
     });
     //学校列表点击事件
     $("div[class='schoolList'] ul li").live("click", function () {
-        $("#schoolName").val($(this).html());
+        $("input", $("#schoolName").next("span")).val($(this).html());
         $("#proSchool").window("close");
     });
+
+    var schoolName = $("input", $("#schoolName").next("span")).val();
+
+
+
+
+
+
 
 
 });
@@ -744,12 +781,12 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#w").window("close")
+            $("#stuDialog").dialog("close")
         }
     });
 }
 //取消按钮
 function cancel() {
-    $("#w").window("close");
+    $("#stuDialog").dialog("close");
 }
 	

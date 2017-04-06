@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by XuMing on 2017/3/31.
  */
 @Controller
-@RequestMapping("/class")
 public class ClassAction {
 
-    @RequestMapping("/index.action")
+    @RequestMapping("/class")
     public String index() {
         return "classEdit";
     }
