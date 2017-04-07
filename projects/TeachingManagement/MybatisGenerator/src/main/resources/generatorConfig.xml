@@ -17,20 +17,23 @@
         </commentGenerator>
 
         <!-- 配置数据库连接参数 -->
-        <jdbcConnection driverClass="" connectionURL="" userId="" password=""/>
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
 
         <!-- 配置实体类的生成 -->
-        <javaModelGenerator targetPackage="" targetProject="">
+        <javaModelGenerator targetPackage="com.ruicai.teaching.entity" targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 配置mapper.xml文件的生成 -->
-        <sqlMapGenerator targetPackage="" targetProject=""/>
+        <sqlMapGenerator targetPackage="com.ruicai.teaching.mapper" targetProject="src/main/java"/>
 
         <!-- 配置Mapper接口的生成 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="" targetProject=""/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.teaching.dao" targetProject="src/main/java"/>
 
         <!-- 配置所有表的生成 -->
-        <table tableName="%"/>
+        <table tableName="%" schema="RCKJ"/>
     </context>
 </generatorConfiguration>
