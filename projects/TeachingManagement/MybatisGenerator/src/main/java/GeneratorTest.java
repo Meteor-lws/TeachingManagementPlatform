@@ -1,5 +1,8 @@
+import javax.security.auth.login.Configuration;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数据库逆向测试
@@ -13,8 +16,13 @@ public class GeneratorTest {
     }
 
     private void generate() {
-        try (InputStream resourceStream = this.getClass().getClassLoader().getResourceAsStream("generatorConfig.xml")) {
-            System.out.println(resourceStream);
+        try (InputStream configStream = this.getClass().getClassLoader().getResourceAsStream("generatorConfig.xml")) {
+            List<String> warnings = new ArrayList<>();
+            ConfigurationParser parser = new ConfigurationParser(warnings);
+            Configuration config = parser.parseConfiguration(configStream);
+            DefaultShellCallback callback = new DefaultShellCallback(true);
+            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+            myBatisGenerator.generate(null);
         } catch (IOException e) {
             System.out.println("加载配置文件失败");
         }
