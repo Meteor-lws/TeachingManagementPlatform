@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置oracle生成器 -->
+    <context id="oracle" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消注释的时间戳 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="" connectionURL="" userId="" password=""/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="" targetProject="">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="" targetProject=""/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="" targetProject=""/>
+
+        <!-- 配置所有表的生成 -->
+        <table tableName="%"/>
+    </context>
+</generatorConfiguration>
