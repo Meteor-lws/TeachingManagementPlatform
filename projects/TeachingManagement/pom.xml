@@ -10,7 +10,6 @@
         <module>ExaminationOnline</module>
         <module>EducationManagement</module>
         <module>SystemManagement</module>
-        <module>MybatisGenerator</module>
     </modules>
     <name>teaching-management</name>
     <url>http://maven.apache.org</url>
