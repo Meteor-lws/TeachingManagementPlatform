@@ -13,6 +13,7 @@
 
         <!-- 取消注释的时间戳 -->
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -46,6 +47,7 @@
 
         <!-- 取消注释的时间戳 -->
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -79,6 +81,7 @@
 
         <!-- 取消注释的时间戳 -->
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -112,6 +115,7 @@
 
         <!-- 取消注释的时间戳 -->
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -145,6 +149,7 @@
 
         <!-- 取消注释的时间戳 -->
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 

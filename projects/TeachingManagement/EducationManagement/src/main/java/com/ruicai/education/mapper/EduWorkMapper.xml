@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruicai.education.mapper.EduWorkMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.education.po.EduWork">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR"/>
+        <result column="WORK_TYPE" property="workType" jdbcType="VARCHAR"/>
+        <result column="WORK_URL" property="workUrl" jdbcType="VARCHAR"/>
+        <result column="WORK_UPLOAD_TIME" property="workUploadTime" jdbcType="TIMESTAMP"/>
+        <result column="WORK_REMARK" property="workRemark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, TEACHER_ID, WORK_TYPE, WORK_URL, WORK_UPLOAD_TIME, WORK_REMARK
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ruicai.education.po.EduWorkExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_WORK
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_WORK
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_WORK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.education.po.EduWorkExample">
+        delete from RCJX.EDU_WORK
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.education.po.EduWork">
+    insert into RCJX.EDU_WORK (ID, TEACHER_ID, WORK_TYPE, 
+      WORK_URL, WORK_UPLOAD_TIME, WORK_REMARK
+      )
+    values (#{id,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, 
+      #{workUrl,jdbcType=VARCHAR}, #{workUploadTime,jdbcType=TIMESTAMP}, #{workRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.education.po.EduWork">
+        insert into RCJX.EDU_WORK
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="teacherId != null">
+                TEACHER_ID,
+            </if>
+            <if test="workType != null">
+                WORK_TYPE,
+            </if>
+            <if test="workUrl != null">
+                WORK_URL,
+            </if>
+            <if test="workUploadTime != null">
+                WORK_UPLOAD_TIME,
+            </if>
+            <if test="workRemark != null">
+                WORK_REMARK,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="workType != null">
+                #{workType,jdbcType=VARCHAR},
+            </if>
+            <if test="workUrl != null">
+                #{workUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="workUploadTime != null">
+                #{workUploadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="workRemark != null">
+                #{workRemark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.education.po.EduWorkExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_WORK
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_WORK
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherId != null">
+                TEACHER_ID = #{record.teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workType != null">
+                WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workUrl != null">
+                WORK_URL = #{record.workUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workUploadTime != null">
+                WORK_UPLOAD_TIME = #{record.workUploadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.workRemark != null">
+                WORK_REMARK = #{record.workRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_WORK
+        set ID = #{record.id,jdbcType=VARCHAR},
+        TEACHER_ID = #{record.teacherId,jdbcType=VARCHAR},
+        WORK_TYPE = #{record.workType,jdbcType=VARCHAR},
+        WORK_URL = #{record.workUrl,jdbcType=VARCHAR},
+        WORK_UPLOAD_TIME = #{record.workUploadTime,jdbcType=TIMESTAMP},
+        WORK_REMARK = #{record.workRemark,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.education.po.EduWork">
+        update RCJX.EDU_WORK
+        <set>
+            <if test="teacherId != null">
+                TEACHER_ID = #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="workType != null">
+                WORK_TYPE = #{workType,jdbcType=VARCHAR},
+            </if>
+            <if test="workUrl != null">
+                WORK_URL = #{workUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="workUploadTime != null">
+                WORK_UPLOAD_TIME = #{workUploadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="workRemark != null">
+                WORK_REMARK = #{workRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.education.po.EduWork">
+    update RCJX.EDU_WORK
+    set TEACHER_ID = #{teacherId,jdbcType=VARCHAR},
+      WORK_TYPE = #{workType,jdbcType=VARCHAR},
+      WORK_URL = #{workUrl,jdbcType=VARCHAR},
+      WORK_UPLOAD_TIME = #{workUploadTime,jdbcType=TIMESTAMP},
+      WORK_REMARK = #{workRemark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
