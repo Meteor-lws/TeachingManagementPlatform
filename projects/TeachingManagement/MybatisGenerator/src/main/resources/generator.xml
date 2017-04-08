@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 父项目逆向配置 -->
+    <context id="teaching" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消所有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="com.ruicai.teaching.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="com.ruicai.teaching.mapper" targetProject="src/main/java"/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.teaching.dao" targetProject="src/main/java"/>
+
+        <!-- 配置所有表的生成 -->
+        <table schema="RCJX" tableName="%"/>
+    </context>
+
+    <!-- 在线评教逆向配置 -->
+    <context id="evaluation" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消所有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="com.ruicai.evaluation.entity" targetProject="EvaluationOnline/src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="com.ruicai.evaluation.mapper" targetProject="EvaluationOnline/src/main/java"/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.evaluation.dao" targetProject="EvaluationOnline/src/main/java"/>
+
+        <!-- 配置所有表的生成 -->
+        <table schema="RCJX" tableName="%"/>
+    </context>
+
+    <!-- 教务管理逆向配置 -->
+    <context id="education" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消所有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="com.ruicai.education.entity" targetProject="EducationManagement/src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="com.ruicai.education.mapper" targetProject="EducationManagement/src/main/java"/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.education.dao" targetProject="EducationManagement/src/main/java"/>
+
+        <!-- 配置所有表的生成 -->
+        <table schema="RCJX" tableName="%"/>
+    </context>
+
+    <!-- 在线考试逆向配置 -->
+    <context id="examination" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消所有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="com.ruicai.examination.entity" targetProject="ExaminationOnline/src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="com.ruicai.examination.mapper" targetProject="ExaminationOnline/src/main/java"/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.examination.dao" targetProject="ExaminationOnline/src/main/java"/>
+
+        <!-- 配置所有表的生成 -->
+        <table schema="RCJX" tableName="%"/>
+    </context>
+
+    <!-- 系统管理逆向配置 -->
+    <context id="system" targetRuntime="MyBatis3">
+        <!-- 当表名或字段名为关键字时自动添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 取消所有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据库连接参数 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+                        userId="RCJX"
+                        password="RCJX"/>
+
+        <!-- 配置实体类的生成 -->
+        <javaModelGenerator targetPackage="com.ruicai.system.entity" targetProject="SystemManagement/src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置mapper.xml文件的生成 -->
+        <sqlMapGenerator targetPackage="com.ruicai.system.mapper" targetProject="SystemManagement/src/main/java"/>
+
+        <!-- 配置Mapper接口的生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.dao" targetProject="SystemManagement/src/main/java"/>
+
+        <!-- 配置所有表的生成 -->
+        <table schema="RCJX" tableName="%"/>
+    </context>
+</generatorConfiguration>
