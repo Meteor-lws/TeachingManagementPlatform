@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruicai.system.dao.EduTeacherMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.system.entity.EduTeacher">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType"/>
+        <result column="TEACHER_SPECIALITY" jdbcType="VARCHAR" property="teacherSpeciality"/>
+        <result column="TEACHER_SEX" jdbcType="VARCHAR" property="teacherSex"/>
+        <result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="TEACHER_PHONE" jdbcType="VARCHAR" property="teacherPhone"/>
+        <result column="TEACHER_INTRODUCTION" jdbcType="VARCHAR" property="teacherIntroduction"/>
+        <result column="TEACHER_PICTURE" jdbcType="VARCHAR" property="teacherPicture"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, USER_ID, TEACHER_TYPE, TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, TEACHER_PHONE, 
+    TEACHER_INTRODUCTION, TEACHER_PICTURE
+  </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_TEACHER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.entity.EduTeacherExample">
+        delete from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.entity.EduTeacher">
+    insert into RCJX.EDU_TEACHER (ID, USER_ID, TEACHER_TYPE, 
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR}, 
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        insert into RCJX.EDU_TEACHER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE,
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY,
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX,
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME,
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE,
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION,
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherType != null">
+                TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSex != null">
+                TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPhone != null">
+                TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPicture != null">
+                TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_TEACHER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+        TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+        TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+        TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.entity.EduTeacher">
+    update RCJX.EDU_TEACHER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+      TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+      TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    <resultMap id="BaseResultMap" type="com.ruicai.system.entity.EduTeacher">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType"/>
+        <result column="TEACHER_SPECIALITY" jdbcType="VARCHAR" property="teacherSpeciality"/>
+        <result column="TEACHER_SEX" jdbcType="VARCHAR" property="teacherSex"/>
+        <result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="TEACHER_PHONE" jdbcType="VARCHAR" property="teacherPhone"/>
+        <result column="TEACHER_INTRODUCTION" jdbcType="VARCHAR" property="teacherIntroduction"/>
+        <result column="TEACHER_PICTURE" jdbcType="VARCHAR" property="teacherPicture"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, USER_ID, TEACHER_TYPE, TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, TEACHER_PHONE, 
+    TEACHER_INTRODUCTION, TEACHER_PICTURE
+  </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_TEACHER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.entity.EduTeacherExample">
+        delete from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.entity.EduTeacher">
+    insert into RCJX.EDU_TEACHER (ID, USER_ID, TEACHER_TYPE, 
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR}, 
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        insert into RCJX.EDU_TEACHER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE,
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY,
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX,
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME,
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE,
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION,
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherType != null">
+                TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSex != null">
+                TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPhone != null">
+                TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPicture != null">
+                TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_TEACHER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+        TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+        TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+        TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.entity.EduTeacher">
+    update RCJX.EDU_TEACHER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+      TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+      TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    <resultMap id="BaseResultMap" type="com.ruicai.system.entity.EduTeacher">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType"/>
+        <result column="TEACHER_SPECIALITY" jdbcType="VARCHAR" property="teacherSpeciality"/>
+        <result column="TEACHER_SEX" jdbcType="VARCHAR" property="teacherSex"/>
+        <result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="TEACHER_PHONE" jdbcType="VARCHAR" property="teacherPhone"/>
+        <result column="TEACHER_INTRODUCTION" jdbcType="VARCHAR" property="teacherIntroduction"/>
+        <result column="TEACHER_PICTURE" jdbcType="VARCHAR" property="teacherPicture"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, USER_ID, TEACHER_TYPE, TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, TEACHER_PHONE, 
+    TEACHER_INTRODUCTION, TEACHER_PICTURE
+  </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_TEACHER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.entity.EduTeacherExample">
+        delete from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.entity.EduTeacher">
+    insert into RCJX.EDU_TEACHER (ID, USER_ID, TEACHER_TYPE, 
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR}, 
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        insert into RCJX.EDU_TEACHER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE,
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY,
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX,
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME,
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE,
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION,
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherType != null">
+                TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSex != null">
+                TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPhone != null">
+                TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPicture != null">
+                TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_TEACHER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+        TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+        TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+        TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.entity.EduTeacher">
+    update RCJX.EDU_TEACHER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+      TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+      TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    <resultMap id="BaseResultMap" type="com.ruicai.system.entity.EduTeacher">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType"/>
+        <result column="TEACHER_SPECIALITY" jdbcType="VARCHAR" property="teacherSpeciality"/>
+        <result column="TEACHER_SEX" jdbcType="VARCHAR" property="teacherSex"/>
+        <result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="TEACHER_PHONE" jdbcType="VARCHAR" property="teacherPhone"/>
+        <result column="TEACHER_INTRODUCTION" jdbcType="VARCHAR" property="teacherIntroduction"/>
+        <result column="TEACHER_PICTURE" jdbcType="VARCHAR" property="teacherPicture"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, USER_ID, TEACHER_TYPE, TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, TEACHER_PHONE, 
+    TEACHER_INTRODUCTION, TEACHER_PICTURE
+  </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_TEACHER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.entity.EduTeacherExample">
+        delete from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.entity.EduTeacher">
+    insert into RCJX.EDU_TEACHER (ID, USER_ID, TEACHER_TYPE, 
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR}, 
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        insert into RCJX.EDU_TEACHER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE,
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY,
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX,
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME,
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE,
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION,
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherType != null">
+                TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSex != null">
+                TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPhone != null">
+                TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPicture != null">
+                TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_TEACHER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+        TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+        TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+        TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.entity.EduTeacher">
+    update RCJX.EDU_TEACHER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+      TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+      TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+    <resultMap id="BaseResultMap" type="com.ruicai.system.entity.EduTeacher">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="TEACHER_TYPE" jdbcType="VARCHAR" property="teacherType"/>
+        <result column="TEACHER_SPECIALITY" jdbcType="VARCHAR" property="teacherSpeciality"/>
+        <result column="TEACHER_SEX" jdbcType="VARCHAR" property="teacherSex"/>
+        <result column="TEACHER_NAME" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="TEACHER_PHONE" jdbcType="VARCHAR" property="teacherPhone"/>
+        <result column="TEACHER_INTRODUCTION" jdbcType="VARCHAR" property="teacherIntroduction"/>
+        <result column="TEACHER_PICTURE" jdbcType="VARCHAR" property="teacherPicture"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    ID, USER_ID, TEACHER_TYPE, TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, TEACHER_PHONE, 
+    TEACHER_INTRODUCTION, TEACHER_PICTURE
+  </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RCJX.EDU_TEACHER
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RCJX.EDU_TEACHER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.entity.EduTeacherExample">
+        delete from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.entity.EduTeacher">
+    insert into RCJX.EDU_TEACHER (ID, USER_ID, TEACHER_TYPE, 
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR}, 
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        insert into RCJX.EDU_TEACHER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE,
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY,
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX,
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME,
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE,
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION,
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.entity.EduTeacherExample" resultType="java.lang.Integer">
+        select count(*) from RCJX.EDU_TEACHER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherType != null">
+                TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherSex != null">
+                TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPhone != null">
+                TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherPicture != null">
+                TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RCJX.EDU_TEACHER
+        set ID = #{record.id,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        TEACHER_TYPE = #{record.teacherType,jdbcType=VARCHAR},
+        TEACHER_SPECIALITY = #{record.teacherSpeciality,jdbcType=VARCHAR},
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+        TEACHER_INTRODUCTION = #{record.teacherIntroduction,jdbcType=VARCHAR},
+        TEACHER_PICTURE = #{record.teacherPicture,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.entity.EduTeacher">
+        update RCJX.EDU_TEACHER
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherType != null">
+                TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSpeciality != null">
+                TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherSex != null">
+                TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPhone != null">
+                TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherIntroduction != null">
+                TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherPicture != null">
+                TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.entity.EduTeacher">
+    update RCJX.EDU_TEACHER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      TEACHER_TYPE = #{teacherType,jdbcType=VARCHAR},
+      TEACHER_SPECIALITY = #{teacherSpeciality,jdbcType=VARCHAR},
+      TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      TEACHER_INTRODUCTION = #{teacherIntroduction,jdbcType=VARCHAR},
+      TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
