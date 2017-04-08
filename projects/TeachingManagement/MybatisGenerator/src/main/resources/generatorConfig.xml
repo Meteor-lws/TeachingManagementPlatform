@@ -18,7 +18,7 @@
 
         <!-- 配置数据库连接参数 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                        connectionURL="jdbc:mysql://localhost:3306/teaching_management"
                         userId="root"
                         password="p073284GY"/>
 
