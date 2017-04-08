@@ -1,3 +1,4 @@
+import org.apache.ibatis.io.Resources;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -23,7 +24,7 @@ public class GeneratorTest {
     }
 
     private void generate() {
-        try (InputStream configStream = this.getClass().getClassLoader().getResourceAsStream("generatorConfig.xml")) {
+        try (InputStream configStream = Resources.getResourceAsStream("generatorConfig.xml")) {
             List<String> warnings = new ArrayList<>();
             ConfigurationParser parser = new ConfigurationParser(warnings);
             Configuration config = parser.parseConfiguration(configStream);

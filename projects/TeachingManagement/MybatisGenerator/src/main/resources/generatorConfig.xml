@@ -17,10 +17,10 @@
         </commentGenerator>
 
         <!-- 配置数据库连接参数 -->
-        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
-                        userId="RCJX"
-                        password="RCJX"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                        userId="root"
+                        password="p073284GY"/>
 
         <!-- 配置实体类的生成 -->
         <javaModelGenerator targetPackage="com.ruicai.teaching.entity" targetProject="src/main/java">
@@ -34,6 +34,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.teaching.dao" targetProject="src/main/java"/>
 
         <!-- 配置所有表的生成 -->
-        <table tableName="%" schema="RCKJ"/>
+        <table tableName="%"/>
     </context>
 </generatorConfiguration>
