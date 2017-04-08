@@ -1,6 +1,13 @@
-import javax.security.auth.login.Configuration;
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.exception.InvalidConfigurationException;
+import org.mybatis.generator.exception.XMLParserException;
+import org.mybatis.generator.internal.DefaultShellCallback;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +32,14 @@ public class GeneratorTest {
             myBatisGenerator.generate(null);
         } catch (IOException e) {
             System.out.println("加载配置文件失败");
+        } catch (XMLParserException e) {
+            System.out.println("配置文件解析失败");
+        } catch (InterruptedException e) {
+            System.out.println("进程被异常中断");
+        } catch (InvalidConfigurationException e) {
+            System.out.println("存在不合法配置");
+        } catch (SQLException e) {
+            System.out.println("SQL语句执行异常");
         }
     }
 }
