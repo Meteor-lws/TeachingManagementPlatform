@@ -6,8 +6,8 @@ import com.ruicai.system.entity.Tree;
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.po.system.SystemDictionaryExample;
 import com.ruicai.system.po.system.SystemDictionaryExample.Criteria;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +17,22 @@ import java.util.List;
  *
  * Created by lws on 2017/4/10.
  */
+@Service
 public class DictionaryService {
 
-    private final ApplicationContext applicationContext;
-
-    public DictionaryService() {
-        applicationContext = new ClassPathXmlApplicationContext("spring/application-context.xml");
-    }
+    @Autowired
+    private SystemDictionaryMapper mapper;
 
     public String getDictionary(String id) {
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         return JSON.toJSONString(mapper.selectByPrimaryKey(id));
     }
 
     public String getDictionaries() {
         List<Tree> result = new ArrayList<>();
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         SystemDictionaryExample example = new SystemDictionaryExample();
         Criteria criteria = example.createCriteria();
         criteria.andParentIdIsNull();
+        System.out.println(mapper + ",.................................................................");
         List<SystemDictionary> dictionaries = mapper.selectByExample(example);
         for (SystemDictionary dictionary : dictionaries) {
             result.add(buildTree(dictionary));
@@ -44,17 +41,14 @@ public class DictionaryService {
     }
 
     public void removeDictionary(String id) {
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.deleteByPrimaryKey(id);
     }
 
     public void editDictionary(SystemDictionary dictionary) {
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.updateByPrimaryKeySelective(dictionary);
     }
 
     public void addDictionary(SystemDictionary dictionary) {
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.insertSelective(dictionary);
     }
 
@@ -72,7 +66,6 @@ public class DictionaryService {
     }
 
     private List<SystemDictionary> getChildren(SystemDictionary dictionary) {
-        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         SystemDictionaryExample example = new SystemDictionaryExample();
         Criteria criteria = example.createCriteria();
         criteria.andParentIdEqualTo(dictionary.getId());

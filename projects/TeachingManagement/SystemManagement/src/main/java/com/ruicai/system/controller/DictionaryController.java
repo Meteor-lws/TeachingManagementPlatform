@@ -2,6 +2,7 @@ package com.ruicai.system.controller;
 
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.service.DictionaryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,11 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class DictionaryController {
-    private final DictionaryService service;
 
-    DictionaryController() {
-        service = new DictionaryService();
-    }
+    @Autowired
+    private DictionaryService service;
 
     @RequestMapping(value = "/dictionary", method = RequestMethod.GET)
     public String dictionary() {
@@ -35,6 +34,7 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/getDictionaries", method = RequestMethod.POST)
     public String getDictionaries() {
+        System.out.println(service + ",.................................................................");
         return service.getDictionaries();
     }
 
