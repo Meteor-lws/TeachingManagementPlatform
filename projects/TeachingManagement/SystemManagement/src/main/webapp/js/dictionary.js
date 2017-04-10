@@ -96,9 +96,15 @@ function add() {
 }
 
 function edit() {
-    ajax('editDictionary', getContent(), function () {
-        refresh();
-    }, '修改数据字典失败');
+    var id = selectedId();
+    if (id) {
+        var content = getContent();
+        ajax('editDictionary', {'id': id, 'parentId': content.parentId, 'name': content.name, 'value': content.value, 'describe': content.describe, 'sortNumber': content.sortNumber}, function () {
+            refresh();
+        }, '修改数据字典失败');
+    } else {
+        $.messager.alert('警告', '请选择要修改的数据字典', 'warning');
+    }
 }
 
 function remove() {
@@ -125,7 +131,7 @@ function select(node) {
 
 function selectedId() {
     var selection = $('#dictionary').tree('getSelected');
-    return selection ? selection.id : null;
+    return selection === null ? null : selection.id;
 }
 
 function ajax(url, data, success, error) {
@@ -143,9 +149,15 @@ function ajax(url, data, success, error) {
 }
 
 function refresh() {
+    var id = selectedId();
     $('#dictionary').tree('reload');
     $('#dictionary-parent').combotree('reload');
-    setContent();
+    if (id) {
+        ajax('getDictionaryById', {'id': id}, function (dictionary) {
+            dictionary = $.parseJSON(dictionary);
+            setContent(dictionary);
+        }, '请求数据字典失败');
+    }
 }
 
 function setContent(dictionary) {

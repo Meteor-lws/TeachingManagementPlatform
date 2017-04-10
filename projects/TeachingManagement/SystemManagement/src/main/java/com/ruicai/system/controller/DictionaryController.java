@@ -21,6 +21,7 @@ import java.util.List;
  *
  * Created by XuMing on 2017/4/5.
  */
+@SuppressWarnings("SameReturnValue")
 @Controller
 public class DictionaryController {
     private final ApplicationContext applicationContext;
@@ -60,6 +61,7 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/editDictionary", method = RequestMethod.POST)
     public String editDictionary(Dictionary dictionary) {
+        System.out.println(dictionary.getId());
         DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
         mapper.updateByPrimaryKeySelective(dictionary);
         return "修改数据字典成功";
