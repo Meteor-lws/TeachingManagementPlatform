@@ -29,7 +29,7 @@
                 <li><a class="easyui-linkbutton" data-options="plain:true">用户管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">角色管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">权限管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">字典管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">数据字典</a></li>
             </ul>
         </div>
         <div title="在线评教子系统">

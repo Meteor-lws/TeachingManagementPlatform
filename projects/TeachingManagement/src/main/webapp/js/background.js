@@ -29,9 +29,9 @@ $(function () {
                     url = '/system/role';
                     break;
                 case '权限管理':
-                    url = '/system/premission';
+                    url = '/system/permission';
                     break;
-                case '字典管理':
+                case '数据字典':
                     url = '/system/dictionary';
                     break;
                 case '评价项管理':

@@ -29,7 +29,6 @@ public class MybatisGenerator {
             DefaultShellCallback callback = new DefaultShellCallback(true);
             MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
-            System.out.println(configStream);
         } catch (IOException e) {
             logger.error("配置文件加载失败");
         } catch (XMLParserException e) {
