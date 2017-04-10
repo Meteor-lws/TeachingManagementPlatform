@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!-- 系统管理逆向工程配置 -->
+    <!-- 教务管理模块逆向工程配置 -->
     <context id="education" targetRuntime="MyBatis3">
         <!-- 设置分隔符 -->
         <property name="beginningDelimiter" value="`"/>
@@ -27,17 +27,17 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- 配置mapper.xml文件的生成 -->
+        <!-- 配置教务管理模块mapper.xml文件的生成 -->
         <sqlMapGenerator targetPackage="mybatis.mapper.education" targetProject="SystemManagement/src/main/resources"/>
 
-        <!-- 配置Mapper接口的生成 -->
+        <!-- 配置教务管理模块Mapper接口的生成 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.dao.education" targetProject="SystemManagement/src/main/java"/>
 
-        <!-- 配置所有表的生成 -->
+        <!-- 配置教务管理模块所有表的生成 -->
         <table schema="ruicai" tableName="EDU%"/>
     </context>
 
-    <!-- 系统管理逆向工程配置 -->
+    <!-- 在线评教模块逆向工程配置 -->
     <context id="evaluation" targetRuntime="MyBatis3">
         <!-- 设置分隔符 -->
         <property name="beginningDelimiter" value="`"/>
@@ -55,22 +55,22 @@
                         userId="ruicai"
                         password="ruicai"/>
 
-        <!-- 配置实体类的生成 -->
+        <!-- 配置在线评教模块实体类的生成 -->
         <javaModelGenerator targetPackage="com.ruicai.system.po.evaluation" targetProject="SystemManagement/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- 配置mapper.xml文件的生成 -->
+        <!-- 配置在线评教模块mapper.xml文件的生成 -->
         <sqlMapGenerator targetPackage="mybatis.mapper.evaluation" targetProject="SystemManagement/src/main/resources"/>
 
-        <!-- 配置Mapper接口的生成 -->
+        <!-- 配置在线评教模块Mapper接口的生成 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.dao.evaluation" targetProject="SystemManagement/src/main/java"/>
 
-        <!-- 配置所有表的生成 -->
+        <!-- 配置在线评教模块所有表的生成 -->
         <table schema="ruicai" tableName="EVA%"/>
     </context>
 
-    <!-- 系统管理逆向工程配置 -->
+    <!-- 在线考试模块逆向工程配置 -->
     <context id="examination" targetRuntime="MyBatis3">
         <!-- 设置分隔符 -->
         <property name="beginningDelimiter" value="`"/>
@@ -88,22 +88,22 @@
                         userId="ruicai"
                         password="ruicai"/>
 
-        <!-- 配置实体类的生成 -->
+        <!-- 配置在线考试模块实体类的生成 -->
         <javaModelGenerator targetPackage="com.ruicai.system.po.examination" targetProject="SystemManagement/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- 配置mapper.xml文件的生成 -->
+        <!-- 配置在线考试模块mapper.xml文件的生成 -->
         <sqlMapGenerator targetPackage="mybatis.mapper.examination" targetProject="SystemManagement/src/main/resources"/>
 
-        <!-- 配置Mapper接口的生成 -->
+        <!-- 配置在线考试模块Mapper接口的生成 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.dao.examination" targetProject="SystemManagement/src/main/java"/>
 
-        <!-- 配置所有表的生成 -->
+        <!-- 配置在线考试模块所有表的生成 -->
         <table schema="ruicai" tableName="EXAM%"/>
     </context>
 
-    <!-- 系统管理逆向工程配置 -->
+    <!-- 系统管理模块逆向工程配置 -->
     <context id="system" targetRuntime="MyBatis3">
         <!-- 设置分隔符 -->
         <property name="beginningDelimiter" value="`"/>
@@ -121,18 +121,18 @@
                         userId="ruicai"
                         password="ruicai"/>
 
-        <!-- 配置实体类的生成 -->
+        <!-- 配置系统管理模块实体类的生成 -->
         <javaModelGenerator targetPackage="com.ruicai.system.po.system" targetProject="SystemManagement/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- 配置mapper.xml文件的生成 -->
+        <!-- 配置系统管理模块mapper.xml文件的生成 -->
         <sqlMapGenerator targetPackage="mybatis.mapper.system" targetProject="SystemManagement/src/main/resources"/>
 
-        <!-- 配置Mapper接口的生成 -->
+        <!-- 配置系统管理模块Mapper接口的生成 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.dao.system" targetProject="SystemManagement/src/main/java"/>
 
-        <!-- 配置所有表的生成 -->
+        <!-- 配置系统管理模块表的生成 -->
         <table schema="ruicai" tableName="SYSTEM%"/>
 
         <table schema="ruicai" tableName="ROLE_TO_RESOURCE"/>
