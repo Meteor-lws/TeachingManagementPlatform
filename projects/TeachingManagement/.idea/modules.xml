@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/EducationManagement/EducationManagement.iml" filepath="$PROJECT_DIR$/EducationManagement/EducationManagement.iml" />
       <module fileurl="file://$PROJECT_DIR$/EvaluationOnline/EvaluationOnline.iml" filepath="$PROJECT_DIR$/EvaluationOnline/EvaluationOnline.iml" />
       <module fileurl="file://$PROJECT_DIR$/ExaminationOnline/ExaminationOnline.iml" filepath="$PROJECT_DIR$/ExaminationOnline/ExaminationOnline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MybatisGenerator/MybatisGenerator.iml" filepath="$PROJECT_DIR$/MybatisGenerator/MybatisGenerator.iml" />
       <module fileurl="file://$PROJECT_DIR$/SystemManagement/SystemManagement.iml" filepath="$PROJECT_DIR$/SystemManagement/SystemManagement.iml" />
       <module fileurl="file://$PROJECT_DIR$/TeachingManagement.iml" filepath="$PROJECT_DIR$/TeachingManagement.iml" />
     </modules>
