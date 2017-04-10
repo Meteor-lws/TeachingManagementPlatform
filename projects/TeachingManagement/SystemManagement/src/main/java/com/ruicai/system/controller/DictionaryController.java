@@ -1,11 +1,11 @@
 package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruicai.system.dao.system.SystemDictionaryMapper;
 import com.ruicai.system.entity.Tree;
-import com.ruicai.system.mapper.SystemDictionaryMapper;
-import com.ruicai.system.po.SystemDictionary;
-import com.ruicai.system.po.SystemDictionaryExample;
-import com.ruicai.system.po.SystemDictionaryExample.Criteria;
+import com.ruicai.system.po.system.SystemDictionary;
+import com.ruicai.system.po.system.SystemDictionaryExample;
+import com.ruicai.system.po.system.SystemDictionaryExample.Criteria;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -24,6 +24,7 @@ import java.util.List;
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class DictionaryController {
+
     private final ApplicationContext applicationContext;
 
     DictionaryController() {
