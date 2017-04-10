@@ -1,5 +1,6 @@
 package com.ruicai.system.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DictionaryController {
 
+    private final DictionaryService service;
+
     @Autowired
-    private DictionaryService service;
+    public DictionaryController(DictionaryService service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "/dictionary", method = RequestMethod.GET)
     public String dictionary() {
@@ -28,14 +33,13 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/getDictionary", method = RequestMethod.POST)
     public String getDictionary(String id) {
-        return service.getDictionary(id);
+        return JSON.toJSONString(service.findById(id));
     }
 
     @ResponseBody
     @RequestMapping(value = "/getDictionaries", method = RequestMethod.POST)
     public String getDictionaries() {
-        System.out.println(service + ",.................................................................");
-        return service.getDictionaries();
+        return JSON.toJSONString(service.findAll());
     }
 
     @ResponseBody
