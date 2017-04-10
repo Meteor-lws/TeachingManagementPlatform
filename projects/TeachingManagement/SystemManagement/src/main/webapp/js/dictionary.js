@@ -11,7 +11,7 @@ $(function () {
 
 function prepareContent() {
     $('#dictionary').tree({
-        url: 'dictionaryData',
+        url: 'getDictionaries',
         onSelect: function (node) {
             select(node);
         }
@@ -32,7 +32,7 @@ function prepareDialog() {
         width: 350,
         height: 40,
         editable: true,
-        url: 'dictionaryData'
+        url: 'getDictionaries'
     });
     $('#dictionary-sort').textbox({
         label: '字典序号：',
@@ -130,7 +130,7 @@ function search(value) {
 }
 
 function select(node) {
-    ajax('getDictionaryById', {'id': node.id}, function (dictionary) {
+    ajax('getDictionary', {'id': node.id}, function (dictionary) {
         dictionary = $.parseJSON(dictionary);
         setContent(dictionary);
     }, '请求数据字典失败');
@@ -160,7 +160,7 @@ function refresh() {
     $('#dictionary').tree('reload');
     $('#dictionary-parent').combotree('reload');
     if (id) {
-        ajax('getDictionaryById', {'id': id}, function (dictionary) {
+        ajax('getDictionary', {'id': id}, function (dictionary) {
             dictionary = $.parseJSON(dictionary);
             setContent(dictionary);
         }, '请求数据字典失败');
