@@ -17,5 +17,6 @@
 </head>
 <body>
 <h2>在线考试</h2>
+<a href="mybatistest">ss</a>
 </body>
 </html>

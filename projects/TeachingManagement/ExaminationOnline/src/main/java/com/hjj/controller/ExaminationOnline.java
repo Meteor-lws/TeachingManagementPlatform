@@ -1,3 +1,4 @@
+/*
 package com.hjj.controller;
 
 import com.alibaba.fastjson.JSON;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * 在线考试控制器
  *
  * Created by 朱高 on 2017/4/1.
- */
+ *//*
+
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class ExaminationOnline {
@@ -231,3 +234,4 @@ public class ExaminationOnline {
         return json;
     }
 }
+*/
