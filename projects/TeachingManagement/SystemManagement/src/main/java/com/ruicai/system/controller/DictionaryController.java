@@ -2,10 +2,10 @@ package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.ruicai.system.entity.Tree;
-import com.ruicai.system.mapper.DictionaryMapper;
-import com.ruicai.system.po.Dictionary;
-import com.ruicai.system.po.DictionaryExample;
-import com.ruicai.system.po.DictionaryExample.Criteria;
+import com.ruicai.system.mapper.SystemDictionaryMapper;
+import com.ruicai.system.po.SystemDictionary;
+import com.ruicai.system.po.SystemDictionaryExample;
+import com.ruicai.system.po.SystemDictionaryExample.Criteria;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -39,12 +39,12 @@ public class DictionaryController {
     @RequestMapping(value = "/dictionaryData", method = RequestMethod.POST)
     public String dictionaryData() {
         List<Tree> result = new ArrayList<>();
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
-        DictionaryExample example = new DictionaryExample();
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
+        SystemDictionaryExample example = new SystemDictionaryExample();
         Criteria criteria = example.createCriteria();
         criteria.andParentIdIsNull();
-        List<Dictionary> dictionaries = mapper.selectByExample(example);
-        for (Dictionary dictionary : dictionaries) {
+        List<SystemDictionary> dictionaries = mapper.selectByExample(example);
+        for (SystemDictionary dictionary : dictionaries) {
             result.add(buildTree(dictionary));
         }
         return JSON.toJSONString(result);
@@ -52,17 +52,16 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/addDictionary", method = RequestMethod.POST)
-    public String addDictionary(Dictionary dictionary) {
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
+    public String addDictionary(SystemDictionary dictionary) {
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.insertSelective(dictionary);
         return "添加数据字典成功";
     }
 
     @ResponseBody
     @RequestMapping(value = "/editDictionary", method = RequestMethod.POST)
-    public String editDictionary(Dictionary dictionary) {
-        System.out.println(dictionary.getId());
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
+    public String editDictionary(SystemDictionary dictionary) {
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.updateByPrimaryKeySelective(dictionary);
         return "修改数据字典成功";
     }
@@ -70,7 +69,7 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/removeDictionaryById", method = RequestMethod.POST)
     public String removeDictionaryById(String id) {
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         mapper.deleteByPrimaryKey(id);
         return "删除数据字典成功";
     }
@@ -78,29 +77,29 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
     public String getDictionaryById(String id) {
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
         return JSON.toJSONString(mapper.selectByPrimaryKey(id));
     }
 
-    private Tree buildTree(Dictionary dictionary) {
+    private Tree buildTree(SystemDictionary dictionary) {
         Tree tree = new Tree();
         tree.setId(dictionary.getId());
-        tree.setText(dictionary.getValue());
-        List<Dictionary> dictionaries = getChildren(dictionary);
+        tree.setText(dictionary.getDictionaryName());
+        List<SystemDictionary> dictionaries = getChildren(dictionary);
         List<Tree> children = new ArrayList<>();
-        for (Dictionary dict : dictionaries) {
+        for (SystemDictionary dict : dictionaries) {
             children.add(buildTree(dict));
         }
         tree.setChildren(children);
         return tree;
     }
 
-    private List<Dictionary> getChildren(Dictionary dictionary) {
-        DictionaryMapper mapper = (DictionaryMapper) applicationContext.getBean("dictionaryMapper");
-        DictionaryExample example = new DictionaryExample();
+    private List<SystemDictionary> getChildren(SystemDictionary dictionary) {
+        SystemDictionaryMapper mapper = (SystemDictionaryMapper) applicationContext.getBean("systemDictionaryMapper");
+        SystemDictionaryExample example = new SystemDictionaryExample();
         Criteria criteria = example.createCriteria();
         criteria.andParentIdEqualTo(dictionary.getId());
-        example.setOrderByClause("SORT_NUMBER ASC");
+        example.setOrderByClause("DICTIONARY_SORT_NUMBER ASC");
         return mapper.selectByExample(example);
     }
 }

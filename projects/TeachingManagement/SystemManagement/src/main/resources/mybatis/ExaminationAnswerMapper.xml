@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ruicai.system.mapper.DictionaryMapper">
-    <resultMap id="BaseResultMap" type="com.ruicai.system.po.Dictionary">
+<mapper namespace="com.ruicai.system.mapper.ExaminationAnswerMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.system.po.ExaminationAnswer">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" jdbcType="VARCHAR"/>
-        <result column="VALUE" property="value" jdbcType="VARCHAR"/>
-        <result column="DESCRIBE" property="describe" jdbcType="VARCHAR"/>
-        <result column="SORT_NUMBER" property="sortNumber" jdbcType="DECIMAL"/>
+        <result column="STUDENT_ID" property="studentId" jdbcType="VARCHAR"/>
+        <result column="ANSWER_SCORE" property="answerScore" jdbcType="DECIMAL"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -68,15 +65,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        ID, PARENT_ID, NAME, VALUE, DESCRIBE, SORT_NUMBER
+        ID, STUDENT_ID, ANSWER_SCORE
     </sql>
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ruicai.system.po.DictionaryExample">
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ruicai.system.po.ExaminationAnswerExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from RUICAI.DICTIONARY
+        from RUICAI.EXAMINATION_ANSWER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -87,96 +84,67 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from RUICAI.DICTIONARY
+        from RUICAI.EXAMINATION_ANSWER
         where ID = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        DELETE FROM RUICAI.DICTIONARY
+        DELETE FROM RUICAI.EXAMINATION_ANSWER
         WHERE ID = #{id,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ruicai.system.po.DictionaryExample">
-        delete from RUICAI.DICTIONARY
+    <delete id="deleteByExample" parameterType="com.ruicai.system.po.ExaminationAnswerExample">
+        delete from RUICAI.EXAMINATION_ANSWER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ruicai.system.po.Dictionary">
-        INSERT INTO RUICAI.DICTIONARY (ID, PARENT_ID, NAME,
-                                       VALUE, DESCRIBE, SORT_NUMBER
+    <insert id="insert" parameterType="com.ruicai.system.po.ExaminationAnswer">
+        INSERT INTO RUICAI.EXAMINATION_ANSWER (ID, STUDENT_ID, ANSWER_SCORE
         )
-        VALUES (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-                #{value,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{sortNumber,jdbcType=DECIMAL}
+        VALUES (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{answerScore,jdbcType=DECIMAL}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.ruicai.system.po.Dictionary">
-        insert into RUICAI.DICTIONARY
+    <insert id="insertSelective" parameterType="com.ruicai.system.po.ExaminationAnswer">
+        insert into RUICAI.EXAMINATION_ANSWER
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 ID,
             </if>
-            <if test="parentId != null">
-                PARENT_ID,
+            <if test="studentId != null">
+                STUDENT_ID,
             </if>
-            <if test="name != null">
-                NAME,
-            </if>
-            <if test="value != null">
-                VALUE,
-            </if>
-            <if test="describe != null">
-                DESCRIBE,
-            </if>
-            <if test="sortNumber != null">
-                SORT_NUMBER,
+            <if test="answerScore != null">
+                ANSWER_SCORE,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="parentId != null">
-                #{parentId,jdbcType=VARCHAR},
+            <if test="studentId != null">
+                #{studentId,jdbcType=VARCHAR},
             </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="value != null">
-                #{value,jdbcType=VARCHAR},
-            </if>
-            <if test="describe != null">
-                #{describe,jdbcType=VARCHAR},
-            </if>
-            <if test="sortNumber != null">
-                #{sortNumber,jdbcType=DECIMAL},
+            <if test="answerScore != null">
+                #{answerScore,jdbcType=DECIMAL},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruicai.system.po.DictionaryExample" resultType="java.lang.Integer">
-        select count(*) from RUICAI.DICTIONARY
+    <select id="countByExample" parameterType="com.ruicai.system.po.ExaminationAnswerExample" resultType="java.lang.Integer">
+        select count(*) from RUICAI.EXAMINATION_ANSWER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update RUICAI.DICTIONARY
+        update RUICAI.EXAMINATION_ANSWER
         <set>
             <if test="record.id != null">
                 ID = #{record.id,jdbcType=VARCHAR},
             </if>
-            <if test="record.parentId != null">
-                PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+            <if test="record.studentId != null">
+                STUDENT_ID = #{record.studentId,jdbcType=VARCHAR},
             </if>
-            <if test="record.name != null">
-                NAME = #{record.name,jdbcType=VARCHAR},
-            </if>
-            <if test="record.value != null">
-                VALUE = #{record.value,jdbcType=VARCHAR},
-            </if>
-            <if test="record.describe != null">
-                DESCRIBE = #{record.describe,jdbcType=VARCHAR},
-            </if>
-            <if test="record.sortNumber != null">
-                SORT_NUMBER = #{record.sortNumber,jdbcType=DECIMAL},
+            <if test="record.answerScore != null">
+                ANSWER_SCORE = #{record.answerScore,jdbcType=DECIMAL},
             </if>
         </set>
         <if test="_parameter != null">
@@ -184,45 +152,30 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update RUICAI.DICTIONARY
+        update RUICAI.EXAMINATION_ANSWER
         set ID = #{record.id,jdbcType=VARCHAR},
-        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
-        NAME = #{record.name,jdbcType=VARCHAR},
-        VALUE = #{record.value,jdbcType=VARCHAR},
-        DESCRIBE = #{record.describe,jdbcType=VARCHAR},
-        SORT_NUMBER = #{record.sortNumber,jdbcType=DECIMAL}
+        STUDENT_ID = #{record.studentId,jdbcType=VARCHAR},
+        ANSWER_SCORE = #{record.answerScore,jdbcType=DECIMAL}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.po.Dictionary">
-        update RUICAI.DICTIONARY
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.po.ExaminationAnswer">
+        update RUICAI.EXAMINATION_ANSWER
         <set>
-            <if test="parentId != null">
-                PARENT_ID = #{parentId,jdbcType=VARCHAR},
+            <if test="studentId != null">
+                STUDENT_ID = #{studentId,jdbcType=VARCHAR},
             </if>
-            <if test="name != null">
-                NAME = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="value != null">
-                VALUE = #{value,jdbcType=VARCHAR},
-            </if>
-            <if test="describe != null">
-                DESCRIBE = #{describe,jdbcType=VARCHAR},
-            </if>
-            <if test="sortNumber != null">
-                SORT_NUMBER = #{sortNumber,jdbcType=DECIMAL},
+            <if test="answerScore != null">
+                ANSWER_SCORE = #{answerScore,jdbcType=DECIMAL},
             </if>
         </set>
         where ID = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.po.Dictionary">
-        UPDATE RUICAI.DICTIONARY
-        SET PARENT_ID   = #{parentId,jdbcType=VARCHAR},
-            NAME        = #{name,jdbcType=VARCHAR},
-            VALUE       = #{value,jdbcType=VARCHAR},
-            DESCRIBE    = #{describe,jdbcType=VARCHAR},
-            SORT_NUMBER = #{sortNumber,jdbcType=DECIMAL}
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.po.ExaminationAnswer">
+        UPDATE RUICAI.EXAMINATION_ANSWER
+        SET STUDENT_ID   = #{studentId,jdbcType=VARCHAR},
+            ANSWER_SCORE = #{answerScore,jdbcType=DECIMAL}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

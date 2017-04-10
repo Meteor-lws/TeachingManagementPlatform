@@ -99,7 +99,14 @@ function edit() {
     var id = selectedId();
     if (id) {
         var content = getContent();
-        ajax('editDictionary', {'id': id, 'parentId': content.parentId, 'name': content.name, 'value': content.value, 'describe': content.describe, 'sortNumber': content.sortNumber}, function () {
+        ajax('editDictionary', {
+            'id': id,
+            'parentId': content.parentId,
+            'dictionaryName': content.dictionaryName,
+            'dictionaryValue': content.dictionaryValue,
+            'dictionaryDescribe': content.dictionaryDescribe,
+            'dictionarySortNumber': content.dictionarySortNumber
+        }, function () {
             refresh();
         }, '修改数据字典失败');
     } else {
@@ -166,11 +173,11 @@ function setContent(dictionary) {
     } else {
         $('#dictionary-parent').combotree('clear');
     }
-    $('#dictionary-name').textbox('setValue', dictionary.name);
-    $('#dictionary-value').textbox('setValue', dictionary.value);
-    $('#dictionary-sort').textbox('setValue', dictionary.sortNumber);
-    $('#dictionary-describe').textbox('setValue', dictionary.describe);
-    $('#dictionary-detail').textbox('setValue', dictionary.describe);
+    $('#dictionary-name').textbox('setValue', dictionary.dictionaryName);
+    $('#dictionary-value').textbox('setValue', dictionary.dictionaryValue);
+    $('#dictionary-sort').textbox('setValue', dictionary.dictionarySortNumber);
+    $('#dictionary-describe').textbox('setValue', dictionary.dictionaryDescribe);
+    $('#dictionary-detail').textbox('setValue', dictionary.dictionaryDescribe);
 }
 
 function getContent() {
@@ -179,5 +186,5 @@ function getContent() {
     var value = $('#dictionary-value').textbox('getValue');
     var sort = $('#dictionary-sort').textbox('getValue');
     var describe = $('#dictionary-describe').textbox('getValue');
-    return {'parentId': parent, 'name': name, 'value': value, 'sortNumber': sort, 'describe': describe};
+    return {'parentId': parent, 'dictionaryName': name, 'dictionaryValue': value, 'dictionarySortNumber': sort, 'dictionaryDescribe': describe};
 }
