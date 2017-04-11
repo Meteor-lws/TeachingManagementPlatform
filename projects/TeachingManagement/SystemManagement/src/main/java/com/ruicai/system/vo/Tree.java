@@ -1,4 +1,4 @@
-package com.ruicai.system.entity;
+package com.ruicai.system.vo;
 
 import java.util.List;
 

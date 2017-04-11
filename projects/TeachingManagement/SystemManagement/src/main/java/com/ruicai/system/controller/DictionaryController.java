@@ -3,6 +3,7 @@ package com.ruicai.system.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 数据字典控制器
@@ -15,5 +16,11 @@ public class DictionaryController {
     @RequestMapping(value = "/dictionary", method = RequestMethod.GET)
     public String dictionary() {
         return "dictionary";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getDictionaryType", method = RequestMethod.POST)
+    public String getDictionaryType() {
+        return "";
     }
 }

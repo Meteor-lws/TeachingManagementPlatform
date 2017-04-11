@@ -127,7 +127,7 @@
         </javaModelGenerator>
 
         <!-- 配置系统管理模块mapper.xml文件的生成 -->
-        <sqlMapGenerator targetPackage="mybatis.mapper.system" targetProject="SystemManagement/src/main/resources"/>
+        <sqlMapGenerator targetPackage="com.ruicai.system.mapper.system" targetProject="SystemManagement/src/main/resources"/>
 
         <!-- 配置系统管理模块Mapper接口的生成 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.mapper.system" targetProject="SystemManagement/src/main/java"/>
