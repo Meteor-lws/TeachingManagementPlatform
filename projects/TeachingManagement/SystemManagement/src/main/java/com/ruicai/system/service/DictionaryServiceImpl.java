@@ -44,7 +44,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         return result;
     }
 
-    public void removeDictionary(String id) {
+    public void deleteById(String id) {
         mapper.deleteByPrimaryKey(id);
     }
 

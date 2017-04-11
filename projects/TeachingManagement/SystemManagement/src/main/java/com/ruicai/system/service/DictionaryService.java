@@ -9,8 +9,6 @@ import com.ruicai.system.po.system.SystemDictionary;
  */
 public interface DictionaryService extends BaseService {
 
-    void removeDictionary(String id);
-
     void editDictionary(SystemDictionary dictionary);
 
     void addDictionary(SystemDictionary dictionary);

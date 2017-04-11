@@ -59,7 +59,7 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/removeDictionaryById", method = RequestMethod.POST)
     public String removeDictionaryById(String id) {
-        service.removeDictionary(id);
+        service.deleteById(id);
         return "删除数据字典成功";
     }
 }

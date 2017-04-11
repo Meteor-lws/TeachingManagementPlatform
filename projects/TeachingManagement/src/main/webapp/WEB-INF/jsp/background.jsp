@@ -22,7 +22,7 @@
     <script src="js/background.js"></script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'west',title:'后台管理',split:true" style="width: 230px">
+<div data-options="region:'west',title:'后台管理',split:true" style="width: 240px">
     <div id="back-nav" class="easyui-accordion" data-options="multiple:true,border:false" style="width: 100%">
         <div title="系统管理">
             <ul>
