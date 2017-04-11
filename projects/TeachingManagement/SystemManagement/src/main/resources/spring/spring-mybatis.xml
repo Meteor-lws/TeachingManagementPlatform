@@ -29,7 +29,7 @@
     </bean>
 
     <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ruicai.system.dao"/>
+        <property name="basePackage" value="com.ruicai.system.mapper"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
     </bean>
 

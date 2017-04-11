@@ -3,9 +3,11 @@ package com.ruicai.system.mapper.system;
 import com.ruicai.system.po.system.SystemDictionaryType;
 import com.ruicai.system.po.system.SystemDictionaryTypeExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SystemDictionaryTypeMapper {
     int countByExample(SystemDictionaryTypeExample example);
 
