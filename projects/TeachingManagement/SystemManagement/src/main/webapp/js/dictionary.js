@@ -10,6 +10,7 @@ $(function () {
 
 function prepareContent() {
     prepareDictionaryType();
+    prepareSearchBox();
     prepareDatagrid();
     prepareTextBox();
 }
@@ -23,6 +24,13 @@ function prepareDictionaryType() {
     });
 }
 
+function prepareSearchBox() {
+    $('.search').searchbox({
+        prompt: '请输入搜索内容',
+        handler: search
+    });
+}
+
 function prepareDatagrid() {
     $('#dictionary-detail').datagrid({
         fit: true,
@@ -30,7 +38,7 @@ function prepareDatagrid() {
         striped: true,
         rownumbers: true,
         pagination: true,
-        pageSize: 25,
+        pageSize: 20,
         pageNumber: 1,
         columns: [[
             {field: 'id', checkbox: true},
@@ -90,6 +98,10 @@ function showDialog(dictionary) {
 
 function select(node) {
     console.log(node);
+}
+
+function search() {
+
 }
 
 function ajax(url, data, success, error) {

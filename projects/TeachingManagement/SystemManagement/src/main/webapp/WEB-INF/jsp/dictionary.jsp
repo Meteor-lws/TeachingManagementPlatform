@@ -35,15 +35,13 @@
                     <a id="dictionary-type-add" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" style="width: 110px">添加字典类型</a>
                     <a id="dictionary-type-edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" style="width: 110px">修改字典类型</a>
                     <a id="dictionary-type-remove" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" style="width: 110px">删除字典类型</a>
-                </td>
-                <td align="right">
                     <a id="dictionary-add" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" style="width: 80px">添加字典</a>
                     <a id="dictionary-edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" style="width: 80px">修改字典</a>
                     <a id="dictionary-remove" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" style="width: 80px">删除字典</a>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <label for="dictionary-search-name" style="font-size: smaller">字典名称：</label><input id="dictionary-search-name" class="search" style="width:250px;height:26px"/>
                     <label for="dictionary-search-value" style="font-size: smaller">字典值：</label><input id="dictionary-search-value" class="search" style="width:250px;height:26px"/>
                     <label for="dictionary-search-describe" style="font-size: smaller">字典描述：</label><input id="dictionary-search-describe" class="search" style="width:250px;height:26px"/>
