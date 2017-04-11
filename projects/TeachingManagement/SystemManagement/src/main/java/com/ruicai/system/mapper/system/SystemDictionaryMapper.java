@@ -1,13 +1,11 @@
-package com.ruicai.system.dao.system;
+package com.ruicai.system.mapper.system;
 
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.po.system.SystemDictionaryExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface SystemDictionaryMapper {
     int countByExample(SystemDictionaryExample example);
 

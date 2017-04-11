@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ClassController {
-
     @RequestMapping("/class")
     public String classEdit() {
         return "classEdit";

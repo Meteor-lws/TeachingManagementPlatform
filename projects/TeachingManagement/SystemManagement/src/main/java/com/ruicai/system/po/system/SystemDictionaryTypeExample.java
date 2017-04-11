@@ -1,17 +1,16 @@
-package com.ruicai.system.po.education;
+package com.ruicai.system.po.system;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class EducationAttendanceExample {
+public class SystemDictionaryTypeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public EducationAttendanceExample() {
+    public SystemDictionaryTypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -175,273 +174,273 @@ public class EducationAttendanceExample {
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdIsNull() {
-            addCriterion("STUDENT_ID is null");
+        public Criteria andParentIdIsNull() {
+            addCriterion("PARENT_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdIsNotNull() {
-            addCriterion("STUDENT_ID is not null");
+        public Criteria andParentIdIsNotNull() {
+            addCriterion("PARENT_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdEqualTo(String value) {
-            addCriterion("STUDENT_ID =", value, "studentId");
+        public Criteria andParentIdEqualTo(String value) {
+            addCriterion("PARENT_ID =", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdNotEqualTo(String value) {
-            addCriterion("STUDENT_ID <>", value, "studentId");
+        public Criteria andParentIdNotEqualTo(String value) {
+            addCriterion("PARENT_ID <>", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdGreaterThan(String value) {
-            addCriterion("STUDENT_ID >", value, "studentId");
+        public Criteria andParentIdGreaterThan(String value) {
+            addCriterion("PARENT_ID >", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdGreaterThanOrEqualTo(String value) {
-            addCriterion("STUDENT_ID >=", value, "studentId");
+        public Criteria andParentIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PARENT_ID >=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdLessThan(String value) {
-            addCriterion("STUDENT_ID <", value, "studentId");
+        public Criteria andParentIdLessThan(String value) {
+            addCriterion("PARENT_ID <", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdLessThanOrEqualTo(String value) {
-            addCriterion("STUDENT_ID <=", value, "studentId");
+        public Criteria andParentIdLessThanOrEqualTo(String value) {
+            addCriterion("PARENT_ID <=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdLike(String value) {
-            addCriterion("STUDENT_ID like", value, "studentId");
+        public Criteria andParentIdLike(String value) {
+            addCriterion("PARENT_ID like", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdNotLike(String value) {
-            addCriterion("STUDENT_ID not like", value, "studentId");
+        public Criteria andParentIdNotLike(String value) {
+            addCriterion("PARENT_ID not like", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdIn(List<String> values) {
-            addCriterion("STUDENT_ID in", values, "studentId");
+        public Criteria andParentIdIn(List<String> values) {
+            addCriterion("PARENT_ID in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdNotIn(List<String> values) {
-            addCriterion("STUDENT_ID not in", values, "studentId");
+        public Criteria andParentIdNotIn(List<String> values) {
+            addCriterion("PARENT_ID not in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdBetween(String value1, String value2) {
-            addCriterion("STUDENT_ID between", value1, value2, "studentId");
+        public Criteria andParentIdBetween(String value1, String value2) {
+            addCriterion("PARENT_ID between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudentIdNotBetween(String value1, String value2) {
-            addCriterion("STUDENT_ID not between", value1, value2, "studentId");
+        public Criteria andParentIdNotBetween(String value1, String value2) {
+            addCriterion("PARENT_ID not between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusIsNull() {
-            addCriterion("ATTENDANCE_STATUS is null");
+        public Criteria andDictionaryTypeNameIsNull() {
+            addCriterion("DICTIONARY_TYPE_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusIsNotNull() {
-            addCriterion("ATTENDANCE_STATUS is not null");
+        public Criteria andDictionaryTypeNameIsNotNull() {
+            addCriterion("DICTIONARY_TYPE_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusEqualTo(String value) {
-            addCriterion("ATTENDANCE_STATUS =", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME =", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusNotEqualTo(String value) {
-            addCriterion("ATTENDANCE_STATUS <>", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameNotEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME <>", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusGreaterThan(String value) {
-            addCriterion("ATTENDANCE_STATUS >", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameGreaterThan(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME >", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("ATTENDANCE_STATUS >=", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME >=", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusLessThan(String value) {
-            addCriterion("ATTENDANCE_STATUS <", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameLessThan(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME <", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusLessThanOrEqualTo(String value) {
-            addCriterion("ATTENDANCE_STATUS <=", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameLessThanOrEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME <=", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusLike(String value) {
-            addCriterion("ATTENDANCE_STATUS like", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameLike(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME like", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusNotLike(String value) {
-            addCriterion("ATTENDANCE_STATUS not like", value, "attendanceStatus");
+        public Criteria andDictionaryTypeNameNotLike(String value) {
+            addCriterion("DICTIONARY_TYPE_NAME not like", value, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusIn(List<String> values) {
-            addCriterion("ATTENDANCE_STATUS in", values, "attendanceStatus");
+        public Criteria andDictionaryTypeNameIn(List<String> values) {
+            addCriterion("DICTIONARY_TYPE_NAME in", values, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusNotIn(List<String> values) {
-            addCriterion("ATTENDANCE_STATUS not in", values, "attendanceStatus");
+        public Criteria andDictionaryTypeNameNotIn(List<String> values) {
+            addCriterion("DICTIONARY_TYPE_NAME not in", values, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusBetween(String value1, String value2) {
-            addCriterion("ATTENDANCE_STATUS between", value1, value2, "attendanceStatus");
+        public Criteria andDictionaryTypeNameBetween(String value1, String value2) {
+            addCriterion("DICTIONARY_TYPE_NAME between", value1, value2, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceStatusNotBetween(String value1, String value2) {
-            addCriterion("ATTENDANCE_STATUS not between", value1, value2, "attendanceStatus");
+        public Criteria andDictionaryTypeNameNotBetween(String value1, String value2) {
+            addCriterion("DICTIONARY_TYPE_NAME not between", value1, value2, "dictionaryTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeIsNull() {
-            addCriterion("ATTENDANCE_TIME is null");
+        public Criteria andDictionaryTypeDescribeIsNull() {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeIsNotNull() {
-            addCriterion("ATTENDANCE_TIME is not null");
+        public Criteria andDictionaryTypeDescribeIsNotNull() {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeEqualTo(Date value) {
-            addCriterion("ATTENDANCE_TIME =", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE =", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeNotEqualTo(Date value) {
-            addCriterion("ATTENDANCE_TIME <>", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeNotEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE <>", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeGreaterThan(Date value) {
-            addCriterion("ATTENDANCE_TIME >", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeGreaterThan(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE >", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("ATTENDANCE_TIME >=", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE >=", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeLessThan(Date value) {
-            addCriterion("ATTENDANCE_TIME <", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeLessThan(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE <", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeLessThanOrEqualTo(Date value) {
-            addCriterion("ATTENDANCE_TIME <=", value, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeLessThanOrEqualTo(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE <=", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeIn(List<Date> values) {
-            addCriterion("ATTENDANCE_TIME in", values, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeLike(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE like", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeNotIn(List<Date> values) {
-            addCriterion("ATTENDANCE_TIME not in", values, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeNotLike(String value) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE not like", value, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeBetween(Date value1, Date value2) {
-            addCriterion("ATTENDANCE_TIME between", value1, value2, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeIn(List<String> values) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE in", values, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceTimeNotBetween(Date value1, Date value2) {
-            addCriterion("ATTENDANCE_TIME not between", value1, value2, "attendanceTime");
+        public Criteria andDictionaryTypeDescribeNotIn(List<String> values) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE not in", values, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkIsNull() {
-            addCriterion("ATTENDANCE_REMARK is null");
+        public Criteria andDictionaryTypeDescribeBetween(String value1, String value2) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE between", value1, value2, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkIsNotNull() {
-            addCriterion("ATTENDANCE_REMARK is not null");
+        public Criteria andDictionaryTypeDescribeNotBetween(String value1, String value2) {
+            addCriterion("DICTIONARY_TYPE_DESCRIBE not between", value1, value2, "dictionaryTypeDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkEqualTo(String value) {
-            addCriterion("ATTENDANCE_REMARK =", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberIsNull() {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkNotEqualTo(String value) {
-            addCriterion("ATTENDANCE_REMARK <>", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberIsNotNull() {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkGreaterThan(String value) {
-            addCriterion("ATTENDANCE_REMARK >", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberEqualTo(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER =", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkGreaterThanOrEqualTo(String value) {
-            addCriterion("ATTENDANCE_REMARK >=", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberNotEqualTo(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <>", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkLessThan(String value) {
-            addCriterion("ATTENDANCE_REMARK <", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberGreaterThan(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER >", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkLessThanOrEqualTo(String value) {
-            addCriterion("ATTENDANCE_REMARK <=", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberGreaterThanOrEqualTo(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER >=", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkLike(String value) {
-            addCriterion("ATTENDANCE_REMARK like", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberLessThan(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkNotLike(String value) {
-            addCriterion("ATTENDANCE_REMARK not like", value, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberLessThanOrEqualTo(Short value) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <=", value, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkIn(List<String> values) {
-            addCriterion("ATTENDANCE_REMARK in", values, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberIn(List<Short> values) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER in", values, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkNotIn(List<String> values) {
-            addCriterion("ATTENDANCE_REMARK not in", values, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberNotIn(List<Short> values) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER not in", values, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkBetween(String value1, String value2) {
-            addCriterion("ATTENDANCE_REMARK between", value1, value2, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberBetween(Short value1, Short value2) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER between", value1, value2, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
 
-        public Criteria andAttendanceRemarkNotBetween(String value1, String value2) {
-            addCriterion("ATTENDANCE_REMARK not between", value1, value2, "attendanceRemark");
+        public Criteria andDictionaryTypeSortNumberNotBetween(Short value1, Short value2) {
+            addCriterion("DICTIONARY_TYPE_SORT_NUMBER not between", value1, value2, "dictionaryTypeSortNumber");
             return (Criteria) this;
         }
     }

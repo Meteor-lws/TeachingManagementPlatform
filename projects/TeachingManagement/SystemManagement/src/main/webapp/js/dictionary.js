@@ -6,7 +6,6 @@
 
 $(function () {
     prepareContent();
-    prepareHandler();
 });
 
 function prepareContent() {
@@ -17,7 +16,7 @@ function prepareContent() {
 
 function prepareDictionaryType() {
     $('#dictionary-type').tree({
-        url: 'getDictionaries',
+        url: 'getDictionaryType',
         onSelect: function (node) {
             select(node);
         }
@@ -26,13 +25,12 @@ function prepareDictionaryType() {
 
 function prepareDatagrid() {
     $('#dictionary-detail').datagrid({
-        url: '',
         fit: true,
         fitColumns: true,
         striped: true,
         rownumbers: true,
         pagination: true,
-        pageSize: 30,
+        pageSize: 25,
         pageNumber: 1,
         columns: [[
             {field: 'id', checkbox: true},
@@ -90,76 +88,8 @@ function showDialog(dictionary) {
     });
 }
 
-function clearDialog() {
-    $('#dictionary-name').textbox('reset');
-    $('#dictionary-value').textbox('reset');
-    $('#dictionary-describe').textbox('reset');
-    $('#dictionary-sort').textbox('reset');
-}
-
-function prepareHandler() {
-    $('#dictionary-add').click(add);
-    $('#dictionary-edit').click(edit);
-    $('#dictionary-remove').click(remove);
-    $('.search').searchbox({
-        searcher: function (value) {
-            search(value);
-        }
-    });
-}
-
-function add() {
-    showDialog(0);
-    // ajax('addDictionary', getContent(), function () {
-    //     refresh();
-    // }, '添加数据字典失败');
-}
-
-function edit() {
-    var id = selectedId();
-    if (id) {
-        showDialog(1);
-        // var content = getContent();
-        // ajax('editDictionary', {
-        //     'id': id,
-        //     'parentId': content.parentId,
-        //     'dictionaryName': content.dictionaryName,
-        //     'dictionaryValue': content.dictionaryValue,
-        //     'dictionaryDescribe': content.dictionaryDescribe,
-        //     'dictionarySortNumber': content.dictionarySortNumber
-        // }, function () {
-        //     refresh();
-        // }, '修改数据字典失败');
-    } else {
-        $.messager.alert('警告', '请选择要修改的数据字典', 'warning');
-    }
-}
-
-function remove() {
-    var id = selectedId();
-    if (id) {
-        // ajax('removeDictionaryById', {'id': id}, function () {
-        //     refresh();
-        // }, '删除数据字典失败');
-    } else {
-        $.messager.alert('警告', '请选择要删除的数据字典', 'warning');
-    }
-}
-
-function search(value) {
-    alert('search:' + value);
-}
-
 function select(node) {
-    ajax('getDictionary', {'id': node.id}, function (dictionary) {
-        dictionary = $.parseJSON(dictionary);
-        setContent(dictionary);
-    }, '请求数据字典失败');
-}
-
-function selectedId() {
-    var selection = $('#dictionary-type').tree('getSelected');
-    return selection === null ? null : selection.id;
+    console.log(node);
 }
 
 function ajax(url, data, success, error) {
@@ -176,37 +106,17 @@ function ajax(url, data, success, error) {
     });
 }
 
-function refresh() {
-    var id = selectedId();
-    $('#dictionary-type').tree('reload');
-    if (id) {
-        ajax('getDictionary', {'id': id}, function (dictionary) {
-            dictionary = $.parseJSON(dictionary);
-            setContent(dictionary);
-        }, '请求数据字典失败');
-    }
-}
-
-function setContent(dictionary) {
-    $('#dictionary-name').textbox('setValue', dictionary.dictionaryName);
-    $('#dictionary-value').textbox('setValue', dictionary.dictionaryValue);
-    $('#dictionary-sort').textbox('setValue', dictionary.dictionarySortNumber);
-    $('#dictionary-describe').textbox('setValue', dictionary.dictionaryDescribe);
-}
-
-function getContent() {
-    var parent = null;
-    var name = $('#dictionary-name').textbox('getValue');
-    var value = $('#dictionary-value').textbox('getValue');
-    var sort = $('#dictionary-sort').textbox('getValue');
-    var describe = $('#dictionary-describe').textbox('getValue');
-    return {'parentId': parent, 'dictionaryName': name, 'dictionaryValue': value, 'dictionarySortNumber': sort, 'dictionaryDescribe': describe};
-}
-
 function showTextBox(id, prompt) {
     $('#' + id).textbox({
         width: 250,
         height: 35,
         prompt: prompt
     });
+}
+
+function clearDialog() {
+    $('#dictionary-name').textbox('reset');
+    $('#dictionary-value').textbox('reset');
+    $('#dictionary-describe').textbox('reset');
+    $('#dictionary-sort').textbox('reset');
 }
