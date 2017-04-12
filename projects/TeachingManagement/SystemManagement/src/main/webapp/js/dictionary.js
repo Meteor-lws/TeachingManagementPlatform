@@ -155,6 +155,7 @@ function showDictionaryDialog(dictionary) {
                         var typeId = $.parseJSON(data).dictionaryTypeId;
                         var dictionary = getDictionaryContent();
                         dictionary.dictionaryTypeId = typeId;
+                        console.log(dictionary);
                     }, '获取数据字典类型失败');
                 }
             } else {
@@ -298,7 +299,6 @@ function getDictionaryContent() {
     dictionary.dictionaryValue = $('#dictionary-value').textbox('getValue');
     dictionary.dictionaryDescribe = $('#dictionary-describe').textbox('getValue');
     dictionary.dictionarySortNumber = $('#dictionary-sort').textbox('getValue');
-    console.log($('#dictionary-name').textbox('getValue'));
     return dictionary;
 }
 
