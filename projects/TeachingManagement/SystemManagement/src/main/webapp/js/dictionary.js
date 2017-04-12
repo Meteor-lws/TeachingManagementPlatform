@@ -78,47 +78,6 @@ function prepareHandler() {
     });
 }
 
-function showDictionaryDialog(dictionary) {
-    var title;
-    var buttonTitle, buttonIcon, buttonHandler;
-    if (dictionary) {
-        title = '修改字典';
-        buttonTitle = '修改';
-        buttonIcon = 'icon-edit';
-        buttonHandler = editDictionary;
-    } else {
-        title = '添加字典';
-        buttonTitle = '添加';
-        buttonIcon = 'icon-add';
-        buttonHandler = addDictionary;
-    }
-    $('#dictionary-dialog').dialog({
-        title: title,
-        width: 360,
-        height: 252,
-        resizable: false,
-        modal: true,
-        buttons: [{
-            text: '重置',
-            width: 65,
-            iconCls: 'icon-reload',
-            handler: clearDictionaryDialog
-        }, {
-            text: buttonTitle,
-            width: 65,
-            iconCls: buttonIcon,
-            handler: buttonHandler
-        }]
-    });
-}
-
-function clearDictionaryDialog() {
-    $('#dictionary-name').textbox('reset');
-    $('#dictionary-value').textbox('reset');
-    $('#dictionary-describe').textbox('reset');
-    $('#dictionary-sort').textbox('reset');
-}
-
 function showTypeDialog(type) {
     var title;
     var buttonTitle, buttonIcon, buttonHandler;
@@ -183,6 +142,48 @@ function clearTypeDialog() {
     $('#dictionary-type-name').textbox('reset');
     $('#dictionary-type-describe').textbox('reset');
     $('#dictionary-type-sort').textbox('reset');
+}
+
+function showDictionaryDialog(dictionary) {
+    var title;
+    var buttonTitle, buttonIcon, buttonHandler;
+    if (dictionary) {
+        title = '修改字典';
+        buttonTitle = '修改';
+        buttonIcon = 'icon-edit';
+        buttonHandler = editDictionary;
+    } else {
+        title = '添加字典';
+        buttonTitle = '添加';
+        buttonIcon = 'icon-add';
+        buttonHandler = addDictionary;
+    }
+    $('#dictionary-dialog').dialog({
+        title: title,
+        width: 360,
+        height: 252,
+        resizable: false,
+        modal: true,
+        buttons: [{
+            text: '重置',
+            width: 65,
+            iconCls: 'icon-reload',
+            handler: clearDictionaryDialog
+        }, {
+            text: buttonTitle,
+            width: 65,
+            iconCls: buttonIcon,
+            handler: buttonHandler
+        }],
+        onClose: clearDictionaryDialog
+    });
+}
+
+function clearDictionaryDialog() {
+    $('#dictionary-name').textbox('reset');
+    $('#dictionary-value').textbox('reset');
+    $('#dictionary-describe').textbox('reset');
+    $('#dictionary-sort').textbox('reset');
 }
 
 function select(node) {

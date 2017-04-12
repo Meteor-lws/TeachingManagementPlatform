@@ -34,6 +34,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         if (typeId != null) {
             example.clear();
             example.createCriteria().andDictionaryTypeIdEqualTo(typeId);
+            example.setOrderByClause("DICTIONARY_SORT_NUMBER ASC");
             List<SystemDictionary> dictionaries = mapper.selectByExample(example);
             datagrid.setTotal(dictionaries.size());
             datagrid.setRows(dictionaries);
