@@ -23,7 +23,6 @@
 </head>
 <body class="easyui-layout">
 <div data-options="region:'west',split:true,border:false" style="width: 240px">
-
     <ul id="dictionary-type"></ul>
 </div>
 <div data-options="region:'center',split:true">

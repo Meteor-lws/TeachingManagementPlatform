@@ -1,5 +1,6 @@
 package com.ruicai.system.service;
 
+import com.ruicai.system.po.system.SystemDictionaryType;
 import com.ruicai.system.vo.Tree;
 
 import java.util.List;
@@ -11,4 +12,8 @@ import java.util.List;
  */
 public interface DictionaryTypeService {
     List<Tree> getDictionaryTypes();
+
+    void addDictionaryType(SystemDictionaryType dictionaryType);
+
+    void deleteDictionaryType(String id);
 }

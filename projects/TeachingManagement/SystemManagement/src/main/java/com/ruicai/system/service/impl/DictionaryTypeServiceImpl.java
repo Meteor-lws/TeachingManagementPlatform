@@ -41,10 +41,19 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
         return result;
     }
 
+    public void addDictionaryType(SystemDictionaryType dictionaryType) {
+        mapper.insertSelective(dictionaryType);
+    }
+
+    @Override
+    public void deleteDictionaryType(String id) {
+        mapper.deleteByPrimaryKey(id);
+    }
+
     private Tree buildTree(SystemDictionaryType dictionaryType) {
         Tree tree = new Tree();
         tree.setId(dictionaryType.getId());
-        tree.setText(dictionaryType.getDictionaryTypeName());
+        tree.setText(dictionaryType.getDictionaryTypeDescribe());
         tree.setChildren(getChildren(dictionaryType));
         return tree;
     }

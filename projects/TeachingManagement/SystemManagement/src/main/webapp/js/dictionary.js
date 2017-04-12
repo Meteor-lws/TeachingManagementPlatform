@@ -71,7 +71,7 @@ function prepareHandler() {
         showTypeDialog(1);
     });
     $('#dictionary-type-remove').click(function () {
-        alert('删除字典类型');
+        deleteDictionaryType();
     });
     $('#dictionary-add').click(function () {
         showDictionaryDialog(null);
@@ -174,23 +174,46 @@ function select(node) {
 }
 
 function addDictionary() {
-
+    console.log(getSelection());
 }
 
 function editDictionary() {
-
+    console.log(getSelection());
 }
 
 function addDictionaryType() {
-
+    var type = {};
+    var content = getTypeContent();
+    var selections = getSelections();
+    if (selections.type) {
+        type.parentId = selections.type.id;
+    }
+    type.dictionaryTypeName = content.name;
+    type.dictionaryTypeDescribe = content.describe;
+    type.dictionaryTypeSortNumber = content.sort;
+    ajax('addDictionaryType', type, function () {
+        $('#dictionary-type').tree('reload');
+    }, '添加字典类型失败');
+    $('#dictionary-type-dialog').dialog('close');
 }
 
 function editDictionaryType() {
+    console.log(getSelection());
+}
 
+function deleteDictionaryType() {
+    var selections = getSelections();
+    if (selections.type) {
+        ajax('deleteDictionaryType', {id: selections.type.id}, function () {
+            $('#dictionary-type').tree('reload');
+        }, '删除字典类型失败');
+    } else {
+        $.messager.alert('警告', '请选择要删除的字典类型', 'warning');
+    }
 }
 
 function search() {
-
+    console.log(getSelection());
 }
 
 function showTextBox(id, prompt) {
@@ -213,4 +236,18 @@ function ajax(url, data, success, error) {
             $.messager.alert('错误', error, 'error');
         }
     });
+}
+
+function getSelections() {
+    var type = $('#dictionary-type').tree('getSelected');
+    var dictionaries = $('#dictionary-detail').datagrid('getSelections');
+    return {type: type, dictionaries: dictionaries};
+}
+
+function getTypeContent() {
+    var dictionaryType = {};
+    dictionaryType.name = $('#dictionary-type-name').textbox('getValue');
+    dictionaryType.describe = $('#dictionary-type-describe').textbox('getValue');
+    dictionaryType.sort = $('#dictionary-type-sort').textbox('getValue');
+    return dictionaryType;
 }

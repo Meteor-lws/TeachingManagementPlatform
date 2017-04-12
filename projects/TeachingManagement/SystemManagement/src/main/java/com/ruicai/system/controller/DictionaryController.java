@@ -1,6 +1,7 @@
 package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruicai.system.po.system.SystemDictionaryType;
 import com.ruicai.system.service.DictionaryService;
 import com.ruicai.system.service.DictionaryTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,20 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/getDictionariesByTypeId", method = RequestMethod.POST)
     public String getDictionariesByTypeId(String typeId) {
-        return typeId == null ? null : JSON.toJSONString(dictionaryService.getDictionariesByTypeId(typeId));
+        return JSON.toJSONString(dictionaryService.getDictionariesByTypeId(typeId));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addDictionaryType", method = RequestMethod.POST)
+    public String addDictionaryType(SystemDictionaryType dictionaryType) {
+        typeService.addDictionaryType(dictionaryType);
+        return "添加字典类型成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteDictionaryType", method = RequestMethod.POST)
+    public String deleteDictionaryType(String id) {
+        typeService.deleteDictionaryType(id);
+        return "删除字典类型成功";
     }
 }

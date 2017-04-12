@@ -109,6 +109,9 @@
         )
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.system.po.system.SystemDictionary">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT sys_guid() FROM dual
+        </selectKey>
         insert into RUICAI.SYSTEM_DICTIONARY
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

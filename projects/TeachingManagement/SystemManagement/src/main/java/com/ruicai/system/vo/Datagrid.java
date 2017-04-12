@@ -1,5 +1,6 @@
 package com.ruicai.system.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class Datagrid<T> {
     private int total;
-    private List<T> rows;
+    private List<T> rows = new ArrayList<>();
 
     public int getTotal() {
         return total;

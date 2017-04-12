@@ -30,12 +30,14 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId) {
-        example.clear();
-        example.createCriteria().andDictionaryTypeIdEqualTo(typeId);
-        List<SystemDictionary> dictionaries = mapper.selectByExample(example);
         Datagrid<SystemDictionary> datagrid = new Datagrid<>();
-        datagrid.setTotal(dictionaries.size());
-        datagrid.setRows(dictionaries);
+        if (typeId != null) {
+            example.clear();
+            example.createCriteria().andDictionaryTypeIdEqualTo(typeId);
+            List<SystemDictionary> dictionaries = mapper.selectByExample(example);
+            datagrid.setTotal(dictionaries.size());
+            datagrid.setRows(dictionaries);
+        }
         return datagrid;
     }
 }
