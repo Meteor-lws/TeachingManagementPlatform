@@ -273,3 +273,19 @@ function setTypeContent(dictionaryType) {
     $('#dictionary-type-describe').textbox('setValue', dictionaryType.dictionaryTypeDescribe);
     $('#dictionary-type-sort').textbox('setValue', dictionaryType.dictionaryTypeSortNumber);
 }
+
+function getDictionaryContent() {
+    var dictionary = {};
+    dictionary.name = $('#dictionary-name').textbox('getValue');
+    dictionary.value = $('#dictionary-value').textbox('getValue');
+    dictionary.describe = $('#dictionary-describe').textbox('getValue');
+    dictionary.sort = $('#dictionary-sort').textbox('getValue');
+    return dictionary;
+}
+
+function setDictionaryContent(dictionary) {
+    $('#dictionary-name').textbox('setValue', dictionary.dictionaryName);
+    $('#dictionary-value').textbox('setValue', dictionary.dictionaryValue);
+    $('#dictionary-describe').textbox('setValue', dictionary.dictionaryDescribe);
+    $('#dictionary-sort').textbox('setValue', dictionary.dictionarySortNumber);
+}
