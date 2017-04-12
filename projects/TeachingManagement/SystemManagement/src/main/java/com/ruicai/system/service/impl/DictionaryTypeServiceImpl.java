@@ -19,15 +19,22 @@ import java.util.List;
 @Service("DictionaryTypeService")
 public class DictionaryTypeServiceImpl implements DictionaryTypeService {
 
+    private final SystemDictionaryTypeMapper mapper;
+
+    private final SystemDictionaryTypeExample example;
+
     @Autowired
-    private SystemDictionaryTypeMapper mapper;
+    public DictionaryTypeServiceImpl(SystemDictionaryTypeMapper mapper, SystemDictionaryTypeExample example) {
+        this.mapper = mapper;
+        this.example = example;
+    }
 
     @Override
     public List<Tree> getDictionaryTypes() {
-        SystemDictionaryTypeExample typeExample = new SystemDictionaryTypeExample();
-        typeExample.createCriteria().andParentIdIsNull();
-        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(typeExample);
         List<Tree> result = new ArrayList<>();
+        example.clear();
+        example.createCriteria().andParentIdIsNull();
+        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(example);
         for (SystemDictionaryType dictionaryType : dictionaryTypes) {
             result.add(buildTree(dictionaryType));
         }
@@ -35,15 +42,21 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
     }
 
     private Tree buildTree(SystemDictionaryType dictionaryType) {
-        SystemDictionaryTypeExample typeExample = new SystemDictionaryTypeExample();
-        typeExample.createCriteria().andParentIdEqualTo(dictionaryType.getId());
-        Tree result = new Tree();
-        List<Tree> children = new ArrayList<>();
-        result.setId(dictionaryType.getId());
-        result.setText(dictionaryType.getDictionaryTypeName());
-        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(typeExample);
+        Tree tree = new Tree();
+        tree.setId(dictionaryType.getId());
+        tree.setText(dictionaryType.getDictionaryTypeName());
+        tree.setChildren(getChildren(dictionaryType));
+        return tree;
+    }
+
+    private List<Tree> getChildren(SystemDictionaryType dictionaryType) {
+        List<Tree> result = new ArrayList<>();
+        example.clear();
+        example.createCriteria().andParentIdEqualTo(dictionaryType.getId());
+        example.setOrderByClause("DICTIONARY_TYPE_SORT_NUMBER ASC");
+        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(example);
         for (SystemDictionaryType type : dictionaryTypes) {
-            children.add(buildTree(type));
+            result.add(buildTree(type));
         }
         return result;
     }

@@ -6,6 +6,7 @@
 
 $(function () {
     prepareContent();
+    prepareHandler();
 });
 
 function prepareContent() {
@@ -17,7 +18,7 @@ function prepareContent() {
 
 function prepareDictionaryType() {
     $('#dictionary-type').tree({
-        url: 'getDictionaryType',
+        url: 'getDictionaryTypes',
         onSelect: function (node) {
             select(node);
         }
@@ -33,6 +34,7 @@ function prepareSearchBox() {
 
 function prepareDatagrid() {
     $('#dictionary-detail').datagrid({
+        url: 'getDictionariesByTypeId',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -56,25 +58,45 @@ function prepareTextBox() {
     showTextBox('dictionary-value', '数据字典值');
     showTextBox('dictionary-describe', '数据字典描述');
     showTextBox('dictionary-sort', '数据字典排序编号');
+    showTextBox('dictionary-type-name', '字典类型名称');
+    showTextBox('dictionary-type-describe', '字典类型描述');
+    showTextBox('dictionary-type-sort', '字典类型排序编号');
 }
 
-function showDialog(dictionary) {
+function prepareHandler() {
+    $('#dictionary-type-add').click(function () {
+        showTypeDialog(null);
+    });
+    $('#dictionary-type-edit').click(function () {
+        showTypeDialog(1);
+    });
+    $('#dictionary-type-remove').click(function () {
+        alert('删除字典类型');
+    });
+    $('#dictionary-add').click(function () {
+        showDictionaryDialog(null);
+    });
+    $('#dictionary-edit').click(function () {
+        showDictionaryDialog(1);
+    });
+    $('#dictionary-remove').click(function () {
+        alert('删除字典');
+    });
+}
+
+function showDictionaryDialog(dictionary) {
     var title;
     var buttonTitle, buttonIcon, buttonHandler;
-    if (dictionary === 0) {
-        title = '添加字典';
-        buttonTitle = '添加';
-        buttonIcon = 'icon-add';
-        buttonHandler = function () {
-            alert('添加');
-        };
-    } else {
+    if (dictionary) {
         title = '修改字典';
         buttonTitle = '修改';
         buttonIcon = 'icon-edit';
-        buttonHandler = function () {
-            alert('修改');
-        };
+        buttonHandler = editDictionary;
+    } else {
+        title = '添加字典';
+        buttonTitle = '添加';
+        buttonIcon = 'icon-add';
+        buttonHandler = addDictionary;
     }
     $('#dictionary-dialog').dialog({
         title: title,
@@ -86,7 +108,7 @@ function showDialog(dictionary) {
             text: '重置',
             width: 65,
             iconCls: 'icon-reload',
-            handler: clearDialog
+            handler: clearDictionaryDialog
         }, {
             text: buttonTitle,
             width: 65,
@@ -96,12 +118,87 @@ function showDialog(dictionary) {
     });
 }
 
+function clearDictionaryDialog() {
+    $('#dictionary-name').textbox('reset');
+    $('#dictionary-value').textbox('reset');
+    $('#dictionary-describe').textbox('reset');
+    $('#dictionary-sort').textbox('reset');
+}
+
+function showTypeDialog(type) {
+    var title;
+    var buttonTitle, buttonIcon, buttonHandler;
+    if (type) {
+        title = '修改字典类型';
+        buttonTitle = '修改';
+        buttonIcon = 'icon-edit';
+        buttonHandler = editDictionaryType;
+    } else {
+        title = '添加字典类型';
+        buttonTitle = '添加';
+        buttonIcon = 'icon-add';
+        buttonHandler = addDictionaryType;
+    }
+    $('#dictionary-type-dialog').dialog({
+        title: title,
+        width: 385,
+        height: 210,
+        resizable: false,
+        modal: true,
+        buttons: [{
+            text: '重置',
+            width: 65,
+            iconCls: 'icon-reload',
+            handler: clearTypeDialog
+        }, {
+            text: buttonTitle,
+            width: 65,
+            iconCls: buttonIcon,
+            handler: buttonHandler
+        }]
+    });
+}
+
+function clearTypeDialog() {
+    $('#dictionary-type-name').textbox('reset');
+    $('#dictionary-type-describe').textbox('reset');
+    $('#dictionary-type-sort').textbox('reset');
+}
+
 function select(node) {
-    console.log(node);
+    $('#dictionary-detail').datagrid({
+        queryParams: {
+            typeId: node.id
+        }
+    });
+}
+
+function addDictionary() {
+
+}
+
+function editDictionary() {
+
+}
+
+function addDictionaryType() {
+
+}
+
+function editDictionaryType() {
+
 }
 
 function search() {
 
+}
+
+function showTextBox(id, prompt) {
+    $('#' + id).textbox({
+        width: 250,
+        height: 35,
+        prompt: prompt
+    });
 }
 
 function ajax(url, data, success, error) {
@@ -116,19 +213,4 @@ function ajax(url, data, success, error) {
             $.messager.alert('错误', error, 'error');
         }
     });
-}
-
-function showTextBox(id, prompt) {
-    $('#' + id).textbox({
-        width: 250,
-        height: 35,
-        prompt: prompt
-    });
-}
-
-function clearDialog() {
-    $('#dictionary-name').textbox('reset');
-    $('#dictionary-value').textbox('reset');
-    $('#dictionary-describe').textbox('reset');
-    $('#dictionary-sort').textbox('reset');
 }

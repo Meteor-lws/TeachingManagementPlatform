@@ -1,8 +1,11 @@
 package com.ruicai.system.po.system;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SystemDictionaryExample {
     protected String orderByClause;
 
@@ -11,7 +14,7 @@ public class SystemDictionaryExample {
     protected List<Criteria> oredCriteria;
 
     public SystemDictionaryExample() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     public String getOrderByClause() {
@@ -68,7 +71,7 @@ public class SystemDictionaryExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {

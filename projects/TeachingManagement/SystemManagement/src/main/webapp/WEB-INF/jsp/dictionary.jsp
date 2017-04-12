@@ -69,6 +69,22 @@
             </tr>
         </table>
     </div>
+    <div id="dictionary-type-dialog">
+        <table align="center" style="line-height:40px">
+            <tr>
+                <td align="right"><label for="dictionary-type-name">字典类型名称:</label></td>
+                <td><input id="dictionary-type-name" type="text"></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="dictionary-type-describe">字典类型描述:</label></td>
+                <td><input id="dictionary-type-describe" type="text"></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="dictionary-type-sort">字典类型序号:</label></td>
+                <td><input id="dictionary-type-sort" type="text"></td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

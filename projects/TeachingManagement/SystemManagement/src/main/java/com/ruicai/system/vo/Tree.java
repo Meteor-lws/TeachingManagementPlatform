@@ -3,7 +3,7 @@ package com.ruicai.system.vo;
 import java.util.List;
 
 /**
- * EasyUI中Tree的实体类
+ * Tree实体类
  *
  * Created by lws on 2017/4/9.
  */
