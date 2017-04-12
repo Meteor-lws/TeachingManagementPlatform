@@ -64,29 +64,9 @@ function prepareTextBox() {
 }
 
 function prepareHandler() {
-    $('#dictionary-type-add').click(function () {
-        showTypeDialog(null);
-    });
-    $('#dictionary-type-edit').click(function () {
-        var type = getSelections().type;
-        if (type) {
-            ajax('getDictionaryTypeById', {id: type.id}, function (dictionaryType) {
-                dictionaryType = $.parseJSON(dictionaryType);
-                setTypeContent(dictionaryType);
-                showTypeDialog(type);
-            }, '获取选中字典类型失败');
-        } else {
-            $.messager.alert('警告', '请选择要修改的字典类型', 'warning');
-        }
-    });
-    $('#dictionary-type-remove').click(function () {
-        var type = getSelections().type;
-        if (type) {
-            deleteDictionaryType(type.id);
-        } else {
-            $.messager.alert('警告', '请选择要删除的字典类型', 'warning');
-        }
-    });
+    $('#dictionary-type-add').click(addDictionaryType);
+    $('#dictionary-type-edit').click(editDictionaryType);
+    $('#dictionary-type-remove').click(deleteDictionaryType);
     $('#dictionary-add').click(function () {
         showDictionaryDialog(null);
     });
@@ -146,13 +126,36 @@ function showTypeDialog(type) {
         title = '添加字典类型';
         buttonTitle = '添加';
         buttonIcon = 'icon-add';
-        buttonHandler = addDictionaryType;
+        buttonHandler = function () {
+            var type = {};
+            var selections = getSelections();
+            if (selections.type) {
+                type.parentId = selections.type.id;
+            }
+            var content = getTypeContent();
+            type.dictionaryTypeName = content.name;
+            type.dictionaryTypeDescribe = content.describe;
+            type.dictionaryTypeSortNumber = content.sort;
+            ajax('addDictionaryType', type, function () {
+                $('#dictionary-type').tree('reload');
+            }, '添加字典类型失败');
+            $('#dictionary-type-dialog').dialog('close');
+        };
     } else {
         title = '修改字典类型';
         buttonTitle = '修改';
         buttonIcon = 'icon-edit';
         buttonHandler = function () {
-            editDictionaryType(type.id);
+            var dictionaryType = getTypeContent();
+            ajax('editDictionaryType', {
+                id: type.id,
+                dictionaryTypeName: dictionaryType.name,
+                dictionaryTypeDescribe: dictionaryType.describe,
+                dictionaryTypeSortNumber: dictionaryType.sort
+            }, function () {
+                $('#dictionary-type').tree('reload');
+            }, '修改字典类型失败');
+            $('#dictionary-type-dialog').dialog('close');
         };
     }
     $('#dictionary-type-dialog').dialog({
@@ -171,7 +174,8 @@ function showTypeDialog(type) {
             width: 65,
             iconCls: buttonIcon,
             handler: buttonHandler
-        }]
+        }],
+        onClose: clearTypeDialog
     });
 }
 
@@ -198,33 +202,31 @@ function editDictionary() {
 }
 
 function addDictionaryType() {
-    var type = {};
-    var content = getTypeContent();
-    var selections = getSelections();
-    if (selections.type) {
-        type.parentId = selections.type.id;
+    showTypeDialog(null);
+}
+
+function editDictionaryType() {
+    var type = getSelections().type;
+    if (type) {
+        ajax('getDictionaryTypeById', {id: type.id}, function (dictionaryType) {
+            dictionaryType = $.parseJSON(dictionaryType);
+            setTypeContent(dictionaryType);
+            showTypeDialog(type);
+        }, '获取选中字典类型失败');
+    } else {
+        $.messager.alert('警告', '请选择要修改的字典类型', 'warning');
     }
-    type.dictionaryTypeName = content.name;
-    type.dictionaryTypeDescribe = content.describe;
-    type.dictionaryTypeSortNumber = content.sort;
-    ajax('addDictionaryType', type, function () {
-        $('#dictionary-type').tree('reload');
-    }, '添加字典类型失败');
-    $('#dictionary-type-dialog').dialog('close');
 }
 
-function editDictionaryType(id) {
-    var dictionaryType = getTypeContent();
-    ajax('editDictionaryType', {id: id, dictionaryTypeName: dictionaryType.name, dictionaryTypeDescribe: dictionaryType.describe, dictionaryTypeSortNumber: dictionaryType.sort}, function () {
-        $('#dictionary-type').tree('reload');
-    }, '修改字典类型失败');
-    $('#dictionary-type-dialog').dialog('close');
-}
-
-function deleteDictionaryType(id) {
-    ajax('deleteDictionaryType', {id: id}, function () {
-        $('#dictionary-type').tree('reload');
-    }, '删除字典类型失败');
+function deleteDictionaryType() {
+    var type = getSelections().type;
+    if (type) {
+        ajax('deleteDictionaryType', {id: type.id}, function () {
+            $('#dictionary-type').tree('reload');
+        }, '删除字典类型失败');
+    } else {
+        $.messager.alert('警告', '请选择要删除的字典类型', 'warning');
+    }
 }
 
 function search() {
