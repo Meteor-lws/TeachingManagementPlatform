@@ -67,15 +67,9 @@ function prepareHandler() {
     $('#dictionary-type-add').click(addDictionaryType);
     $('#dictionary-type-edit').click(editDictionaryType);
     $('#dictionary-type-remove').click(deleteDictionaryType);
-    $('#dictionary-add').click(function () {
-        showDictionaryDialog(null);
-    });
-    $('#dictionary-edit').click(function () {
-        showDictionaryDialog(1);
-    });
-    $('#dictionary-remove').click(function () {
-        alert('删除字典');
-    });
+    $('#dictionary-add').click(addDictionary);
+    $('#dictionary-edit').click(editDictionary);
+    $('#dictionary-remove').click(deleteDictionary);
 }
 
 function showTypeDialog(type) {
@@ -147,16 +141,16 @@ function clearTypeDialog() {
 function showDictionaryDialog(dictionary) {
     var title;
     var buttonTitle, buttonIcon, buttonHandler;
-    if (dictionary) {
-        title = '修改字典';
-        buttonTitle = '修改';
-        buttonIcon = 'icon-edit';
-        buttonHandler = editDictionary;
-    } else {
+    if (dictionary === null) {
         title = '添加字典';
         buttonTitle = '添加';
         buttonIcon = 'icon-add';
         buttonHandler = addDictionary;
+    } else {
+        title = '修改字典';
+        buttonTitle = '修改';
+        buttonIcon = 'icon-edit';
+        buttonHandler = editDictionary;
     }
     $('#dictionary-dialog').dialog({
         title: title,
@@ -195,11 +189,15 @@ function select(node) {
 }
 
 function addDictionary() {
-    console.log(getSelection());
+    showDictionaryDialog(null);
 }
 
 function editDictionary() {
-    console.log(getSelection());
+    showDictionaryDialog();
+}
+
+function deleteDictionary() {
+    alert('删除');
 }
 
 function addDictionaryType() {
