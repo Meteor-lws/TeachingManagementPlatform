@@ -15,5 +15,9 @@ public interface DictionaryTypeService {
 
     void addDictionaryType(SystemDictionaryType dictionaryType);
 
+    void editDictionaryType(SystemDictionaryType dictionaryType);
+
     void deleteDictionaryType(String id);
+
+    SystemDictionaryType getDictionaryTypeById(String id);
 }

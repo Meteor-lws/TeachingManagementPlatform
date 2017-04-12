@@ -47,10 +47,24 @@ public class DictionaryController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/getDictionaryTypeById", method = RequestMethod.POST)
+    public String getDictionaryTypeById(String id) {
+        return JSON.toJSONString(typeService.getDictionaryTypeById(id));
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/addDictionaryType", method = RequestMethod.POST)
     public String addDictionaryType(SystemDictionaryType dictionaryType) {
         typeService.addDictionaryType(dictionaryType);
         return "添加字典类型成功";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/editDictionaryType", method = RequestMethod.POST)
+    public String editDictionaryType(SystemDictionaryType dictionaryType) {
+        typeService.editDictionaryType(dictionaryType);
+        return "修改字典类型成功";
     }
 
     @ResponseBody
