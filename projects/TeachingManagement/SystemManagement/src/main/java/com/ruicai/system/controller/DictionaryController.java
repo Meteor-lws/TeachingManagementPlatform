@@ -73,4 +73,11 @@ public class DictionaryController {
         typeService.deleteDictionaryType(id);
         return "删除字典类型成功";
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
+    public String getDictionaryById(String id) {
+        return JSON.toJSONString(dictionaryService.getDictionaryById(id));
+    }
 }

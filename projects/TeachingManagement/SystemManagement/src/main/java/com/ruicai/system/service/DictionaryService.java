@@ -10,4 +10,6 @@ import com.ruicai.system.vo.Datagrid;
  */
 public interface DictionaryService {
     Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId);
+
+    SystemDictionary getDictionaryById(String id);
 }

@@ -41,4 +41,9 @@ public class DictionaryServiceImpl implements DictionaryService {
         }
         return datagrid;
     }
+
+    @Override
+    public SystemDictionary getDictionaryById(String id) {
+        return mapper.selectByPrimaryKey(id);
+    }
 }
