@@ -1,6 +1,7 @@
 package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.po.system.SystemDictionaryType;
 import com.ruicai.system.service.DictionaryService;
 import com.ruicai.system.service.DictionaryTypeService;
@@ -41,12 +42,6 @@ public class DictionaryController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDictionariesByTypeId", method = RequestMethod.POST)
-    public String getDictionariesByTypeId(String typeId) {
-        return JSON.toJSONString(dictionaryService.getDictionariesByTypeId(typeId));
-    }
-
-    @ResponseBody
     @RequestMapping(value = "/getDictionaryTypeById", method = RequestMethod.POST)
     public String getDictionaryTypeById(String id) {
         return JSON.toJSONString(typeService.getDictionaryTypeById(id));
@@ -79,5 +74,19 @@ public class DictionaryController {
     @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
     public String getDictionaryById(String id) {
         return JSON.toJSONString(dictionaryService.getDictionaryById(id));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getDictionariesByTypeId", method = RequestMethod.POST)
+    public String getDictionariesByTypeId(String typeId) {
+        return JSON.toJSONString(dictionaryService.getDictionariesByTypeId(typeId));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addDictionary", method = RequestMethod.POST)
+    public String addDictionary(SystemDictionary dictionary) {
+        System.err.println(dictionary);
+        dictionaryService.addDictionary(dictionary);
+        return "添加数据字典成功";
     }
 }

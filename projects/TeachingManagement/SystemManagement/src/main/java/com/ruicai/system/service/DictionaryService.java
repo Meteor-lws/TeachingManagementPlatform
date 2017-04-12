@@ -9,7 +9,9 @@ import com.ruicai.system.vo.Datagrid;
  * Created by lws on 2017/4/11.
  */
 public interface DictionaryService {
+    SystemDictionary getDictionaryById(String id);
+
     Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId);
 
-    SystemDictionary getDictionaryById(String id);
+    void addDictionary(SystemDictionary dictionary);
 }

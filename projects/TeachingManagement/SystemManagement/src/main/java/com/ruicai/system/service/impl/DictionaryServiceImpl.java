@@ -29,6 +29,11 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
+    public SystemDictionary getDictionaryById(String id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId) {
         Datagrid<SystemDictionary> datagrid = new Datagrid<>();
         if (typeId != null) {
@@ -43,7 +48,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public SystemDictionary getDictionaryById(String id) {
-        return mapper.selectByPrimaryKey(id);
+    public void addDictionary(SystemDictionary dictionary) {
+        mapper.insertSelective(dictionary);
     }
 }

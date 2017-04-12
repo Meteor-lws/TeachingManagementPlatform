@@ -67,7 +67,9 @@ function prepareHandler() {
     $('#dictionary-type-add').click(addDictionaryType);
     $('#dictionary-type-edit').click(editDictionaryType);
     $('#dictionary-type-remove').click(deleteDictionaryType);
-    $('#dictionary-add').click(addDictionary);
+    $('#dictionary-add').click(function () {
+        showDictionaryDialog(null);
+    });
     $('#dictionary-edit').click(editDictionary);
     $('#dictionary-remove').click(deleteDictionary);
 }
@@ -154,12 +156,12 @@ function showDictionaryDialog(dictionary) {
                 } else {
                     ajax('getDictionaryById', {id: selections.dictionaries[0].id}, function (data) {
                         dictionary.dictionaryTypeId = $.parseJSON(data).dictionaryTypeId;
-                        console.log(dictionary);
+                        addDictionary(dictionary);
                     }, '获取数据字典类型失败');
                 }
             } else {
                 dictionary.dictionaryTypeId = selections.type.id;
-                console.log(dictionary);
+                addDictionary(dictionary);
             }
             closeDialog('dictionary-dialog');
         };
@@ -235,8 +237,17 @@ function deleteDictionaryType() {
     }
 }
 
-function addDictionary() {
-    showDictionaryDialog(null);
+function addDictionary(dictionary) {
+    var data = {
+        dictionaryTypeId: dictionary.dictionaryTypeId,
+        dictionaryName: dictionary.dictionaryName,
+        dictionaryValue: dictionary.dictionaryValue,
+        dictionaryDescribe: dictionary.dictionaryDescribe,
+        dictionarySortNumber: dictionary.dictionarySortNumber
+    };
+    ajax('addDictionary', data, function () {
+        $('#dictionary-detail').datagrid('reload');
+    }, '添加数据字典失败');
 }
 
 function editDictionary() {
