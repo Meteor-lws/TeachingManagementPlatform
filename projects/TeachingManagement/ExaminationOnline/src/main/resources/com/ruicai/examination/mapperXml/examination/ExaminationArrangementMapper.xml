@@ -10,6 +10,35 @@
         <result column="EXAMINATION_TIME" property="examinationTime" jdbcType="OTHER"/>
         <result column="EXAMINATION_ADDRESS" property="examinationAddress" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="TeacherResultMap" type="com.ruicai.examination.po.education.EducationTeacher">
+        <id column="ID1" property="id" jdbcType="VARCHAR"/>
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="TEACHER_TYPE" property="teacherType" jdbcType="VARCHAR"/>
+        <result column="TEACHER_SPECIALITY" property="teacherSpeciality" jdbcType="VARCHAR"/>
+        <result column="TEACHER_SEX" property="teacherSex" jdbcType="VARCHAR"/>
+        <result column="TEACHER_NAME" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="TEACHER_PHONE" property="teacherPhone" jdbcType="VARCHAR"/>
+        <result column="TEACHER_INTRODUCTION" property="teacherIntroduction" jdbcType="VARCHAR"/>
+        <result column="TEACHER_PICTURE" property="teacherPicture" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ClassResultMap" type="com.ruicai.examination.po.education.EducationClass">
+        <id column="ID2" property="id" jdbcType="VARCHAR"/>
+        <result column="HEAD_TEACHER_ID" property="headTeacherId" jdbcType="VARCHAR"/>
+        <result column="MAIN_TEACHER_ID" property="mainTeacherId" jdbcType="VARCHAR"/>
+        <result column="ASSISTANT_ID" property="assistantId" jdbcType="VARCHAR"/>
+        <result column="CLASS_TYPE" property="classType" jdbcType="VARCHAR"/>
+        <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
+        <result column="CLASS_START_DATE" property="classStartDate" jdbcType="TIMESTAMP"/>
+        <result column="CLASS_END_DATE" property="classEndDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ManagementResultList" type="com.ruicai.examination.vo.examination.Management">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
+        <result column="TEACHER_NAME" property="testPhase" jdbcType="VARCHAR"/>
+        <result column="EXAMINATION_ADDRESS" property="testTime" jdbcType="VARCHAR"/>
+        <result column="EXAMINATION_TIME" property="invigilator" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_NAME" property="testPlace" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -245,4 +274,32 @@
             EXAMINATION_ADDRESS = #{examinationAddress,jdbcType=VARCHAR}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
+    <select id="findAllManagement" parameterType="com.ruicai.examination.vo.examination.ManagementDatagrid"
+            resultMap="BaseResultMap">
+        SELECT *
+        FROM (
+                 (SELECT
+                      rownum rn,
+                      uo.*
+                  FROM
+                      (SELECT *
+                       FROM EXAMINATION_ARRANGEMENT ea
+                       ORDER BY ea.EXAMINATION_TIME) uo
+                  WHERE rownum &lt;= #{rows} + 2)) ua
+        WHERE ua.rn &gt;= #{rows}
+    </select>
+
+    <select id="findManagementDatagrid" resultMap="ManagementResultList"
+            parameterType="com.ruicai.examination.vo.examination.Management">
+        SELECT
+            ea.ID,
+            ec.CLASS_NAME,
+            et.TEACHER_NAME,
+            ea.EXAMINATION_ADDRESS,
+            ea.EXAMINATION_TIME,
+            sd.DICTIONARY_NAME
+        FROM EXAMINATION_ARRANGEMENT ea INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et.ID
+            INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec.ID
+            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd.ID
+    </select>
 </mapper>

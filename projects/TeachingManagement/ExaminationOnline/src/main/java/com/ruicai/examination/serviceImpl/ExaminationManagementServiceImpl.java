@@ -1,10 +1,17 @@
 package com.ruicai.examination.serviceImpl;
 
+import com.ruicai.examination.mapper.education.EducationClassMapper;
+import com.ruicai.examination.mapper.education.EducationTeacherMapper;
 import com.ruicai.examination.mapper.examination.ExaminationArrangementMapper;
 import com.ruicai.examination.po.examination.ExaminationArrangement;
+import com.ruicai.examination.po.examination.ExaminationArrangementExample;
 import com.ruicai.examination.service.ExaminationManagementService;
+import com.ruicai.examination.vo.examination.Management;
+import com.ruicai.examination.vo.examination.ManagementDatagrid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by 朱高 on 2017/4/10.
@@ -12,11 +19,31 @@ import org.springframework.stereotype.Service;
 @Service("ExaminationManagementService")
 public class ExaminationManagementServiceImpl implements ExaminationManagementService {
     @Autowired
+    ExaminationArrangementExample arrangementExample;
+    @Autowired
     private ExaminationArrangementMapper examinationArrangementMapper;
+    @Autowired
+    private EducationClassMapper classMapper;
+    @Autowired
+    private EducationTeacherMapper teacherMapper;
 
     @Override
     public void addExaminationManagement(ExaminationArrangement examinationManagement) {
         System.out.println(examinationArrangementMapper + "........sad.................");
         examinationArrangementMapper.insert(examinationManagement);
     }
+
+    /**
+     * 分页查询考试安排
+     *
+     * @param managementDatagrid
+     * @return
+     */
+    @Override
+    public ManagementDatagrid findManagementDatagrid(ManagementDatagrid managementDatagrid) {
+        List<Management> arrangement = examinationArrangementMapper.findManagementDatagrid(managementDatagrid);
+        managementDatagrid.setList(arrangement);
+        return managementDatagrid;
+    }
+
 }

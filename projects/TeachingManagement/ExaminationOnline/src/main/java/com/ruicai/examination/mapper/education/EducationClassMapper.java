@@ -3,9 +3,11 @@ package com.ruicai.examination.mapper.education;
 import com.ruicai.examination.po.education.EducationClass;
 import com.ruicai.examination.po.education.EducationClassExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EducationClassMapper {
     int countByExample(EducationClassExample example);
 

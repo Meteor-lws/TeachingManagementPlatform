@@ -53,7 +53,7 @@ $(function () {
         ]]
     });
 
-    $("#condition_Name").combotree({
+    /*$("#condition_Name").combotree({
         url: "className",
         lines: true,//是否显示虚线
         onlyLeafCheck: true,//只能选取叶子结点
@@ -285,5 +285,5 @@ $(function () {
                 $("#manager_add").form("reset");
             }
         });
-    }
+     }*/
 });

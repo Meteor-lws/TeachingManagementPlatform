@@ -70,4 +70,17 @@ public class ExaminationArrangement {
     public void setExaminationAddress(String examinationAddress) {
         this.examinationAddress = examinationAddress == null ? null : examinationAddress.trim();
     }
+
+    @Override
+    public String toString() {
+        return "ExaminationArrangement{" +
+                "id='" + id + '\'' +
+                ", classId='" + classId + '\'' +
+                ", teacherId='" + teacherId + '\'' +
+                ", paperId='" + paperId + '\'' +
+                ", examinationStage='" + examinationStage + '\'' +
+                ", examinationTime=" + examinationTime +
+                ", examinationAddress='" + examinationAddress + '\'' +
+                '}';
+    }
 }

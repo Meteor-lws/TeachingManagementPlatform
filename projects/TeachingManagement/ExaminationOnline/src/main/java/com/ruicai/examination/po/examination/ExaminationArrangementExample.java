@@ -1,13 +1,17 @@
 package com.ruicai.examination.po.examination;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ExaminationArrangementExample {
+    //查询条件
     protected String orderByClause;
-
+    //是否是特有的
     protected boolean distinct;
-
+    //要拼接的条件
     protected List<Criteria> oredCriteria;
 
     public ExaminationArrangementExample() {

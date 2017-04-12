@@ -1,7 +1,11 @@
 package com.ruicai.examination.mapper.examination;
 
+import com.ruicai.examination.po.education.EducationClass;
+import com.ruicai.examination.po.education.EducationTeacher;
 import com.ruicai.examination.po.examination.ExaminationArrangement;
 import com.ruicai.examination.po.examination.ExaminationArrangementExample;
+import com.ruicai.examination.vo.examination.Management;
+import com.ruicai.examination.vo.examination.ManagementDatagrid;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +34,12 @@ public interface ExaminationArrangementMapper {
     int updateByPrimaryKeySelective(ExaminationArrangement record);
 
     int updateByPrimaryKey(ExaminationArrangement record);
+
+    List<ExaminationArrangement> findAllManagement(ManagementDatagrid managementDatagrid);
+
+    List<EducationClass> findClass(ManagementDatagrid managementDatagrid);
+
+    List<EducationTeacher> findTeacher(ManagementDatagrid managementDatagrid);
+
+    List<Management> findManagementDatagrid(ManagementDatagrid managementDatagrid);
 }

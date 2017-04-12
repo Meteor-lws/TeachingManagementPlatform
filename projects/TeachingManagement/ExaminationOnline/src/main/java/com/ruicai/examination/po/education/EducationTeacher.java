@@ -90,4 +90,19 @@ public class EducationTeacher {
     public void setTeacherPicture(String teacherPicture) {
         this.teacherPicture = teacherPicture == null ? null : teacherPicture.trim();
     }
+
+    @Override
+    public String toString() {
+        return "EducationTeacher{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", teacherType='" + teacherType + '\'' +
+                ", teacherSpeciality='" + teacherSpeciality + '\'' +
+                ", teacherSex='" + teacherSex + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", teacherPhone='" + teacherPhone + '\'' +
+                ", teacherIntroduction='" + teacherIntroduction + '\'' +
+                ", teacherPicture='" + teacherPicture + '\'' +
+                '}';
+    }
 }
