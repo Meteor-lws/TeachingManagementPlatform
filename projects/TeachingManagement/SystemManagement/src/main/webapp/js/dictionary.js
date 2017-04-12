@@ -147,19 +147,19 @@ function showDictionaryDialog(dictionary) {
         buttonIcon = 'icon-add';
         buttonHandler = function () {
             var selections = getSelections();
+            var dictionary = getDictionaryContent();
             if (selections.type === null) {
                 if (selections.dictionaries.length === 0) {
                     $.messager.alert('警告', '请选择要添加的数据字典所属的字典类型', 'warning');
                 } else {
                     ajax('getDictionaryById', {id: selections.dictionaries[0].id}, function (data) {
-                        var typeId = $.parseJSON(data).dictionaryTypeId;
-                        var dictionary = getDictionaryContent();
-                        dictionary.dictionaryTypeId = typeId;
+                        dictionary.dictionaryTypeId = $.parseJSON(data).dictionaryTypeId;
                         console.log(dictionary);
                     }, '获取数据字典类型失败');
                 }
             } else {
-
+                dictionary.dictionaryTypeId = selections.type.id;
+                console.log(dictionary);
             }
             closeDialog('dictionary-dialog');
         };
