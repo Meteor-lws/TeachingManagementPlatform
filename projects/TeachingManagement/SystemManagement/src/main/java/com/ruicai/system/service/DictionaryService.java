@@ -3,6 +3,8 @@ package com.ruicai.system.service;
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.vo.Datagrid;
 
+import java.util.List;
+
 /**
  * 数据字典Service接口
  *
@@ -16,4 +18,6 @@ public interface DictionaryService {
     void addDictionary(SystemDictionary dictionary);
 
     void editDictionary(SystemDictionary dictionary);
+
+    void deleteDictionaries(List<SystemDictionary> dictionaries);
 }

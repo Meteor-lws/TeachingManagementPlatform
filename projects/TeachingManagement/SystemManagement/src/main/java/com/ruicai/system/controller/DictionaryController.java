@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * 数据字典控制器
  *
@@ -94,5 +96,13 @@ public class DictionaryController {
     public String editDictionary(SystemDictionary dictionary) {
         dictionaryService.editDictionary(dictionary);
         return "修改数据字典成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteDictionaries", method = RequestMethod.POST)
+    public String deleteDictionaries(String data) {
+        List<SystemDictionary> dictionaries = JSON.parseArray(data, SystemDictionary.class);
+        dictionaryService.deleteDictionaries(dictionaries);
+        return "删除数据字典成功";
     }
 }

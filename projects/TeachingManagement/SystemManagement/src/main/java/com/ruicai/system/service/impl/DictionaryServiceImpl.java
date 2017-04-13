@@ -56,4 +56,11 @@ public class DictionaryServiceImpl implements DictionaryService {
     public void editDictionary(SystemDictionary dictionary) {
         mapper.updateByPrimaryKeySelective(dictionary);
     }
+
+    @Override
+    public void deleteDictionaries(List<SystemDictionary> dictionaries) {
+        for (SystemDictionary dictionary : dictionaries) {
+            mapper.deleteByPrimaryKey(dictionary.getId());
+        }
+    }
 }

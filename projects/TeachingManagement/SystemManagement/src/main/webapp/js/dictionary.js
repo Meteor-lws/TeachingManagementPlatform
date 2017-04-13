@@ -259,7 +259,14 @@ function editDictionary() {
 }
 
 function deleteDictionary() {
-    alert('删除');
+    var dictionaries = getSelectedDictionaries();
+    if (dictionaries) {
+        ajax('deleteDictionaries', {data: JSON.stringify(dictionaries)}, function () {
+            $('#dictionary-detail').datagrid('reload');
+        }, '删除数据字典失败');
+    } else {
+        $.messager.alert('警告', '请选择要删除的数据字典', 'warning');
+    }
 }
 
 function search() {
