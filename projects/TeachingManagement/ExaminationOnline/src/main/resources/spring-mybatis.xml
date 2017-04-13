@@ -17,6 +17,23 @@
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:com/ruicai/examination/mapperXml/**/*.xml"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <!-- offsetAsPageNum 会将 RowBounds 中的 offset 参数当成 pageNum 使用，可以用页码和页面大小两个参数进行分页。-->
+                        <!-- reasonablepage Num<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页 -->
+                        <!-- pageSizeZero 如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型） -->
+                        <value>
+                            offsetAsPageNum = true
+                            reasonable = true
+                            pageSizeZero = true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

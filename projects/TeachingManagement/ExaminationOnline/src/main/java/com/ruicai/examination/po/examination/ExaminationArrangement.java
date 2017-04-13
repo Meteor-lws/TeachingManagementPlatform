@@ -1,5 +1,7 @@
 package com.ruicai.examination.po.examination;
 
+import java.sql.Timestamp;
+
 public class ExaminationArrangement {
     private String id;
 
@@ -11,7 +13,7 @@ public class ExaminationArrangement {
 
     private String examinationStage;
 
-    private Object examinationTime;
+    private Timestamp examinationTime;
 
     private String examinationAddress;
 
@@ -55,11 +57,11 @@ public class ExaminationArrangement {
         this.examinationStage = examinationStage == null ? null : examinationStage.trim();
     }
 
-    public Object getExaminationTime() {
+    public Timestamp getExaminationTime() {
         return examinationTime;
     }
 
-    public void setExaminationTime(Object examinationTime) {
+    public void setExaminationTime(Timestamp examinationTime) {
         this.examinationTime = examinationTime;
     }
 

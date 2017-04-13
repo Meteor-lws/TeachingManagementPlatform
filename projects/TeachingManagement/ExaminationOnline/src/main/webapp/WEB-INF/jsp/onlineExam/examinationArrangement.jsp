@@ -54,11 +54,11 @@
     </p>
     <p><label for="testPhase">考试阶段：</label><input id="testPhase" name="testPhase" class="textbox" editable="false"
                                                   style="width:125px;"></p>
-    <p><label for="testTime">考试时间：</label><input id="testTime" name="testTime" class="easyui-datebox" editable="false"
+    <p><label for="testTime">考试时间：</label><input id="testTime" name="testTime" class="easyui-datetimebox" editable="false"
                                                  required="required" style="width:125px;"></p>
-    <p><label for="invigilator">监考老师：</label><input id="invigilator" name="invigilator" editable="false"
+    <p><label for="invigilator">监考老师：</label><input id="invigilator" name="invigilator"
                                                     style="width:125px;"></p>
-    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" editable="false" style="width:125px;">
+    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" style="width:125px;">
     </p>
 </form>
 </body>

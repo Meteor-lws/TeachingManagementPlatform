@@ -4,6 +4,8 @@ import com.ruicai.examination.po.education.EducationClass;
 import com.ruicai.examination.po.education.EducationTeacher;
 import com.ruicai.examination.po.examination.ExaminationArrangement;
 import com.ruicai.examination.po.examination.ExaminationArrangementExample;
+import com.ruicai.examination.po.system.SystemDictionary;
+import com.ruicai.examination.vo.examination.ClassTree;
 import com.ruicai.examination.vo.examination.Management;
 import com.ruicai.examination.vo.examination.ManagementDatagrid;
 import org.apache.ibatis.annotations.Param;
@@ -43,5 +45,10 @@ public interface ExaminationArrangementMapper {
 
     List<Management> findManagementDatagrid(ManagementDatagrid managementDatagrid);
 
-    List<String> findDicTypeName(String dicTypeName);
+    List<SystemDictionary> findDicTypeName(String dicTypeName);
+
+    List<EducationTeacher> findTeacherName();
+
+    List<ClassTree> findClassMessageByClassType(String classType);
+
 }

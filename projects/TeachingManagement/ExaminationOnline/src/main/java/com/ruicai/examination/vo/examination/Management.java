@@ -11,7 +11,16 @@ public class Management {
     private String testTime;
     private String invigilator;
     private String testPlace;
+    private String paperId;
     private String stuName;
+
+    public String getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(String paperId) {
+        this.paperId = paperId;
+    }
 
     public String getStuName() {
         return stuName;

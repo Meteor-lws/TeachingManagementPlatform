@@ -39,6 +39,14 @@
         <result column="EXAMINATION_TIME" property="testTime" jdbcType="VARCHAR"/>
         <result column="DICTIONARY_NAME" property="testPhase" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="DicResultList" type="com.ruicai.examination.po.system.SystemDictionary">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_NAME" property="dictionaryName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ClassTreeResultList" type="com.ruicai.examination.vo.examination.ClassTree">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="CLASS_NAME" property="text" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -142,6 +150,9 @@
                 #{examinationAddress,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.examination.po.examination.ExaminationArrangement">
+        <selectKey keyProperty="id" keyColumn="ID" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM dual
+        </selectKey>
         insert into RUICAI.EXAMINATION_ARRANGEMENT
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -289,31 +300,46 @@
         WHERE ua.rn &gt;= #{rows}
     </select>
 
-    <select id="findManagementDatagrid" resultMap="ManagementResultList"
-            parameterType="com.ruicai.examination.vo.examination.Management">
-        SELECT *
-        FROM (
-                 (SELECT
-                      rownum rn,
-                      uo.*
-                  FROM
-                      (SELECT
-                           ea.ID,
-                           ec.CLASS_NAME,
-                           et.TEACHER_NAME,
-                           ea.EXAMINATION_ADDRESS,
-                           ea.EXAMINATION_TIME,
-                           sd.DICTIONARY_NAME
-                       FROM EXAMINATION_ARRANGEMENT ea INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et.ID
-                           INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec.ID
-                           INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd.ID) uo
-                  WHERE rownum &lt;= #{rows} + 2)) ua
-        WHERE ua.rn &gt;= #{rows}
+    <select id="findManagementDatagrid" resultMap="ManagementResultList" parameterType="com.ruicai.examination.vo.examination.ManagementDatagrid">
+        SELECT
+            ea. ID,
+            ec.CLASS_NAME,
+            et.TEACHER_NAME,
+            ea.EXAMINATION_ADDRESS,
+            ea.EXAMINATION_TIME,
+            sd.DICTIONARY_NAME
+        FROM
+            EXAMINATION_ARRANGEMENT ea
+            INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et. ID
+            INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec. ID
+            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID ORDER BY sd.DICTIONARY_SORT_NUMBER
     </select>
 
-    <select id="findDicTypeName" parameterType="String" resultType="String">
-        SELECT * FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
+    <select id="findDicTypeName" parameterType="String" resultMap="DicResultList">
+        SELECT sd.ID,sd.DICTIONARY_NAME FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
           (SELECT ID FROM SYSTEM_DICTIONARY_TYPE sdt WHERE sdt.DICTIONARY_TYPE_NAME = #{dicTypeName})
           ORDER BY SD.DICTIONARY_SORT_NUMBER
+    </select>
+
+    <select id="findTeacherName" resultMap="TeacherResultMap">
+        SELECT et.ID, et.TEACHER_NAME FROM EDUCATION_TEACHER et
+    </select>
+
+    <!--<select id="findClassName" resultMap="ClassResultMap">
+       SELECT
+           EC.id,
+           EC.CLASS_NAME
+       FROM
+           EDUCATION_CLASS ec
+           INNER JOIN SYSTEM_DICTIONARY sd ON ec.CLASS_TYPE = sd. ID
+           INNER JOIN SYSTEM_DICTIONARY_TYPE sdt ON sdt.DICTIONARY_TYPE_NAME = 'class-type' ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
+    </select>-->
+    
+    <select id="findClassMessageByClassType" parameterType="String" resultMap="ClassTreeResultList">
+        SELECT
+            EC.id,
+            EC.CLASS_NAME
+        FROM
+            EDUCATION_CLASS ec WHERE ec.CLASS_TYPE = #{classType} ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
     </select>
 </mapper>

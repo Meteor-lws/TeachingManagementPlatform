@@ -1,8 +1,11 @@
 /**
  * Created by 朱高 on 2017/3/21.
  */
+/*$.fn.combobox.defaults.filter = function(q, row){
+    var opts = $(this).combobox('options');
+    return row[opts.textField].indexOf(q) >= 0;
+};*/
 $(function () {
-
     $("#table").datagrid({
         url: "datagrid",
         fit: true,
@@ -83,6 +86,7 @@ $(function () {
         }
     });
 */
+
     manager_tool = {
         edit: function () {
             var length = $("#table").datagrid("getSelections").length;
@@ -108,28 +112,34 @@ $(function () {
             }
         },
         add: function () {
-            dialogOption("新增管理", "add");
+            dialogOption("新增管理", "addClassMessage");
             $('#manager_add').dialog("open");
             $("#testPhase").combobox({
                 required: true,
                 valueField: 'id',//传递的值
-                textField: 'text',//显示的值
-                url: "testPhase",
+                textField: 'dictionaryName',//显示的值
+                url: "findDicTypeName",
                 queryParams : {
                     dicTypeName : "examination-stage"
+                },
+                filter: function(q, row){
+                    var opts = $(this).combobox('options');
+                    return row[opts.textField].indexOf(q) >= 0;
                 }
             });
             $("#invigilator").combobox({
                 required: true,
                 valueField: 'id',//传递的值
-                textField: 'text',//显示的值
-                url: "json/invigilator.json"
+                textField: 'teacherName',//显示的值
+                url: "findTeacherName",
+                filter: function(q, row){
+                    var opts = $(this).combobox('options');
+                    console.log(row[opts.textField].indexOf(q));
+                    return row[opts.textField].indexOf(q) > -1;
+                }
             });
-            $("#testPlace").combobox({
-                required: true,
-                valueField: 'id',//传递的值
-                textField: 'text',//显示的值
-                url: "json/testPlace.json"
+            $("#testPlace").textbox({
+                required: true
             });
             testComboTree($("#className"), "className");
         },
@@ -179,9 +189,8 @@ $(function () {
             //$.ajax()
         }
     };
-/*
-    function testComboTree(idObject, url) {
 
+    function testComboTree(idObject, url) {
         idObject.combotree({
             url: url,
             required: true,//是否必填
@@ -195,7 +204,6 @@ $(function () {
                     return false;
                 }
             },
-            //
             onClick: function (node) {
                 if (!$(this).tree('isLeaf', node.target)) {
                     $("#className").combo('showPanel');
@@ -213,9 +221,6 @@ $(function () {
             }
         });
     }
-
-
-*/
     function dialogOption(title, url) {
         $("#manager_add").dialog({
             width: 350,
@@ -227,23 +232,24 @@ $(function () {
                     text: "保存",
                     iconCls: "icon-add",
                     handler: function () {
+                        alert("url = " + url);
                         if ($("#manager_add").form("validate")) {
-                            var id = null;
-                            if (url !== 'add') {
+                            //var id = null;
+                            /*if (url !== 'add') {
                                 id = $("#table").datagrid("getSelected").id;
-                            }
+                            }*/
                             var data = {
-                                id: id,
-                                className: $("input[name='className']").val(),
-                                testPhase: $("input[name='testPhase']").val(),
-                                testTime: $("input[name='testTime']").val(),
-                                invigilator: $("input[name='invigilator']").val(),
-                                testPlace: $("input[name='testPlace']").val()
+                                classId: $("input[name='className']").val(),
+                                examinationStage: $("input[name='testPhase']").val(),
+                                examinationTime: $("input[name='testTime']").val(),
+                                teacherId: $("input[name='invigilator']").val(),
+                                examinationAddress: $("input[name='testPlace']").val()
                             };
                             ajaxMethod(url, data, function (data) {
+
                                 $.messager.progress("close");
                                 console.log(data);
-                                if (data !== 0) {
+                                if (data != null) {
                                     $.messager.show({
                                         title: "提示",
                                         msg: "新增用户成功"
@@ -279,12 +285,30 @@ $(function () {
             type: "POST",
             data: data,
             dataType: "json",
-            beforeSend: function () {
+            /*beforeSend: function () {
                 $.messager.progress({
-                    text: "正在新增中....."
+                    text
+
+
+                    : "正在新增中....."
                 })
-            },
-            success: success(data)
+            },*/
+            success: function(data){
+                alert("成功");
+                $.messager.progress("close");
+                console.log(data);
+                if (data != null) {
+                    $.messager.show({
+                        title: "提示",
+                        msg: "新增用户成功"
+                    });
+                    $("#manager_add").dialog("close").form("reset");
+                    $("#table").datagrid("clearSelections");
+                    $("#table").datagrid("reload");
+                } else {
+                    $.messager.alert("新增失败", "未知错误导致失败", "warning");
+                }
+            }
         })
     }
 });

@@ -7,10 +7,19 @@ import java.util.List;
  */
 public class ManagementDatagrid {
     List<Management> list;
+    private long total;
     private int page;
     private int rows;
     private String sort;
     private String order;
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
     public List<Management> getList() {
         return list;
