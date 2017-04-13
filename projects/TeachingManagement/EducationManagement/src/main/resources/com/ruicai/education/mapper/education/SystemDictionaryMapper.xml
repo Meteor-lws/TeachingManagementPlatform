@@ -228,4 +228,7 @@
   <select id="selectDicByName" parameterType="string" resultMap="BaseResultMap">
           select sd.* from SYSTEM_DICTIONARY sd ,SYSTEM_DICTIONARY_TYPE sdt where SD.DICTIONARY_TYPE_ID = sdt."ID" and SDT.DICTIONARY_TYPE_NAME = #{name}
   </select>
+  <select id="selectAllDictionary" resultMap="BaseResultMap">
+    SELECT * from SYSTEM_DICTIONARY
+  </select>
 </mapper>

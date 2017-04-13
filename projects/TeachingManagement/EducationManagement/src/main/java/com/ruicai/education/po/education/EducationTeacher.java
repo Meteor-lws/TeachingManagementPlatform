@@ -19,12 +19,13 @@ public class EducationTeacher {
 
     private String teacherPicture;
 
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getUserId() {
@@ -32,7 +33,7 @@ public class EducationTeacher {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+        this.userId = userId;
     }
 
     public String getTeacherType() {
@@ -40,7 +41,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherType(String teacherType) {
-        this.teacherType = teacherType == null ? null : teacherType.trim();
+        this.teacherType = teacherType;
     }
 
     public String getTeacherSpeciality() {
@@ -48,7 +49,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherSpeciality(String teacherSpeciality) {
-        this.teacherSpeciality = teacherSpeciality == null ? null : teacherSpeciality.trim();
+        this.teacherSpeciality = teacherSpeciality;
     }
 
     public String getTeacherSex() {
@@ -56,7 +57,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherSex(String teacherSex) {
-        this.teacherSex = teacherSex == null ? null : teacherSex.trim();
+        this.teacherSex = teacherSex;
     }
 
     public String getTeacherName() {
@@ -64,7 +65,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName == null ? null : teacherName.trim();
+        this.teacherName = teacherName;
     }
 
     public String getTeacherPhone() {
@@ -72,7 +73,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherPhone(String teacherPhone) {
-        this.teacherPhone = teacherPhone == null ? null : teacherPhone.trim();
+        this.teacherPhone = teacherPhone;
     }
 
     public String getTeacherIntroduction() {
@@ -80,7 +81,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherIntroduction(String teacherIntroduction) {
-        this.teacherIntroduction = teacherIntroduction == null ? null : teacherIntroduction.trim();
+        this.teacherIntroduction = teacherIntroduction;
     }
 
     public String getTeacherPicture() {
@@ -88,6 +89,7 @@ public class EducationTeacher {
     }
 
     public void setTeacherPicture(String teacherPicture) {
-        this.teacherPicture = teacherPicture == null ? null : teacherPicture.trim();
+        this.teacherPicture = teacherPicture;
     }
+
 }

@@ -23,4 +23,7 @@ public interface EducationTeacherMapper {
     int updateByPrimaryKey(EducationTeacher record);
 
     int selectTeaByConditionCount(TeacherCondition condition);
+
+    List<EducationTeacher> selectTeaByCondition(TeacherCondition condition);
+
 }

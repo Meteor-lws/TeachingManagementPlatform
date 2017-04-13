@@ -1,6 +1,7 @@
 /**
  * Created by XuMing on 2017/4/1.
  */
+
 $(function () {
     var teachingType ;
     var rowValue;
@@ -9,8 +10,7 @@ $(function () {
         valueField:'id',
         textField:'dictionaryName',
         onSelect:function (sel) {
-            alert(sel.id);
-            var teachingType = sel.id;
+            teachingType = sel.id;
         }
     });
 
@@ -75,7 +75,7 @@ $(function () {
     });
 
     $('#teaDg').datagrid({
-        url: 'datagrid_data1.json',
+        url: '/education/teacherSelect',
         fitColumns: false,
         fit: true,
         striped: true,
@@ -85,13 +85,12 @@ $(function () {
         pageSize: 20,
         pageNumber: 1,
         columns: [[
-            {field: 'productname', itemid: 'ID', checkbox: true, width: 1000},
-            {field: 'productid', title: '姓名', width: 10, width: 100},
-            {field: 'productid', title: '性别', width: 100},
-            {field: 'productid', title: '班级', width: 100},
-            {field: 'productid', title: '类型', width: 100},
-            {field: 'productid', title: '专业', width: 100},
-            {field: 'productid', title: '手机', width: 100},
+            {field: 'id', itemid: 'ID', checkbox: true, width: 1000},
+            {field: 'teacherName', title: '姓名', width: 10, width: 100},
+            {field: 'teacherSexView', title: '性别', width: 100},
+            {field: 'teacherTypeView', title: '类型', width: 100},
+            {field: 'teacherSpecialityView', title: '专业', width: 100},
+            {field: 'teacherPhone', title: '手机', width: 100},
             {field: 'productid', title: '入职时间', width: 200}
         ]],
         toolbar: '#teaTb'
@@ -99,7 +98,14 @@ $(function () {
 
     $("#selectTea").click(function()
     {
-        $("#selectTeaByCondition").submit();
+
+        var id = $("#teacherNo").val();//教师id
+        var teacherName = $("#teacherName").val();//教师姓名
+        $('#teaDg').datagrid('load', {
+            id: id,
+            teacherName: teacherName,
+            teacherType: teachingType
+        });
     });
 
 

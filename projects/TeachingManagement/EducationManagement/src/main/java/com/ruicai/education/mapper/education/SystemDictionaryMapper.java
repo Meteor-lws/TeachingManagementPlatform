@@ -29,4 +29,6 @@ public interface SystemDictionaryMapper {
     int updateByPrimaryKey(SystemDictionary record);
 
     List<SystemDictionary> selectDicByName(String desc);
+
+    List<SystemDictionary> selectDictionary();
 }

@@ -29,7 +29,16 @@ public class TeacherServerImpl implements TeacherServer {
     @Override
     public PageBean<EducationTeacher> selectTeaByCondition(TeacherCondition condition, PageBean<EducationTeacher> pageBean) {
         int total = selectTeaByConditionCount(condition);
+        char[] page = condition.getPage();
+        try {
+            pageBean.setPage(Integer.parseInt(page[0] + ""));
+        } catch (Exception e) {
+            pageBean.setPage(1);
+        }
+        pageBean.setRowNums(condition.getRows());
+        List<EducationTeacher> teacherList = educationTeacherMapper.selectTeaByCondition(condition);
+        pageBean.setRows(teacherList);
         pageBean.setTotal(total);
-        return null;
+        return pageBean;
     }
 }

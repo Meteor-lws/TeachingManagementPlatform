@@ -7,17 +7,9 @@ import java.util.List;
  */
 public class PageBean<T> {
     private Integer page;//页码
-    private Integer rows;//每页显示多少条数据
+    private Integer rowNums;//每页显示多少条数据
     private Integer total;//总共多少条数据
-    private List<T> list;//数据列表
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
+    private List<T> rows;//数据列表
 
     public Integer getPage() {
         return page;
@@ -27,12 +19,12 @@ public class PageBean<T> {
         this.page = page;
     }
 
-    public Integer getRows() {
-        return rows;
+    public Integer getRowNums() {
+        return rowNums;
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    public void setRowNums(Integer rowNums) {
+        this.rowNums = rowNums;
     }
 
     public Integer getTotal() {
@@ -41,5 +33,13 @@ public class PageBean<T> {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    public List<T> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 }

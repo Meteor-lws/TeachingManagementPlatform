@@ -10,25 +10,15 @@ public class TeacherCondition {
 
     private String teacherType;
 
+
     private Integer rows;
 
-    private Integer page;
+    private char[] page;
 
-    public Integer getRows() {
-        return rows;
-    }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
-    }
+    private Integer startNum = 0;
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
+    private Integer endNum = 20;
 
     public String getId() {
         return id;
@@ -52,5 +42,38 @@ public class TeacherCondition {
 
     public void setTeacherType(String teacherType) {
         this.teacherType = teacherType;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public char[] getPage() {
+        return page;
+    }
+
+    public void setPage(char[] page) {
+        this.page = page;
+    }
+
+
+    public Integer getStartNum() {
+        return startNum;
+    }
+
+    public void setStartNum(Integer startNum) {
+        this.startNum = startNum;
+    }
+
+    public Integer getEndNum() {
+        return endNum;
+    }
+
+    public void setEndNum(Integer endNum) {
+        this.endNum = endNum;
     }
 }

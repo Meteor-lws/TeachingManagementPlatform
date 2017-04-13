@@ -156,9 +156,32 @@
         and TEACHER_NAME  like  '%${teacherName}%'
       </if>
     </where>
-
   </select>
+  <select id="selectTeaByCondition" parameterType="com.ruicai.education.po.education.TeacherCondition"
+          resultMap="BaseResultMap">
 
+    SELECT
+    *
+    FROM
+    (
+    SELECT
+    a1.*, ROWNUM rn
+    FROM
+    (select * from EDUCATION_TEACHER WHERE ROWNUM &lt; ${endNum}
+    <if test="id != null and id != ''">
+      id = #{id}
+    </if>
+    <if test="teacherType != null and teacherType != ''  ">
+      and TEACHER_TYPE = #{teacherType}
+    </if>
+    <if test="teacherName != null and teacherName != ''">
+      and TEACHER_NAME like '%${teacherName}%'
+    </if>
+    ) a1
+    )
+    WHERE
+    rn &gt; ${startNum}
+  </select>
 
 
 </mapper>
