@@ -14,4 +14,6 @@ public interface DictionaryService {
     Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId);
 
     void addDictionary(SystemDictionary dictionary);
+
+    void editDictionary(SystemDictionary dictionary);
 }

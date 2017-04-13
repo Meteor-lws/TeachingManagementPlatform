@@ -51,4 +51,9 @@ public class DictionaryServiceImpl implements DictionaryService {
     public void addDictionary(SystemDictionary dictionary) {
         mapper.insertSelective(dictionary);
     }
+
+    @Override
+    public void editDictionary(SystemDictionary dictionary) {
+        mapper.updateByPrimaryKeySelective(dictionary);
+    }
 }

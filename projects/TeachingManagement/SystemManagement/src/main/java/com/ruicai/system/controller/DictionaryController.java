@@ -85,8 +85,14 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping(value = "/addDictionary", method = RequestMethod.POST)
     public String addDictionary(SystemDictionary dictionary) {
-        System.err.println(dictionary);
         dictionaryService.addDictionary(dictionary);
         return "添加数据字典成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/editDictionary", method = RequestMethod.POST)
+    public String editDictionary(SystemDictionary dictionary) {
+        dictionaryService.editDictionary(dictionary);
+        return "修改数据字典成功";
     }
 }

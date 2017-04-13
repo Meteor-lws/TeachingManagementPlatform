@@ -146,6 +146,15 @@ function showDictionaryDialog(dictionary) {
         buttonTitle = '修改';
         buttonIcon = 'icon-edit';
         buttonHandler = function () {
+            var dictionary = getSelectedDictionaries()[0];
+            var content = getDictionaryContent();
+            dictionary.dictionaryName = content.dictionaryName;
+            dictionary.dictionaryValue = content.dictionaryValue;
+            dictionary.dictionaryDescribe = content.dictionaryDescribe;
+            dictionary.dictionarySortNumber = content.dictionarySortNumber;
+            ajax('editDictionary', dictionary, function () {
+                $('#dictionary-detail').datagrid('reload');
+            }, '添加数据字典失败');
             closeDialog('dictionary-dialog');
         };
     } else {
@@ -240,7 +249,13 @@ function addDictionary() {
 }
 
 function editDictionary() {
-    showDictionaryDialog();
+    var dictionaries = getSelectedDictionaries();
+    if (dictionaries) {
+        setDictionaryContent(dictionaries[0]);
+        showDictionaryDialog(null);
+    } else {
+        $.messager.alert('警告', '请选择要修改的数据字典', 'warning');
+    }
 }
 
 function deleteDictionary() {
@@ -275,6 +290,11 @@ function ajax(url, data, success, error) {
 
 function getSelectedType() {
     return $('#dictionary-type').tree('getSelected');
+}
+
+function getSelectedDictionaries() {
+    var selections = $('#dictionary-detail').datagrid('getSelections');
+    return selections.length > 0 ? selections : null;
 }
 
 function getTypeContent() {
