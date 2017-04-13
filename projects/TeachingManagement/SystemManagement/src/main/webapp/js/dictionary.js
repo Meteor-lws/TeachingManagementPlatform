@@ -67,9 +67,7 @@ function prepareHandler() {
     $('#dictionary-type-add').click(addDictionaryType);
     $('#dictionary-type-edit').click(editDictionaryType);
     $('#dictionary-type-remove').click(deleteDictionaryType);
-    $('#dictionary-add').click(function () {
-        showDictionaryDialog(null);
-    });
+    $('#dictionary-add').click(addDictionary);
     $('#dictionary-edit').click(editDictionary);
     $('#dictionary-remove').click(deleteDictionary);
 }
@@ -82,16 +80,16 @@ function showTypeDialog(type) {
         buttonTitle = '添加';
         buttonIcon = 'icon-add';
         buttonHandler = function () {
-            var type = {};
-            var selections = getSelections();
-            if (selections.type) {
-                type.parentId = selections.type.id;
+            var dictionaryType = {};
+            var type = getSelectedType();
+            if (type) {
+                dictionaryType.parentId = type.id;
             }
             var content = getTypeContent();
-            type.dictionaryTypeName = content.name;
-            type.dictionaryTypeDescribe = content.describe;
-            type.dictionaryTypeSortNumber = content.sort;
-            ajax('addDictionaryType', type, function () {
+            dictionaryType.dictionaryTypeName = content.name;
+            dictionaryType.dictionaryTypeDescribe = content.describe;
+            dictionaryType.dictionaryTypeSortNumber = content.sort;
+            ajax('addDictionaryType', dictionaryType, function () {
                 $('#dictionary-type').tree('reload');
             }, '添加字典类型失败');
             closeDialog('dictionary-type-dialog');
@@ -144,32 +142,25 @@ function showDictionaryDialog(dictionary) {
     var title;
     var buttonTitle, buttonIcon, buttonHandler;
     if (dictionary === null) {
-        title = '添加字典';
-        buttonTitle = '添加';
-        buttonIcon = 'icon-add';
-        buttonHandler = function () {
-            var selections = getSelections();
-            var dictionary = getDictionaryContent();
-            if (selections.type === null) {
-                if (selections.dictionaries.length === 0) {
-                    $.messager.alert('警告', '请选择要添加的数据字典所属的字典类型', 'warning');
-                } else {
-                    ajax('getDictionaryById', {id: selections.dictionaries[0].id}, function (data) {
-                        dictionary.dictionaryTypeId = $.parseJSON(data).dictionaryTypeId;
-                        addDictionary(dictionary);
-                    }, '获取数据字典类型失败');
-                }
-            } else {
-                dictionary.dictionaryTypeId = selections.type.id;
-                addDictionary(dictionary);
-            }
-            closeDialog('dictionary-dialog');
-        };
-    } else {
         title = '修改字典';
         buttonTitle = '修改';
         buttonIcon = 'icon-edit';
         buttonHandler = function () {
+            closeDialog('dictionary-dialog');
+        };
+    } else {
+        title = '添加字典';
+        buttonTitle = '添加';
+        buttonIcon = 'icon-add';
+        buttonHandler = function () {
+            var content = getDictionaryContent();
+            dictionary.dictionaryName = content.dictionaryName;
+            dictionary.dictionaryValue = content.dictionaryValue;
+            dictionary.dictionaryDescribe = content.dictionaryDescribe;
+            dictionary.dictionarySortNumber = content.dictionarySortNumber;
+            ajax('addDictionary', dictionary, function () {
+                $('#dictionary-detail').datagrid('reload');
+            }, '添加数据字典失败');
             closeDialog('dictionary-dialog');
         };
     }
@@ -214,7 +205,7 @@ function addDictionaryType() {
 }
 
 function editDictionaryType() {
-    var type = getSelections().type;
+    var type = getSelectedType();
     if (type) {
         ajax('getDictionaryTypeById', {id: type.id}, function (dictionaryType) {
             dictionaryType = $.parseJSON(dictionaryType);
@@ -227,7 +218,7 @@ function editDictionaryType() {
 }
 
 function deleteDictionaryType() {
-    var type = getSelections().type;
+    var type = getSelectedType();
     if (type) {
         ajax('deleteDictionaryType', {id: type.id}, function () {
             $('#dictionary-type').tree('reload');
@@ -237,17 +228,15 @@ function deleteDictionaryType() {
     }
 }
 
-function addDictionary(dictionary) {
-    var data = {
-        dictionaryTypeId: dictionary.dictionaryTypeId,
-        dictionaryName: dictionary.dictionaryName,
-        dictionaryValue: dictionary.dictionaryValue,
-        dictionaryDescribe: dictionary.dictionaryDescribe,
-        dictionarySortNumber: dictionary.dictionarySortNumber
-    };
-    ajax('addDictionary', data, function () {
-        $('#dictionary-detail').datagrid('reload');
-    }, '添加数据字典失败');
+function addDictionary() {
+    var dictionaryType = getSelectedType();
+    if (dictionaryType) {
+        var dictionary = {};
+        dictionary.dictionaryTypeId = dictionaryType.id;
+        showDictionaryDialog(dictionary);
+    } else {
+        $.messager.alert('警告', '请选择要添加的数据字典所属的字典类型', 'warning');
+    }
 }
 
 function editDictionary() {
@@ -284,10 +273,8 @@ function ajax(url, data, success, error) {
     });
 }
 
-function getSelections() {
-    var type = $('#dictionary-type').tree('getSelected');
-    var dictionaries = $('#dictionary-detail').datagrid('getSelections');
-    return {type: type, dictionaries: dictionaries};
+function getSelectedType() {
+    return $('#dictionary-type').tree('getSelected');
 }
 
 function getTypeContent() {
