@@ -82,7 +82,7 @@ $(function () {
             }
         }
     });
-
+*/
     manager_tool = {
         edit: function () {
             var length = $("#table").datagrid("getSelections").length;
@@ -109,12 +109,15 @@ $(function () {
         },
         add: function () {
             dialogOption("新增管理", "add");
-            $("#manager_add").dialog("open");
+            $('#manager_add').dialog("open");
             $("#testPhase").combobox({
                 required: true,
                 valueField: 'id',//传递的值
                 textField: 'text',//显示的值
-                url: "json/testPhase.json"
+                url: "testPhase",
+                queryParams : {
+                    dicTypeName : "examination-stage"
+                }
             });
             $("#invigilator").combobox({
                 required: true,
@@ -176,7 +179,7 @@ $(function () {
             //$.ajax()
         }
     };
-
+/*
     function testComboTree(idObject, url) {
 
         idObject.combotree({
@@ -211,38 +214,8 @@ $(function () {
         });
     }
 
-    function ajaxMethod(url, data) {
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            dataType: "json",
-            beforeSend: function () {
-                $.messager.progress({
-                    text: "正在新增中....."
-                })
-            },
-            success: function (data, response, status) {
-                $.messager.progress("close");
-                console.log(data);
-                if (url === 'update') {
 
-                }
-                if (data !== 0) {
-                    $.messager.show({
-                        title: "提示",
-                        msg: "新增用户成功"
-                    });
-                    $("#manager_add").dialog("close").form("reset");
-                    $("#table").datagrid("clearSelections");
-                    $("#table").datagrid("reload");
-                } else {
-                    $.messager.alert("新增失败", "未知错误导致失败", "warning");
-                }
-            }
-        })
-    }
-
+*/
     function dialogOption(title, url) {
         $("#manager_add").dialog({
             width: 350,
@@ -267,7 +240,21 @@ $(function () {
                                 invigilator: $("input[name='invigilator']").val(),
                                 testPlace: $("input[name='testPlace']").val()
                             };
-                            ajaxMethod(url, data);
+                            ajaxMethod(url, data, function (data) {
+                                $.messager.progress("close");
+                                console.log(data);
+                                if (data !== 0) {
+                                    $.messager.show({
+                                        title: "提示",
+                                        msg: "新增用户成功"
+                                    });
+                                    $("#manager_add").dialog("close").form("reset");
+                                    $("#table").datagrid("clearSelections");
+                                    $("#table").datagrid("reload");
+                                } else {
+                                    $.messager.alert("新增失败", "未知错误导致失败", "warning");
+                                }
+                            });
                         }
                     }
                 },
@@ -285,5 +272,19 @@ $(function () {
                 $("#manager_add").form("reset");
             }
         });
-     }*/
+     }
+    function ajaxMethod(url, data, success) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            dataType: "json",
+            beforeSend: function () {
+                $.messager.progress({
+                    text: "正在新增中....."
+                })
+            },
+            success: success(data)
+        })
+    }
 });

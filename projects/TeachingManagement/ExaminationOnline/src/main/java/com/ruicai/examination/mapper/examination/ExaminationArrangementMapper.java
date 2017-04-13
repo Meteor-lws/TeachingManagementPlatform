@@ -42,4 +42,6 @@ public interface ExaminationArrangementMapper {
     List<EducationTeacher> findTeacher(ManagementDatagrid managementDatagrid);
 
     List<Management> findManagementDatagrid(ManagementDatagrid managementDatagrid);
+
+    List<String> findDicTypeName(String dicTypeName);
 }

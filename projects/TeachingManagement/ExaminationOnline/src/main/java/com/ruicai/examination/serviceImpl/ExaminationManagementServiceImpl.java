@@ -1,10 +1,7 @@
 package com.ruicai.examination.serviceImpl;
 
-import com.ruicai.examination.mapper.education.EducationClassMapper;
-import com.ruicai.examination.mapper.education.EducationTeacherMapper;
 import com.ruicai.examination.mapper.examination.ExaminationArrangementMapper;
 import com.ruicai.examination.po.examination.ExaminationArrangement;
-import com.ruicai.examination.po.examination.ExaminationArrangementExample;
 import com.ruicai.examination.service.ExaminationManagementService;
 import com.ruicai.examination.vo.examination.Management;
 import com.ruicai.examination.vo.examination.ManagementDatagrid;
@@ -19,13 +16,7 @@ import java.util.List;
 @Service("ExaminationManagementService")
 public class ExaminationManagementServiceImpl implements ExaminationManagementService {
     @Autowired
-    ExaminationArrangementExample arrangementExample;
-    @Autowired
     private ExaminationArrangementMapper examinationArrangementMapper;
-    @Autowired
-    private EducationClassMapper classMapper;
-    @Autowired
-    private EducationTeacherMapper teacherMapper;
 
     @Override
     public void addExaminationManagement(ExaminationArrangement examinationManagement) {
@@ -44,6 +35,12 @@ public class ExaminationManagementServiceImpl implements ExaminationManagementSe
         List<Management> arrangement = examinationArrangementMapper.findManagementDatagrid(managementDatagrid);
         managementDatagrid.setList(arrangement);
         return managementDatagrid;
+    }
+
+    @Override
+    public List<String> findDicTypeName(String dicTypeName) {
+        examinationArrangementMapper.findDicTypeName(dicTypeName);
+        return null;
     }
 
 }

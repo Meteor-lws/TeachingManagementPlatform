@@ -34,10 +34,10 @@
     <resultMap id="ManagementResultList" type="com.ruicai.examination.vo.examination.Management">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
         <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
-        <result column="TEACHER_NAME" property="testPhase" jdbcType="VARCHAR"/>
-        <result column="EXAMINATION_ADDRESS" property="testTime" jdbcType="VARCHAR"/>
-        <result column="EXAMINATION_TIME" property="invigilator" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_NAME" property="testPlace" jdbcType="VARCHAR"/>
+        <result column="TEACHER_NAME" property="invigilator" jdbcType="VARCHAR"/>
+        <result column="EXAMINATION_ADDRESS" property="testPlace" jdbcType="VARCHAR"/>
+        <result column="EXAMINATION_TIME" property="testTime" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_NAME" property="testPhase" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -291,15 +291,29 @@
 
     <select id="findManagementDatagrid" resultMap="ManagementResultList"
             parameterType="com.ruicai.examination.vo.examination.Management">
-        SELECT
-            ea.ID,
-            ec.CLASS_NAME,
-            et.TEACHER_NAME,
-            ea.EXAMINATION_ADDRESS,
-            ea.EXAMINATION_TIME,
-            sd.DICTIONARY_NAME
-        FROM EXAMINATION_ARRANGEMENT ea INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et.ID
-            INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec.ID
-            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd.ID
+        SELECT *
+        FROM (
+                 (SELECT
+                      rownum rn,
+                      uo.*
+                  FROM
+                      (SELECT
+                           ea.ID,
+                           ec.CLASS_NAME,
+                           et.TEACHER_NAME,
+                           ea.EXAMINATION_ADDRESS,
+                           ea.EXAMINATION_TIME,
+                           sd.DICTIONARY_NAME
+                       FROM EXAMINATION_ARRANGEMENT ea INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et.ID
+                           INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec.ID
+                           INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd.ID) uo
+                  WHERE rownum &lt;= #{rows} + 2)) ua
+        WHERE ua.rn &gt;= #{rows}
+    </select>
+
+    <select id="findDicTypeName" parameterType="String" resultType="String">
+        SELECT * FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
+          (SELECT ID FROM SYSTEM_DICTIONARY_TYPE sdt WHERE sdt.DICTIONARY_TYPE_NAME = #{dicTypeName})
+          ORDER BY SD.DICTIONARY_SORT_NUMBER
     </select>
 </mapper>
