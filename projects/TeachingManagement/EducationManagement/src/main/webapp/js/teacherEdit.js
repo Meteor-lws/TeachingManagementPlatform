@@ -2,36 +2,19 @@
  * Created by XuMing on 2017/4/1.
  */
 $(function () {
-
-    //班级下拉框数据
-    $('#classSel').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
+    var teachingType ;
+    var rowValue;
+    $('#teachingType').combobox({
+        url:'/education/teachingTypeList',
+        valueField:'id',
+        textField:'dictionaryName',
+        onSelect:function (sel) {
+            alert(sel.id);
+            var teachingType = sel.id;
         }
-
-        ]
     });
 
 
-    var rowValue;
     $('#teaDg').datagrid({
         onDblClickCell: function (index, field, value) {
             $('#teaDialog').window('open');
@@ -112,6 +95,11 @@ $(function () {
             {field: 'productid', title: '入职时间', width: 200}
         ]],
         toolbar: '#teaTb'
+    });
+
+    $("#selectTea").click(function()
+    {
+        $("#selectTeaByCondition").submit();
     });
 
 

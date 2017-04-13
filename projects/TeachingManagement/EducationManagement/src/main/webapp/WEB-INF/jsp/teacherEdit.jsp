@@ -33,14 +33,18 @@
            data-options="iconCls:'icon-remove',plain:true">刪除</a>
 
     </div>
-    教师编号 <input id="noSearch" type="text" class="easyui-numberbox"
-                value="100" data-options="min:0,precision:2" style="width: 120px"></input>
-    教师姓名 <input id="vv" class="easyui-validatebox" style="width: 120px"/>
-    职教类型  <select id="teachingType" class="easyui-combotree" style="width:170px;"></select>
 
-    <%--查询教师--%>
+    <div>
+        <form id="selectTeaByCondition" action="${pageContext.request.contextPath}/teacherSelect" method="post">
+    教师编号 <input id="teacherNo" name="id" type="text" class="easyui-numberbox"
+                value="100" data-options="min:0,precision:2" style="width: 120px"></input>
+    教师姓名 <input id="teacherName" name="teacherName" class="easyui-validatebox" style="width: 120px"/>
+    职教类型 <input id="teachingType" name="teacherType" />
+
+<%--查询教师--%>
     <a id="selectTea" href="javascript:void(0)" class="easyui-linkbutton"
        data-options="iconCls:'icon-search',plain:true">搜索</a>
+        </form>
 </div>
 <%--教师修改添加框--%>
 <div id="teaDialog" class="easyui-window" title="教师修改"

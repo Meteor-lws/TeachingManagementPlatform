@@ -18,7 +18,7 @@ public class DicationaryServerImpl implements DictionaryServer {
     private com.ruicai.education.mapper.education.SystemDictionaryMapper SystemDictionaryMapper;
 
     @Override
-    public List<SystemDictionary> selectDicByDesc(String desc){
-        return  SystemDictionaryMapper.selectDicByDesc(desc);
+    public List<SystemDictionary> selectDicByName(String name){
+        return  SystemDictionaryMapper.selectDicByName(name);
     }
 }
