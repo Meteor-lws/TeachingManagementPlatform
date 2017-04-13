@@ -13,7 +13,7 @@ import java.util.List;
 public interface DictionaryService {
     SystemDictionary getDictionaryById(String id);
 
-    Datagrid<SystemDictionary> getDictionariesByTypeId(String typeId);
+    Datagrid<SystemDictionary> getDictionaries(String type, String name, String value, String describe);
 
     void addDictionary(SystemDictionary dictionary);
 

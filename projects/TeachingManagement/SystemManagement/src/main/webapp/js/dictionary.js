@@ -28,13 +28,13 @@ function prepareDictionaryType() {
 function prepareSearchBox() {
     $('.search').searchbox({
         prompt: '请输入搜索内容',
-        handler: search
+        searcher: search
     });
 }
 
 function prepareDatagrid() {
     $('#dictionary-detail').datagrid({
-        url: 'getDictionariesByTypeId',
+        url: 'getDictionaries',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -204,7 +204,7 @@ function clearDictionaryDialog() {
 function select(node) {
     $('#dictionary-detail').datagrid({
         queryParams: {
-            typeId: node.id
+            type: node.id
         }
     });
 }
@@ -270,7 +270,20 @@ function deleteDictionary() {
 }
 
 function search() {
-    console.log(getSelection());
+    var dictionaryType = getSelectedType();
+    if (dictionaryType) {
+        var searchContent = getSearchContent();
+        $('#dictionary-detail').datagrid({
+            queryParams: {
+                type: dictionaryType.id,
+                name: searchContent.name,
+                value: searchContent.value,
+                describe: searchContent.describe
+            }
+        });
+    } else {
+        $.messager.alert('警告', '请选择要搜索的数据字典所属类型', 'warning');
+    }
 }
 
 function showTextBox(id, prompt) {
@@ -332,6 +345,14 @@ function setDictionaryContent(dictionary) {
     $('#dictionary-value').textbox('setValue', dictionary.dictionaryValue);
     $('#dictionary-describe').textbox('setValue', dictionary.dictionaryDescribe);
     $('#dictionary-sort').textbox('setValue', dictionary.dictionarySortNumber);
+}
+
+function getSearchContent() {
+    var searchContent = {};
+    searchContent.name = $('#dictionary-search-name').searchbox('getValue');
+    searchContent.value = $('#dictionary-search-value').searchbox('getValue');
+    searchContent.describe = $('#dictionary-search-describe').searchbox('getValue');
+    return searchContent;
 }
 
 function closeDialog(id) {
