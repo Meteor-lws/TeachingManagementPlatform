@@ -1,5 +1,7 @@
 package com.ruicai.system.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ruicai.system.mapper.system.SystemDictionaryMapper;
 import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.po.system.SystemDictionaryExample;
@@ -35,7 +37,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public Datagrid<SystemDictionary> getDictionaries(String type, String name, String value, String describe) {
+    public Datagrid<SystemDictionary> getDictionaries(String type, String name, String value, String describe, int page, int rows) {
         Datagrid<SystemDictionary> datagrid = new Datagrid<>();
         if (type != null) {
             example.clear();
@@ -51,8 +53,10 @@ public class DictionaryServiceImpl implements DictionaryService {
                 criteria.andDictionaryDescribeLike(fixString(describe));
             }
             example.setOrderByClause("DICTIONARY_SORT_NUMBER ASC");
+            PageHelper.startPage(page, rows);
             List<SystemDictionary> dictionaries = mapper.selectByExample(example);
-            datagrid.setTotal(dictionaries.size());
+            PageInfo<SystemDictionary> pageInfo = new PageInfo<>(dictionaries);
+            datagrid.setTotal(pageInfo.getTotal());
             datagrid.setRows(dictionaries);
         }
         return datagrid;

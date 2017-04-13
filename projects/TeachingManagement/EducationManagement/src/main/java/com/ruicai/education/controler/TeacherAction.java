@@ -1,6 +1,5 @@
 package com.ruicai.education.controler;
 
-import com.ruicai.education.mapper.education.SystemDictionaryMapper;
 import com.ruicai.education.po.education.EducationTeacher;
 import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.po.education.TeacherCondition;
@@ -9,11 +8,8 @@ import com.ruicai.education.server.TeacherServer;
 import com.ruicai.education.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import java.util.List;
 
@@ -30,22 +26,21 @@ public class TeacherAction {
     private TeacherServer teacherServer;//注入教师服务
 
     @RequestMapping("/teacher")
-    public String  index() {
+    public String index() {
         return "teacherEdit";
     }
 
     @RequestMapping("/teachingTypeList")
-    public @ResponseBody  List<SystemDictionary> teachingType()
-    {
+    public @ResponseBody
+    List<SystemDictionary> teachingType() {
         List<SystemDictionary> teachingTypeList = dictionaryServer.selectDicByName("teaching-type");
-        return  teachingTypeList;
+        return teachingTypeList;
     }
 
     @RequestMapping("/teacherSelect")
-    public  List<EducationTeacher> selectTeacherByCondition(TeacherCondition condtition , PageBean<EducationTeacher> pageBean)
-    {
-        teacherServer.selectTeaByCondition(condtition,pageBean);
-        return  null;
+    public List<EducationTeacher> selectTeacherByCondition(TeacherCondition condtition, PageBean<EducationTeacher> pageBean) {
+        teacherServer.selectTeaByCondition(condtition, pageBean);
+        return null;
     }
 
 

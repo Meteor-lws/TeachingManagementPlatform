@@ -40,7 +40,8 @@ function prepareDatagrid() {
         striped: true,
         rownumbers: true,
         pagination: true,
-        pageSize: 20,
+        pageSize: 25,
+        pageList: [10, 15, 20, 25, 30],
         pageNumber: 1,
         columns: [[
             {field: 'id', checkbox: true},

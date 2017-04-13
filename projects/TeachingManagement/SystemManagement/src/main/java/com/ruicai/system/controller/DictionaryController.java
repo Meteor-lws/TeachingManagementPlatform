@@ -80,8 +80,8 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/getDictionaries", method = RequestMethod.POST)
-    public String getDictionaries(String type, String name, String value, String describe) {
-        return JSON.toJSONString(dictionaryService.getDictionaries(type, name, value, describe));
+    public String getDictionaries(String type, String name, String value, String describe, int page, int rows) {
+        return JSON.toJSONString(dictionaryService.getDictionaries(type, name, value, describe, page, rows));
     }
 
     @ResponseBody
