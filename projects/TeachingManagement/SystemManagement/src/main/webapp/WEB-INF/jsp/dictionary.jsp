@@ -49,36 +49,52 @@
         </table>
     </div>
     <div id="dictionary-dialog">
-        <table align="center" style="line-height:40px">
-            <tr>
+        <table align="center">
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-name">字典名称:</label></td>
                 <td><input id="dictionary-name" type="text"></td>
             </tr>
             <tr>
+                <td></td>
+                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-value">字典值:</label></td>
                 <td><input id="dictionary-value" type="text"></td>
             </tr>
             <tr>
+                <td></td>
+                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-describe">字典描述:</label></td>
                 <td><input id="dictionary-describe" type="text"></td>
             </tr>
-            <tr>
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-sort">字典序号:</label></td>
                 <td><input id="dictionary-sort" type="text"></td>
             </tr>
         </table>
     </div>
     <div id="dictionary-type-dialog">
-        <table align="center" style="line-height:40px">
-            <tr>
+        <table align="center">
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-type-name">字典类型名称:</label></td>
                 <td><input id="dictionary-type-name" type="text"></td>
             </tr>
             <tr>
+                <td></td>
+                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-type-describe">字典类型描述:</label></td>
                 <td><input id="dictionary-type-describe" type="text"></td>
             </tr>
             <tr>
+                <td></td>
+                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-type-sort">字典类型序号:</label></td>
                 <td><input id="dictionary-type-sort" type="text"></td>
             </tr>

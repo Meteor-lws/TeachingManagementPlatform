@@ -81,19 +81,29 @@ function showTypeDialog(type) {
         buttonTitle = '添加';
         buttonIcon = 'icon-add';
         buttonHandler = function () {
-            var dictionaryType = {};
-            var type = getSelectedType();
-            if (type) {
-                dictionaryType.parentId = type.id;
-            }
             var content = getTypeContent();
-            dictionaryType.dictionaryTypeName = content.name;
-            dictionaryType.dictionaryTypeDescribe = content.describe;
-            dictionaryType.dictionaryTypeSortNumber = content.sort;
-            ajax('addDictionaryType', dictionaryType, function () {
-                $('#dictionary-type').tree('reload');
-            }, '添加字典类型失败');
-            closeDialog('dictionary-type-dialog');
+            ajax('isTypeNameExist', content.name, function (data) {
+                if (data === 'false') {
+                    if (content.value.trim().length > 0) {
+                        var dictionaryType = {};
+                        var type = getSelectedType();
+                        if (type) {
+                            dictionaryType.parentId = type.id;
+                        }
+                        dictionaryType.dictionaryTypeName = content.name;
+                        dictionaryType.dictionaryTypeDescribe = content.describe;
+                        dictionaryType.dictionaryTypeSortNumber = content.sort;
+                        ajax('addDictionaryType', dictionaryType, function () {
+                            $('#dictionary-type').tree('reload');
+                        }, '添加字典类型失败');
+                        closeDialog('dictionary-type-dialog');
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }, '查询类型名是否存在失败');
         };
     } else {
         title = '修改字典类型';
@@ -114,8 +124,8 @@ function showTypeDialog(type) {
     }
     $('#dictionary-type-dialog').dialog({
         title: title,
-        width: 385,
-        height: 210,
+        width: 390,
+        height: 250,
         resizable: false,
         modal: true,
         buttons: [{
@@ -177,7 +187,7 @@ function showDictionaryDialog(dictionary) {
     $('#dictionary-dialog').dialog({
         title: title,
         width: 360,
-        height: 252,
+        height: 292,
         resizable: false,
         modal: true,
         buttons: [{
@@ -230,9 +240,13 @@ function editDictionaryType() {
 function deleteDictionaryType() {
     var type = getSelectedType();
     if (type) {
-        ajax('deleteDictionaryType', {id: type.id}, function () {
-            $('#dictionary-type').tree('reload');
-        }, '删除字典类型失败');
+        $.messager.confirm('删除字典类型', '确认删除当前字典类型？', function (choice) {
+            if (choice) {
+                ajax('deleteDictionaryType', {id: type.id}, function () {
+                    $('#dictionary-type').tree('reload');
+                }, '删除字典类型失败');
+            }
+        });
     } else {
         $.messager.alert('警告', '请选择要删除的字典类型', 'warning');
     }
@@ -262,9 +276,13 @@ function editDictionary() {
 function deleteDictionary() {
     var dictionaries = getSelectedDictionaries();
     if (dictionaries) {
-        ajax('deleteDictionaries', {data: JSON.stringify(dictionaries)}, function () {
-            $('#dictionary-detail').datagrid('reload');
-        }, '删除数据字典失败');
+        $.messager.confirm('删除字典类型', '确认删除当前数据字典？', function (choice) {
+            if (choice) {
+                ajax('deleteDictionaries', {data: JSON.stringify(dictionaries)}, function () {
+                    $('#dictionary-detail').datagrid('reload');
+                }, '删除数据字典失败');
+            }
+        });
     } else {
         $.messager.alert('警告', '请选择要删除的数据字典', 'warning');
     }
@@ -300,11 +318,19 @@ function ajax(url, data, success, error) {
         type: 'post',
         url: url,
         data: data,
+        beforeSend: function () {
+            $('<div class="datagrid-mask"></div>').css({display: 'block', width: '100%', height: $(window).height()}).appendTo('body');
+            $('<div class="datagrid-mask-msg"></div>').html('正在处理，请稍候。。。').appendTo('body').css({display: 'block', left: ($(document.body).outerWidth - 190) / 2, top: ($(window).height() - 45) / 2});
+        },
         success: function (data) {
             success(data);
         },
         error: function () {
             $.messager.alert('错误', error, 'error');
+        },
+        complete: function () {
+            $('.datagrid-mask').remove();
+            $('.datagrid-mask-msg').remove();
         }
     });
 }
