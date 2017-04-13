@@ -7,6 +7,7 @@
           <element id="module-output" name="EducationManagement" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.10" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.6.RELEASE" />

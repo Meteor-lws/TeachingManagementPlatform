@@ -1,6 +1,54 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns="http://www.springframework.org/schema/beans" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.ruicai.education"/>
+
+
+    <!--Oracle数据源-->
+    <bean id="dataSource"  class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="jdbc:oracle:thin:@192.168.53.104:1521:orcl"/>
+        <property name="password" value="ruicai"/>
+        <property name="username" value="ruicai"/>
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+    </bean>
+
+    <!--Mybatis整合Spring-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/ruicai/education/mapper/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ruicai.education.mapper.education"/>
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--aop事物-->
+    <tx:advice id="interceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+
+        <aop:pointcut expression="execution(*  com.ruicai.education.server.*.*(..))" id="point"/>
+
+        <aop:advisor advice-ref="interceptor" pointcut-ref="point"/>
+
+    </aop:config>
 
 </beans>

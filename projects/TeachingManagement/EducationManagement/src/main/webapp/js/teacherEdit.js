@@ -3,6 +3,33 @@
  */
 $(function () {
 
+    //班级下拉框数据
+    $('#classSel').combotree('tree').tree({
+        data: [{
+            text: "JAVA",
+            state: "closed",
+            children: [{
+                text: "1611"
+            }, {
+                text: "1612"
+            }, {
+                text: "1701"
+            }]
+        }, {
+            text: "UI",
+            state: "closed",
+            children: [{
+                text: "1611"
+            }, {
+                text: "1612"
+            }, {
+                text: "1701"
+            }]
+        }
+
+        ]
+    });
+
 
     var rowValue;
     $('#teaDg').datagrid({

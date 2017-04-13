@@ -36,8 +36,7 @@
     教师编号 <input id="noSearch" type="text" class="easyui-numberbox"
                 value="100" data-options="min:0,precision:2" style="width: 120px"></input>
     教师姓名 <input id="vv" class="easyui-validatebox" style="width: 120px"/>
-    入职时间 <input id="dd" type="text" class="easyui-datebox" style="width: 120px"></input>--
-    <input id="dd" type="text" class="easyui-datebox" style="width: 120px"></input>
+    职教类型  <select id="teachingType" class="easyui-combotree" style="width:170px;"></select>
 
     <%--查询教师--%>
     <a id="selectTea" href="javascript:void(0)" class="easyui-linkbutton"

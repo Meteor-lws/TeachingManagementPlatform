@@ -117,22 +117,22 @@
 
         <!-- 配置数据库连接参数 -->
         <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        connectionURL="jdbc:oracle:thin:@192.168.53.104:1521:orcl"
                         userId="ruicai"
                         password="ruicai"/>
 
         <!-- 配置系统管理模块实体类的生成 -->
-        <javaModelGenerator targetPackage="com.ruicai.system.po.system" targetProject="SystemManagement/src/main/java">
+        <javaModelGenerator targetPackage="com.ruicai.education.po.education" targetProject="EducationManagement/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 配置系统管理模块mapper.xml文件的生成 -->
-        <sqlMapGenerator targetPackage="com.ruicai.system.mapper.system" targetProject="SystemManagement/src/main/resources"/>
+        <sqlMapGenerator targetPackage="com.ruicai.education.mapper.education" targetProject="EducationManagement/src/main/resources"/>
 
         <!-- 配置系统管理模块Mapper接口的生成 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.system.mapper.system" targetProject="SystemManagement/src/main/java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.education.mapper.education" targetProject="EducationManagement/src/main/java"/>
 
         <!-- 配置系统管理模块表的生成 -->
-        <table schema="ruicai" tableName="%DICTIONARY%"/>
+        <table schema="ruicai" tableName="%EDU%"/>
     </context>
 </generatorConfiguration>
