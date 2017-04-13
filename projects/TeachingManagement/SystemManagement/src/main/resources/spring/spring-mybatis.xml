@@ -27,8 +27,9 @@
                 <bean class="com.github.pagehelper.PageInterceptor">
                     <property name="properties">
                         <value>
-                            offsetAsPageNum=true
                             reasonable=true
+                            pageSizeZero=true
+                            offsetAsPageNum=true
                         </value>
                     </property>
                 </bean>
