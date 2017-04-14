@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+                <td><span id="dictionary-name-warning" style="font-size: 10px;color: red">&nbsp</span></td>
             </tr>
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-value">字典值:</label></td>
@@ -64,11 +64,15 @@
             </tr>
             <tr>
                 <td></td>
-                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+                <td><span id="dictionary-value-warning" style="font-size: 10px;color: red">&nbsp</span></td>
             </tr>
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-describe">字典描述:</label></td>
                 <td><input id="dictionary-describe" type="text"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span style="font-size: 10px;color: red">&nbsp</span></td>
             </tr>
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-sort">字典序号:</label></td>
@@ -84,7 +88,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+                <td><span id="dictionary-type-name-warning" style="font-size: 10px;color: red">&nbsp</span></td>
             </tr>
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-type-describe">字典类型描述:</label></td>
@@ -92,7 +96,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><span style="font-size: 10px;color: red">123&nbsp</span></td>
+                <td><span id="dictionary-type-describe-warning" style="font-size: 10px;color: red">&nbsp</span></td>
             </tr>
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-type-sort">字典类型序号:</label></td>
