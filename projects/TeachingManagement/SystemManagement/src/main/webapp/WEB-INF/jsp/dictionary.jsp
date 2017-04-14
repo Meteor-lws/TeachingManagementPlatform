@@ -22,7 +22,7 @@
     <script src="js/dictionary.js"></script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'west',split:true,border:false" style="width: 240px">
+<div data-options="region:'west',split:true" style="width: 240px">
     <ul id="dictionary-type"></ul>
 </div>
 <div data-options="region:'center',split:true">
@@ -45,6 +45,30 @@
                     <label for="dictionary-search-value" style="font-size: smaller">字典值：</label><input id="dictionary-search-value" class="search" style="width:250px;height:26px"/>
                     <label for="dictionary-search-describe" style="font-size: smaller">字典描述：</label><input id="dictionary-search-describe" class="search" style="width:250px;height:26px"/>
                 </td>
+            </tr>
+        </table>
+    </div>
+    <div id="dictionary-type-dialog">
+        <table align="center">
+            <tr style="line-height:40px">
+                <td align="right"><label for="dictionary-type-name">字典类型名称:</label></td>
+                <td><input id="dictionary-type-name" type="text"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="dictionary-type-name-warning" style="font-size: 10px;color: red">&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
+                <td align="right"><label for="dictionary-type-describe">字典类型描述:</label></td>
+                <td><input id="dictionary-type-describe" type="text"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="dictionary-type-describe-warning" style="font-size: 10px;color: red">&nbsp</span></td>
+            </tr>
+            <tr style="line-height:40px">
+                <td align="right"><label for="dictionary-type-sort">字典类型序号:</label></td>
+                <td><input id="dictionary-type-sort" type="text"></td>
             </tr>
         </table>
     </div>
@@ -77,30 +101,6 @@
             <tr style="line-height:40px">
                 <td align="right"><label for="dictionary-sort">字典序号:</label></td>
                 <td><input id="dictionary-sort" type="text"></td>
-            </tr>
-        </table>
-    </div>
-    <div id="dictionary-type-dialog">
-        <table align="center">
-            <tr style="line-height:40px">
-                <td align="right"><label for="dictionary-type-name">字典类型名称:</label></td>
-                <td><input id="dictionary-type-name" type="text"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span id="dictionary-type-name-warning" style="font-size: 10px;color: red">&nbsp</span></td>
-            </tr>
-            <tr style="line-height:40px">
-                <td align="right"><label for="dictionary-type-describe">字典类型描述:</label></td>
-                <td><input id="dictionary-type-describe" type="text"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span id="dictionary-type-describe-warning" style="font-size: 10px;color: red">&nbsp</span></td>
-            </tr>
-            <tr style="line-height:40px">
-                <td align="right"><label for="dictionary-type-sort">字典类型序号:</label></td>
-                <td><input id="dictionary-type-sort" type="text"></td>
             </tr>
         </table>
     </div>

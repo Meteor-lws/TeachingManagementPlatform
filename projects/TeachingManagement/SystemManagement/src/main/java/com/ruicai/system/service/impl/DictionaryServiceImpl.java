@@ -31,12 +31,31 @@ public class DictionaryServiceImpl implements DictionaryService {
         this.example = example;
     }
 
-    @Override
+    public boolean isDictionaryNameExist(String dictionaryName) {
+        example.clear();
+        example.createCriteria().andDictionaryNameEqualTo(dictionaryName);
+        List<SystemDictionary> dictionaries = mapper.selectByExample(example);
+        return dictionaries.size() > 0;
+    }
+
+    public void addDictionary(SystemDictionary dictionary) {
+        mapper.insertSelective(dictionary);
+    }
+
+    public void deleteDictionaries(List<SystemDictionary> dictionaries) {
+        for (SystemDictionary dictionary : dictionaries) {
+            mapper.deleteByPrimaryKey(dictionary.getId());
+        }
+    }
+
+    public void editDictionary(SystemDictionary dictionary) {
+        mapper.updateByPrimaryKeySelective(dictionary);
+    }
+
     public SystemDictionary getDictionaryById(String id) {
         return mapper.selectByPrimaryKey(id);
     }
 
-    @Override
     public Datagrid<SystemDictionary> getDictionaries(String type, String name, String value, String describe, int page, int rows) {
         Datagrid<SystemDictionary> datagrid = new Datagrid<>();
         if (type != null) {
@@ -60,31 +79,6 @@ public class DictionaryServiceImpl implements DictionaryService {
             datagrid.setRows(dictionaries);
         }
         return datagrid;
-    }
-
-    @Override
-    public void addDictionary(SystemDictionary dictionary) {
-        mapper.insertSelective(dictionary);
-    }
-
-    @Override
-    public void editDictionary(SystemDictionary dictionary) {
-        mapper.updateByPrimaryKeySelective(dictionary);
-    }
-
-    @Override
-    public void deleteDictionaries(List<SystemDictionary> dictionaries) {
-        for (SystemDictionary dictionary : dictionaries) {
-            mapper.deleteByPrimaryKey(dictionary.getId());
-        }
-    }
-
-    @Override
-    public boolean isDictionaryNameExist(String dictionaryName) {
-        example.clear();
-        example.createCriteria().andDictionaryNameEqualTo(dictionaryName);
-        List<SystemDictionary> dictionaries = mapper.selectByExample(example);
-        return dictionaries.size() > 0;
     }
 
     private String fixString(String string) {

@@ -29,12 +29,29 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
         this.example = example;
     }
 
-    @Override
+    public boolean isTypeNameExist(String typeName) {
+        example.clear();
+        example.createCriteria().andDictionaryTypeNameEqualTo(typeName);
+        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(example);
+        return dictionaryTypes.size() > 0;
+    }
+
+    public void addDictionaryType(SystemDictionaryType dictionaryType) {
+        mapper.insertSelective(dictionaryType);
+    }
+
+    public void deleteDictionaryType(String id) {
+        mapper.deleteByPrimaryKey(id);
+    }
+
+    public void editDictionaryType(SystemDictionaryType dictionaryType) {
+        mapper.updateByPrimaryKeySelective(dictionaryType);
+    }
+
     public SystemDictionaryType getDictionaryTypeById(String id) {
         return mapper.selectByPrimaryKey(id);
     }
 
-    @Override
     public List<Tree> getDictionaryTypes() {
         List<Tree> result = new ArrayList<>();
         example.clear();
@@ -44,29 +61,6 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
             result.add(buildTree(dictionaryType));
         }
         return result;
-    }
-
-    @Override
-    public void addDictionaryType(SystemDictionaryType dictionaryType) {
-        mapper.insertSelective(dictionaryType);
-    }
-
-    @Override
-    public void editDictionaryType(SystemDictionaryType dictionaryType) {
-        mapper.updateByPrimaryKeySelective(dictionaryType);
-    }
-
-    @Override
-    public void deleteDictionaryType(String id) {
-        mapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public boolean isTypeNameExist(String typeName) {
-        example.clear();
-        example.createCriteria().andDictionaryTypeNameEqualTo(typeName);
-        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(example);
-        return dictionaryTypes.size() > 0;
     }
 
     private Tree buildTree(SystemDictionaryType dictionaryType) {

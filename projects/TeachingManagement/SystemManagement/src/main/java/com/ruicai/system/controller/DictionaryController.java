@@ -2,9 +2,7 @@ package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.ruicai.system.po.system.SystemDictionary;
-import com.ruicai.system.po.system.SystemDictionaryType;
 import com.ruicai.system.service.DictionaryService;
-import com.ruicai.system.service.DictionaryTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +20,11 @@ import java.util.List;
 @Controller
 public class DictionaryController {
 
-    private final DictionaryTypeService typeService;
-
-    private final DictionaryService dictionaryService;
+    private final DictionaryService service;
 
     @Autowired
-    public DictionaryController(DictionaryTypeService typeService, DictionaryService dictionaryService) {
-        this.typeService = typeService;
-        this.dictionaryService = dictionaryService;
+    public DictionaryController(DictionaryService service) {
+        this.service = service;
     }
 
     @RequestMapping(value = "/dictionary", method = RequestMethod.GET)
@@ -38,83 +33,42 @@ public class DictionaryController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDictionaryTypes", method = RequestMethod.POST)
-    public String getDictionaryTypes() {
-        return JSON.toJSONString(typeService.getDictionaryTypes());
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getDictionaryTypeById", method = RequestMethod.POST)
-    public String getDictionaryTypeById(String id) {
-        return JSON.toJSONString(typeService.getDictionaryTypeById(id));
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/addDictionaryType", method = RequestMethod.POST)
-    public String addDictionaryType(SystemDictionaryType dictionaryType) {
-        typeService.addDictionaryType(dictionaryType);
-        return "添加字典类型成功";
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/editDictionaryType", method = RequestMethod.POST)
-    public String editDictionaryType(SystemDictionaryType dictionaryType) {
-        typeService.editDictionaryType(dictionaryType);
-        return "修改字典类型成功";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/deleteDictionaryType", method = RequestMethod.POST)
-    public String deleteDictionaryType(String id) {
-        typeService.deleteDictionaryType(id);
-        return "删除字典类型成功";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/isTypeNameExist", method = RequestMethod.POST)
-    public String isTypeNameExist(String typeName) {
-        return String.valueOf(typeService.isTypeNameExist(typeName));
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
-    public String getDictionaryById(String id) {
-        return JSON.toJSONString(dictionaryService.getDictionaryById(id));
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getDictionaries", method = RequestMethod.POST)
-    public String getDictionaries(String type, String name, String value, String describe, int page, int rows) {
-        return JSON.toJSONString(dictionaryService.getDictionaries(type, name, value, describe, page, rows));
+    @RequestMapping(value = "/isDictionaryNameExist", method = RequestMethod.POST)
+    public String isDictionaryNameExist(String dictionaryName) {
+        return String.valueOf(service.isDictionaryNameExist(dictionaryName));
     }
 
     @ResponseBody
     @RequestMapping(value = "/addDictionary", method = RequestMethod.POST)
     public String addDictionary(SystemDictionary dictionary) {
-        dictionaryService.addDictionary(dictionary);
+        service.addDictionary(dictionary);
         return "添加数据字典成功";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/editDictionary", method = RequestMethod.POST)
-    public String editDictionary(SystemDictionary dictionary) {
-        dictionaryService.editDictionary(dictionary);
-        return "修改数据字典成功";
     }
 
     @ResponseBody
     @RequestMapping(value = "/deleteDictionaries", method = RequestMethod.POST)
     public String deleteDictionaries(String data) {
         List<SystemDictionary> dictionaries = JSON.parseArray(data, SystemDictionary.class);
-        dictionaryService.deleteDictionaries(dictionaries);
+        service.deleteDictionaries(dictionaries);
         return "删除数据字典成功";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/isDictionaryNameExist", method = RequestMethod.POST)
-    public String isDictionaryNameExist(String dictionaryName) {
-        return String.valueOf(dictionaryService.isDictionaryNameExist(dictionaryName));
+    @RequestMapping(value = "/editDictionary", method = RequestMethod.POST)
+    public String editDictionary(SystemDictionary dictionary) {
+        service.editDictionary(dictionary);
+        return "修改数据字典成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
+    public String getDictionaryById(String id) {
+        return JSON.toJSONString(service.getDictionaryById(id));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getDictionaries", method = RequestMethod.POST)
+    public String getDictionaries(String type, String name, String value, String describe, int page, int rows) {
+        return JSON.toJSONString(service.getDictionaries(type, name, value, describe, page, rows));
     }
 }
