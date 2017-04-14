@@ -88,4 +88,41 @@ public class ExaminationManagementServiceImpl implements ExaminationManagementSe
         System.err.println("i = " + i);
     }
 
+    /**
+     * 更新考试安排
+     *
+     * @param examinationArrangement
+     */
+    @Override
+    public void updateExaminationArrangementMessage(ExaminationArrangement examinationArrangement) {
+        examinationArrangementMapper.updateByPrimaryKeySelective(examinationArrangement);
+    }
+
+    /**
+     * 批量删除考试信息
+     *
+     * @param ids
+     */
+    @Override
+    public void deleteExaminationArrangement(String ids) {
+        examinationArrangementMapper.deleteExaminationArrangement(ids);
+    }
+
+    /**
+     * 将类的变量名和实际在mybatis中需要的值对应出来
+     * @param name
+     * @return
+     */
+    public String fixVariateName(String name){
+        if ("className".equals(name)){
+            name = "ec.CLASS_NAME";
+        }else if ("testPhase".equals(name)){
+            name = "sd.DICTIONARY_NAME";
+        }else if ("invigilator".equals(name)){
+            name = "et.TEACHER_NAME";
+        }
+
+        return name;
+    }
+
 }

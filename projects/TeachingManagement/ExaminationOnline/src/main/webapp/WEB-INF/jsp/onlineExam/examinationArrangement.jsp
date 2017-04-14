@@ -50,15 +50,17 @@
 
 <form id="manager_add" class="easyui-dialog" data-options="closed : true,modal:true"
       style="margin:0;padding:5px 0 0 25px;color:#333;">
-    <p><label for="className">考试班级：</label><input id="className" name="className" editable="false" style="width:125px;">
+    <p><label for="selectId"></label><input id="selectId" name="id" type="hidden" editable="false" style="width:145px;">
+    </p>
+    <p><label for="className">考试班级：</label><input id="className" name="className" editable="false" style="width:145px;">
     </p>
     <p><label for="testPhase">考试阶段：</label><input id="testPhase" name="testPhase" class="textbox" editable="false"
-                                                  style="width:125px;"></p>
+                                                  style="width:145px;"></p>
     <p><label for="testTime">考试时间：</label><input id="testTime" name="testTime" class="easyui-datetimebox" editable="false"
-                                                 required="required" style="width:125px;"></p>
+                                                 required="required" style="width:145px;"></p>
     <p><label for="invigilator">监考老师：</label><input id="invigilator" name="invigilator"
-                                                    style="width:125px;"></p>
-    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" style="width:125px;">
+                                                    style="width:145px;"></p>
+    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" style="width:145px;">
     </p>
 </form>
 </body>

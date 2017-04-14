@@ -18,12 +18,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by 朱高 on 2017/4/10.
+ * 朱高 2017/04/15
  */
 @Controller
 public class ExaminationManagementController {
+    private final ExaminationManagementService examinationManagementService;
+
     @Autowired
-    private ExaminationManagementService examinationManagementService;
+    public ExaminationManagementController(ExaminationManagementService examinationManagementService) {
+        this.examinationManagementService = examinationManagementService;
+    }
 
     @RequestMapping(value = "/examination", method = RequestMethod.GET)
     public String toExaminationArrangement() {
@@ -42,7 +46,6 @@ public class ExaminationManagementController {
     @RequestMapping(value = "/findDicTypeName", method = RequestMethod.POST)
     @ResponseBody
     public String findTestPhase(@Param(value = "dicTypeName") String dicTypeName){
-        System.err.println("dicTypeName = " + dicTypeName);
         List<SystemDictionary> list = examinationManagementService.findDicTypeName(dicTypeName);
         return JSON.toJSONString(list);
     }
@@ -50,24 +53,36 @@ public class ExaminationManagementController {
     @ResponseBody
     public String findTeacherName() {
         List<EducationTeacher> list = examinationManagementService.findTeacherName();
-        String json = JSON.toJSONString(list);
-        return json;
+        return JSON.toJSONString(list);
     }
 
     @RequestMapping(value = "/className", method = RequestMethod.POST)
     @ResponseBody
     public String findClassName(){
         List<ClassTree> list = examinationManagementService.findClassName();
-        String json = JSON.toJSONString(list);
-        return json;
+        return JSON.toJSONString(list);
     }
 
-    @RequestMapping(value = "/addClassMessage", method = RequestMethod.POST)
+    @RequestMapping(value = "/addExaminationArrangementMessage", method = RequestMethod.POST)
     @ResponseBody
     public String addClassMessage(ExaminationArrangement examinationArrangement){
         examinationArrangement.setPaperId(UUID.randomUUID().toString().replace("-",""));
-        System.err.println(examinationArrangement);
         examinationManagementService.insert(examinationArrangement);
         return "考试安排添加成功";
+    }
+
+    @RequestMapping(value = "/updateExaminationArrangementMessage", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateExaminationArrangementMessage(ExaminationArrangement examinationArrangement){
+        System.err.println(examinationArrangement);
+        examinationManagementService.updateExaminationArrangementMessage(examinationArrangement);
+        return "考试安排更新成功";
+    }
+
+    @RequestMapping(value = "/removeExaminationArrangementMessage", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String removeExaminationArrangementMessage(@Param(value = "ids")String ids){
+        examinationManagementService.deleteExaminationArrangement(ids);
+        return "删除考试安排成功";
     }
 }

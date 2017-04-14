@@ -68,4 +68,16 @@ public interface ExaminationManagementService {
     List<ClassTree> findClassMessageByClassType(String classType);
 
     void insert(ExaminationArrangement examinationArrangement);
+
+    /**
+     * 更新考试安排
+     * @param examinationArrangement
+     */
+    void updateExaminationArrangementMessage(ExaminationArrangement examinationArrangement);
+
+    /**
+     * 批量删除考试信息
+     * @param ids
+     */
+    void deleteExaminationArrangement(String ids);
 }

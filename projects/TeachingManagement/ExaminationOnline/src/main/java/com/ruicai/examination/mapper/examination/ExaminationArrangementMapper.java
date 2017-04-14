@@ -51,4 +51,5 @@ public interface ExaminationArrangementMapper {
 
     List<ClassTree> findClassMessageByClassType(String classType);
 
+    void deleteExaminationArrangement(String ids);
 }

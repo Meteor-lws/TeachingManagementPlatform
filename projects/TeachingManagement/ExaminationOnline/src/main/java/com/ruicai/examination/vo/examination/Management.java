@@ -6,9 +6,12 @@ package com.ruicai.examination.vo.examination;
 public class Management {
     private String id;
     private String ids;
+    private String classId;
     private String className;
+    private String examinationStage;
     private String testPhase;
     private String testTime;
+    private String teacherId;
     private String invigilator;
     private String testPlace;
     private String paperId;
@@ -86,16 +89,45 @@ public class Management {
         this.testPlace = testPlace;
     }
 
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getExaminationStage() {
+        return examinationStage;
+    }
+
+    public void setExaminationStage(String examinationStage) {
+        this.examinationStage = examinationStage;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
     @Override
     public String toString() {
-        return "ClassMessage{" +
+        return "Management{" +
                 "id='" + id + '\'' +
                 ", ids='" + ids + '\'' +
+                ", classId='" + classId + '\'' +
                 ", className='" + className + '\'' +
+                ", examinationStage='" + examinationStage + '\'' +
                 ", testPhase='" + testPhase + '\'' +
                 ", testTime='" + testTime + '\'' +
+                ", teacherId='" + teacherId + '\'' +
                 ", invigilator='" + invigilator + '\'' +
                 ", testPlace='" + testPlace + '\'' +
+                ", paperId='" + paperId + '\'' +
+                ", stuName='" + stuName + '\'' +
                 '}';
     }
 }

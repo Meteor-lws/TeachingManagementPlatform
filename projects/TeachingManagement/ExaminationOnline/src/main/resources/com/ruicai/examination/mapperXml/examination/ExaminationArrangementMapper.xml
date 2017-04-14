@@ -33,10 +33,13 @@
     </resultMap>
     <resultMap id="ManagementResultList" type="com.ruicai.examination.vo.examination.Management">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="CLASS_ID" property="classId" jdbcType="VARCHAR"/>
         <result column="CLASS_NAME" property="className" jdbcType="VARCHAR"/>
+        <result column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR"/>
         <result column="TEACHER_NAME" property="invigilator" jdbcType="VARCHAR"/>
         <result column="EXAMINATION_ADDRESS" property="testPlace" jdbcType="VARCHAR"/>
         <result column="EXAMINATION_TIME" property="testTime" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_ID" property="examinationStage" jdbcType="VARCHAR"/>
         <result column="DICTIONARY_NAME" property="testPhase" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="DicResultList" type="com.ruicai.examination.po.system.SystemDictionary">
@@ -211,9 +214,6 @@
     <update id="updateByExampleSelective" parameterType="map">
         update RUICAI.EXAMINATION_ARRANGEMENT
         <set>
-            <if test="record.id != null">
-                ID = #{record.id,jdbcType=VARCHAR},
-            </if>
             <if test="record.classId != null">
                 CLASS_ID = #{record.classId,jdbcType=VARCHAR},
             </if>
@@ -303,16 +303,44 @@
     <select id="findManagementDatagrid" resultMap="ManagementResultList" parameterType="com.ruicai.examination.vo.examination.ManagementDatagrid">
         SELECT
             ea. ID,
+            ec.ID as CLASS_ID,
             ec.CLASS_NAME,
+            et.ID as TEACHER_ID,
             et.TEACHER_NAME,
             ea.EXAMINATION_ADDRESS,
             ea.EXAMINATION_TIME,
+            sd.ID as DICTIONARY_ID,
             sd.DICTIONARY_NAME
         FROM
             EXAMINATION_ARRANGEMENT ea
             INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et. ID
             INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec. ID
-            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID ORDER BY sd.DICTIONARY_SORT_NUMBER
+            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID ORDER BY ea.EXAMINATION_TIME DESC
+        <if test="sort != null">
+            ORDER BY
+            <if test="sort == 'className'">
+                ec.CLASS_NAME
+            </if>
+            <if test="sort == 'testPhase'">
+                sd.DICTIONARY_SORT_NUMBER
+            </if>
+            <if test="sort == 'invigilator'">
+                et.TEACHER_NAME
+            </if>
+            <if test="sort == 'testTime'">
+                ea.EXAMINATION_TIME
+            </if>
+            <if test="sort == 'testPlace'">
+                ea.EXAMINATION_ADDRESS
+            </if>
+
+            <if test="order == 'asc'">
+                ASC
+            </if>
+            <if test="order == 'desc'">
+                desc
+            </if>
+        </if>
     </select>
 
     <select id="findDicTypeName" parameterType="String" resultMap="DicResultList">
@@ -342,4 +370,14 @@
         FROM
             EDUCATION_CLASS ec WHERE ec.CLASS_TYPE = #{classType} ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
     </select>
+
+    <delete id="deleteExaminationArrangement" parameterType="String">
+        DELETE
+        FROM
+            EXAMINATION_ARRANGEMENT
+        WHERE
+            "ID" IN (
+                #{ids}
+            )
+    </delete>
 </mapper>
