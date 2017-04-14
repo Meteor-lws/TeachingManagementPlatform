@@ -71,6 +71,12 @@ public class DictionaryController {
         return "删除字典类型成功";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/isTypeNameExist", method = RequestMethod.POST)
+    public String isTypeNameExist(String typeName) {
+        return String.valueOf(typeService.isTypeNameExist(typeName));
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/getDictionaryById", method = RequestMethod.POST)
@@ -104,5 +110,11 @@ public class DictionaryController {
         List<SystemDictionary> dictionaries = JSON.parseArray(data, SystemDictionary.class);
         dictionaryService.deleteDictionaries(dictionaries);
         return "删除数据字典成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/isDictionaryNameExist", method = RequestMethod.POST)
+    public String isDictionaryNameExist(String dictionaryName) {
+        return String.valueOf(dictionaryService.isDictionaryNameExist(dictionaryName));
     }
 }

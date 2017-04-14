@@ -30,6 +30,11 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
     }
 
     @Override
+    public SystemDictionaryType getDictionaryTypeById(String id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Tree> getDictionaryTypes() {
         List<Tree> result = new ArrayList<>();
         example.clear();
@@ -57,8 +62,11 @@ public class DictionaryTypeServiceImpl implements DictionaryTypeService {
     }
 
     @Override
-    public SystemDictionaryType getDictionaryTypeById(String id) {
-        return mapper.selectByPrimaryKey(id);
+    public boolean isTypeNameExist(String typeName) {
+        example.clear();
+        example.createCriteria().andDictionaryTypeNameEqualTo(typeName);
+        List<SystemDictionaryType> dictionaryTypes = mapper.selectByExample(example);
+        return dictionaryTypes.size() > 0;
     }
 
     private Tree buildTree(SystemDictionaryType dictionaryType) {

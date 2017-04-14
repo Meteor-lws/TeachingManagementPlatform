@@ -20,4 +20,6 @@ public interface DictionaryService {
     void editDictionary(SystemDictionary dictionary);
 
     void deleteDictionaries(List<SystemDictionary> dictionaries);
+
+    boolean isDictionaryNameExist(String dictionaryName);
 }

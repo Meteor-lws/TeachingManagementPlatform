@@ -11,6 +11,8 @@ import java.util.List;
  * Created by lws on 2017/4/11.
  */
 public interface DictionaryTypeService {
+    SystemDictionaryType getDictionaryTypeById(String id);
+
     List<Tree> getDictionaryTypes();
 
     void addDictionaryType(SystemDictionaryType dictionaryType);
@@ -19,5 +21,5 @@ public interface DictionaryTypeService {
 
     void deleteDictionaryType(String id);
 
-    SystemDictionaryType getDictionaryTypeById(String id);
+    boolean isTypeNameExist(String typeName);
 }

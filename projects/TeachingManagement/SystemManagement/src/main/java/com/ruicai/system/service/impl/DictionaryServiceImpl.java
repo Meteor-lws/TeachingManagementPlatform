@@ -79,6 +79,14 @@ public class DictionaryServiceImpl implements DictionaryService {
         }
     }
 
+    @Override
+    public boolean isDictionaryNameExist(String dictionaryName) {
+        example.clear();
+        example.createCriteria().andDictionaryNameEqualTo(dictionaryName);
+        List<SystemDictionary> dictionaries = mapper.selectByExample(example);
+        return dictionaries.size() > 0;
+    }
+
     private String fixString(String string) {
         return "%" + string + "%";
     }

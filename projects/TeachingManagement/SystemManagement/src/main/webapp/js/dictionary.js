@@ -43,6 +43,7 @@ function prepareDatagrid() {
         fit: true,
         fitColumns: true,
         striped: true,
+        remoteSort: false,
         rownumbers: true,
         pagination: true,
         pageSize: 25,
@@ -53,7 +54,7 @@ function prepareDatagrid() {
             {field: 'dictionaryName', title: '键', width: 40},
             {field: 'dictionaryValue', title: '值', width: 40},
             {field: 'dictionaryDescribe', title: '描述', width: 60},
-            {field: 'dictionarySortNumber', title: '序号', width: 20}
+            {field: 'dictionarySortNumber', title: '序号', width: 20, sortable: true}
         ]],
         toolbar: '#dictionary-tool'
     });
@@ -406,7 +407,15 @@ function closeDialog(id) {
 }
 
 function testTypeName() {
-
+    ajax('isTypeNameExist', {typeName: $('#dictionary-type-name').textbox('getValue').trim()}, function (data) {
+        if (data === 'true') {
+            typeNamePassed = false;
+            $('#dictionary-type-name-warning').html('字典类型名称已存在');
+        } else {
+            typeNamePassed = true;
+            clearTypeNameWarning();
+        }
+    }, '验证字典类型名称是否重复时请求失败');
 }
 
 function clearTypeNameWarning() {
@@ -419,6 +428,7 @@ function testTypeDescribe() {
         $('#dictionary-type-describe-warning').html('字典类型描述不可为空');
     } else {
         typeDescribePassed = true;
+        clearTypeDescribeWarning();
     }
 }
 
@@ -427,7 +437,15 @@ function clearTypeDescribeWarning() {
 }
 
 function testDictionaryName() {
-    $('#dictionary-name-warning').html('FBI WARNING');
+    ajax('isDictionaryNameExist', {dictionaryName: $('#dictionary-name').textbox('getValue').trim()}, function (data) {
+        if (data === 'true') {
+            dictionaryNamePassed = false;
+            $('#dictionary-name-warning').html('字典名称已存在');
+        } else {
+            dictionaryNamePassed = true;
+            clearDictionaryNameWarning();
+        }
+    }, '验证字典名称是否重复时请求失败');
 }
 
 function clearDictionaryNameWarning() {
@@ -436,10 +454,11 @@ function clearDictionaryNameWarning() {
 
 function testDictionaryValue() {
     if ($('#dictionary-value').textbox('getValue').trim().length === 0) {
-        typeDescribePassed = false;
+        dictionaryValuePassed = false;
         $('#dictionary-value-warning').html('字典值不可为空');
     } else {
-        typeDescribePassed = true;
+        dictionaryValuePassed = true;
+        clearDictionaryValueWarning();
     }
 }
 
