@@ -1,11 +1,10 @@
 package com.ruicai.education.mapper.education;
 
 import com.ruicai.education.po.education.EducationTeacher;
+import com.ruicai.education.po.education.TeacherCondition;
 
 import java.util.List;
-
-import com.ruicai.education.po.education.TeacherCondition;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 public interface EducationTeacherMapper {
 
@@ -27,4 +26,6 @@ public interface EducationTeacherMapper {
     List<EducationTeacher> selectTeaByCondition(TeacherCondition condition);
 
     List<EducationTeacher> selectAll();
+
+    void grantRole(Map<String, String> s);
 }

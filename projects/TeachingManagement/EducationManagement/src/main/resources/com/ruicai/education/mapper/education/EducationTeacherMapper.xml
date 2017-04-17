@@ -217,4 +217,10 @@
       TEACHER_NAME
     FROM education_teacher
   </select>
+
+  <insert id="grantRole" parameterType="string">
+    insert
+  </insert>
+
+
 </mapper>

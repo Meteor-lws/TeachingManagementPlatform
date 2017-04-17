@@ -22,6 +22,9 @@ $(function () {
         }
     });
 
+    /**
+     * 获取所有教师的角色
+     */
     $.ajax({
         url: "/education/getTeacherRole",
         async: false,
@@ -33,7 +36,9 @@ $(function () {
 
     });
 
-
+    /**
+     * 职教类型
+     */
     $('#teachingType').combobox({
         url:'/education/teachingTypeList',
         valueField:'id',
@@ -71,26 +76,28 @@ $(function () {
 
     $('#teaDg').datagrid({
         onDblClickRow: function (index, row) {
+            //数据的回写
             $('#teaDialog').window('open');
             $("#teaId").val(row.id);
             $("#teacherNameForm").textbox("setValue", row.teacherName);
-            $("#teacherType").textbox("setValue", row.teacherType);
-            $("#teacherSpeciality").textbox("setValue", row.teacherSpeciality);
-            $("#teacherPhone").textbox("setValue", row.teacherPhone);
-            $("#teacherIntroduction").textbox("setValue", row.teacherIntroduction);
+            $("#teacherTypeForm").combobox("select", row.teacherType);
+            $("#teacherSpecialityForm").combobox("select", row.teacherSpeciality);
+            $("#teacherPhoneForm").textbox("setValue", row.teacherPhone);
+            $("#teacherIntroductionForm").textbox("setValue", row.teacherIntroduction);
             var roles = row.roles;
-            var conteent = "";
+            var content = "";
             for (var i = 0; i < roleList.length; i++) {
                 for (var l = 0; l < roles.length; l++) {
-                    if (roles[l].roleId == roleList[i].roleId) {
-                        content += "<input type='checkbox' name='teacherSex' checked='checked' value=" + roleList[i].roleId + " >" + roleList[i].roleName + "</input>";
+                    if (roleList[i].id == roles[l].roleId) {
+                        content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
                     }
                     else {
-                        content += "<input type='radio' name='teacherSex' value=" + roleList[i].roleId + ">" + roleList[i].roleName;
+                        content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
                     }
-                }
-            }
 
+                }
+
+            }
             $("#roleDiv").html(content);
         },
         onSelect: function (rowIndex, rowData) {
@@ -103,6 +110,14 @@ $(function () {
             title: "添加老师"
         });
         $("#teaDialog").dialog('open');
+        var content = "";
+        for (var i = 0; i < roleList.length; i++) {
+            content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+        }
+        $("#roleDiv").html(content);
+
+
+
     });
     //修改
     $("#editTea").click(function () {
@@ -121,7 +136,28 @@ $(function () {
                 title: "学生修改"
             });
             $("#teaDialog").dialog('open');
-            var selectRow = selects[0]
+            var selRow = $('#teaDg').datagrid('getSelected');//选中行
+            var roles = selRow.roles;
+            var content = "";
+            for (var i = 0; i < roleList.length; i++) {
+                for (var l = 0; l < roles.length; l++) {
+                    if (roleList[i].id == roles[l].roleId) {
+                        content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                    }
+                    else {
+                        content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                    }
+
+                }
+            }
+            //数据的回写
+            $("#roleDiv").html(content);
+            $("#teaId").val(selRow.id);
+            $("#teacherNameForm").textbox("setValue", selRow.teacherName);
+            $("#teacherTypeForm").combobox("select", selRow.teacherType);
+            $("#teacherSpecialityForm").combobox("select", selRow.teacherSpeciality);
+            $("#teacherPhoneForm").textbox("setValue", selRow.teacherPhone);
+            $("#teacherIntroductionForm").textbox("setValue", selRow.teacherIntroduction);
 
         }
     });

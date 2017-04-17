@@ -1,7 +1,6 @@
 package com.ruicai.education.server;
 
 import com.ruicai.education.po.education.EducationTeacher;
-import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.po.education.TeacherCondition;
 import com.ruicai.education.util.PageBean;
 
@@ -29,11 +28,30 @@ public interface TeacherServer {
      */
     public PageBean<EducationTeacher> selectTeaByCondition(TeacherCondition condition, PageBean<EducationTeacher> pageBean);
 
+    /**
+     * 添加或修改教师    有id则修改   无id则添加
+     *
+     * @param teacher 教师信息
+     */
     public void saveOrUpdate(EducationTeacher teacher);
 
+    /**
+     * 添加教师
+     * @param teacher 教师信息
+     */
     public void saveTea(EducationTeacher teacher);
 
+    /**
+     * 修改教师信息
+     * @param teacher 教师信息
+     */
     public void updateTea(EducationTeacher teacher);
 
-    List<EducationTeacher> selectAll();
+    /**
+     * 查询所有的教师
+     *
+     * @return 所有的教师列表
+     */
+    public List<EducationTeacher> selectAll();
+
 }

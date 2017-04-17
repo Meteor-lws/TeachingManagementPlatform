@@ -70,7 +70,7 @@
                                             style="width:170px;"></select>
                 </td>
                 <td class="tdLabel" align="right"><label>手机</label></td>
-                <td class="tdValue"><input class="easyui-textbox" id="teacherPhone" type="text" name="teacherPhone"
+                <td class="tdValue"><input class="easyui-textbox" id="teacherPhoneForm" type="text" name="teacherPhone"
                                            data-options="required:true">
                 </td>
             </tr>

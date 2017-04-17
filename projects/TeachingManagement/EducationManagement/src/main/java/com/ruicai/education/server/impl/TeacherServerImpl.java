@@ -1,9 +1,6 @@
 package com.ruicai.education.server.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.ruicai.education.mapper.education.EducationTeacherMapper;
-import com.ruicai.education.mapper.education.SystemDictionaryMapper;
 import com.ruicai.education.po.education.EducationTeacher;
 import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.po.education.SystemUser;
@@ -13,11 +10,12 @@ import com.ruicai.education.server.TeacherServer;
 import com.ruicai.education.server.UserServer;
 import com.ruicai.education.util.PageBean;
 import com.ruicai.education.util.ReadProperties;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -80,6 +78,14 @@ public class TeacherServerImpl implements TeacherServer {
         user.setUserType(teacherDic.getId());
         String userId = userServer.insertUser(user);
         teacher.setUserId(userId);
+        String[] role = teacher.getRole();
+        for (int i = 0; i < role.length; i++) {
+            Map<String, String> userToRole = new HashMap<>();
+            userToRole.put("userId", user.getId());
+            userToRole.put("roleId", role[i]);
+            educationTeacherMapper.grantRole(userToRole);
+        }
+
         educationTeacherMapper.insert(teacher);
     }
 
@@ -90,12 +96,10 @@ public class TeacherServerImpl implements TeacherServer {
 
     /**
      * 查询所有教师
-     *
      * @return 教师列表
      */
     @Override
     public List<EducationTeacher> selectAll() {
-
         return educationTeacherMapper.selectAll();
     }
 

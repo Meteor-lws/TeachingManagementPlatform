@@ -21,7 +21,17 @@ public class EducationTeacher {
 
     private String teacherPicture;
 
+    private String[] role;
+
     private List<UserToRoleKey> roles;
+
+    public String[] getRole() {
+        return role;
+    }
+
+    public void setRole(String[] role) {
+        this.role = role;
+    }
 
     public List<UserToRoleKey> getRoles() {
         return roles;
