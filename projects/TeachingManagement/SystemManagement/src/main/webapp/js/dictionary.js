@@ -69,10 +69,10 @@ function prepareTextBox() {
     showTextBox('dictionary-name', '数据字典名称');
     showTextBox('dictionary-value', '数据字典值');
     showTextBox('dictionary-describe', '数据字典描述');
-    showTextBox('dictionary-sort', '数据字典排序编号');
+    showNumberBox('dictionary-sort');
     showTextBox('dictionary-type-name', '字典类型名称');
     showTextBox('dictionary-type-describe', '字典类型描述');
-    showTextBox('dictionary-type-sort', '字典类型排序编号');
+    showNumberBox('dictionary-type-sort');
 }
 
 function prepareHandler() {
@@ -486,6 +486,16 @@ function showTextBox(id, prompt) {
         width: 250,
         height: 35,
         prompt: prompt
+    });
+}
+
+function showNumberBox(id) {
+    $('#' + id).numberbox({
+        width: 250,
+        height: 35,
+        value: 0,
+        min: 0,
+        max: 999
     });
 }
 
