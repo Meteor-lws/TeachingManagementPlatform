@@ -11,9 +11,6 @@
     <name>system-management</name>
     <url>http://maven.apache.org</url>
 
-    <dependencies>
-    </dependencies>
-
     <build>
         <finalName>system</finalName>
     </build>
