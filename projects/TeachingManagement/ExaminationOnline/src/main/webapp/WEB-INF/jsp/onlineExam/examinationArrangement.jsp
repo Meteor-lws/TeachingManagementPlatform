@@ -37,31 +37,26 @@
         <a class="easyui-linkbutton" iconCls="icon-redo" plain="true" id="redo">取消编辑</a>
     </div>
     <div style="padding:0 0 0 7px;color:#333;">
-        <label for="condition_Name">查询班级：</label><input id="condition_Name" type="text" class="textbox" name="user"
-                                                        style="width:130px">
-        <label for="condition_date_from">创建时间从：</label><input id="condition_date_from" type="text" name="date_from"
-                                                              class="easyui-datebox" editable="false"
-                                                              style="width:110px">
-        <label for="condition_date_to">到：</label><input type="text" id="condition_date_to" name="date_to"
-                                                        class="easyui-datebox" editable="false" style="width:110px">
+        <label for="condition_Name">查询班级：</label><input id="condition_Name" type="text" class="textbox" style="width:130px">
+        <label for="conditionPhase">查询考试阶段：</label><input id="conditionPhase" type="text"
+                                                                 editable="false" style="width:110px">
+        <label for="conditionTime">查询考试时间：</label><input type="text" id="conditionTime"
+                                                        class="easyui-datetimebox" editable="false" style="width:160px">
+        <label for="conditionInvigilator">查询监考老师：</label><input id="conditionInvigilator" style="width:130px;">
+        <label for="conditionPlace">查询考试地点：</label><input id="conditionPlace" type="text"
+                                                          editable="true" style="width:110px">
         <a class="easyui-linkbutton" iconCls="icon-search" onclick="manager_tool.search();">查询</a>
+        <a class="easyui-linkbutton" iconCls="icon-reload" onclick="manager_tool.clear();">重置查询条件</a>
     </div>
 </div>
 
-<form id="manager_add" class="easyui-dialog" data-options="closed : true,modal:true"
-      style="margin:0;padding:5px 0 0 25px;color:#333;">
-    <p><label for="selectId"></label><input id="selectId" name="id" type="hidden" editable="false" style="width:145px;">
-    </p>
-    <p><label for="className">考试班级：</label><input id="className" name="className" editable="false" style="width:145px;">
-    </p>
-    <p><label for="testPhase">考试阶段：</label><input id="testPhase" name="testPhase" class="textbox" editable="false"
-                                                  style="width:145px;"></p>
-    <p><label for="testTime">考试时间：</label><input id="testTime" name="testTime" class="easyui-datetimebox" editable="false"
-                                                 required="required" style="width:145px;"></p>
-    <p><label for="invigilator">监考老师：</label><input id="invigilator" name="invigilator"
-                                                    style="width:145px;"></p>
-    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" style="width:145px;">
-    </p>
-</form>
+<div id="manager_add" style="padding:0 0 0 7px;color:#333;">
+    <p><label for="selectId"></label><input id="selectId" name="id" type="hidden" editable="false" style="width:145px;"></p>
+    <p><label for="className">考试班级：</label><input id="className" name="className" editable="false" style="width:145px;"></p>
+    <p><label for="testPhase">考试阶段：</label><input id="testPhase" name="testPhase" class="textbox" editable="false" style="width:145px;"></p>
+    <p><label for="testTime">考试时间：</label><input id="testTime" name="testTime" class="easyui-datetimebox" editable="false" required="required" style="width:145px;"></p>
+    <p><label for="invigilator">监考老师：</label><input id="invigilator" name="invigilator" style="width:145px;"></p>
+    <p><label for="testPlace">考试地点：</label><input id="testPlace" name="testPlace" style="width:145px;"></p>
+</div>
 </body>
 </html>

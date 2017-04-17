@@ -146,11 +146,11 @@
     </delete>
     <insert id="insert" parameterType="com.ruicai.examination.po.examination.ExaminationArrangement">
         INSERT INTO RUICAI.EXAMINATION_ARRANGEMENT (ID, CLASS_ID, TEACHER_ID,
-                                                    PAPER_ID, EXAMINATION_STAGE, EXAMINATION_TIME,
-                                                    EXAMINATION_ADDRESS)
+        PAPER_ID, EXAMINATION_STAGE, EXAMINATION_TIME,
+        EXAMINATION_ADDRESS)
         VALUES (#{id,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR},
-                #{paperId,jdbcType=VARCHAR}, #{examinationStage,jdbcType=VARCHAR}, #{examinationTime,jdbcType=OTHER},
-                #{examinationAddress,jdbcType=VARCHAR})
+        #{paperId,jdbcType=VARCHAR}, #{examinationStage,jdbcType=VARCHAR}, #{examinationTime,jdbcType=OTHER},
+        #{examinationAddress,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.examination.po.examination.ExaminationArrangement">
         <selectKey keyProperty="id" keyColumn="ID" order="BEFORE" resultType="String">
@@ -278,45 +278,108 @@
     <update id="updateByPrimaryKey" parameterType="com.ruicai.examination.po.examination.ExaminationArrangement">
         UPDATE RUICAI.EXAMINATION_ARRANGEMENT
         SET CLASS_ID            = #{classId,jdbcType=VARCHAR},
-            TEACHER_ID          = #{teacherId,jdbcType=VARCHAR},
-            PAPER_ID            = #{paperId,jdbcType=VARCHAR},
-            EXAMINATION_STAGE   = #{examinationStage,jdbcType=VARCHAR},
-            EXAMINATION_TIME    = #{examinationTime,jdbcType=OTHER},
-            EXAMINATION_ADDRESS = #{examinationAddress,jdbcType=VARCHAR}
+        TEACHER_ID          = #{teacherId,jdbcType=VARCHAR},
+        PAPER_ID            = #{paperId,jdbcType=VARCHAR},
+        EXAMINATION_STAGE   = #{examinationStage,jdbcType=VARCHAR},
+        EXAMINATION_TIME    = #{examinationTime,jdbcType=OTHER},
+        EXAMINATION_ADDRESS = #{examinationAddress,jdbcType=VARCHAR}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
     <select id="findAllManagement" parameterType="com.ruicai.examination.vo.examination.ManagementDatagrid"
             resultMap="BaseResultMap">
         SELECT *
         FROM (
-                 (SELECT
-                      rownum rn,
-                      uo.*
-                  FROM
-                      (SELECT *
-                       FROM EXAMINATION_ARRANGEMENT ea
-                       ORDER BY ea.EXAMINATION_TIME) uo
-                  WHERE rownum &lt;= #{rows} + 2)) ua
+        (SELECT
+        rownum rn,
+        uo.*
+        FROM
+        (SELECT *
+        FROM EXAMINATION_ARRANGEMENT ea
+        ORDER BY ea.EXAMINATION_TIME) uo
+        WHERE rownum &lt;= #{rows} + 2)) ua
         WHERE ua.rn &gt;= #{rows}
     </select>
 
     <select id="findManagementDatagrid" resultMap="ManagementResultList" parameterType="com.ruicai.examination.vo.examination.ManagementDatagrid">
         SELECT
-            ea. ID,
-            ec.ID as CLASS_ID,
-            ec.CLASS_NAME,
-            et.ID as TEACHER_ID,
-            et.TEACHER_NAME,
-            ea.EXAMINATION_ADDRESS,
-            ea.EXAMINATION_TIME,
-            sd.ID as DICTIONARY_ID,
-            sd.DICTIONARY_NAME
+        ea. ID,
+        ec.ID as CLASS_ID,
+        ec.CLASS_NAME,
+        et.ID as TEACHER_ID,
+        et.TEACHER_NAME,
+        ea.EXAMINATION_ADDRESS,
+        ea.EXAMINATION_TIME,
+        sd.ID as DICTIONARY_ID,
+        sd.DICTIONARY_NAME
         FROM
-            EXAMINATION_ARRANGEMENT ea
-            INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et. ID
-            INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec. ID
-            INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID ORDER BY ea.EXAMINATION_TIME DESC
-        <if test="sort != null">
+        EXAMINATION_ARRANGEMENT ea
+        INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et. ID
+        INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec. ID
+        INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID ORDER BY ea.EXAMINATION_TIME DESC
+    </select>
+
+    <select id="findDicTypeName" parameterType="String" resultMap="DicResultList">
+        SELECT sd.ID,sd.DICTIONARY_NAME FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
+        (SELECT ID FROM SYSTEM_DICTIONARY_TYPE sdt WHERE sdt.DICTIONARY_TYPE_NAME = #{dicTypeName})
+        ORDER BY SD.DICTIONARY_SORT_NUMBER
+    </select>
+
+    <select id="findTeacherName" resultMap="TeacherResultMap">
+        SELECT et.ID, et.TEACHER_NAME FROM EDUCATION_TEACHER et
+    </select>
+
+    <select id="findManagementDatagridByOrder" resultMap="ManagementResultList" parameterType="com.ruicai.examination.vo.examination.Management">
+        SELECT
+        ea. ID,
+        ec.ID as CLASS_ID,
+        ec.CLASS_NAME,
+        et.ID as TEACHER_ID,
+        et.TEACHER_NAME,
+        ea.EXAMINATION_ADDRESS,
+        ea.EXAMINATION_TIME,
+        sd.ID as DICTIONARY_ID,
+        sd.DICTIONARY_NAME
+        FROM
+        EXAMINATION_ARRANGEMENT ea
+        INNER JOIN EDUCATION_TEACHER et ON ea.TEACHER_ID = et. ID
+        INNER JOIN EDUCATION_CLASS ec ON ea.CLASS_ID = ec. ID
+        INNER JOIN SYSTEM_DICTIONARY sd ON ea.EXAMINATION_STAGE = sd. ID
+
+        <where>
+            <if test="parentNode != '' and parentNode != null">
+                and ec.CLASS_TYPE = #{parentNode}
+            </if>
+            <if test="classId != '' and classId != null">
+                and ea.CLASS_ID = #{classId}
+            </if>
+            <if test="examinationStage != '' and examinationStage != null">
+                and ea.EXAMINATION_STAGE = #{examinationStage}
+            </if>
+            <if test="testTime != '' and testTime != null">
+                and ea.EXAMINATION_TIME &gt;to_date(#{testTime}, 'yyyy-mm-dd hh24:mi:ss')
+            </if>
+            <if test="teacherId != '' and teacherId != null" >
+                and ea.TEACHER_ID = #{teacherId}
+            </if>
+            <if test="testPlace != '' and testPlace != null">
+                and ea.EXAMINATION_ADDRESS = #{testPlace}
+            </if>
+        </where>
+        ORDER BY
+        <if test="parentNode != '' and parentNode != null">
+            ec.CLASS_NAME ASC,
+        </if>
+        ea.EXAMINATION_TIME DESC
+    </select>
+    <!--<select id="findClassName" resultMap="ClassResultMap">
+       SELECT
+           EC.id,
+           EC.CLASS_NAME
+       FROM
+           EDUCATION_CLASS ec
+           INNER JOIN SYSTEM_DICTIONARY sd ON ec.CLASS_TYPE = sd. ID
+           INNER JOIN SYSTEM_DICTIONARY_TYPE sdt ON sdt.DICTIONARY_TYPE_NAME = 'class-type' ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
+           <if test="sort != null">
             ORDER BY
             <if test="sort == 'className'">
                 ec.CLASS_NAME
@@ -341,43 +404,24 @@
                 desc
             </if>
         </if>
-    </select>
-
-    <select id="findDicTypeName" parameterType="String" resultMap="DicResultList">
-        SELECT sd.ID,sd.DICTIONARY_NAME FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
-          (SELECT ID FROM SYSTEM_DICTIONARY_TYPE sdt WHERE sdt.DICTIONARY_TYPE_NAME = #{dicTypeName})
-          ORDER BY SD.DICTIONARY_SORT_NUMBER
-    </select>
-
-    <select id="findTeacherName" resultMap="TeacherResultMap">
-        SELECT et.ID, et.TEACHER_NAME FROM EDUCATION_TEACHER et
-    </select>
-
-    <!--<select id="findClassName" resultMap="ClassResultMap">
-       SELECT
-           EC.id,
-           EC.CLASS_NAME
-       FROM
-           EDUCATION_CLASS ec
-           INNER JOIN SYSTEM_DICTIONARY sd ON ec.CLASS_TYPE = sd. ID
-           INNER JOIN SYSTEM_DICTIONARY_TYPE sdt ON sdt.DICTIONARY_TYPE_NAME = 'class-type' ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
     </select>-->
-    
+
     <select id="findClassMessageByClassType" parameterType="String" resultMap="ClassTreeResultList">
         SELECT
-            EC.id,
-            EC.CLASS_NAME
+        EC.id,
+        EC.CLASS_NAME
         FROM
-            EDUCATION_CLASS ec WHERE ec.CLASS_TYPE = #{classType} ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
+        EDUCATION_CLASS ec WHERE ec.CLASS_TYPE = #{classType} ORDER BY EC.CLASS_TYPE,EC.CLASS_NAME
     </select>
 
     <delete id="deleteExaminationArrangement" parameterType="String">
         DELETE
         FROM
-            EXAMINATION_ARRANGEMENT
+        EXAMINATION_ARRANGEMENT
         WHERE
-            "ID" IN (
-                #{ids}
-            )
+        "ID" IN
+        <foreach item="ids" collection="array" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
     </delete>
 </mapper>

@@ -51,5 +51,7 @@ public interface ExaminationArrangementMapper {
 
     List<ClassTree> findClassMessageByClassType(String classType);
 
-    void deleteExaminationArrangement(String ids);
+    void deleteExaminationArrangement(String[] ids);
+
+    List<Management> findManagementDatagridByOrder(Management management);
 }

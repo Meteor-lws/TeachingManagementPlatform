@@ -79,5 +79,7 @@ public interface ExaminationManagementService {
      * 批量删除考试信息
      * @param ids
      */
-    void deleteExaminationArrangement(String ids);
+    void deleteExaminationArrangement(String[] ids);
+
+    ManagementDatagrid findManagementDatagridByOrder(ManagementDatagrid management, int rows, int page);
 }

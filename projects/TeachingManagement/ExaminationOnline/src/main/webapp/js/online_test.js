@@ -8,6 +8,10 @@
 $(function () {
     var _table = $("#table");
     var _manager_add = $("#manager_add");
+    var _phase = $("#testPhase");
+    var _invigilator = $("#invigilator");
+    var _place = $("#testPlace");
+    var _className = $("#className");
     _table.datagrid({
         url: "datagrid",
         fit: true,
@@ -62,37 +66,7 @@ $(function () {
             }
         ]]
     });
-
-    /*$("#condition_Name").combotree({
-        url: "className",
-        lines: true,//是否显示虚线
-        onlyLeafCheck: true,//只能选取叶子结点
-        //不为叶子节点不让选上
-        onBeforeSelect: function (node) {
-            //node.target代表的是选取的结点
-            //node代表整个结点对象
-            if (!$(this).tree('isLeaf', node.target)) {
-                return false;
-            }
-        },
-        //
-        onClick: function (node) {
-            if (!$(this).tree('isLeaf', node.target)) {
-                $("#className").combo('showPanel');
-            }
-        },
-        onLoadSuccess: function (node, data) {
-            var _this = this;
-            if (data) {
-                $(data).each(function (index, value) {
-                    if (this.state === 'closed') {
-                        $(_this).tree('expandAll');
-                    }
-                });
-            }
-        }
-    });
-*/
+    showFormOption($("#conditionPhase"), $("#conditionInvigilator"), $("#conditionPlace"), $("#condition_Name"), false);
     manager_tool = {
         add: function () {
             dialogOption("新增管理", "addExaminationArrangementMessage", function (url, data) {
@@ -101,12 +75,13 @@ $(function () {
                         $.messager.show({
                             title: "提示",
                             msg: data
-                        }, "由于系统原因添加考试安排失败请重新添加", "正在添加考试安排请等待");
-                    });
+                        });
+                        clear();
+                    }, "由于系统原因添加考试安排失败请重新添加", "正在添加考试安排请等待");
                 }
             });
             _manager_add.dialog("open");
-           showFormOption();
+            showFormOption(_phase, _invigilator, _place, _className, true);
         },
         edit: function () {
             var length = _table.datagrid("getSelections").length;
@@ -114,8 +89,9 @@ $(function () {
                 $.messager.alert('警告操作！', '编辑记录只能选定一条数据！', 'warning');
             } else if (length === 1) {
                 var obj = _table.datagrid("getSelected");
+
                 dialogOption("修改管理", "updateExaminationArrangementMessage", function (url, data) {
-                    if ($("#manager_add").form("validate")) {
+                    if (_manager_add.form("validate")) {
                         ajaxMethod(url, data, function (data) {
                             $.messager.show({
                                 title: "提示",
@@ -124,14 +100,14 @@ $(function () {
                         });
                     }
                 }, obj.id);
-                showFormOption();
-                $("#className").combotree("setValue",{
+                showFormOption(_phase, _invigilator, _place, _className, true);
+                _className.combotree("setValue",{
                     id : obj.classId
                 });
-                $("#testPhase").combobox("select",obj.examinationStage);
+                _phase.combobox("select",obj.examinationStage);
                 $("#testTime").datetimebox("setValue",obj.testTime);
-                $("#invigilator").combobox("setValue",obj.teacherId);
-                $("#testPlace").textbox("setText",obj.testPlace);
+                _invigilator.combobox("setValue",obj.teacherId);
+                _place.textbox("setText",obj.testPlace);
                 _manager_add.dialog("open");
             } else {
                 $.messager.alert('警告操作！', '编辑记录至少选定一条数据！', 'warning');
@@ -143,33 +119,80 @@ $(function () {
             if (length === 0) {
                 $.messager.alert('警告操作！', '未选择删除行！', 'warning');
             } else {
-                var ids = null;
-                var selections = _table.datagrid("getSelections");
-                for (var i = 0; i < selections.length; i++) {
-                    if (i === selections.length - 1) {
-                        ids = ids + selections[i].id;
-                    } else {
-                        ids = ids + selections[i].id + ",";
+                $.messager.confirm("确认对话框", "确定要删除所选数据吗？", function (flag) {
+                    if(flag){
+                        var ids = "";
+                        var selections = _table.datagrid("getSelections");
+                        for (var i = 0; i < selections.length; i++) {
+                            if (i === selections.length - 1) {
+                                ids = ids + selections[i].id;
+                            } else {
+                                ids = ids + selections[i].id + ",";
+                            }
+                        }
+                        var data = {
+                            ids : ids
+                        };
+                        ajaxMethod("removeExaminationArrangementMessage", data, function () {
+                            $.messager.show({
+                                title: "提示",
+                                msg: "信息删除成功"
+                            });
+                        }, "删除数据失败，请稍后再试", "正在删除数据");
+                    }else {
+                        _table.datagrid("clearSelections");
                     }
-                }
-                var data = {
-                    ids : ids
-                };
-                alert("ids = " + ids);
-                ajaxMethod("removeExaminationArrangementMessage", data, function () {
-                    $.messager.show({
-                        title: "提示",
-                        msg: "信息删除成功"
-                    });
-                }, "删除数据失败，请稍后再试", "正在删除数据");
+                })
             }
         },
         search: function () {
-            //var condition = $("#condition_Name").val();
-            console.log($("#condition_Name").val());
-            console.log($("input[name='date_from']").val());
-            console.log($("input[name='date_to']").val());
-            //$.ajax()
+            var condition_Name = $("#condition_Name").combotree("getValue");
+            var conditionPhase = $("#conditionPhase").combobox("getValue");
+            var conditionTime = $("#conditionTime").datetimebox("getValue");
+            var conditionInvigilator = $("#conditionInvigilator").combobox("getValue");
+            var conditionPlace = $("#conditionPlace").textbox("getText");
+            var cn = $("#condition_Name");
+            if(condition_Name == "" && conditionPhase == "" && conditionTime == "" && conditionInvigilator == "" && conditionPlace == ""){
+                $.messager.alert('警告', "为选择查询条件，请重试", 'warning');
+            }else {
+                var target = cn.combotree("tree").tree("getSelected");
+                var page = _table.datagrid("options").pageNumber;
+                var rows = _table.datagrid("options").pageSize;
+                var data = {
+                    examinationStage : conditionPhase,
+                    testTime : conditionTime,
+                    teacherId : conditionInvigilator,
+                    testPlace : conditionPlace,
+                    page : page,
+                    rows : rows
+                };
+                if(target != null){
+                    if(cn.combotree("tree").tree("isLeaf", target.target)){
+                        data.classId = condition_Name;
+                    }else {
+                        data.parentNode = target.id;
+                    }
+                }
+                _table.datagrid("options").queryParams = data;
+                _table.datagrid("reload");
+            }
+        },
+        clear : function () {
+            $("#condition_Name").combotree("clear");
+            $("#conditionPhase").combobox("clear");
+            $("#conditionTime").datetimebox("setValue", "");
+            $("#conditionInvigilator").combobox("clear");
+            $("#conditionPlace").textbox("clear");
+            var data = {
+                examinationStage : "",
+                testTime : "",
+                teacherId : "",
+                testPlace : "",
+                page : _table.datagrid("options").pageNumber,
+                rows : _table.datagrid("options").pageSize
+            };
+            _table.datagrid("options").queryParams = data;
+            _table.datagrid("load", "datagrid");
         }
     };
 });
@@ -194,14 +217,17 @@ function dialogOption(title, url, save, selectId) {
                         examinationAddress: $("#testPlace").textbox("getText")
                     };
                     save(url, data);
+                    _manager_add.dialog("close");
+                    alert("取消");
                 }
             },
             {
                 text: "取消",
                 iconCls: "icon-redo",
                 handler: function () {
-                    _manager_add.dialog("close").form("reset");
+                    clear();
                     $("#table").datagrid("clearSelections");
+                    _manager_add.dialog("close");
                 }
             }
         ],
@@ -210,9 +236,9 @@ function dialogOption(title, url, save, selectId) {
         }
     });
 }
-function showFormOption() {
-    $("#testPhase").combobox({
-        required: true,
+function showFormOption(_phase, _invigilator, _place, _className, flag) {
+    _phase.combobox({
+        required: flag,
         valueField: 'id',//传递的值
         textField: 'dictionaryName',//显示的值
         url: "findDicTypeName",
@@ -224,8 +250,8 @@ function showFormOption() {
             return row[opts.textField].indexOf(q) >= 0;
         }
     });
-    $("#invigilator").combobox({
-        required: true,
+    _invigilator.combobox({
+        required: flag,
         valueField: 'id',//传递的值
         textField: 'teacherName',//显示的值
         url: "findTeacherName",
@@ -235,10 +261,10 @@ function showFormOption() {
             return row[opts.textField].indexOf(q) > -1;
         }
     });
-    $("#testPlace").textbox({
-        required: true
+    _place.textbox({
+        required: flag
     });
-    testComboTree($("#className"), "className");
+    testComboTree(_className, "className", flag);
 }
 function ajaxMethod(url, data, success, error, text) {
     $.ajax({
@@ -252,36 +278,39 @@ function ajaxMethod(url, data, success, error, text) {
          },
         success: function(data){
             success(data);
+            var _table = $("#table");
+            _table.datagrid("clearSelections");
+            _table.datagrid("reload");
         },
         error: function () {
             $.messager.alert('错误', error, 'error');
         },
         complete: function () {
             $.messager.progress("close");
-            $("#manager_add").dialog("close").form("reset");
-            var _table = $("#table");
-            _table.datagrid("clearSelections");
-            _table.datagrid("reload");
+            $("#manager_add1").dialog("close").form("reset");
+            $("#testPlace").textbox("reset");
         }
     })
 }
-function testComboTree(idObject, url) {
+function testComboTree(idObject, url, flag) {
     idObject.combotree({
         url: url,
-        required: true,//是否必填
+        required: flag,//是否必填
         lines: true,//是否显示虚线
-        onlyLeafCheck: true,//只能选取叶子结点
+        onlyLeafCheck: flag,//只能选取叶子结点
         //不为叶子节点不让选上
         onBeforeSelect: function (node) {
             //node.target代表的是选取的结点
             //node代表整个结点对象
             if (!$(this).tree('isLeaf', node.target)) {
-                return false;
+                return !flag;
             }
         },
         onClick: function (node) {
-            if (!$(this).tree('isLeaf', node.target)) {
-                $("#className").combo('showPanel');
+            if(flag){
+                if (!$(this).tree('isLeaf', node.target)) {
+                    idObject.combo('showPanel');
+                }
             }
         },
         onLoadSuccess: function (node, data) {
@@ -295,4 +324,11 @@ function testComboTree(idObject, url) {
             }
         }
     });
+}
+function clear() {
+        $("#className").combotree("clear");
+        $("#testPhase").combobox("clear");
+        $("#testTime").datetimebox("setValue", "");
+        $("#invigilator").combobox("clear");
+        $("#testPlace").textbox("clear");
 }

@@ -84,8 +84,7 @@ public class ExaminationManagementServiceImpl implements ExaminationManagementSe
 
     @Override
     public void insert(ExaminationArrangement examinationArrangement) {
-        int i = examinationArrangementMapper.insertSelective(examinationArrangement);
-        System.err.println("i = " + i);
+        examinationArrangementMapper.insertSelective(examinationArrangement);
     }
 
     /**
@@ -104,8 +103,18 @@ public class ExaminationManagementServiceImpl implements ExaminationManagementSe
      * @param ids
      */
     @Override
-    public void deleteExaminationArrangement(String ids) {
+    public void deleteExaminationArrangement(String[] ids) {
         examinationArrangementMapper.deleteExaminationArrangement(ids);
+    }
+
+    @Override
+    public ManagementDatagrid findManagementDatagridByOrder(ManagementDatagrid management, int rows, int page) {
+        PageHelper.startPage(page, rows);
+        List<Management> arrangement = examinationArrangementMapper.findManagementDatagridByOrder(management.getManagement());
+        PageInfo<Management> pageInfo = new PageInfo<>(arrangement);
+        management.setTotal(pageInfo.getTotal());
+        management.setList(arrangement);
+        return management;
     }
 
     /**

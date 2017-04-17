@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ManagementDatagrid {
     List<Management> list;
+    private Management management;
     private long total;
     private int page;
     private int rows;
@@ -61,14 +62,25 @@ public class ManagementDatagrid {
         this.order = order;
     }
 
+    public Management getManagement() {
+        return management;
+    }
+
     @Override
     public String toString() {
         return "ManagementDatagrid{" +
                 "list=" + list +
+                ", management=" + management +
+                ", total=" + total +
                 ", page=" + page +
                 ", rows=" + rows +
                 ", sort='" + sort + '\'' +
                 ", order='" + order + '\'' +
                 '}';
     }
+
+    public void setManagement(Management management) {
+        this.management = management;
+    }
+
 }

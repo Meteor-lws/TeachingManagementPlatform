@@ -5,7 +5,7 @@ package com.ruicai.examination.vo.examination;
  */
 public class Management {
     private String id;
-    private String ids;
+    private String[] ids;
     private String classId;
     private String className;
     private String examinationStage;
@@ -15,8 +15,19 @@ public class Management {
     private String invigilator;
     private String testPlace;
     private String paperId;
-    private String stuName;
+    private String parentNode;
 
+    public Management(String classId, String examinationStage, String testTime, String teacherId, String testPlace, String parentNode) {
+        this.classId = classId;
+        this.examinationStage = examinationStage;
+        this.testTime = testTime;
+        this.teacherId = teacherId;
+        this.testPlace = testPlace;
+        this.parentNode = parentNode;
+    }
+
+    public Management() {
+    }
     public String getPaperId() {
         return paperId;
     }
@@ -25,19 +36,19 @@ public class Management {
         this.paperId = paperId;
     }
 
-    public String getStuName() {
-        return stuName;
+    public String getParentNode() {
+        return parentNode;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
+    public void setParentNode(String parentNode) {
+        this.parentNode = parentNode;
     }
 
-    public String getIds() {
+    public String[] getIds() {
         return ids;
     }
 
-    public void setIds(String ids) {
+    public void setIds(String[] ids) {
         this.ids = ids;
     }
 
@@ -127,7 +138,7 @@ public class Management {
                 ", invigilator='" + invigilator + '\'' +
                 ", testPlace='" + testPlace + '\'' +
                 ", paperId='" + paperId + '\'' +
-                ", stuName='" + stuName + '\'' +
+                ", parentNode='" + parentNode + '\'' +
                 '}';
     }
 }

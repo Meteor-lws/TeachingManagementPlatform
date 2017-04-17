@@ -6,6 +6,7 @@ import com.ruicai.examination.po.examination.ExaminationArrangement;
 import com.ruicai.examination.po.system.SystemDictionary;
 import com.ruicai.examination.service.ExaminationManagementService;
 import com.ruicai.examination.vo.examination.ClassTree;
+import com.ruicai.examination.vo.examination.Management;
 import com.ruicai.examination.vo.examination.ManagementDatagrid;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,22 @@ public class ExaminationManagementController {
 
     @RequestMapping(value = "/datagrid", method = RequestMethod.POST)
     @ResponseBody
-    public String findManagementDatagrid(ManagementDatagrid managementDatagrid) {
-        managementDatagrid = examinationManagementService.findManagementDatagrid(managementDatagrid);
-        String json = JSON.toJSONString(managementDatagrid.getList());
-        json = "{\"total\":"+managementDatagrid.getTotal()+",\"rows\":" + json + "}";
+    public String findManagementDatagrid(ManagementDatagrid managementDatagrid,
+                                         String classId, String examinationStage, String testTime,
+                                         String teacherId, String testPlace, String parentNode, int rows, int page) {
+        String json = null;
+        System.err.println(classId == null && examinationStage == null && testTime == null && teacherId == null && testPlace == null && parentNode == null);
+        if(classId == null && examinationStage == null && testTime == null && teacherId == null && testPlace == null && parentNode == null){
+            managementDatagrid = examinationManagementService.findManagementDatagrid(managementDatagrid);
+            json = JSON.toJSONString(managementDatagrid.getList());
+            json = "{\"total\":"+managementDatagrid.getTotal()+",\"rows\":" + json + "}";
+        }else {
+            Management management = new Management(classId, examinationStage, testTime, teacherId, testPlace, parentNode);
+            managementDatagrid.setManagement(management);
+            examinationManagementService.findManagementDatagridByOrder(managementDatagrid, rows, page);
+            json = JSON.toJSONString(managementDatagrid.getList());
+            json = "{\"total\":"+managementDatagrid.getTotal()+",\"rows\":" + json + "}";
+        }
         return json;
     }
 
@@ -79,10 +92,24 @@ public class ExaminationManagementController {
         return "考试安排更新成功";
     }
 
-    @RequestMapping(value = "/removeExaminationArrangementMessage", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/removeExaminationArrangementMessage", method = RequestMethod.POST)
     @ResponseBody
     public String removeExaminationArrangementMessage(@Param(value = "ids")String ids){
-        examinationManagementService.deleteExaminationArrangement(ids);
+        System.err.println("ids = " + ids.split(","));
+        examinationManagementService.deleteExaminationArrangement(ids.split(","));
         return "删除考试安排成功";
+    }
+
+    @RequestMapping(value = "/searchManagement", method = RequestMethod.POST)
+    @ResponseBody
+    public String searchManagement(String classId, String examinationStage, String testTime,
+                                   String teacherId, String testPlace, String parentNode, int rows, int page){
+        ManagementDatagrid managementDatagrid = new ManagementDatagrid();
+        Management management = new Management(classId, examinationStage, testTime, teacherId, testPlace, parentNode);
+        managementDatagrid.setRows(rows);
+        managementDatagrid.setPage(page);
+        managementDatagrid.setManagement(management);
+        System.err.println(managementDatagrid);
+        return "查询成功";
     }
 }
