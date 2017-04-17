@@ -19,7 +19,6 @@
       <module name="EducationManagement" target="1.8" />
       <module name="EvaluationOnline" target="1.8" />
       <module name="ExaminationOnline" target="1.8" />
-      <module name="mybatis-generator" target="1.8" />
       <module name="MybatisGenerator" target="1.8" />
       <module name="SystemManagement" target="1.8" />
       <module name="TeachingManagement" target="1.8" />
