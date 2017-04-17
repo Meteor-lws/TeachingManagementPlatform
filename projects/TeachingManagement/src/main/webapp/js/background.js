@@ -35,13 +35,13 @@ $(function () {
                     url = '/system/dictionary';
                     break;
                 case '评价项管理':
-                    url = '/evaluation/item';
+                    url = '/evaluation/ItemManagement';
                     break;
                 case '留言审核':
-                    url = '/evaluation/message';
+                    url = '/evaluation/MessageReview';
                     break;
                 case '评价分析':
-                    url = '/evaluation/analysis';
+                    url = '/evaluation/EvaluationAnalysis';
                     break;
                 case '考试安排':
                     url = '/examination/examination';

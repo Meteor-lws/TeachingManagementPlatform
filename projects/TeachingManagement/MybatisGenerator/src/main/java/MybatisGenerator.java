@@ -30,15 +30,15 @@ public class MybatisGenerator {
             MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
         } catch (IOException e) {
-            logger.error("配置文件加载失败");
+            logger.error("配置文件加载失败:" + e);
         } catch (XMLParserException e) {
-            logger.error("配置文件解析失败");
+            logger.error("配置文件解析失败:" + e);
         } catch (InterruptedException e) {
-            logger.error("数据库逆向异常中断");
+            logger.error("数据库逆向异常中断:" + e);
         } catch (InvalidConfigurationException e) {
-            logger.error("配置文件存在非法配置");
+            logger.error("配置文件存在非法配置:" + e);
         } catch (SQLException e) {
-            logger.error("SQL语句执行失败");
+            logger.error("SQL语句执行失败:" + e);
         }
     }
 }
