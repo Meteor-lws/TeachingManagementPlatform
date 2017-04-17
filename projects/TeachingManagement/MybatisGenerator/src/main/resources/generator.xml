@@ -133,6 +133,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.education.mapper.education" targetProject="EducationManagement/src/main/java"/>
 
         <!-- 配置系统管理模块表的生成 -->
-        <table schema="ruicai" tableName="%dictionary%"/>
+        <table schema="ruicai" tableName="user_to_role"/>
     </context>
 </generatorConfiguration>

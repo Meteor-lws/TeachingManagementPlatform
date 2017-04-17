@@ -31,4 +31,6 @@ public interface SystemDictionaryMapper {
     List<SystemDictionary> selectDicByName(String desc);
 
     List<SystemDictionary> selectDictionary();
+
+    SystemDictionary selectDicByValue(String val);
 }

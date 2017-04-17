@@ -12,8 +12,28 @@ import java.util.List;
  */
 public interface TeacherServer {
 
+    /**
+     * 查询符合条件的教师的数量
+     *
+     * @param condition 教师查询条件
+     * @return
+     */
     public int selectTeaByConditionCount(TeacherCondition condition);
 
-    public PageBean<EducationTeacher> selectTeaByCondition(TeacherCondition condition,PageBean<EducationTeacher> pageBean);
+    /**
+     * 查询符合条件的教师
+     *
+     * @param condition 条件
+     * @param pageBean  分页bean
+     * @return 分页util
+     */
+    public PageBean<EducationTeacher> selectTeaByCondition(TeacherCondition condition, PageBean<EducationTeacher> pageBean);
 
+    public void saveOrUpdate(EducationTeacher teacher);
+
+    public void saveTea(EducationTeacher teacher);
+
+    public void updateTea(EducationTeacher teacher);
+
+    List<EducationTeacher> selectAll();
 }

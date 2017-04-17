@@ -5,6 +5,35 @@
 $(function () {
     var teachingType ;
     var rowValue;
+    var roleList;//教师角色列表
+
+    $.ajax({
+        url: '/education/getSexRadion',
+        type: 'post',
+        success: function (data) {
+            var list = $.parseJSON(data);
+            var sexDiv = $("#sex");
+            var content = "";
+            for (var i = 0; i < list.length; i++) {
+                content += "<input type='radio' name='teacherSex' value=" + list[i].id + ">" + list[i].dictionaryName;
+            }
+            sexDiv.html(content);
+
+        }
+    });
+
+    $.ajax({
+        url: "/education/getTeacherRole",
+        async: false,
+        success: function (data) {
+            var content = "";
+            roleList = $.parseJSON(data);
+        }
+
+
+    });
+
+
     $('#teachingType').combobox({
         url:'/education/teachingTypeList',
         valueField:'id',
@@ -14,12 +43,55 @@ $(function () {
         }
     });
 
+    $('#teacherTypeForm').combobox({
+        url: '/education/teachingTypeList',
+        valueField: 'id',
+        textField: 'dictionaryName',
+        onSelect: function (sel) {
+            teachingType = sel.id;
+        }
+    });
+
+    $('#teacherTypeForm').combobox({
+        url: '/education/teachingTypeList',
+        valueField: 'id',
+        textField: 'dictionaryName',
+        onSelect: function (sel) {
+            teachingType = sel.id;
+        }
+    });
+
+
+    $('#teacherSpecialityForm').combobox({
+        url: '/education/getTeacherSpeciality',
+        valueField: 'id',
+        textField: 'dictionaryName'
+    });
+
 
     $('#teaDg').datagrid({
-        onDblClickCell: function (index, field, value) {
+        onDblClickRow: function (index, row) {
             $('#teaDialog').window('open');
-            $("#name").val(rowValue.itemid);
+            $("#teaId").val(row.id);
+            $("#teacherNameForm").textbox("setValue", row.teacherName);
+            $("#teacherType").textbox("setValue", row.teacherType);
+            $("#teacherSpeciality").textbox("setValue", row.teacherSpeciality);
+            $("#teacherPhone").textbox("setValue", row.teacherPhone);
+            $("#teacherIntroduction").textbox("setValue", row.teacherIntroduction);
+            var roles = row.roles;
+            var conteent = "";
+            for (var i = 0; i < roleList.length; i++) {
+                for (var l = 0; l < roles.length; l++) {
+                    if (roles[l].roleId == roleList[i].roleId) {
+                        content += "<input type='checkbox' name='teacherSex' checked='checked' value=" + roleList[i].roleId + " >" + roleList[i].roleName + "</input>";
+                    }
+                    else {
+                        content += "<input type='radio' name='teacherSex' value=" + roleList[i].roleId + ">" + roleList[i].roleName;
+                    }
+                }
+            }
 
+            $("#roleDiv").html(content);
         },
         onSelect: function (rowIndex, rowData) {
             rowValue = rowData;
@@ -32,6 +104,7 @@ $(function () {
         });
         $("#teaDialog").dialog('open');
     });
+    //修改
     $("#editTea").click(function () {
 
         var selects = $("#teaDg").datagrid("getSelections");
@@ -52,7 +125,7 @@ $(function () {
 
         }
     });
-
+//删除
     $("#removeTea").click(function () {
         var selects = $("#teaDg").datagrid("getSelections");
         if (selects.length == 0) {
@@ -87,9 +160,9 @@ $(function () {
         columns: [[
             {field: 'id', itemid: 'ID', checkbox: true, width: 1000},
             {field: 'teacherName', title: '姓名', width: 10, width: 100},
-            {field: 'teacherSexView', title: '性别', width: 100},
-            {field: 'teacherTypeView', title: '类型', width: 100},
-            {field: 'teacherSpecialityView', title: '专业', width: 100},
+            {field: 'teacherSex', title: '性别', width: 100},
+            {field: 'teacherType', title: '类型', width: 100},
+            {field: 'teacherSpeciality', title: '专业', width: 100},
             {field: 'teacherPhone', title: '手机', width: 100},
             {field: 'productid', title: '入职时间', width: 200}
         ]],
@@ -110,15 +183,11 @@ $(function () {
 
 
 });
-function clearForm() {
-    $("input").each(function () {
-        $(this).val("");
-    });
-}
+
 function submitForm() {
     $.messager.progress(); // 显示进度条
-    $('#ff').form('submit', {
-        url: "/asada",
+    $('#teaForm').form('submit', {
+        url: "/education/saveOrUpdate",
         onSubmit: function () {
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -128,6 +197,9 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
+            $("#teaForm").form("clear");//清除表单内容
+            $("#pic").attr("src", "");
+            $("#teaDg").datagrid("reload");
             $("#teaDialog").dialog("close")
         }
     });
@@ -135,4 +207,25 @@ function submitForm() {
 }
 function cancel() {
     $("#teaDialog").dialog("close");
+    $("#teaForm").form("clear");
+}
+
+function showPic() {
+    var uploadPath = "http://localhost:8081/Upload/";//文件服务器路径
+    var formData = new FormData($("#teaForm")[0]);
+    $.ajax({
+        url: '/education/getUpLoadPath',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (returndata) {
+            $("#pic").attr("src", uploadPath + returndata);
+            $("#teacherPicture").val(returndata);
+        },
+        error: function (returndata) {
+        }
+    });
 }

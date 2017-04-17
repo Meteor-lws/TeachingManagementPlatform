@@ -256,4 +256,11 @@
       CLASS_END_DATE = #{classEndDate,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+    <select id="selectClassByType" parameterType="string" resultMap="BaseResultMap">
+        SELECT *
+        FROM EDUCATION_CLASS
+        WHERE CLASS_TYPE = #{type}
+    </select>
+
+
 </mapper>

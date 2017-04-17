@@ -1,5 +1,7 @@
 package com.ruicai.education.po.education;
 
+import java.util.List;
+
 public class EducationTeacher {
     private String id;
 
@@ -19,6 +21,15 @@ public class EducationTeacher {
 
     private String teacherPicture;
 
+    private List<UserToRoleKey> roles;
+
+    public List<UserToRoleKey> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserToRoleKey> roles) {
+        this.roles = roles;
+    }
 
     public String getId() {
         return id;

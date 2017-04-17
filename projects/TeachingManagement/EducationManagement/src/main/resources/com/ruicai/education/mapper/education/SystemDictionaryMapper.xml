@@ -231,4 +231,12 @@
   <select id="selectAllDictionary" resultMap="BaseResultMap">
     SELECT * from SYSTEM_DICTIONARY
   </select>
+
+  <select id="selectDicByValue" parameterType="string" resultMap="BaseResultMap">
+    SELECT *
+    FROM SYSTEM_DICTIONARY
+    WHERE DICTIONARY_VALUE = #{val}
+  </select>
+
+
 </mapper>

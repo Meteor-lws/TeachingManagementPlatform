@@ -27,4 +27,6 @@ public interface EducationClassMapper {
     int updateByPrimaryKeySelective(EducationClass record);
 
     int updateByPrimaryKey(EducationClass record);
+
+    List<EducationClass> selectClassByType(String type);
 }

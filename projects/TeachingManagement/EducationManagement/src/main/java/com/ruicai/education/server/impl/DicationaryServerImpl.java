@@ -15,10 +15,16 @@ import java.util.List;
 public class DicationaryServerImpl implements DictionaryServer {
 
     @Autowired
-    private com.ruicai.education.mapper.education.SystemDictionaryMapper SystemDictionaryMapper;
+    private com.ruicai.education.mapper.education.SystemDictionaryMapper systemDictionaryMapper;
 
     @Override
     public List<SystemDictionary> selectDicByName(String name){
-        return  SystemDictionaryMapper.selectDicByName(name);
+        return systemDictionaryMapper.selectDicByName(name);
+    }
+
+    @Override
+    public SystemDictionary selectDicByValue(String val) {
+
+        return systemDictionaryMapper.selectDicByValue(val);
     }
 }

@@ -46,51 +46,67 @@
 </div>
 <%--教师修改添加框--%>
 <div id="teaDialog" class="easyui-window" title="教师修改"
-     data-options="modal:true,closed:true,iconCls:'icon-save'"
-     style="width:700px;height:500px;padding:10px;">
-    <form id="teaForm" method="post" action="/asa">
+     data-options="modal:true,closed:true,iconCls:'icon-save',closable:false"
+     style="width:700px;height:600px;padding:10px;">
+    <form id="teaForm" method="post" action="/asa" enctype="multipart/form-data">
         <table style="height:100%" width="100% " align="center">
             <tr>
+                <input type="hidden" name="teacherId" id="teaId">
                 <td class="tdLabel" align="right"><label>姓名</label></td>
                 <td class="tdValue">
-                    <input id="name" class="easyui-textbox" type="text" name="name" data-options="required:true">
+                    <input id="teacherNameForm" name="teacherName" class="easyui-textbox" type="text"
+                           data-options="required:true">
 
                 </td>
-                <td class="tdLabel" align="right"><label>班级</label></td>
+                <td class="tdLabel" align="right"><label>类型</label></td>
                 <td class="tdValue">
-                    <select id="teaClass" class="easyui-combotree" style="width:170px;"></select>
+                    <select id="teacherTypeForm" name="teacherType" class="easyui-combotree"
+                            style="width:170px;"></select>
                 </td>
             </tr>
             <tr>
                 <td class="tdLabel" align="right"><label>专业</label></td>
-                <td class="tdValue"><input class="easyui-textbox" type="text" name="major" data-options="required:true">
+                <td class="tdValue"><select id="teacherSpecialityForm" name="teacherSpeciality" class="easyui-combotree"
+                                            style="width:170px;"></select>
                 </td>
                 <td class="tdLabel" align="right"><label>手机</label></td>
-                <td class="tdValue"><input class="easyui-textbox" type="text" name="phone" data-options="required:true">
+                <td class="tdValue"><input class="easyui-textbox" id="teacherPhone" type="text" name="teacherPhone"
+                                           data-options="required:true">
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>类型</label></td>
-                <td class="tdValue">
-                    <input class="easyui-textbox" type="text" name="type" data-options="required:true">
-                </td>
-                <td class="tdLabel" align="right"><label>性别</label></td>
-                <td class="tdValue">
-                    <input name="sex" type="radio" value="1"/>男 <input name="sex" type="radio" value="0"/>女
+                <td class="tdLabel" align="right" colspan="2"><label>性别</label></td>
+                <td class="tdValue" colspan="2">
+                    <div id="sex">
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="1" style="width: 100px ;height: 50px" align="right"><label>照片</label></td>
-                <td colspan="3" style="width: 100px ;height: 50px">
-                    <img alt="jiaoshi" src="${pageContext.request.contextPath}/js.jpg">
+                <td colspan="1" style="width: 100px ;height: 50px" align="left"><label>照片</label></td>
+                <td colspan="3" style="width: 100px ;height: 50px" align="left">
+                    <img alt="jiaoshi" id="pic" src="${pageContext.request.contextPath}/js.jpg">
+                    <input id="teacherPicture" type="hidden" name="teacherPicture"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" style="width: 100px ;height: 50px" align="left"><label>上传</label></td>
+                <td colspan="3" style="width: 100px ;height: 50px" align="left">
+                    <input id="teacherPicForm" type="file" name="teapic" onchange="showPic()">
                 </td>
             </tr>
 
             <tr>
                 <td colspan="1" style="width: 100px ;height: 50px" align="right"><label>简介</label></td>
                 <td colspan="3" style="width: 100px ;height: 50px">
-                    <input class="easyui-textbox" data-options="multiline:true" value=""
+                    <input id="teacherIntroductionForm" name="teacherIntroduction" class="easyui-textbox"
+                           data-options="multiline:true" value=""
                            style="width:300px;height:100px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">角色</td>
+                <td colspan="3">
+                    <div id="roleDiv"></div>
                 </td>
             </tr>
 

@@ -20,22 +20,9 @@ $(function () {
     });
 
 
-    $('#classSel').combotree('tree').tree({
-        data: [
-            {
-                text: "JAVA",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            },
-            {
-                text: "UI",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            }
-
-        ]
+    $('#classSel').combotree({
+        url: "/education/getClass"
     });
-
 
     var pager = $('#resDg').datagrid().datagrid('getPager');
     $("#removeRes").click(function () {
@@ -66,19 +53,10 @@ $(function () {
 
     });
 
-    $('#Uploader').combotree('tree').tree({
-        data: [
-            {
-                text: "JAVA",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            },
-            {
-                text: "UI",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            }
+    $('#Uploader').combobox({
+        url: "/education/getUploader",
+        valueField: 'id',
+        textField: 'teacherName'
 
-        ]
     });
 });

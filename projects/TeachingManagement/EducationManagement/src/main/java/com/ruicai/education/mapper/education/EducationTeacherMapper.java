@@ -26,4 +26,5 @@ public interface EducationTeacherMapper {
 
     List<EducationTeacher> selectTeaByCondition(TeacherCondition condition);
 
+    List<EducationTeacher> selectAll();
 }

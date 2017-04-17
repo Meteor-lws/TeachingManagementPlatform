@@ -28,7 +28,7 @@
                 班级
             <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
             上传者
-            <select id="Uploader" class="easyui-combotree" style="width:120px;"></select>
+            <select id="Uploader" class="easyui-combobox" style="width:120px;"></select>
             日期
             <input id="dd" type="text" class="easyui-datebox" style="width: 120px;"></input>
             &nbsp&nbsp&nbsp
