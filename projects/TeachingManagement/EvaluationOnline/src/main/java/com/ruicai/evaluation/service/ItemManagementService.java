@@ -21,5 +21,7 @@ public interface ItemManagementService {
 
     void editEvaluationItem(EvaluationItem item);
 
+    void addEvaluationItem(EvaluationItem item);
+
     void deleteEvaluationItems(List<String> ids);
 }

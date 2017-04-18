@@ -45,12 +45,18 @@ public class ItemManagementController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "addEvaluationItem", method = RequestMethod.POST)
+    public String addEvaluationItem(EvaluationItem item) {
+        service.addEvaluationItem(item);
+        return "修改评价项成功";
+    }
+
+    @ResponseBody
     @RequestMapping(value = "editEvaluationItem", method = RequestMethod.POST)
     public String editEvaluationItem(EvaluationItem item) {
         service.editEvaluationItem(item);
         return "修改评价项成功";
     }
-
 
     @ResponseBody
     @RequestMapping(value = "deleteEvaluationItems", method = RequestMethod.POST)

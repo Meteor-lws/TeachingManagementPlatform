@@ -83,7 +83,19 @@ function showDialog(item) {
         buttonText = '添加';
         buttonIcon = 'icon-add';
         buttonHandler = function () {
-            alert('add');
+            var content = getDialogContent();
+            var item = {};
+            if (content.enable === '0') {
+                item.itemEnable = 0;
+            } else {
+                item.itemEnable = 1;
+            }
+            item.itemContent = content.content;
+            item.itemType = content.type;
+            ajax('addEvaluationItem', item, function () {
+                closeDialog();
+                $('#item-data').datagrid('reload');
+            }, '添加评价项失败');
         };
     } else {
         title = '修改评价项';
