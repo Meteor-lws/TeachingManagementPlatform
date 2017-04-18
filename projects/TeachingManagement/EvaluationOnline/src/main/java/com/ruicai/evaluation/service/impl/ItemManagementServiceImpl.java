@@ -84,6 +84,10 @@ public class ItemManagementServiceImpl implements ItemManagementService {
         return result;
     }
 
+    public void editEvaluationItem(EvaluationItem item) {
+        itemMapper.updateByPrimaryKey(item);
+    }
+
     private EvaluationItemView buildItemView(EvaluationItem item) {
         EvaluationItemView itemView = new EvaluationItemView();
         itemView.setId(item.getId());

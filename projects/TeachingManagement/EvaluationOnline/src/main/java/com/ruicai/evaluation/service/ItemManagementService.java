@@ -1,5 +1,6 @@
 package com.ruicai.evaluation.service;
 
+import com.ruicai.evaluation.po.evaluation.EvaluationItem;
 import com.ruicai.evaluation.po.system.SystemDictionary;
 import com.ruicai.evaluation.vo.Datagrid;
 import com.ruicai.evaluation.vo.EvaluationItemView;
@@ -17,4 +18,6 @@ public interface ItemManagementService {
     List<SystemDictionary> getEvaluationItemTypes();
 
     Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent);
+
+    void editEvaluationItem(EvaluationItem item);
 }

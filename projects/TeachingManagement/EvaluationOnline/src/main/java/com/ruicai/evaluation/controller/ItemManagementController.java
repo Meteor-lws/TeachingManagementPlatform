@@ -1,6 +1,7 @@
 package com.ruicai.evaluation.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruicai.evaluation.po.evaluation.EvaluationItem;
 import com.ruicai.evaluation.service.impl.ItemManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,5 +39,12 @@ public class ItemManagementController {
     @RequestMapping(value = "getEvaluationItems", method = RequestMethod.POST)
     public String getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent) {
         return JSON.toJSONString(service.getEvaluationItems(page, rows, typeId, enable, itemContent));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "editEvaluationItem", method = RequestMethod.POST)
+    public String editEvaluationItem(EvaluationItem item) {
+        service.editEvaluationItem(item);
+        return "修改评价项成功";
     }
 }

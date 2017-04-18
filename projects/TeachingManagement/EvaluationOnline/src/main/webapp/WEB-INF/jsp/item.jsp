@@ -51,7 +51,7 @@
 </div>
 <div id="item-dialog">
     <table align="center" style="margin-top: 10px">
-        <tr>
+        <tr style="line-height: 45px">
             <td align="right">
                 <label for="item-type">评价项类型：</label>
             </td>
@@ -59,13 +59,7 @@
                 <select id="item-type" style="width: 180px;height: 30px"></select>
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td>
-                <span id="item-type-warning" style="font-size: smaller;color: red">&nbsp</span>
-            </td>
-        </tr>
-        <tr>
+        <tr style="line-height: 45px">
             <td align="right" style="vertical-align: top">
                 <label for="item-content">评价项内容：</label>
             </td>
@@ -73,21 +67,15 @@
                 <input id="item-content" data-options="multiline:true" style="width: 180px;height: 80px">
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td>
-                <span id="item-content-warning" style="font-size: smaller;color: red">&nbsp</span>
-            </td>
-        </tr>
-        <tr>
+        <tr style="line-height: 36px">
             <td align="right">是否启用：</td>
             <td>
                 <label>
-                    <input name="item-enable" type="radio" value="true" checked>
+                    <input name="item-enable" type="radio" value="1" checked>
                     是
                 </label>
                 <label>
-                    <input name="item-enable" type="radio" value="false">
+                    <input name="item-enable" type="radio" value="0">
                     否
                 </label>
             </td>
