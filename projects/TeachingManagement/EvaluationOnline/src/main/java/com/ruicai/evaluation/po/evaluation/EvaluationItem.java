@@ -1,13 +1,13 @@
 package com.ruicai.evaluation.po.evaluation;
 
 public class EvaluationItem {
-    private String id;
+    protected String id;
 
-    private String itemType;
+    protected String itemType;
 
-    private String itemContent;
+    protected String itemContent;
 
-    private Short itemEnable;
+    protected Short itemEnable;
 
     public String getId() {
         return id;

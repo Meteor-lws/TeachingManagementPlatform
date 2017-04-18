@@ -33,4 +33,10 @@ public class ItemManagementController {
     public String getEvaluationItemTypes() {
         return JSON.toJSONString(service.getEvaluationItemTypes());
     }
+
+    @ResponseBody
+    @RequestMapping(value = "getEvaluationItems", method = RequestMethod.POST)
+    public String getEvaluationItems(int page, int rows) {
+        return JSON.toJSONString(service.getEvaluationItems(page, rows));
+    }
 }

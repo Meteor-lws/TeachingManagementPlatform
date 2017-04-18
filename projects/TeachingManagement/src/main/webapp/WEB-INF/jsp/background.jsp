@@ -64,8 +64,8 @@
         <div data-options="iconCls:'icon-home'" style="padding: 4px"> 欢迎来到后台管理系统！</div>
     </div>
 </div>
-<div data-options="region:'north'" style="height:83px">
-    <div style="position: absolute;width: 100%;text-align: center"><h1>瑞才科技教学管理平台</h1></div>
+<div data-options="region:'north'" style="height:85px">
+    <div style="position: absolute;width: 100%;min-width: 700px;text-align: center"><h1>瑞才科技教学管理平台</h1></div>
     <div style="position: absolute"><a href=""><img src="image/logo.png"></a></div>
 </div>
 <div data-options="region:'south'" style="height:36px;line-height:30px;text-align: center">&copy;2017-2027瑞才科技教学管理平台</div>

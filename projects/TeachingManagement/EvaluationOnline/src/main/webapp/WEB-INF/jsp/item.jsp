@@ -40,13 +40,9 @@
                 <label for="item-search-content" style="font-size: smaller">评价项内容：</label>
                 <input id="item-search-content" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
                        style="width:250px">
-            </td>
-            <td>
                 <label for="item-search-type" style="font-size: smaller;margin-left: 20px">评价项类型：</label>
                 <input id="item-search-type" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
                        style="width:250px">
-            </td>
-            <td>
                 <label for="item-search-enable" style="font-size: smaller;margin-left: 20px">是否启用：</label>
                 <input id="item-search-enable" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
                        style="width:250px">

@@ -1,6 +1,8 @@
 package com.ruicai.evaluation.service;
 
 import com.ruicai.evaluation.po.system.SystemDictionary;
+import com.ruicai.evaluation.vo.Datagrid;
+import com.ruicai.evaluation.vo.EvaluationItemView;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +15,6 @@ import java.util.List;
 @Service
 public interface ItemManagementService {
     List<SystemDictionary> getEvaluationItemTypes();
+
+    Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows);
 }

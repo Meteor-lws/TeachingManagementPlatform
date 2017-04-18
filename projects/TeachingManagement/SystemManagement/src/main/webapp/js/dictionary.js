@@ -48,7 +48,6 @@ function prepareDatagrid() {
         fitColumns: true,
         striped: true,
         remoteSort: false,
-        multiSort: true,
         rownumbers: true,
         pagination: true,
         pageSize: 25,
