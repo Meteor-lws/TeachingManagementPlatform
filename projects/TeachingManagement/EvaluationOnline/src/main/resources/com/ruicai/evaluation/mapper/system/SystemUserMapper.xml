@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ruicai.evaluation.mapper.examination.ExaminationAnswerMapper">
-    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.examination.ExaminationAnswer">
+<mapper namespace="com.ruicai.evaluation.mapper.system.SystemUserMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.system.SystemUser">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="STUDENT_ID" property="studentId" jdbcType="VARCHAR"/>
-        <result column="ANSWER_SCORE" property="answerScore" jdbcType="DECIMAL"/>
+        <result column="USER_STATUS" property="userStatus" jdbcType="VARCHAR"/>
+        <result column="USER_TYPE" property="userType" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR"/>
+        <result column="USER_NUMBER" property="userNumber" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -67,16 +70,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        ID, STUDENT_ID, ANSWER_SCORE
+        ID, USER_STATUS, USER_TYPE, USER_NAME, USER_PWD, USER_NUMBER
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswerExample">
+            parameterType="com.ruicai.evaluation.po.system.SystemUserExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from RUICAI.EXAMINATION_ANSWER
+        from RUICAI.SYSTEM_USER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -87,70 +90,99 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from RUICAI.EXAMINATION_ANSWER
+        from RUICAI.SYSTEM_USER
         where ID = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        DELETE FROM RUICAI.EXAMINATION_ANSWER
+        DELETE FROM RUICAI.SYSTEM_USER
         WHERE ID = #{id,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswerExample">
-        delete from RUICAI.EXAMINATION_ANSWER
+    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.system.SystemUserExample">
+        delete from RUICAI.SYSTEM_USER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswer">
+    <insert id="insert" parameterType="com.ruicai.evaluation.po.system.SystemUser">
         <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
             SELECT sys_guid() FROM dual
         </selectKey>
-        insert into RUICAI.EXAMINATION_ANSWER (ID, STUDENT_ID, ANSWER_SCORE
+        insert into RUICAI.SYSTEM_USER (ID, USER_STATUS, USER_TYPE,
+        USER_NAME, USER_PWD, USER_NUMBER
         )
-        values (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{answerScore,jdbcType=DECIMAL}
+        values (#{id,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userNumber,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswer">
+    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.system.SystemUser">
         <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
             SELECT sys_guid() FROM dual
         </selectKey>
-        insert into RUICAI.EXAMINATION_ANSWER
+        insert into RUICAI.SYSTEM_USER
         <trim prefix="(" suffix=")" suffixOverrides=",">
             ID,
-            <if test="studentId != null">
-                STUDENT_ID,
+            <if test="userStatus != null">
+                USER_STATUS,
             </if>
-            <if test="answerScore != null">
-                ANSWER_SCORE,
+            <if test="userType != null">
+                USER_TYPE,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userPwd != null">
+                USER_PWD,
+            </if>
+            <if test="userNumber != null">
+                USER_NUMBER,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             #{id,jdbcType=VARCHAR},
-            <if test="studentId != null">
-                #{studentId,jdbcType=VARCHAR},
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=VARCHAR},
             </if>
-            <if test="answerScore != null">
-                #{answerScore,jdbcType=DECIMAL},
+            <if test="userType != null">
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null">
+                #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userNumber != null">
+                #{userNumber,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswerExample"
+    <select id="countByExample" parameterType="com.ruicai.evaluation.po.system.SystemUserExample"
             resultType="java.lang.Integer">
-        select count(*) from RUICAI.EXAMINATION_ANSWER
+        select count(*) from RUICAI.SYSTEM_USER
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update RUICAI.EXAMINATION_ANSWER
+        update RUICAI.SYSTEM_USER
         <set>
             <if test="record.id != null">
                 ID = #{record.id,jdbcType=VARCHAR},
             </if>
-            <if test="record.studentId != null">
-                STUDENT_ID = #{record.studentId,jdbcType=VARCHAR},
+            <if test="record.userStatus != null">
+                USER_STATUS = #{record.userStatus,jdbcType=VARCHAR},
             </if>
-            <if test="record.answerScore != null">
-                ANSWER_SCORE = #{record.answerScore,jdbcType=DECIMAL},
+            <if test="record.userType != null">
+                USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userName != null">
+                USER_NAME = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userPwd != null">
+                USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userNumber != null">
+                USER_NUMBER = #{record.userNumber,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -158,30 +190,45 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update RUICAI.EXAMINATION_ANSWER
+        update RUICAI.SYSTEM_USER
         set ID = #{record.id,jdbcType=VARCHAR},
-        STUDENT_ID = #{record.studentId,jdbcType=VARCHAR},
-        ANSWER_SCORE = #{record.answerScore,jdbcType=DECIMAL}
+        USER_STATUS = #{record.userStatus,jdbcType=VARCHAR},
+        USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+        USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+        USER_NUMBER = #{record.userNumber,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswer">
-        update RUICAI.EXAMINATION_ANSWER
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.evaluation.po.system.SystemUser">
+        update RUICAI.SYSTEM_USER
         <set>
-            <if test="studentId != null">
-                STUDENT_ID = #{studentId,jdbcType=VARCHAR},
+            <if test="userStatus != null">
+                USER_STATUS = #{userStatus,jdbcType=VARCHAR},
             </if>
-            <if test="answerScore != null">
-                ANSWER_SCORE = #{answerScore,jdbcType=DECIMAL},
+            <if test="userType != null">
+                USER_TYPE = #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null">
+                USER_PWD = #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userNumber != null">
+                USER_NUMBER = #{userNumber,jdbcType=VARCHAR},
             </if>
         </set>
         where ID = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ruicai.evaluation.po.examination.ExaminationAnswer">
-        UPDATE RUICAI.EXAMINATION_ANSWER
-        SET STUDENT_ID   = #{studentId,jdbcType=VARCHAR},
-            ANSWER_SCORE = #{answerScore,jdbcType=DECIMAL}
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.evaluation.po.system.SystemUser">
+        UPDATE RUICAI.SYSTEM_USER
+        SET USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+            USER_TYPE   = #{userType,jdbcType=VARCHAR},
+            USER_NAME   = #{userName,jdbcType=VARCHAR},
+            USER_PWD    = #{userPwd,jdbcType=VARCHAR},
+            USER_NUMBER = #{userNumber,jdbcType=VARCHAR}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

@@ -137,18 +137,18 @@
                         password="ruicai"/>
 
         <!-- 配置系统管理模块实体类的生成 -->
-        <javaModelGenerator targetPackage="com.ruicai.education.po.system"
-                            targetProject="EducationManagement/src/main/java">
+        <javaModelGenerator targetPackage="com.ruicai.evaluation.po.system"
+                            targetProject="EvaluationOnline/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 配置系统管理模块mapper.xml文件的生成 -->
-        <sqlMapGenerator targetPackage="com.ruicai.education.mapper.system"
-                         targetProject="EducationManagement/src/main/resources"/>
+        <sqlMapGenerator targetPackage="com.ruicai.evaluation.mapper.system"
+                         targetProject="EvaluationOnline/src/main/resources"/>
 
         <!-- 配置系统管理模块Mapper接口的生成 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.education.mapper.system"
-                             targetProject="EducationManagement/src/main/java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ruicai.evaluation.mapper.system"
+                             targetProject="EvaluationOnline/src/main/java"/>
 
         <!-- 配置系统管理模块表的生成 -->
         <table schema="ruicai" tableName="SYSTEM%">

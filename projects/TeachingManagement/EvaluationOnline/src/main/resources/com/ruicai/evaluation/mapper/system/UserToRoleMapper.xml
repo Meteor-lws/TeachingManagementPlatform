@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ruicai.evaluation.mapper.evaluation.EvaluationItemMapper">
-    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.evaluation.EvaluationItem">
-        <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR"/>
-        <result column="ITEM_CONTENT" property="itemContent" jdbcType="VARCHAR"/>
-        <result column="ITEM_ENABLE" property="itemEnable" jdbcType="DECIMAL"/>
+<mapper namespace="com.ruicai.evaluation.mapper.system.UserToRoleMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.system.UserToRoleKey">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -68,16 +66,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        ID, ITEM_TYPE, ITEM_CONTENT, ITEM_ENABLE
+        USER_ID, ROLE_ID
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItemExample">
+            parameterType="com.ruicai.evaluation.po.system.UserToRoleExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from RUICAI.EVALUATION_ITEM
+        from RUICAI.USER_TO_ROLE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -85,82 +83,55 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from RUICAI.EVALUATION_ITEM
-        where ID = #{id,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        DELETE FROM RUICAI.EVALUATION_ITEM
-        WHERE ID = #{id,jdbcType=VARCHAR}
+    <delete id="deleteByPrimaryKey" parameterType="com.ruicai.evaluation.po.system.UserToRoleKey">
+        DELETE FROM RUICAI.USER_TO_ROLE
+        WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+              AND ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItemExample">
-        delete from RUICAI.EVALUATION_ITEM
+    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.system.UserToRoleExample">
+        delete from RUICAI.USER_TO_ROLE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItem">
-        <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
-            SELECT sys_guid() FROM dual
-        </selectKey>
-        insert into RUICAI.EVALUATION_ITEM (ID, ITEM_TYPE, ITEM_CONTENT,
-        ITEM_ENABLE)
-        values (#{id,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, #{itemContent,jdbcType=VARCHAR},
-        #{itemEnable,jdbcType=DECIMAL})
+    <insert id="insert" parameterType="com.ruicai.evaluation.po.system.UserToRoleKey">
+        INSERT INTO RUICAI.USER_TO_ROLE (USER_ID, ROLE_ID)
+        VALUES (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItem">
-        <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
-            SELECT sys_guid() FROM dual
-        </selectKey>
-        insert into RUICAI.EVALUATION_ITEM
+    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.system.UserToRoleKey">
+        insert into RUICAI.USER_TO_ROLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            ID,
-            <if test="itemType != null">
-                ITEM_TYPE,
+            <if test="userId != null">
+                USER_ID,
             </if>
-            <if test="itemContent != null">
-                ITEM_CONTENT,
-            </if>
-            <if test="itemEnable != null">
-                ITEM_ENABLE,
+            <if test="roleId != null">
+                ROLE_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{id,jdbcType=VARCHAR},
-            <if test="itemType != null">
-                #{itemType,jdbcType=VARCHAR},
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="itemContent != null">
-                #{itemContent,jdbcType=VARCHAR},
-            </if>
-            <if test="itemEnable != null">
-                #{itemEnable,jdbcType=DECIMAL},
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItemExample"
+    <select id="countByExample" parameterType="com.ruicai.evaluation.po.system.UserToRoleExample"
             resultType="java.lang.Integer">
-        select count(*) from RUICAI.EVALUATION_ITEM
+        select count(*) from RUICAI.USER_TO_ROLE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update RUICAI.EVALUATION_ITEM
+        update RUICAI.USER_TO_ROLE
         <set>
-            <if test="record.id != null">
-                ID = #{record.id,jdbcType=VARCHAR},
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
             </if>
-            <if test="record.itemType != null">
-                ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
-            </if>
-            <if test="record.itemContent != null">
-                ITEM_CONTENT = #{record.itemContent,jdbcType=VARCHAR},
-            </if>
-            <if test="record.itemEnable != null">
-                ITEM_ENABLE = #{record.itemEnable,jdbcType=DECIMAL},
+            <if test="record.roleId != null">
+                ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -168,35 +139,11 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update RUICAI.EVALUATION_ITEM
-        set ID = #{record.id,jdbcType=VARCHAR},
-        ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
-        ITEM_CONTENT = #{record.itemContent,jdbcType=VARCHAR},
-        ITEM_ENABLE = #{record.itemEnable,jdbcType=DECIMAL}
+        update RUICAI.USER_TO_ROLE
+        set USER_ID = #{record.userId,jdbcType=VARCHAR},
+        ROLE_ID = #{record.roleId,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItem">
-        update RUICAI.EVALUATION_ITEM
-        <set>
-            <if test="itemType != null">
-                ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
-            </if>
-            <if test="itemContent != null">
-                ITEM_CONTENT = #{itemContent,jdbcType=VARCHAR},
-            </if>
-            <if test="itemEnable != null">
-                ITEM_ENABLE = #{itemEnable,jdbcType=DECIMAL},
-            </if>
-        </set>
-        where ID = #{id,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationItem">
-        UPDATE RUICAI.EVALUATION_ITEM
-        SET ITEM_TYPE    = #{itemType,jdbcType=VARCHAR},
-            ITEM_CONTENT = #{itemContent,jdbcType=VARCHAR},
-            ITEM_ENABLE  = #{itemEnable,jdbcType=DECIMAL}
-        WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

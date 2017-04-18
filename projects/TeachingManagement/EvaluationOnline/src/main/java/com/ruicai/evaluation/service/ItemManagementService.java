@@ -1,0 +1,16 @@
+package com.ruicai.evaluation.service;
+
+import com.ruicai.evaluation.po.system.SystemDictionary;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * 评价项管理Service接口
+ *
+ * Created by lws on 2017/4/17.
+ */
+@Service
+public interface ItemManagementService {
+    List<SystemDictionary> getEvaluationItemTypes();
+}

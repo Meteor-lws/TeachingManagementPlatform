@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ruicai.evaluation.mapper.evaluation.EvaluationDetailMapper">
-    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.evaluation.EvaluationDetail">
-        <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR"/>
-        <result column="EVALUATION_ID" property="evaluationId" jdbcType="VARCHAR"/>
-        <result column="EVALUATION_SCORE" property="evaluationScore" jdbcType="DECIMAL"/>
+<mapper namespace="com.ruicai.evaluation.mapper.system.RoleToResourceMapper">
+    <resultMap id="BaseResultMap" type="com.ruicai.evaluation.po.system.RoleToResourceKey">
+        <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+        <id column="RES_ID" property="resId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -68,16 +66,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        ID, ITEM_ID, EVALUATION_ID, EVALUATION_SCORE
+        ROLE_ID, RES_ID
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetailExample">
+            parameterType="com.ruicai.evaluation.po.system.RoleToResourceExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from RUICAI.EVALUATION_DETAIL
+        from RUICAI.ROLE_TO_RESOURCE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -85,82 +83,55 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from RUICAI.EVALUATION_DETAIL
-        where ID = #{id,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        DELETE FROM RUICAI.EVALUATION_DETAIL
-        WHERE ID = #{id,jdbcType=VARCHAR}
+    <delete id="deleteByPrimaryKey" parameterType="com.ruicai.evaluation.po.system.RoleToResourceKey">
+        DELETE FROM RUICAI.ROLE_TO_RESOURCE
+        WHERE ROLE_ID = #{roleId,jdbcType=VARCHAR}
+              AND RES_ID = #{resId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetailExample">
-        delete from RUICAI.EVALUATION_DETAIL
+    <delete id="deleteByExample" parameterType="com.ruicai.evaluation.po.system.RoleToResourceExample">
+        delete from RUICAI.ROLE_TO_RESOURCE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetail">
-        <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
-            SELECT sys_guid() FROM dual
-        </selectKey>
-        insert into RUICAI.EVALUATION_DETAIL (ID, ITEM_ID, EVALUATION_ID,
-        EVALUATION_SCORE)
-        values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{evaluationId,jdbcType=VARCHAR},
-        #{evaluationScore,jdbcType=DECIMAL})
+    <insert id="insert" parameterType="com.ruicai.evaluation.po.system.RoleToResourceKey">
+        INSERT INTO RUICAI.ROLE_TO_RESOURCE (ROLE_ID, RES_ID)
+        VALUES (#{roleId,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetail">
-        <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
-            SELECT sys_guid() FROM dual
-        </selectKey>
-        insert into RUICAI.EVALUATION_DETAIL
+    <insert id="insertSelective" parameterType="com.ruicai.evaluation.po.system.RoleToResourceKey">
+        insert into RUICAI.ROLE_TO_RESOURCE
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            ID,
-            <if test="itemId != null">
-                ITEM_ID,
+            <if test="roleId != null">
+                ROLE_ID,
             </if>
-            <if test="evaluationId != null">
-                EVALUATION_ID,
-            </if>
-            <if test="evaluationScore != null">
-                EVALUATION_SCORE,
+            <if test="resId != null">
+                RES_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{id,jdbcType=VARCHAR},
-            <if test="itemId != null">
-                #{itemId,jdbcType=VARCHAR},
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
             </if>
-            <if test="evaluationId != null">
-                #{evaluationId,jdbcType=VARCHAR},
-            </if>
-            <if test="evaluationScore != null">
-                #{evaluationScore,jdbcType=DECIMAL},
+            <if test="resId != null">
+                #{resId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetailExample"
+    <select id="countByExample" parameterType="com.ruicai.evaluation.po.system.RoleToResourceExample"
             resultType="java.lang.Integer">
-        select count(*) from RUICAI.EVALUATION_DETAIL
+        select count(*) from RUICAI.ROLE_TO_RESOURCE
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update RUICAI.EVALUATION_DETAIL
+        update RUICAI.ROLE_TO_RESOURCE
         <set>
-            <if test="record.id != null">
-                ID = #{record.id,jdbcType=VARCHAR},
+            <if test="record.roleId != null">
+                ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
             </if>
-            <if test="record.itemId != null">
-                ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.evaluationId != null">
-                EVALUATION_ID = #{record.evaluationId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.evaluationScore != null">
-                EVALUATION_SCORE = #{record.evaluationScore,jdbcType=DECIMAL},
+            <if test="record.resId != null">
+                RES_ID = #{record.resId,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -168,35 +139,11 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update RUICAI.EVALUATION_DETAIL
-        set ID = #{record.id,jdbcType=VARCHAR},
-        ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
-        EVALUATION_ID = #{record.evaluationId,jdbcType=VARCHAR},
-        EVALUATION_SCORE = #{record.evaluationScore,jdbcType=DECIMAL}
+        update RUICAI.ROLE_TO_RESOURCE
+        set ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+        RES_ID = #{record.resId,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetail">
-        update RUICAI.EVALUATION_DETAIL
-        <set>
-            <if test="itemId != null">
-                ITEM_ID = #{itemId,jdbcType=VARCHAR},
-            </if>
-            <if test="evaluationId != null">
-                EVALUATION_ID = #{evaluationId,jdbcType=VARCHAR},
-            </if>
-            <if test="evaluationScore != null">
-                EVALUATION_SCORE = #{evaluationScore,jdbcType=DECIMAL},
-            </if>
-        </set>
-        where ID = #{id,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ruicai.evaluation.po.evaluation.EvaluationDetail">
-        UPDATE RUICAI.EVALUATION_DETAIL
-        SET ITEM_ID          = #{itemId,jdbcType=VARCHAR},
-            EVALUATION_ID    = #{evaluationId,jdbcType=VARCHAR},
-            EVALUATION_SCORE = #{evaluationScore,jdbcType=DECIMAL}
-        WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>
