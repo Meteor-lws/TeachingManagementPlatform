@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 评价项管理控制器
  *
@@ -46,5 +49,18 @@ public class ItemManagementController {
     public String editEvaluationItem(EvaluationItem item) {
         service.editEvaluationItem(item);
         return "修改评价项成功";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "deleteEvaluationItems", method = RequestMethod.POST)
+    public String deleteEvaluationItems(String data) {
+        List<EvaluationItem> items = JSON.parseArray(data, EvaluationItem.class);
+        List<String> ids = new ArrayList<>();
+        for (EvaluationItem item : items) {
+            ids.add(item.getId());
+        }
+        service.deleteEvaluationItems(ids);
+        return "删除评价项成功";
     }
 }

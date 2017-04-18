@@ -88,6 +88,12 @@ public class ItemManagementServiceImpl implements ItemManagementService {
         itemMapper.updateByPrimaryKey(item);
     }
 
+    public void deleteEvaluationItems(List<String> ids) {
+        itemExample.clear();
+        itemExample.createCriteria().andIdIn(ids);
+        itemMapper.deleteByExample(itemExample);
+    }
+
     private EvaluationItemView buildItemView(EvaluationItem item) {
         EvaluationItemView itemView = new EvaluationItemView();
         itemView.setId(item.getId());

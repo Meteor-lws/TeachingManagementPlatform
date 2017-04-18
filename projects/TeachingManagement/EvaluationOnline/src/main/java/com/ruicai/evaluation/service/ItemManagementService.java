@@ -20,4 +20,6 @@ public interface ItemManagementService {
     Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent);
 
     void editEvaluationItem(EvaluationItem item);
+
+    void deleteEvaluationItems(List<String> ids);
 }

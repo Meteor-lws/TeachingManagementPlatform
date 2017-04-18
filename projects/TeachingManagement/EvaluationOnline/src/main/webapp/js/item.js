@@ -155,7 +155,18 @@ function editItem() {
 }
 
 function removeItem() {
-    alert('remove');
+    var selections = getSelections();
+    if (selections) {
+        $.messager.confirm('删除确认', '确认要删除选中的评价项吗？', function (choice) {
+            if (choice) {
+                ajax('deleteEvaluationItems', {data: JSON.stringify(selections)}, function () {
+                    $('#item-data').datagrid('reload');
+                }, '删除评价项失败');
+            }
+        });
+    } else {
+        $.messager.alert('警告', '请选择需要删除的评价项', 'warning');
+    }
 }
 
 function searchItems() {
