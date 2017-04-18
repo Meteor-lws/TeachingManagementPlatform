@@ -34,18 +34,17 @@
                    data-options="width:95,plain:true,iconCls:'icon-edit'">修改评价项</a>
                 <a id="item-remove" class="easyui-linkbutton" data-options="width:95,plain:true,iconCls:'icon-remove'">删除评价项</a>
             </td>
-        </tr>
-        <tr>
             <td>
-                <label for="item-search-content" style="font-size: smaller">评价项内容：</label>
-                <input id="item-search-content" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
-                       style="width:250px">
-                <label for="item-search-type" style="font-size: smaller;margin-left: 20px">评价项类型：</label>
-                <input id="item-search-type" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
-                       style="width:250px">
-                <label for="item-search-enable" style="font-size: smaller;margin-left: 20px">是否启用：</label>
-                <input id="item-search-enable" class="easyui-searchbox" data-options="prompt:'请输入搜索内容'"
-                       style="width:250px">
+                <label for="item-search-type" style="font-size: 8px;margin-left: 10px">评价项类型：</label>
+                <select id="item-search-type" style="width: 100px;height: 24px"></select>
+            </td>
+            <td>
+                <label for="item-search-enable" style="font-size: 8px;margin-left: 15px">是否启用：</label>
+                <select id="item-search-enable" style="width: 55px;height: 24px"></select>
+            </td>
+            <td>
+                <label for="item-search-content" style="font-size: 8px;margin-left: 15px">评价项内容：</label>
+                <input id="item-search-content" style="width:200px">
             </td>
         </tr>
     </table>

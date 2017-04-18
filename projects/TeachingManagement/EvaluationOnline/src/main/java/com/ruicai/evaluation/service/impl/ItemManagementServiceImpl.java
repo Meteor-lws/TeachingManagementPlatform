@@ -7,6 +7,7 @@ import com.ruicai.evaluation.mapper.system.SystemDictionaryMapper;
 import com.ruicai.evaluation.mapper.system.SystemDictionaryTypeMapper;
 import com.ruicai.evaluation.po.evaluation.EvaluationItem;
 import com.ruicai.evaluation.po.evaluation.EvaluationItemExample;
+import com.ruicai.evaluation.po.evaluation.EvaluationItemExample.Criteria;
 import com.ruicai.evaluation.po.system.SystemDictionary;
 import com.ruicai.evaluation.po.system.SystemDictionaryExample;
 import com.ruicai.evaluation.po.system.SystemDictionaryTypeExample;
@@ -53,9 +54,23 @@ public class ItemManagementServiceImpl implements ItemManagementService {
         return dictionaryMapper.selectByExample(dictionaryExample);
     }
 
-    public Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows) {
+    public Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent) {
         itemExample.clear();
         itemExample.setOrderByClause("ITEM_TYPE ASC");
+        Criteria criteria = itemExample.createCriteria();
+        if (typeId != null && typeId.length() > 0) {
+            criteria.andItemTypeEqualTo(typeId);
+        }
+        if (enable != null && enable.length() > 0) {
+            if ("true".equals(enable)) {
+                criteria.andItemEnableNotEqualTo((short) 0);
+            } else {
+                criteria.andItemEnableEqualTo((short) 0);
+            }
+        }
+        if (itemContent != null && itemContent.length() > 0) {
+            criteria.andItemContentLike("%" + itemContent + "%");
+        }
         PageHelper.startPage(page, rows);
         List<EvaluationItem> items = itemMapper.selectByExample(itemExample);
         PageInfo<EvaluationItem> pageInfo = new PageInfo<>(items);

@@ -36,7 +36,7 @@ public class ItemManagementController {
 
     @ResponseBody
     @RequestMapping(value = "getEvaluationItems", method = RequestMethod.POST)
-    public String getEvaluationItems(int page, int rows) {
-        return JSON.toJSONString(service.getEvaluationItems(page, rows));
+    public String getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent) {
+        return JSON.toJSONString(service.getEvaluationItems(page, rows, typeId, enable, itemContent));
     }
 }

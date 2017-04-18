@@ -16,5 +16,5 @@ import java.util.List;
 public interface ItemManagementService {
     List<SystemDictionary> getEvaluationItemTypes();
 
-    Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows);
+    Datagrid<EvaluationItemView> getEvaluationItems(int page, int rows, String typeId, String enable, String itemContent);
 }

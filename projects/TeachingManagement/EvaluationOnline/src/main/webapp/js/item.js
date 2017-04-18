@@ -7,6 +7,7 @@
 $(function () {
     prepareDialog();
     prepareDatagrid();
+    prepareTools();
 });
 
 function prepareDialog() {
@@ -42,4 +43,66 @@ function prepareDatagrid() {
         ]],
         toolbar: '#item-tool'
     });
+}
+
+function prepareTools() {
+    $('#item-add').click(addItem);
+    $('#item-edit').click(editItem);
+    $('#item-remove').click(removeItem);
+    $('#item-search-type').combobox({
+        url: 'getEvaluationItemTypes',
+        limitToList: true,
+        valueField: 'id',
+        textField: 'dictionaryName',
+        onChange: function () {
+            $('#item-search-type').combobox('reload');
+        }
+    });
+    $('#item-search-enable').combobox({
+        limitToList: true,
+        valueField: 'value',
+        textField: 'text',
+        data: [{
+            value: 'true',
+            text: '是'
+        }, {
+            value: 'false',
+            text: '否'
+        }]
+    });
+    $('#item-search-content').searchbox({
+        prompt: '请输入搜索内容',
+        searcher: searchItems
+    });
+}
+
+function addItem() {
+    alert('add');
+}
+
+function editItem() {
+    alert('edit');
+}
+
+function removeItem() {
+    alert('remove');
+}
+
+function searchItems() {
+    var searchText = getSearchText();
+    $('#item-data').datagrid({
+        queryParams: {
+            typeId: searchText.type,
+            enable: searchText.enable,
+            itemContent: searchText.content
+        }
+    });
+}
+
+function getSearchText() {
+    return {
+        type: $('#item-search-type').combobox('getValue').trim(),
+        enable: $('#item-search-enable').combobox('getValue').trim(),
+        content: $('#item-search-content').searchbox('getValue').trim()
+    };
 }
