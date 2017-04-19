@@ -33,9 +33,8 @@
         <a id="removeStu" href="javascript:void(0)" class="easyui-linkbutton"
            data-options="iconCls:'icon-edit',plain:true">刪除</a>
         </div>
-    学生姓名 <input id="stuName" class="easyui-validatebox" name="stuName" style="width: 120px;"/> 入学时间 <input
-        id="entranceTime" name="entranceTime" type="text"
-        class="easyui-datebox" style="width: 120px;"></input> &nbsp &nbsp班&nbsp &nbsp&nbsp级
+    学生姓名 <input id="stuName" class="easyui-validatebox" name="stuName" style="width: 120px;"/> </input> &nbsp
+    &nbsp班&nbsp &nbsp&nbsp级
     <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
     毕业时间 <input id="entranceTime" name="entranceTime" type="text" class="easyui-datebox" style="width: 120px;">
     <%--搜索按鈕--%>
@@ -78,9 +77,6 @@
                 <td class="tdValue">
                     <select id="state" class="easyui-combobox"
                                 style="width:170px;" data-options="panelHeight:'80px'">
-                        <option value="1">已就业</option>
-                        <option value="0">待就业</option>
-                        <option value="0">待就业</option>
                     </select>
                 </td>
                 <td class="tdLabel" align="right"><label>班级</label></td>

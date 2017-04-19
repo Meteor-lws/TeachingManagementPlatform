@@ -6,6 +6,7 @@ $(function () {
     var teachingType ;
     var rowValue;
     var roleList;//教师角色列表
+    var uploadPath = "http://localhost:8081/Upload/"
 
     $.ajax({
         url: '/education/getSexRadion',
@@ -15,7 +16,7 @@ $(function () {
             var sexDiv = $("#sex");
             var content = "";
             for (var i = 0; i < list.length; i++) {
-                content += "<input type='radio' name='teacherSex' value=" + list[i].id + ">" + list[i].dictionaryName;
+                content += "<input type='radio' id='" + list[i].id + "' name='teacherSex' value=" + list[i].id + ">" + list[i].dictionaryName;
             }
             sexDiv.html(content);
 
@@ -57,15 +58,6 @@ $(function () {
         }
     });
 
-    $('#teacherTypeForm').combobox({
-        url: '/education/teachingTypeList',
-        valueField: 'id',
-        textField: 'dictionaryName',
-        onSelect: function (sel) {
-            teachingType = sel.id;
-        }
-    });
-
 
     $('#teacherSpecialityForm').combobox({
         url: '/education/getTeacherSpeciality',
@@ -79,26 +71,40 @@ $(function () {
             //数据的回写
             $('#teaDialog').window('open');
             $("#teaId").val(row.id);
+            $("#userId").val(row.userId);
             $("#teacherNameForm").textbox("setValue", row.teacherName);
             $("#teacherTypeForm").combobox("select", row.teacherType);
             $("#teacherSpecialityForm").combobox("select", row.teacherSpeciality);
             $("#teacherPhoneForm").textbox("setValue", row.teacherPhone);
+            $("#pic").attr("src", uploadPath + row.teacherPicture);
+            $("#teacherPicture").val(row.teacherPicture);
             $("#teacherIntroductionForm").textbox("setValue", row.teacherIntroduction);
-            var roles = row.roles;
-            var content = "";
-            for (var i = 0; i < roleList.length; i++) {
-                for (var l = 0; l < roles.length; l++) {
-                    if (roleList[i].id == roles[l].roleId) {
-                        content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
-                    }
-                    else {
-                        content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
-                    }
+            var teacherSex = row.teacherSex;
+            $("#" + teacherSex).attr("checked", "checked");
 
+            $.ajax({
+                url: "/education/getTeacherInfo",
+                data: {"userId": row.userId},
+                success: function (data) {
+                    var teacherRole = $.parseJSON(data);
+                    var roles = new Array();
+                    //将教师高喊的角色的ID存入数组
+                    for (var i = 0; i < teacherRole.length; i++) {
+                        roles[i] = teacherRole[i].id;
+                    }
+                    var content = "";
+                    //教师角色复选框的回写
+                    for (var i = 0; i < roleList.length; i++) {
+                        if (roles.indexOf(roleList[i].id) != -1) {
+                            content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                        }
+                        else {
+                            content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                        }
+                    }
+                    $("#roleDiv").html(content);
                 }
-
-            }
-            $("#roleDiv").html(content);
+            });
         },
         onSelect: function (rowIndex, rowData) {
             rowValue = rowData;
@@ -110,6 +116,7 @@ $(function () {
             title: "添加老师"
         });
         $("#teaDialog").dialog('open');
+        $("#pic").attr("src", "");
         var content = "";
         for (var i = 0; i < roleList.length; i++) {
             content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
@@ -121,7 +128,6 @@ $(function () {
     });
     //修改
     $("#editTea").click(function () {
-
         var selects = $("#teaDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
@@ -138,21 +144,38 @@ $(function () {
             $("#teaDialog").dialog('open');
             var selRow = $('#teaDg').datagrid('getSelected');//选中行
             var roles = selRow.roles;
-            var content = "";
-            for (var i = 0; i < roleList.length; i++) {
-                for (var l = 0; l < roles.length; l++) {
-                    if (roleList[i].id == roles[l].roleId) {
-                        content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+            //隐藏域赋值
+            $("#teaid").val(selRow.id);
+            $("#teacherPicture").val(selRow.teacherPicture);
+            $("#userId").val(selRow.userId);
+            var teacherSex = selRow.teacherSex;
+            $("#" + teacherSex).attr("checked", "checked");
+            $.ajax({
+                url: "/education/getTeacherInfo",
+                data: {"userId": selRow.userId},
+                success: function (data) {
+                    var teacherRole = $.parseJSON(data);
+                    var roles = new Array();
+                    //将教师高喊的角色的ID存入数组
+                    for (var i = 0; i < teacherRole.length; i++) {
+                        roles[i] = teacherRole[i].id;
                     }
-                    else {
-                        content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                    var content = "";
+                    //教师角色复选框的回写
+                    for (var i = 0; i < roleList.length; i++) {
+                        if (roles.indexOf(roleList[i].id) != -1) {
+                            content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                        }
+                        else {
+                            content += "<input type='checkbox' name='role'  value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
+                        }
                     }
-
+                    $("#roleDiv").html(content);
                 }
-            }
+            });
             //数据的回写
-            $("#roleDiv").html(content);
             $("#teaId").val(selRow.id);
+            $("#pic").attr("src", uploadPath + selRow.teacherPicture);
             $("#teacherNameForm").textbox("setValue", selRow.teacherName);
             $("#teacherTypeForm").combobox("select", selRow.teacherType);
             $("#teacherSpecialityForm").combobox("select", selRow.teacherSpeciality);
@@ -168,8 +191,27 @@ $(function () {
             $.messager.alert('警告', '请选择一个需要修改的列');
         } else {
             $.messager.confirm('确认', '您确认想要这些记录吗？', function (choose) {
+                var teacherIds = new Array();
+                var userIds = new Array();
                 if (choose) {
-                    $.messager.alert('提示', '删除成功');
+                    for (var i = 0; i < selects.length; i++) {
+                        teacherIds[i] = selects[i].id;
+                        userIds[i] = selects[i].userId;
+                    }
+                    $.ajax({
+                        url: "/education/deleteTeacher",
+                        datatype: "json",
+                        data: {
+                            "teacherIds": JSON.stringify(teacherIds),
+                            "userIds": JSON.stringify(userIds)
+                        },
+                        type: "post",
+                        success: function (data) {
+                            $("#teaDg").datagrid("reload");
+                        }
+
+                    })
+
                 }
             });
 
@@ -200,8 +242,12 @@ $(function () {
             {field: 'teacherType', title: '类型', width: 100},
             {field: 'teacherSpeciality', title: '专业', width: 100},
             {field: 'teacherPhone', title: '手机', width: 100},
-            {field: 'productid', title: '入职时间', width: 200}
         ]],
+        queryParams: {
+            id: $("#teacherNo").val(),
+            teacherName: $("teacherName").val(),
+            teacherType: teachingType
+        },
         toolbar: '#teaTb'
     });
 
@@ -212,7 +258,6 @@ $(function () {
         var teacherName = $("#teacherName").val();//教师姓名
         $('#teaDg').datagrid('load', {
             id: id,
-            teacherName: teacherName,
             teacherType: teachingType
         });
     });
@@ -244,6 +289,7 @@ function submitForm() {
 function cancel() {
     $("#teaDialog").dialog("close");
     $("#teaForm").form("clear");
+    $("#pic").attr("src", "");
 }
 
 function showPic() {

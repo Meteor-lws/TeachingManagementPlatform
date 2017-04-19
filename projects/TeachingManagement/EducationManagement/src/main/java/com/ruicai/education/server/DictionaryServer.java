@@ -18,7 +18,6 @@ public interface DictionaryServer {
 
     /**
      * 根据字典表中的value来查询字典
-     *
      * @param val value值
      * @return 符合的字典对象
      */

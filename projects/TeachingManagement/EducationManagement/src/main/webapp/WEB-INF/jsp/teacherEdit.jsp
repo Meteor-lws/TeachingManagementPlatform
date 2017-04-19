@@ -51,7 +51,8 @@
     <form id="teaForm" method="post" action="/asa" enctype="multipart/form-data">
         <table style="height:100%" width="100% " align="center">
             <tr>
-                <input type="hidden" name="teacherId" id="teaId">
+                <input type="hidden" name="id" id="teaId">
+                <input type="hidden" name="userId" id="userId">
                 <td class="tdLabel" align="right"><label>姓名</label></td>
                 <td class="tdValue">
                     <input id="teacherNameForm" name="teacherName" class="easyui-textbox" type="text"

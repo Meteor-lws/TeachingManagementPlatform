@@ -1,11 +1,9 @@
 package com.ruicai.education.server.impl;
 
 import com.ruicai.education.mapper.education.EducationTeacherMapper;
-import com.ruicai.education.po.education.EducationTeacher;
-import com.ruicai.education.po.education.SystemDictionary;
-import com.ruicai.education.po.education.SystemUser;
-import com.ruicai.education.po.education.TeacherCondition;
+import com.ruicai.education.po.education.*;
 import com.ruicai.education.server.DictionaryServer;
+import com.ruicai.education.server.RoleService;
 import com.ruicai.education.server.TeacherServer;
 import com.ruicai.education.server.UserServer;
 import com.ruicai.education.util.PageBean;
@@ -31,7 +29,8 @@ public class TeacherServerImpl implements TeacherServer {
     private UserServer userServer; //注入用户服务
     @Autowired
     private DictionaryServer dictionaryServer;//注入字典服务
-
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public int selectTeaByConditionCount(TeacherCondition condition) {
@@ -41,12 +40,12 @@ public class TeacherServerImpl implements TeacherServer {
     @Override
     public PageBean<EducationTeacher> selectTeaByCondition(TeacherCondition condition, PageBean<EducationTeacher> pageBean) {
         int total = selectTeaByConditionCount(condition);
-        char[] page = condition.getPage();
-        try {
-            pageBean.setPage(Integer.parseInt(page[0] + ""));
-        } catch (Exception e) {
-            pageBean.setPage(1);
+        Integer page = condition.getPage();
+        if (page == null) {
+            page = 1;
         }
+        condition.setStartNum((page - 1) * condition.getRows());
+        condition.setEndNum((page * condition.getRows()) + 1);
         pageBean.setRowNums(condition.getRows());
         List<EducationTeacher> teacherList = educationTeacherMapper.selectTeaByCondition(condition);
         pageBean.setRows(teacherList);
@@ -85,13 +84,25 @@ public class TeacherServerImpl implements TeacherServer {
             userToRole.put("roleId", role[i]);
             educationTeacherMapper.grantRole(userToRole);
         }
-
         educationTeacherMapper.insert(teacher);
     }
 
     @Override
     public void updateTea(EducationTeacher teacher) {
         educationTeacherMapper.updateByPrimaryKeySelective(teacher);
+        //删除用户所有的角色
+        roleService.deleteRoleByUserID(teacher.getUserId());
+        String[] roles = teacher.getRole();
+        //遍历添加
+        for (int i = 0; i < roles.length; i++) {
+            //生成 用户——角色 中间表所对应的对象
+            UserToRoleKey utr = new UserToRoleKey();
+            utr.setRoleId(roles[i]);
+            utr.setUserId(teacher.getUserId());
+            roleService.addRole(utr);
+        }
+
+
     }
 
     /**
@@ -102,5 +113,33 @@ public class TeacherServerImpl implements TeacherServer {
     public List<EducationTeacher> selectAll() {
         return educationTeacherMapper.selectAll();
     }
+
+    /**
+     * 批量删除教师
+     *
+     * @param teacherIds 教师id集合
+     * @param userIds    用户id集合
+     */
+    @Override
+    public void deleteTeacherByBatch(List<String> teacherIds, List<String> userIds) {
+
+        //删除教师表信息
+        for (int i = 0; i < teacherIds.size(); i++) {
+            educationTeacherMapper.deleteByPrimaryKey(teacherIds.get(i));
+        }
+
+        //删除用户角色表
+        for (int i = 0; i < userIds.size(); i++) {
+            roleService.deleteRoleByUserID(userIds.get(i));
+        }
+
+        //删除用户表信息
+        for (int i = 0; i < userIds.size(); i++) {
+            userServer.deleteByPrimaryKey(userIds.get(i));
+        }
+
+
+    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.ruicai.education.server.impl;
 
-import com.ruicai.education.mapper.education.SystemDictionaryMapper;
 import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.server.DictionaryServer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ public class DicationaryServerImpl implements DictionaryServer {
 
     @Override
     public SystemDictionary selectDicByValue(String val) {
-
         return systemDictionaryMapper.selectDicByValue(val);
     }
 }

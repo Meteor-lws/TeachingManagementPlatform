@@ -14,4 +14,11 @@ public interface UserServer {
      */
     public String insertUser(SystemUser user);
 
+
+    /**
+     * 按照用户id删除指定用户
+     *
+     * @param id 用户id
+     */
+    void deleteByPrimaryKey(String id);
 }

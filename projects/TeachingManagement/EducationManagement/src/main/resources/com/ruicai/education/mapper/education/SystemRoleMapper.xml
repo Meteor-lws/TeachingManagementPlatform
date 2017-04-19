@@ -237,4 +237,23 @@
                            WHERE ROLE_CODE = 'teacher')
     </select>
 
+    <select id="GetTeacherRole" resultMap="BaseResultMap" parameterType="string">
+        SELECT
+            sr.ID,
+            sr.ROLE_NAME
+        FROM SYSTEM_ROLE sr LEFT JOIN USER_TO_ROLE utr ON sr.ID = utr.ROLE_ID
+            JOIN EDUCATION_TEACHER et ON et.USER_ID = utr.USER_ID
+        WHERE et.USER_ID = #{userId}
+    </select>
+    <delete id="deleteRoleByUserID" parameterType="string">
+        DELETE FROM USER_TO_ROLE
+        WHERE USER_ID = #{userId}
+    </delete>
+
+    <insert id="addRole" parameterType="com.ruicai.education.po.education.UserToRoleKey">
+        INSERT INTO USER_TO_ROLE VALUES (#{userId}, #{roleId})
+
+    </insert>
+
+
 </mapper>

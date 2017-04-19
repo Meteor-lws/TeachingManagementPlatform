@@ -54,4 +54,11 @@ public interface TeacherServer {
      */
     public List<EducationTeacher> selectAll();
 
+    /**
+     * 批量删除教师
+     *
+     * @param tids 教师id集合
+     * @param uids 用户id集合
+     */
+    void deleteTeacherByBatch(List<String> tids, List<String> uids);
 }

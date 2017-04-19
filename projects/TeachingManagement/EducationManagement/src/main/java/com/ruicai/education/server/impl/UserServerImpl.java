@@ -20,4 +20,10 @@ public class UserServerImpl implements UserServer {
         systemUserMapper.insert(user);
         return user.getId();
     }
+
+    @Override
+    public void deleteByPrimaryKey(String id) {
+        systemUserMapper.deleteByPrimaryKey(id);
+    }
+
 }

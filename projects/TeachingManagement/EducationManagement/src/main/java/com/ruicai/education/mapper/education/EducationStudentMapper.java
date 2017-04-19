@@ -2,8 +2,10 @@ package com.ruicai.education.mapper.education;
 
 import com.ruicai.education.po.education.EducationStudent;
 import com.ruicai.education.po.education.EducationStudentExample;
-import java.util.List;
+import com.ruicai.education.po.education.StudentCondition;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface EducationStudentMapper {
     int countByExample(EducationStudentExample example);
@@ -27,4 +29,8 @@ public interface EducationStudentMapper {
     int updateByPrimaryKeySelective(EducationStudent record);
 
     int updateByPrimaryKey(EducationStudent record);
+
+    List<EducationStudent> selectStudentBycondition(StudentCondition condition);
+
+    int selectStudentByconditionCount();
 }

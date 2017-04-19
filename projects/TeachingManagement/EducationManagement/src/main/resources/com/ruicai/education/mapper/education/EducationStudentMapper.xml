@@ -368,4 +368,10 @@
       STUDENT_CONDUCT = #{studentConduct,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectStudentByconditionCount" parameterType="com.ruicai.education.po.education.StudentCondition">
+
+  </select>
+
+
 </mapper>

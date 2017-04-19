@@ -8,6 +8,9 @@
     <result column="TEACHER_SPECIALITY" property="teacherSpeciality" jdbcType="VARCHAR" />
     <result column="TEACHER_SEX" property="teacherSex" jdbcType="VARCHAR" />
     <result column="TEACHER_NAME" property="teacherName" jdbcType="VARCHAR" />
+    <result column="TEACHER_SEX_VIEW" property="teacherSexView" jdbcType="VARCHAR"/>
+    <result column="TEACHER_SPECIALITY_VIEW" property="teacherSpecialityView" jdbcType="VARCHAR"/>
+    <result column="TEACHER_TYPE_VIEW" property="teacherTypeView" jdbcType="VARCHAR"/>
     <result column="TEACHER_PHONE" property="teacherPhone" jdbcType="VARCHAR" />
     <result column="TEACHER_INTRODUCTION" property="teacherIntroduction" jdbcType="VARCHAR" />
     <result column="TEACHER_PICTURE" property="teacherPicture" jdbcType="VARCHAR" />
@@ -175,16 +178,18 @@
     a1.*, ROWNUM rn
     FROM
     (SELECT
-    ET."ID",
+    et."ID",
     et.USER_ID,
     et.TEACHER_PHONE,
-    et.TEACHER_PICTURE,
     et.TEACHER_INTRODUCTION,
-    ET.TEACHER_NAME,
-    sd.DICTIONARY_NAME as TEACHER_SEX,
-    sd1.DICTIONARY_NAME as TEACHER_SPECIALITY,
-    sd2.DICTIONARY_NAME as TEACHER_TYPE,
-    utr.ROLE_ID
+    et.teacher_picture,
+    et.TEACHER_NAME,
+    et.TEACHER_SPECIALITY,
+    et.TEACHER_SEX,
+    et.TEACHER_TYPE,
+    sd.DICTIONARY_NAME as TEACHER_SEX_VIEW,
+    sd1.DICTIONARY_NAME as TEACHER_SPECIALITY_VIEW,
+    sd2.DICTIONARY_NAME as TEACHER_TYPE_VIEW
     FROM
     (
     (
@@ -195,10 +200,10 @@
     JOIN SYSTEM_DICTIONARY sd1 ON ET.TEACHER_SPECIALITY = SD1."ID"
     )
     JOIN SYSTEM_DICTIONARY sd2 ON ET.TEACHER_TYPE = SD2."ID"
-    ) ,USER_TO_ROLE utr
-    where ROWNUM &lt; ${endNum} AND utr.USER_ID = et.USER_ID
+    )
+    where ROWNUM &lt; ${endNum}
     <if test="id != null and id != ''">
-      id = #{id}
+      and id = #{id}
     </if>
     <if test="teacherType != null and teacherType != ''  ">
       and TEACHER_TYPE = #{teacherType}
@@ -219,8 +224,7 @@
   </select>
 
   <insert id="grantRole" parameterType="string">
-    insert
+    INSERT INTO USER_TO_ROLE VALUES (#{userId},#{roleId})
   </insert>
-
 
 </mapper>

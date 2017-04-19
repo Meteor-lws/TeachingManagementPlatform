@@ -508,6 +508,7 @@ var proSchool = {
 $(function () {
     //定义一个变量接受选中列对象
     var rowValue;
+    var schoolName = $("input", $("#schoolName").next("span")).val();
 
     $('#stuDg').datagrid({
         url: 'datagrid_data1.json',
@@ -618,29 +619,7 @@ $(function () {
 
     //班级下拉框数据
     $('#classSel').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }
-
-        ]
+        url: "/education/getClass"
     });
     //班级下拉框数据
     $('#personClass').combotree('tree').tree({
@@ -755,11 +734,11 @@ $(function () {
         $("#proSchool").window("close");
     });
 
-    var schoolName = $("input", $("#schoolName").next("span")).val();
-
-
-
-
+    $("#state").combobox({
+        url: "/education/getStudentStatu",
+        valueField: 'id',
+        textField: 'dictionaryName'
+    })
 
 
 

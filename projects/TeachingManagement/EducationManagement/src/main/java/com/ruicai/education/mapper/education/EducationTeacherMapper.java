@@ -28,4 +28,5 @@ public interface EducationTeacherMapper {
     List<EducationTeacher> selectAll();
 
     void grantRole(Map<String, String> s);
+
 }

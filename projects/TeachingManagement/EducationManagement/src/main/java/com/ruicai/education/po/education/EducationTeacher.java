@@ -19,11 +19,39 @@ public class EducationTeacher {
 
     private String teacherIntroduction;
 
+    private String teacherSexView;
+
+    private String teacherSpecialityView;
+
+    private String teacherTypeView;
+
     private String teacherPicture;
-
     private String[] role;
-
     private List<UserToRoleKey> roles;
+
+    public String getTeacherSexView() {
+        return teacherSexView;
+    }
+
+    public void setTeacherSexView(String teacherSexView) {
+        this.teacherSexView = teacherSexView;
+    }
+
+    public String getTeacherSpecialityView() {
+        return teacherSpecialityView;
+    }
+
+    public void setTeacherSpecialityView(String teacherSpecialityView) {
+        this.teacherSpecialityView = teacherSpecialityView;
+    }
+
+    public String getTeacherTypeView() {
+        return teacherTypeView;
+    }
+
+    public void setTeacherTypeView(String teacherTypeView) {
+        this.teacherTypeView = teacherTypeView;
+    }
 
     public String[] getRole() {
         return role;

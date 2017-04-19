@@ -13,12 +13,12 @@ public class TeacherCondition {
 
     private Integer rows;
 
-    private char[] page;
+    private Integer page;
 
 
-    private Integer startNum = 0;
+    private Integer startNum;
 
-    private Integer endNum = 20;
+    private Integer endNum;
 
     public String getId() {
         return id;
@@ -52,13 +52,7 @@ public class TeacherCondition {
         this.rows = rows;
     }
 
-    public char[] getPage() {
-        return page;
-    }
 
-    public void setPage(char[] page) {
-        this.page = page;
-    }
 
 
     public Integer getStartNum() {
@@ -75,5 +69,13 @@ public class TeacherCondition {
 
     public void setEndNum(Integer endNum) {
         this.endNum = endNum;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 }

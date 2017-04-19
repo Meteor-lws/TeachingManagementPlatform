@@ -1,6 +1,7 @@
 package com.ruicai.education.server;
 
 import com.ruicai.education.po.education.SystemRole;
+import com.ruicai.education.po.education.UserToRoleKey;
 
 import java.util.List;
 
@@ -15,4 +16,15 @@ public interface RoleService {
      */
     public List<SystemRole> selectAllTeacherRole();
 
+    /**
+     * 获取教师角色信息
+     *
+     * @param userId
+     * @return
+     */
+    List<SystemRole> getTeacherRole(String userId);
+
+    void deleteRoleByUserID(String userId);
+
+    void addRole(UserToRoleKey utr);
 }

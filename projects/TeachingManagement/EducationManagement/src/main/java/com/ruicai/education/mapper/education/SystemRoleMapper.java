@@ -2,6 +2,7 @@ package com.ruicai.education.mapper.education;
 
 import com.ruicai.education.po.education.SystemRole;
 import com.ruicai.education.po.education.SystemRoleExample;
+import com.ruicai.education.po.education.UserToRoleKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,4 +31,10 @@ public interface SystemRoleMapper {
     int updateByPrimaryKey(SystemRole record);
 
     List<SystemRole> selectAllTeacher();
+
+    List<SystemRole> GetTeacherRole(String userId);
+
+    void deleteRoleByUserID(String userId);
+
+    void addRole(UserToRoleKey utr);
 }
