@@ -27,9 +27,9 @@ public class ItemManagementController {
         this.service = service;
     }
 
-    @RequestMapping(value = "item", method = RequestMethod.GET)
+    @RequestMapping(value = "ItemManagement", method = RequestMethod.GET)
     public String ItemManagement() {
-        return "item";
+        return "ItemManagement";
     }
 
     @ResponseBody

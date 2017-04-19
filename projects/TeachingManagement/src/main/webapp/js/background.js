@@ -35,7 +35,7 @@ $(function () {
                     url = '/system/dictionary';
                     break;
                 case '评价项管理':
-                    url = '/evaluation/item';
+                    url = '/evaluation/ItemManagement';
                     break;
                 case '留言审核':
                     url = '/evaluation/MessageReview';
