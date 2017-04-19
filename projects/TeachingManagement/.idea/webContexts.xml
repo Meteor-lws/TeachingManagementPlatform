@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/EvaluationOnline/src/main/webapp/WEB-INF/jsp/ItemManagement.jsp" value="file://$PROJECT_DIR$/EvaluationOnline/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/EvaluationOnline/src/main/webapp/WEB-INF/jsp/item.jsp" value="file://$PROJECT_DIR$/EvaluationOnline/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/SystemManagement/src/main/webapp/WEB-INF/jsp/dictionary.jsp" value="file://$PROJECT_DIR$/SystemManagement/src/main/webapp" />
       </map>
