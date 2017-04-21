@@ -2,6 +2,7 @@ package com.ruicai.evaluation.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.ruicai.evaluation.service.impl.MessageReviewServiceImpl;
+import com.ruicai.evaluation.vo.EvaluationMessageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class MessageReviewController {
 
     @ResponseBody
     @RequestMapping(value = "GetMessages", method = RequestMethod.POST)
-    public String GetMessages() {
-        return JSON.toJSONStringWithDateFormat(service.getMessages(), "yyyy-MM-dd HH:mm:ss");
+    public String GetMessages(int page, int rows, String searchParams) {
+        return JSON.toJSONStringWithDateFormat(service.getMessages(page, rows, JSON.parseObject(searchParams, EvaluationMessageView.class)), "yyyy-MM-dd HH:mm:ss");
     }
 }

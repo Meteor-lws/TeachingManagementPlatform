@@ -16,5 +16,5 @@ import java.util.List;
 public interface MessageReviewService {
     List<SystemDictionary> getMessageStatuses();
 
-    Datagrid<EvaluationMessageView> getMessages();
+    Datagrid<EvaluationMessageView> getMessages(int page, int rows, EvaluationMessageView messageView);
 }

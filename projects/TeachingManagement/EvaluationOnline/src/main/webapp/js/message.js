@@ -27,6 +27,7 @@ function prepareDatagrid() {
         fitColumns: true,
         striped: true,
         remoteSort: false,
+        multiSort: true,
         rownumbers: true,
         pagination: true,
         pageSize: 25,
@@ -35,8 +36,8 @@ function prepareDatagrid() {
         columns: [[
             {field: 'id', checkbox: true},
             {field: 'messageContent', title: '留言内容', width: 1010, fixed: true},
-            {field: 'from', title: '留言人', width: 10},
-            {field: 'to', title: '留言对象', width: 10},
+            {field: 'from', title: '留言人', width: 10, sortable: true},
+            {field: 'to', title: '留言对象', width: 10, sortable: true},
             {field: 'messageTime', title: '留言时间', width: 15, sortable: true},
             {field: 'status', title: '审核状态', width: 10, sortable: true}
         ]],
@@ -45,15 +46,19 @@ function prepareDatagrid() {
 }
 
 function search() {
-    console.log(getSearchText());
+    $('#message-data').datagrid({
+        queryParams: {
+            searchParams: JSON.stringify(getSearchText())
+        }
+    });
 }
 
 function getSearchText() {
-    return {
-        date: $('#message-search-time').datebox('getValue'),
-        status: $('#message-search-status').combobox('getValue'),
-        content: $('#message-search-content').searchbox('getValue').trim(),
-        from: $('#message-search-from').searchbox('getValue').trim(),
-        to: $('#message-search-to').searchbox('getValue').trim()
-    };
+    var searchText = {};
+    searchText.messageTime = $('#message-search-time').datebox('getValue');
+    searchText.messageStatus = $('#message-search-status').combobox('getValue');
+    searchText.messageContent = $('#message-search-content').searchbox('getValue').trim();
+    searchText.from = $('#message-search-from').searchbox('getValue').trim();
+    searchText.to = $('#message-search-to').searchbox('getValue').trim();
+    return searchText;
 }

@@ -1,23 +1,22 @@
 package com.ruicai.evaluation.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ruicai.evaluation.mapper.evaluation.EvaluationMessageMapper;
 import com.ruicai.evaluation.mapper.system.SystemDictionaryMapper;
 import com.ruicai.evaluation.mapper.system.SystemDictionaryTypeMapper;
 import com.ruicai.evaluation.mapper.system.SystemUserMapper;
 import com.ruicai.evaluation.po.evaluation.EvaluationMessage;
 import com.ruicai.evaluation.po.evaluation.EvaluationMessageExample;
-import com.ruicai.evaluation.po.system.SystemDictionary;
-import com.ruicai.evaluation.po.system.SystemDictionaryExample;
-import com.ruicai.evaluation.po.system.SystemDictionaryTypeExample;
-import com.ruicai.evaluation.po.system.SystemUserExample;
+import com.ruicai.evaluation.po.evaluation.EvaluationMessageExample.Criteria;
+import com.ruicai.evaluation.po.system.*;
 import com.ruicai.evaluation.service.MessageReviewService;
 import com.ruicai.evaluation.vo.Datagrid;
 import com.ruicai.evaluation.vo.EvaluationMessageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 留言审核Service接口实现类
@@ -60,21 +59,72 @@ public class MessageReviewServiceImpl implements MessageReviewService {
         typeExample.createCriteria().andDictionaryTypeNameEqualTo("message-status");
         dictionaryExample.clear();
         dictionaryExample.createCriteria().andDictionaryTypeIdEqualTo(typeMapper.selectByExample(typeExample).get(0).getId());
-        dictionaryExample.setOrderByClause("DICTIONARY_SORT_NUMBER ASC");
+        dictionaryExample.setOrderByClause("DICTIONARY_SORT_NUMBER");
         return dictionaryMapper.selectByExample(dictionaryExample);
     }
 
-    public Datagrid<EvaluationMessageView> getMessages() {
+    public Datagrid<EvaluationMessageView> getMessages(int page, int rows, EvaluationMessageView messageView) {
+
+        Datagrid<EvaluationMessageView> result = new Datagrid<>();
+
         messageExample.clear();
+        Criteria criteria = messageExample.createCriteria();
+
+        if (messageView != null) {
+            List<SystemUser> users;
+            if (messageView.getFrom().length() > 0) {
+                userExample.clear();
+                userExample.createCriteria().andUserNameLike("%" + messageView.getFrom() + "%");
+                users = userMapper.selectByExample(userExample);
+                if (users.size() > 0) {
+                    List<String> from = new ArrayList<>();
+                    for (SystemUser user : users) {
+                        from.add(user.getId());
+                    }
+                    criteria.andMessageFromIn(from);
+                }
+            }
+            if (messageView.getTo().length() > 0) {
+                userExample.clear();
+                userExample.createCriteria().andUserNameLike("%" + messageView.getTo() + "%");
+                users = userMapper.selectByExample(userExample);
+                if (users.size() > 0) {
+                    List<String> to = new ArrayList<>();
+                    for (SystemUser user : users) {
+                        to.add(user.getId());
+                    }
+                    criteria.andMessageToIn(to);
+                }
+            }
+            if (messageView.getMessageStatus().length() > 0) {
+                criteria.andMessageStatusEqualTo(messageView.getMessageStatus());
+            }
+            if (messageView.getMessageContent().length() > 0) {
+                criteria.andMessageContentLike("%" + messageView.getMessageContent() + "%");
+            }
+            if (messageView.getMessageTime() != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(messageView.getMessageTime());
+                calendar.add(Calendar.DATE, 1);
+                Date date = calendar.getTime();
+                criteria.andMessageTimeBetween(messageView.getMessageTime(), date);
+            }
+            System.err.println(messageView);
+        }
+
+        messageExample.setOrderByClause("MESSAGE_STATUS,");
+
+        PageHelper.startPage(page, rows);
         List<EvaluationMessage> messages = messageMapper.selectByExample(messageExample);
+        result.setTotal(new PageInfo<>(messages).getTotal());
+
         List<EvaluationMessageView> messageViews = new ArrayList<>();
         for (EvaluationMessage message : messages) {
             messageViews.add(buildMessageView(message));
         }
-        Datagrid<EvaluationMessageView> datagrid = new Datagrid<>();
-        datagrid.setTotal(messageViews.size());
-        datagrid.setRows(messageViews);
-        return datagrid;
+        result.setRows(messageViews);
+
+        return result;
     }
 
     private EvaluationMessageView buildMessageView(EvaluationMessage message) {
