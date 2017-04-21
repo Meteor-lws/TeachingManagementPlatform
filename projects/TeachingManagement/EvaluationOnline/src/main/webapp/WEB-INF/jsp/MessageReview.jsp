@@ -27,10 +27,10 @@
     <table>
         <tr>
             <td>
-                <label for="message-search-time" style="font-size: 8px">留言日期：</label>
-                <input id="message-search-time" type="text" class="easyui-datebox">
                 <label for="message-search-status" style="font-size: 8px;margin-left: 10px">留言状态：</label>
                 <select id="message-search-status" style="width: 100px;height: 24px"></select>
+                <label for="message-search-time" style="font-size: 8px">留言日期：</label>
+                <input id="message-search-time" type="text" class="easyui-datebox">
                 <label for="message-search-content" style="font-size: 8px;margin-left: 10px">留言内容：</label>
                 <input id="message-search-content" class="message-search" style="width:200px">
                 <label for="message-search-from" style="font-size: 8px;margin-left: 10px">留言人：</label>

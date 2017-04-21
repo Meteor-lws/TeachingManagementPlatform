@@ -126,6 +126,24 @@ public class MessageReviewServiceImpl implements MessageReviewService {
         return result;
     }
 
+    public void UpdateMessagesStatus(List<EvaluationMessageView> messageViews, boolean status) {
+        String statusValue;
+        if (status) {
+            statusValue = "message-pass";
+        } else {
+            statusValue = "message-fail";
+        }
+        dictionaryExample.clear();
+        dictionaryExample.createCriteria().andDictionaryValueEqualTo(statusValue);
+        String statusId = dictionaryMapper.selectByExample(dictionaryExample).get(0).getId();
+        List<EvaluationMessage> messages = new ArrayList<>();
+        messages.addAll(messageViews);
+        for (EvaluationMessage message : messages) {
+            message.setMessageStatus(statusId);
+            messageMapper.updateByPrimaryKeySelective(message);
+        }
+    }
+
     private EvaluationMessageView buildMessageView(EvaluationMessage message) {
         EvaluationMessageView messageView = new EvaluationMessageView();
         messageView.setId(message.getId());

@@ -17,4 +17,6 @@ public interface MessageReviewService {
     List<SystemDictionary> getMessageStatuses();
 
     Datagrid<EvaluationMessageView> getMessages(int page, int rows, EvaluationMessageView messageView);
+
+    void UpdateMessagesStatus(List<EvaluationMessageView> messageViews, boolean status);
 }
