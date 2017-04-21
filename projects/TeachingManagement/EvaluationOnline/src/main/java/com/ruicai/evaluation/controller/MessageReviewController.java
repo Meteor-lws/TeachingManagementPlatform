@@ -34,4 +34,10 @@ public class MessageReviewController {
     public String MessageStatuses() {
         return JSON.toJSONString(service.getMessageStatuses());
     }
+
+    @ResponseBody
+    @RequestMapping(value = "GetMessages", method = RequestMethod.POST)
+    public String GetMessages() {
+        return JSON.toJSONStringWithDateFormat(service.getMessages(), "yyyy-MM-dd HH:mm:ss");
+    }
 }

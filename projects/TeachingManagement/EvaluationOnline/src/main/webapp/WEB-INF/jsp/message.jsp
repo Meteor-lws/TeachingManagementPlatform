@@ -26,7 +26,7 @@
 <div id="message-tool">
     <table>
         <tr>
-            <td style="min-width: 1070px">
+            <td>
                 <label for="message-search-time" style="font-size: 8px">留言日期：</label>
                 <input id="message-search-time" type="text" class="easyui-datebox">
                 <label for="message-search-status" style="font-size: 8px;margin-left: 10px">留言状态：</label>

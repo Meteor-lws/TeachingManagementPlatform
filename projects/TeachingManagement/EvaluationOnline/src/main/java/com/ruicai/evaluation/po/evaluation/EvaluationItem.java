@@ -40,4 +40,14 @@ public class EvaluationItem {
     public void setItemEnable(Short itemEnable) {
         this.itemEnable = itemEnable;
     }
+
+    @Override
+    public String toString() {
+        return "EvaluationItem{" +
+                "id='" + id + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", itemContent='" + itemContent + '\'' +
+                ", itemEnable=" + itemEnable +
+                '}';
+    }
 }

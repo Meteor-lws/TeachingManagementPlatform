@@ -30,10 +30,8 @@ public class EvaluationItemView extends EvaluationItem {
     @Override
     public String toString() {
         return "EvaluationItemView{" +
-                "id='" + id + '\'' +
-                ", itemContent='" + itemContent + '\'' +
-                ", type='" + type + '\'' +
+                "type='" + type + '\'' +
                 ", enable='" + enable + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

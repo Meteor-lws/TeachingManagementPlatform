@@ -72,4 +72,17 @@ public class EvaluationMessage {
     public void setMessageContent(String messageContent) {
         this.messageContent = messageContent == null ? null : messageContent.trim();
     }
+
+    @Override
+    public String toString() {
+        return "EvaluationMessage{" +
+                "id='" + id + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", messageFrom='" + messageFrom + '\'' +
+                ", messageTo='" + messageTo + '\'' +
+                ", messageStatus='" + messageStatus + '\'' +
+                ", messageTime=" + messageTime +
+                ", messageContent='" + messageContent + '\'' +
+                '}';
+    }
 }
