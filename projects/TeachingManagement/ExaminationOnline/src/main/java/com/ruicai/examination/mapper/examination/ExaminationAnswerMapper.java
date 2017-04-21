@@ -2,7 +2,6 @@ package com.ruicai.examination.mapper.examination;
 
 import com.ruicai.examination.po.examination.ExaminationAnswer;
 import com.ruicai.examination.po.examination.ExaminationAnswerExample;
-import com.ruicai.examination.vo.question.Question;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +29,4 @@ public interface ExaminationAnswerMapper {
     int updateByPrimaryKeySelective(ExaminationAnswer record);
 
     int updateByPrimaryKey(ExaminationAnswer record);
-
-
 }

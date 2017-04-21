@@ -3,6 +3,7 @@ package com.ruicai.examination.vo.question;
 import com.ruicai.examination.po.examination.ExaminationQuestion;
 
 /**
+ *
  * Created by 朱高 on 2017/4/18.
  */
 public class Question extends ExaminationQuestion {

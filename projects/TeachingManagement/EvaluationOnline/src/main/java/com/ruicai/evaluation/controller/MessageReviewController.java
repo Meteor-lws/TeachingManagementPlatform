@@ -27,7 +27,7 @@ public class MessageReviewController {
 
     @RequestMapping(value = "MessageReview", method = RequestMethod.GET)
     public String MessageReview() {
-        return "message";
+        return "MessageReview";
     }
 
     @ResponseBody
