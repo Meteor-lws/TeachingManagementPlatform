@@ -9,6 +9,20 @@
         <result column="QUESTION_CONTENT" property="questionContent" jdbcType="VARCHAR"/>
         <result column="QUESTION_ANSWER" property="questionAnswer" jdbcType="VARCHAR"/>
         <result column="QUESTION_SELECTIONS" property="questionSelections" jdbcType="DECIMAL"/>
+        <result column="QUESTION_STAGE" property="questionStage" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="QuestionResultMap" type="com.ruicai.examination.vo.question.Question">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="QUESTION_SUBJECT_NAME" property="questionSubjectName" jdbcType="VARCHAR"/>
+        <result column="QUESTION_TYPE_NAME" property="questionTypeName" jdbcType="VARCHAR"/>
+        <result column="QUESTION_SCORE" property="questionScore" jdbcType="DECIMAL"/>
+        <result column="QUESTION_CONTENT" property="questionContent" jdbcType="VARCHAR"/>
+        <result column="QUESTION_ANSWER" property="questionAnswer" jdbcType="VARCHAR"/>
+        <result column="QUESTION_SELECTIONS" property="questionSelections" jdbcType="DECIMAL"/>
+        <result column="QUESTION_STAGE_NAME" property="questionStageName" jdbcType="VARCHAR"/>
+        <result column="QUESTION_SUBJECT_VALUE" property="questionSubject" jdbcType="VARCHAR"/>
+        <result column="QUESTION_TYPE_VALUE" property="questionType" jdbcType="VARCHAR"/>
+        <result column="QUESTION_STAGE_VALUE" property="questionStage" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -246,4 +260,44 @@
             QUESTION_SELECTIONS = #{questionSelections,jdbcType=DECIMAL}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
+    <select id="selectQuestion" parameterType="com.ruicai.examination.vo.question.Question" resultMap="QuestionResultMap">
+        SELECT
+            eq."ID",
+            sd.DICTIONARY_NAME AS QUESTION_SUBJECT_NAME,
+            sd1.DICTIONARY_NAME AS QUESTION_TYPE_NAME,
+            eq.QUESTION_SCORE,
+            sd2.DICTIONARY_NAME AS QUESTION_STAGE_NAME,
+            eq.QUESTION_CONTENT,
+            eq.QUESTION_ANSWER,
+            sd.DICTIONARY_VALUE AS QUESTION_SUBJECT_VALUE,
+            sd1.DICTIONARY_VALUE AS QUESTION_TYPE_VALUE,
+            sd2.DICTIONARY_VALUE AS QUESTION_STAGE_VALUE,
+            eq.QUESTION_SELECTIONS
+        FROM
+            EXAMINATION_QUESTION eq
+            INNER JOIN SYSTEM_DICTIONARY sd ON eq.QUESTION_SUBJECT = sd."ID"
+            INNER JOIN SYSTEM_DICTIONARY sd1 ON eq.QUESTION_TYPE = sd1. ID
+            INNER JOIN SYSTEM_DICTIONARY sd2 ON eq.QUESTION_STAGE = sd2.id
+            <where>
+                <if test="questionSubject != '' and questionSubject != null">
+                    AND eq.QUESTION_SUBJECT = #{questionSubject}
+                </if>
+                <if test="questionType != '' and questionType != null">
+                    AND eq.QUESTION_TYPE = #{questionType}
+                </if>
+                <if test="questionStage != '' and questionStage != null">
+                    AND eq.QUESTION_STAGE = #{questionStage}
+                </if>
+                <if test="questionSelections != '' and questionSelections != null">
+                    AND eq.QUESTION_SELECTIONS = #{questionSelections}
+                </if>
+            </where>
+        ORDER BY
+            QUESTION_TYPE_VALUE ASC,
+            QUESTION_SUBJECT_VALUE ASC
+    </select>
+    <!--
+        sd.DICTIONARY_VALUE AS QUESTION_SUBJECT_VALUE,
+        sd1.DICTIONARY_VALUE AS QUESTION_TYPE_VALUE,
+    -->
 </mapper>

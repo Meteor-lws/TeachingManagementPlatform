@@ -3,12 +3,26 @@ package com.ruicai.examination.po.examination;
 public class ExaminationAnswerDetail {
     private String id;
 
+    /**
+     * 答题卡ID
+     * 外键：指向Answer_ID
+     */
     private String answerId;
 
+    /**
+     * 试卷详情ID
+     * 外键：指向Paper_Detail_Id
+     */
     private String paperDetailId;
 
+    /**
+     * 作答内容
+     */
     private String answerContent;
 
+    /**
+     * 作答得分
+     */
     private Short answerDetailScore;
 
     public String getId() {

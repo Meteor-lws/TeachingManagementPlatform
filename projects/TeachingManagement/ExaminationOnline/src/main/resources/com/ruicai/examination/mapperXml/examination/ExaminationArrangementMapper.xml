@@ -7,7 +7,7 @@
         <result column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR"/>
         <result column="PAPER_ID" property="paperId" jdbcType="VARCHAR"/>
         <result column="EXAMINATION_STAGE" property="examinationStage" jdbcType="VARCHAR"/>
-        <result column="EXAMINATION_TIME" property="examinationTime" jdbcType="OTHER"/>
+        <result column="EXAMINATION_TIME" property="examinationTime" jdbcType="TIMESTAMP"/>
         <result column="EXAMINATION_ADDRESS" property="examinationAddress" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="TeacherResultMap" type="com.ruicai.examination.po.education.EducationTeacher">
@@ -45,6 +45,7 @@
     <resultMap id="DicResultList" type="com.ruicai.examination.po.system.SystemDictionary">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
         <result column="DICTIONARY_NAME" property="dictionaryName" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_VALUE" property="dictionaryValue" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="ClassTreeResultList" type="com.ruicai.examination.vo.examination.ClassTree">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
@@ -319,9 +320,23 @@
     </select>
 
     <select id="findDicTypeName" parameterType="String" resultMap="DicResultList">
-        SELECT sd.ID,sd.DICTIONARY_NAME FROM SYSTEM_DICTIONARY sd WHERE sd.DICTIONARY_TYPE_ID =
-        (SELECT ID FROM SYSTEM_DICTIONARY_TYPE sdt WHERE sdt.DICTIONARY_TYPE_NAME = #{dicTypeName})
-        ORDER BY SD.DICTIONARY_SORT_NUMBER
+        SELECT
+            sd. ID,
+            sd.DICTIONARY_NAME,
+            sd.DICTIONARY_VALUE
+        FROM
+            SYSTEM_DICTIONARY sd
+        WHERE
+            sd.DICTIONARY_TYPE_ID = (
+                SELECT
+                    ID
+                FROM
+                    SYSTEM_DICTIONARY_TYPE sdt
+                WHERE
+                    sdt.DICTIONARY_TYPE_NAME = #{dicTypeName}
+            )
+        ORDER BY
+            SD.DICTIONARY_SORT_NUMBER
     </select>
 
     <select id="findTeacherName" resultMap="TeacherResultMap">

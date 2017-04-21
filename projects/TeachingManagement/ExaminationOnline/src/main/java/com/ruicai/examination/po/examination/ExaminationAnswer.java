@@ -3,8 +3,15 @@ package com.ruicai.examination.po.examination;
 public class ExaminationAnswer {
     private String id;
 
+    /**
+     * 作答学生
+     * 外键: 指向学生ID，
+     */
     private String studentId;
 
+    /**
+     * 作答总分
+     */
     private Short answerScore;
 
     public String getId() {

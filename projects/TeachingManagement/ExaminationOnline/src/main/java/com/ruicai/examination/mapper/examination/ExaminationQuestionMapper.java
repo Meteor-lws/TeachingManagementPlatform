@@ -2,10 +2,12 @@ package com.ruicai.examination.mapper.examination;
 
 import com.ruicai.examination.po.examination.ExaminationQuestion;
 import com.ruicai.examination.po.examination.ExaminationQuestionExample;
+import com.ruicai.examination.vo.question.Question;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface ExaminationQuestionMapper {
     int countByExample(ExaminationQuestionExample example);
 
@@ -28,4 +30,6 @@ public interface ExaminationQuestionMapper {
     int updateByPrimaryKeySelective(ExaminationQuestion record);
 
     int updateByPrimaryKey(ExaminationQuestion record);
+
+    List<Question> selectQuestion(Question question);
 }

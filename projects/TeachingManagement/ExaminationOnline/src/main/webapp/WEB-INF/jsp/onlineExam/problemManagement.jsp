@@ -20,13 +20,14 @@
     <script type="text/javascript" src="easyui/jquery.min.js"></script>
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="js/problem_management.js"></script>
+    <script type="text/javascript" src="js/problemManagement.js"></script>
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
     <script charset="utf-8" src="kindeditor/kindeditor.js"></script>
     <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
     <script>
         var editor;
         KindEditor.ready(function (K) {
-            editor = K.create('textarea[name="questionContent"]', {
+            editor = K.create('div[name="text"]', {
                 allowFileManage: true,
                 uploadJson: 'kindeditor/jsp/upload_json.jsp',
                 fileManagerJson: 'kindeditor/jsp/file_manager_json.jsp',
@@ -51,40 +52,31 @@
         <a class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="manager_tool.add();">添加</a>
         <a class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="manager_tool.edit();">修改</a>
         <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="manager_tool.remove();">删除</a>
-        <a class="easyui-linkbutton" iconCls="icon-save" plain="true" id="save">保存</a>
-        <a class="easyui-linkbutton" iconCls="icon-redo" plain="true" id="redo">取消编辑</a>
+        <a class="easyui-linkbutton" iconCls="icon-search" onclick="manager_tool.search();">查询</a>
+        <a class="easyui-linkbutton" iconCls="icon-reload" onclick="manager_tool.clear();">重置查询条件</a>
     </div>
     <div style="padding:0 0 0 7px;color:#333;">
-        <label for="questionType">查询题目类型：</label><input id="questionType" type="text" class="textbox"
-                                                        style="width:130px">
-        <label for="proposer">查询出题人：</label><input id="proposer" type="text" class="textbox" style="width:130px">
-        <label for="phase">查询阶段：</label><input id="phase" type="text" class="textbox" style="width:130px">
-        <label for="condition_date_from">出题时间从：</label><input id="condition_date_from" type="text" name="date_from"
-                                                              class="easyui-datebox" editable="false"
-                                                              style="width:110px">
-        <label for="condition_date_to">到：</label><input type="text" id="condition_date_to" name="date_to"
-                                                        class="easyui-datebox" editable="false" style="width:110px">
-        <a class="easyui-linkbutton" iconCls="icon-search" onclick="manager_tool.search();">查询</a>
+        <label for="questionSubjectName">题目使用班级类型：</label><input id="questionSubjectName" type="text" class="textbox" style="width:130px">
+        <label for="questionTypeName">试题类型：</label><input id="questionTypeName" type="text" style="width:130px">
+        <label for="questionStageName">查询阶段：</label><input id="questionStageName" type="text" style="width:130px">
+        <label for="questionSelections">使用次数：</label><input id="questionSelections" type="text" style="width:110px">
     </div>
 </div>
-<form id="addQuestion" style="margin:0;padding:5px 0 0 25px;color:#333;">
-    <label for="questionTypes">试题类型：</label><input id="questionTypes" name="questionType" editable="false"
-                                                   style="width:125px;">
-    <label for="phases">适用阶段：</label><input id="phases" name="phase" class="textbox" editable="false"
-                                            style="width:125px;">
-    <label for="questionTimes">出题时间：</label><input id="questionTimes" name="questionTime" class="easyui-datebox"
-                                                   editable="false" required="required" style="width:125px;">
-    <div id="answer_div"><label for="answer">标准答案：</label><input id="answer" name="answer" type="text"
-                                                                 style="width:125px;"></div>
-    <div id="answer1_div" style="display:none;"><label for="answer1">标准答案：</label><input id="answer1" name="answer"
-                                                                                         style="width:125px;"></div>
-    <div id="answer2_div" style="display:none;"><label for="answer2">标准答案：</label><input id="answer2" name="answer"
-                                                                                         class="easyui-filebox"
-                                                                                         style="width:180px;"></div>
-    <textarea id="content" name="questionContent" rows="" cols=""
-              style="width: 800px; height: 400px; visibility: hidden;" title=""></textarea>
-    <input type="hidden" name="proposer" editable="false" value="徐明" style="width:125px;">
-    <input type="hidden" name="usageCount" editable="false" value="0" style="width:125px;">
-</form>
+<div>
+    <div id="chooseQuestionType" align="center" style="vertical-align: middle"></div>
+    <form id="addQuestion" name="myForm" style="margin:0;padding:5px 0 0 25px;color:#333;">
+        <%--<label for="classType">班级类型：</label><input id="classType" editable="false" style="width:125px;">
+        <label for="questionStage">适用阶段：</label><input id="questionStage" class="textbox" editable="false" style="width:125px;">
+        <label for="questionScores">题目分数：</label><input id="questionScores" class="textbox" style="width: 100px;"/>
+        <label >题目答案：<span id="answer"></span></label>--%>
+        <%--<div id="judgment"></div>
+        <input type="hidden" name="proposer" editable="false" value="徐明" style="width:125px;">
+        <input type="hidden" name="usageCount" editable="false" value="0" style="width:125px;">--%>
+        <div name="text" >
+
+        </div>
+    </form>
+
+</div>
 </body>
 </html>

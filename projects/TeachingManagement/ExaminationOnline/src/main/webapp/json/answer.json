@@ -1,19 +1,18 @@
 [
   {
     "id": "A",
-    "selected": true,
-    "text": "A"
+    "dictionaryName": "A"
   },
   {
     "id": "B",
-    "text": "B"
+    "dictionaryName": "B"
   },
   {
     "id": "C",
-    "text": "C"
+    "dictionaryName": "C"
   },
   {
     "id": "D",
-    "text": "D"
+    "dictionaryName": "D"
   }
 ]

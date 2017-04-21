@@ -24,7 +24,7 @@ $(function () {
         pageList: [10, 20, 30, 40, 50],
         pageNumber: 1,//也是排序项
         toolbar: "#manager_tool",
-        autoRowHeight: false,
+        autoRowHeight: true,
         multiSort : true,
         remoteSort : false,
         align: "center",

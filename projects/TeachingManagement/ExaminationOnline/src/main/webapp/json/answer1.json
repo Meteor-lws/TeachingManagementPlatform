@@ -1,11 +1,10 @@
 [
   {
-    "id": "√",
-    "selected": true,
-    "text": "√"
+    "id": "1",
+    "dictionaryName": "√"
   },
   {
-    "id": "×",
-    "text": "×"
+    "id": "0",
+    "dictionaryName": "×"
   }
 ]

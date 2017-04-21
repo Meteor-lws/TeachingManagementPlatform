@@ -58,7 +58,8 @@ public class ExaminationManagementController {
 
     @RequestMapping(value = "/findDicTypeName", method = RequestMethod.POST)
     @ResponseBody
-    public String findTestPhase(@Param(value = "dicTypeName") String dicTypeName){
+    public String findTestPhase(String dicTypeName){
+        System.err.println(dicTypeName);
         List<SystemDictionary> list = examinationManagementService.findDicTypeName(dicTypeName);
         return JSON.toJSONString(list);
     }

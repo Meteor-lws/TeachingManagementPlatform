@@ -1,19 +1,52 @@
 package com.ruicai.examination.po.examination;
 
 public class ExaminationQuestion {
-    private String id;
+    protected String id;
 
-    private String questionSubject;
+    /**
+     * 考试科目
+     * 外键: 指向数据字典表，数据字典的ID
+     */
+    protected String questionSubject;
 
-    private String questionType;
+    /**
+     * 试题类型
+     * 外键: 指向数据字典表，数据字典的ID
+     */
+    protected String questionType;
 
-    private Short questionScore;
+    /**
+     * 试题分数
+     */
+    protected Short questionScore;
 
-    private String questionContent;
+    /**
+     * 试题内容
+     */
+    protected String questionContent;
 
-    private String questionAnswer;
+    /**
+     * 试题答案
+     */
+    protected String questionAnswer;
 
-    private Integer questionSelections;
+    /**
+     * 选用次数
+     */
+    protected Integer questionSelections;
+
+    /**
+     * 试题使用阶段
+     */
+    protected String questionStage;
+
+    public String getQuestionStage() {
+        return questionStage;
+    }
+
+    public void setQuestionStage(String questionStage) {
+        this.questionStage = questionStage;
+    }
 
     public String getId() {
         return id;

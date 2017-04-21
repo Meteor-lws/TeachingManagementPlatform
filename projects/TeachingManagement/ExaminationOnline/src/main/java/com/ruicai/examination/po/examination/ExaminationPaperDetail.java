@@ -3,8 +3,16 @@ package com.ruicai.examination.po.examination;
 public class ExaminationPaperDetail {
     private String id;
 
+    /**
+     * 试卷ID
+     * 外键：指向试卷ID
+     */
     private String paperId;
 
+    /**
+     * 试题
+     * 外键：指向问题ID
+     */
     private String questionId;
 
     public String getId() {

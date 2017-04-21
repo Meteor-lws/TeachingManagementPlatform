@@ -3,14 +3,33 @@ package com.ruicai.examination.po.examination;
 public class ExaminationPaper {
     private String id;
 
+    /**
+     * 考试阶段
+     * 外键：指向数据字典的ID
+     */
     private String paperStage;
 
+    /**
+     * 试卷科目
+     * 外键：指向数据字典ID
+     */
     private String paperSubject;
 
+    /**
+     * 试卷状态
+     * 外键：指向数据字典ID
+     */
     private String paperStatus;
 
+    /**
+     * 出题人
+     * 外键:指向老师ID
+     */
     private String paperAuthor;
 
+    /**
+     * 试卷标题
+     */
     private String paperTitle;
 
     public String getId() {
