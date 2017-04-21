@@ -109,10 +109,9 @@ public class MessageReviewServiceImpl implements MessageReviewService {
                 Date date = calendar.getTime();
                 criteria.andMessageTimeBetween(messageView.getMessageTime(), date);
             }
-            System.err.println(messageView);
         }
 
-        messageExample.setOrderByClause("MESSAGE_STATUS,");
+        messageExample.setOrderByClause("MESSAGE_STATUS,MESSAGE_TIME,MESSAGE_FROM");
 
         PageHelper.startPage(page, rows);
         List<EvaluationMessage> messages = messageMapper.selectByExample(messageExample);
