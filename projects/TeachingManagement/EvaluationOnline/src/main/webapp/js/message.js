@@ -5,5 +5,20 @@
  */
 
 $(function () {
-
+    prepareTools();
 });
+
+function prepareTools() {
+    $('#message-search-status').combobox({
+        url: 'MessageStatuses',
+        valueField: 'id',
+        textField: 'dictionaryName'
+    });
+    $('.message-search').searchbox({
+        searcher: search
+    });
+}
+
+function search() {
+    alert('search');
+}
