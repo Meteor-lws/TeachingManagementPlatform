@@ -45,5 +45,15 @@ function prepareDatagrid() {
 }
 
 function search() {
-    alert('search');
+    console.log(getSearchText());
+}
+
+function getSearchText() {
+    return {
+        date: $('#message-search-time').datebox('getValue'),
+        status: $('#message-search-status').combobox('getValue'),
+        content: $('#message-search-content').searchbox('getValue').trim(),
+        from: $('#message-search-from').searchbox('getValue').trim(),
+        to: $('#message-search-to').searchbox('getValue').trim()
+    };
 }
