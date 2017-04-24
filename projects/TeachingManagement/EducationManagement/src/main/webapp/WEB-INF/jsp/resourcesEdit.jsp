@@ -25,18 +25,15 @@
                data-options="iconCls:'icon-remove',plain:true">批量删除</a>
         </div>
         <div style="margin-top:5px" align="left">
-                班级
-            <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
             上传者
-            <select id="Uploader" class="easyui-combobox" style="width:120px;"></select>
+            <select id="teacherId" class="easyui-combobox" style="width:120px;"></select>
             日期
-            <input id="dd" type="text" class="easyui-datebox" style="width: 120px;"></input>
+            <input id="workUploadTime" type="text" class="easyui-datetimebox" style="width: 120px;"></input>
             &nbsp&nbsp&nbsp
-            <a href="otherpage.php" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            <input id="workType" type="hidden" name="workType" value="resource">
         </div>
     </div>
-
-
     </thead>
 </table>
 </body>

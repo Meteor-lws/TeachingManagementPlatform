@@ -1,6 +1,8 @@
 package com.ruicai.education.po.education;
 
-import java.util.Date;
+import com.ruicai.education.util.MyDateFormate;
+
+import java.sql.Timestamp;
 
 public class EducationClass {
     private String id;
@@ -11,13 +13,52 @@ public class EducationClass {
 
     private String assistantId;
 
+    private String assistantView;
+
     private String classType;
 
+    private String classTypeView;
     private String className;
+    private Timestamp classStartDate;
+    private Timestamp classEndDate;
+    private String mainTeacher;
+    private String headTeacher;
+    private String classStartDateView;
+    private String classEndDateView;
 
-    private Date classStartDate;
+    public String getClassTypeView() {
+        return classTypeView;
+    }
 
-    private Date classEndDate;
+    public void setClassTypeView(String classTypeView) {
+        this.classTypeView = classTypeView;
+    }
+
+    public String getClassStartDateView() {
+        return classStartDateView;
+    }
+
+
+    public String getClassEndDateView() {
+        return classEndDateView;
+    }
+
+
+    public String getMainTeacher() {
+        return mainTeacher;
+    }
+
+    public void setMainTeacher(String mainTeacher) {
+        this.mainTeacher = mainTeacher;
+    }
+
+    public String getHeadTeacher() {
+        return headTeacher;
+    }
+
+    public void setHeadTeacher(String headTeacher) {
+        this.headTeacher = headTeacher;
+    }
 
     public String getId() {
         return id;
@@ -67,19 +108,22 @@ public class EducationClass {
         this.className = className == null ? null : className.trim();
     }
 
-    public Date getClassStartDate() {
+    public Timestamp getClassStartDate() {
+
         return classStartDate;
     }
 
-    public void setClassStartDate(Date classStartDate) {
+    public void setClassStartDate(Timestamp classStartDate) {
         this.classStartDate = classStartDate;
+        this.classStartDateView = MyDateFormate.timeStampToString(classStartDate);
     }
 
-    public Date getClassEndDate() {
+    public Timestamp getClassEndDate() {
         return classEndDate;
     }
 
-    public void setClassEndDate(Date classEndDate) {
+    public void setClassEndDate(Timestamp classEndDate) {
         this.classEndDate = classEndDate;
+        this.classEndDateView = MyDateFormate.timeStampToString(classEndDate);
     }
 }

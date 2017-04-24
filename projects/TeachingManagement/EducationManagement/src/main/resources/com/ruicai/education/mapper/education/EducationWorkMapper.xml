@@ -8,6 +8,7 @@
     <result column="WORK_URL" property="workUrl" jdbcType="VARCHAR" />
     <result column="WORK_UPLOAD_TIME" property="workUploadTime" jdbcType="TIMESTAMP" />
     <result column="WORK_REMARK" property="workRemark" jdbcType="VARCHAR" />
+    <result column="TEACHER_VIEW" property="teacherView" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
     ID, TEACHER_ID, WORK_TYPE, WORK_URL, WORK_UPLOAD_TIME, WORK_REMARK
@@ -107,4 +108,77 @@
       WORK_REMARK = #{workRemark,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectResBycondition" parameterType="com.ruicai.education.po.education.WorkCondition"
+          resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    (
+    SELECT
+    A .*, ROWNUM rn
+    FROM
+    (
+    SELECT
+    EW."ID",
+    EW.TEACHER_ID,
+    EW.WORK_TYPE,
+    EW.WORK_UPLOAD_TIME,
+    EW.WORK_URL,
+    ET.TEACHER_NAME AS TEACHER_VIEW
+    FROM(
+    EDUCATION_WORK EW
+    JOIN SYSTEM_DICTIONARY sd ON EW.WORK_TYPE = SD."ID")
+    JOIN EDUCATION_TEACHER et ON EW.TEACHER_ID = ET."ID"
+    WHERE
+    EW.WORK_TYPE = (
+    SELECT
+    "ID"
+    FROM
+    SYSTEM_DICTIONARY
+    WHERE
+    DICTIONARY_VALUE = #{workType}
+    )
+    AND ROWNUM &lt; #{endNum}
+
+    <if test="teacherId != null and teacherId != '' ">
+      AND TEACHER_ID = #{teacherId}
+    </if>
+    <if test="workUploadTime != null  and workUploadTime != ''">
+      AND WORK_UPLOAD_TIME &gt; to_date(#{workUploadTime},'yyyy-mm-dd hh24:mi:ss')
+    </if>
+    ) A
+    )
+    WHERE
+    rn &gt; #{startNum}
+  </select>
+
+
+  <select id="selectResByconditionCount" parameterType="com.ruicai.education.po.education.WorkCondition"
+          resultType="int">
+    SELECT
+    "COUNT"(EW."ID")
+    FROM
+
+    EDUCATION_WORK ew
+    JOIN SYSTEM_DICTIONARY sd ON EW.WORK_TYPE = SD."ID"
+    WHERE
+    EW.WORK_TYPE = (
+    SELECT
+    "ID"
+    FROM
+    SYSTEM_DICTIONARY
+    WHERE
+    DICTIONARY_VALUE = #{workType}
+    )
+    <if test="teacherId != null and teacherId != '' ">
+      AND TEACHER_ID = #{teacherId}
+    </if>
+    <if test="workUploadTime != null  and workUploadTime != ''">
+      AND WORK_UPLOAD_TIME &gt; to_date(#{workUploadTime},'yyyy-mm-dd hh24:mi:ss')
+    </if>
+
+  </select>
+
+
 </mapper>

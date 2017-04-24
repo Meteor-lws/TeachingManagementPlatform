@@ -1,9 +1,9 @@
 package com.ruicai.education.mapper.education;
 
 import com.ruicai.education.po.education.EducationWork;
+import com.ruicai.education.po.education.WorkCondition;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface EducationWorkMapper {
 
@@ -18,4 +18,8 @@ public interface EducationWorkMapper {
     int updateByPrimaryKeySelective(EducationWork record);
 
     int updateByPrimaryKey(EducationWork record);
+
+    List<EducationWork> selectResBycondition(WorkCondition condition);
+
+    int selectResByconditionCount(WorkCondition condition);
 }

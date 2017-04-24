@@ -1,10 +1,12 @@
 package com.ruicai.education.server.impl;
 
 import com.ruicai.education.mapper.education.EducationClassMapper;
+import com.ruicai.education.po.education.ClassCondition;
 import com.ruicai.education.po.education.EducationClass;
 import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.server.ClassServer;
 import com.ruicai.education.server.DictionaryServer;
+import com.ruicai.education.util.PageBean;
 import com.ruicai.education.util.TreeBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +57,23 @@ public class ClassServerImpl implements ClassServer {
             info.add(treeBean);
         }
         return info;
+    }
+
+    @Override
+    public PageBean<EducationClass> selectByCondition(ClassCondition condition) {
+        condition.setStartNum((condition.getPage() - 1) * condition.getRows());
+        condition.setEndNum(condition.getPage() * condition.getRows() + 1);
+        PageBean<EducationClass> pageBean = new PageBean<>();
+        List<EducationClass> list = educationClassMapper.selectByCondition(condition);
+        int total = educationClassMapper.selectByConditionCount(condition);
+        pageBean.setTotal(total);
+        pageBean.setRows(list);
+        return pageBean;
+    }
+
+    @Override
+    public int selectByConditionCount(ClassCondition condition) {
+        return educationClassMapper.selectByConditionCount(condition);
     }
 
 }

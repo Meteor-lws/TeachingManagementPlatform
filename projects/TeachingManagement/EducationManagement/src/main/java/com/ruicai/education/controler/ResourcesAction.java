@@ -1,9 +1,11 @@
 package com.ruicai.education.controler;
 
+import com.alibaba.fastjson.JSON;
 import com.ruicai.education.po.education.EducationTeacher;
-import com.ruicai.education.server.ClassServer;
-import com.ruicai.education.server.DictionaryServer;
-import com.ruicai.education.server.TeacherServer;
+import com.ruicai.education.po.education.EducationWork;
+import com.ruicai.education.po.education.WorkCondition;
+import com.ruicai.education.server.WorkServer;
+import com.ruicai.education.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +21,7 @@ import java.util.List;
 public class ResourcesAction {
 
     @Autowired
-    private DictionaryServer dictionaryServer;
-
-    @Autowired
-    private ClassServer classServer;
-
-    @Autowired
-    private TeacherServer teacherServer;
+    private WorkServer workServer;
 
     /**
      * 首页
@@ -37,7 +33,6 @@ public class ResourcesAction {
         return "resourcesEdit";
     }
 
-
     /**
      * 获取系统所有教师
      *
@@ -46,10 +41,26 @@ public class ResourcesAction {
     @RequestMapping("/getUploader")
     public @ResponseBody
     List<EducationTeacher> getUploder() {
-        List<EducationTeacher> teacherList = teacherServer.selectAll();
+        List<EducationTeacher> teacherList = workServer.selectAllTeacher();
         return teacherList;
     }
 
+    @RequestMapping("/getResByCondition")
+    public @ResponseBody
+    PageBean<EducationWork> getResourceByCondition(WorkCondition condition, PageBean<EducationWork> pageBean) {
+        return workServer.getResByCondition(condition, pageBean);
+    }
 
+    @RequestMapping("/deleteResByBatch")
+    public @ResponseBody
+    void deleteResByBatch(String ids) {
+        List<String> rids = JSON.parseArray(ids, String.class);
+        workServer.deleteResByBatch(rids);
+    }
+
+    @RequestMapping("/downloadByBatch")
+    public void downLoad(String paths) {
+
+    }
 
 }

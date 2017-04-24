@@ -1,6 +1,8 @@
 package com.ruicai.education.po.education;
 
-import java.util.Date;
+import com.ruicai.education.util.MyDateFormate;
+
+import java.sql.Timestamp;
 
 public class EducationWork {
     private String id;
@@ -11,9 +13,18 @@ public class EducationWork {
 
     private String workUrl;
 
-    private Date workUploadTime;
+    private Timestamp workUploadTime;
+
+    private String teacherView;
 
     private String workRemark;
+
+    private String workUploadTimeView;
+
+    public String getWorkUploadTimeView() {
+        return workUploadTimeView;
+    }
+
 
     public String getId() {
         return id;
@@ -47,12 +58,13 @@ public class EducationWork {
         this.workUrl = workUrl == null ? null : workUrl.trim();
     }
 
-    public Date getWorkUploadTime() {
+    public Timestamp getWorkUploadTime() {
         return workUploadTime;
     }
 
-    public void setWorkUploadTime(Date workUploadTime) {
+    public void setWorkUploadTime(Timestamp workUploadTime) {
         this.workUploadTime = workUploadTime;
+        this.workUploadTimeView = MyDateFormate.timeStampToString(workUploadTime);
     }
 
     public String getWorkRemark() {
@@ -61,5 +73,13 @@ public class EducationWork {
 
     public void setWorkRemark(String workRemark) {
         this.workRemark = workRemark == null ? null : workRemark.trim();
+    }
+
+    public String getTeacherView() {
+        return teacherView;
+    }
+
+    public void setTeacherView(String teacherView) {
+        this.teacherView = teacherView;
     }
 }

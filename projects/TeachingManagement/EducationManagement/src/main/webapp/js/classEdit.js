@@ -4,7 +4,7 @@
 
 
     $('#classDg').datagrid({
-        url: 'datagrid_data1.json',
+        url: '/education/selectClassByCondition',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -14,12 +14,20 @@
         pageSize: 20,
         pageNumber: 1,
         columns: [[
-            {field: 'code', itemid: 'ID', checkbox: true, width: 10},
-            {field: 'productid', title: '班级名称', width: 10},
-            {field: 'productid', title: '开班时间', width: 10},
-            {field: 'productid', title: '结业时间', width: 10},
-            {field: 'productid', title: '状态', width: 10}
+            {field: 'id', itemid: 'ID', checkbox: true, width: 10},
+            {field: 'className', title: '班级名称', width: 10},
+            {field: 'classStartDateView', title: '开班时间', width: 10},
+            {field: 'classEndDateView', title: '结业时间', width: 10},
+            {field: 'mainTeacher', title: '主讲老师', width: 10},
+            {field: 'classType', title: '班级类型', width: 10},
+            {field: 'headTeacher', title: '班主任', width: 10},
+            {field: 'assistantView', title: '助教', width: 10},
+
         ]],
+        queryParams: {
+            classStartDate: $("#classStartDate").datetimebox("getValue"),
+            classEndDate: $("#classEndDate").datetimebox("getValue")
+        },
         toolbar: '#classTb'
     });
 
@@ -80,37 +88,12 @@
 
     });
     $("#search").click(function () {
-        var no = $("#noSearch").val();
         $('#classDg').datagrid('load', {
-            'no': no
+            classStartDate: $("#classStartDate").datetimebox("getValue"),
+            classEndDate: $("#classEndDate").datetimebox("getValue")
         });
     });
 
-    $('#classSel').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }
-
-        ]
-    });
 
 
 });

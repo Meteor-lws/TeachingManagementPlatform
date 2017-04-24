@@ -10,6 +10,10 @@
     <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
     <result column="CLASS_START_DATE" property="classStartDate" jdbcType="TIMESTAMP" />
     <result column="CLASS_END_DATE" property="classEndDate" jdbcType="TIMESTAMP" />
+    <result column="HEAD_TEACHER" property="headTeacher" jdbcType="VARCHAR"/>
+    <result column="MAIN_TEACHER" property="mainTeacher" jdbcType="VARCHAR"/>
+    <result column="CLASS_TYPE_VIEW" property="classTypeView" jdbcType="VARCHAR"/>
+    <result column="ASSISTANT_VIEW" property="assistantView" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -261,6 +265,71 @@
         FROM EDUCATION_CLASS
         WHERE CLASS_TYPE = #{type}
     </select>
+
+  <select id="selectByCondition" parameterType="com.ruicai.education.po.education.ClassCondition"
+          resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    (
+    SELECT
+    A .*,
+    ROWNUM rn
+    FROM
+    (
+    SELECT
+    EC."ID",
+    ec.ASSISTANT_ID,
+    ec.CLASS_START_DATE,
+    ec.CLASS_NAME,
+    ec.CLASS_TYPE,
+    ec.CLASS_END_DATE,
+    ET.TEACHER_NAME AS MAIN_TEACHER,
+    ET1.TEACHER_NAME AS HEAD_TEACHER,
+    et2.TEACHER_NAME AS ASSISTANT_VIEW,
+    SD.DICTIONARY_NAME AS CLASS_TYPE_VIEW
+    FROM
+    (
+    (
+    (
+    EDUCATION_CLASS ec
+    JOIN EDUCATION_TEACHER et ON EC.MAIN_TEACHER_ID = ET."ID"
+    )
+    JOIN EDUCATION_TEACHER et1 ON ET1. ID = EC.HEAD_TEACHER_ID
+    )
+    JOIN EDUCATION_TEACHER et2 ON ET2."ID" = EC.ASSISTANT_ID
+    )
+    JOIN SYSTEM_DICTIONARY sd ON SD."ID" = EC.CLASS_TYPE
+    WHERE
+    ROWNUM &lt; #{endNum}
+
+    <if test="classStartDate != null and classStartDate != ''">
+      AND CLASS_START_DATE &gt; to_date(#{classStartDate},'yyyy-mm-dd hh24:mi:ss')
+    </if>
+    <if test="classStartDate != null and classStartDate != ''">
+      AND CLASS_START_DATE &lt; to_date(#{classEndDate},'yyyy-mm-dd hh24:mi:ss')
+    </if>
+    ) A
+    )
+    WHERE
+    rn &gt; #{startNum}
+  </select>
+
+
+  <select id="selectByConditionCount" parameterType="com.ruicai.education.po.education.ClassCondition" resultType="int">
+    SELECT
+    "COUNT" (EC."ID")
+    FROM
+    EDUCATION_CLASS ec
+    <where>
+      <if test="classStartDate != null and classStartDate != ''">
+        CLASS_START_DATE &gt; to_date(#{classStartDate},'yyyy-mm-dd hh24:mi:ss')
+      </if>
+      <if test="classStartDate != null and classStartDate != ''">
+        AND CLASS_START_DATE &lt; to_date(#{classEndDate},'yyyy-mm-dd hh24:mi:ss')
+      </if>
+    </where>
+  </select>
 
 
 </mapper>

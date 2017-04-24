@@ -1,17 +1,22 @@
 package com.ruicai.education.po.education;
 
 /**
- * Created by wy on 2017/4/16.
+ * Created by wy on 2017/4/24.
  */
-public class WorkCondition {
+public class ClassCondition {
+    private String classStartDate;
 
-    private String workType;
-    private String teacherId;
-    private String workUploadTime;
+    private String classEndDate;
+
     private Integer rows;
+
     private Integer page;
+
+
     private Integer startNum;
+
     private Integer endNum;
+
 
     public Integer getRows() {
         return rows;
@@ -45,28 +50,19 @@ public class WorkCondition {
         this.endNum = endNum;
     }
 
-    public String getWorkType() {
-        return workType;
+    public String getClassStartDate() {
+        return classStartDate;
     }
 
-    public void setWorkType(String workType) {
-        this.workType = workType;
+    public void setClassStartDate(String classStartDate) {
+        this.classStartDate = classStartDate;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public String getClassEndDate() {
+        return classEndDate;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getWorkUploadTime() {
-        return workUploadTime;
-    }
-
-    public void setWorkUploadTime(String workUploadTime) {
-        this.workUploadTime = workUploadTime;
+    public void setClassEndDate(String classEndDate) {
+        this.classEndDate = classEndDate;
     }
 }
-

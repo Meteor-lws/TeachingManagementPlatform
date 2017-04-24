@@ -31,10 +31,9 @@
         </div>
 
         <div align="left" style="margin-top:5px">
-            班级名称 <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
-            开班时间 <input id="startTime" type="text" class="easyui-datebox" style="width: 120px"></input>
-            结业时间<input id="endTime" type="text" class="easyui-datebox" style="width: 120px"></input>
-            <a id="search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            开班时间 <input id="classStartDate" type="text" class="easyui-datebox" style="width: 120px"></input>
+            结业时间<input id="classEndDate" type="text" class="easyui-datebox" style="width: 120px"></input>
+            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         </div>
     </div>
 <div id="classDialog" class="easyui-dialog" title="班级修改"

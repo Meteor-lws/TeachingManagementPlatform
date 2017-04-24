@@ -1,9 +1,11 @@
 package com.ruicai.education.mapper.education;
 
+import com.ruicai.education.po.education.ClassCondition;
 import com.ruicai.education.po.education.EducationClass;
 import com.ruicai.education.po.education.EducationClassExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface EducationClassMapper {
     int countByExample(EducationClassExample example);
@@ -29,4 +31,8 @@ public interface EducationClassMapper {
     int updateByPrimaryKey(EducationClass record);
 
     List<EducationClass> selectClassByType(String type);
+
+    List<EducationClass> selectByCondition(ClassCondition condition);
+
+    int selectByConditionCount(ClassCondition condition);
 }

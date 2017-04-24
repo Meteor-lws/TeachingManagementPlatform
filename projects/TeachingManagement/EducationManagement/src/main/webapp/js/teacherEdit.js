@@ -238,9 +238,9 @@ $(function () {
         columns: [[
             {field: 'id', itemid: 'ID', checkbox: true, width: 1000},
             {field: 'teacherName', title: '姓名', width: 10, width: 100},
-            {field: 'teacherSex', title: '性别', width: 100},
-            {field: 'teacherType', title: '类型', width: 100},
-            {field: 'teacherSpeciality', title: '专业', width: 100},
+            {field: 'teacherSexView', title: '性别', width: 100},
+            {field: 'teacherTypeView', title: '类型', width: 100},
+            {field: 'teacherSpecialityView', title: '专业', width: 100},
             {field: 'teacherPhone', title: '手机', width: 100},
         ]],
         queryParams: {

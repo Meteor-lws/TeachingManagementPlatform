@@ -1,7 +1,10 @@
 package com.ruicai.education.controler;
 
+import com.ruicai.education.po.education.ClassCondition;
+import com.ruicai.education.po.education.EducationClass;
 import com.ruicai.education.server.ClassServer;
 import com.ruicai.education.server.DictionaryServer;
+import com.ruicai.education.util.PageBean;
 import com.ruicai.education.util.TreeBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +38,13 @@ public class ClassAction {
         //查出所有的班级类别所对应的数据字典值
         info = classServer.getClassTree(info);
         return info;
+    }
+
+    @RequestMapping("/selectClassByCondition")
+    public @ResponseBody
+    PageBean<EducationClass> selectClassByCondition(ClassCondition condition) {
+        return classServer.selectByCondition(condition);
+
     }
 
 }
