@@ -3,6 +3,7 @@ package com.ruicai.examination.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruicai.examination.mapper.examination.ExaminationQuestionMapper;
+import com.ruicai.examination.po.examination.ExaminationQuestion;
 import com.ruicai.examination.service.ProblemManagementService;
 import com.ruicai.examination.vo.question.Question;
 import com.ruicai.examination.vo.question.QuestionDatagrid;
@@ -39,5 +40,15 @@ public class ProblemManagementServiceImpl implements ProblemManagementService {
     @Override
     public QuestionDatagrid selectQuestion(int page, int rows) {
         return selectQuestion(page, rows, null);
+    }
+
+    @Override
+    public int insert(ExaminationQuestion examinationQuestion) {
+        return questionMapper.insertSelective(examinationQuestion);
+    }
+
+    @Override
+    public void updateQuestion(ExaminationQuestion question) {
+        questionMapper.updateByPrimaryKeySelective(question);
     }
 }

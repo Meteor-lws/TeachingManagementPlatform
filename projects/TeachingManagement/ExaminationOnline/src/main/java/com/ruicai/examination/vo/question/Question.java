@@ -10,6 +10,15 @@ public class Question extends ExaminationQuestion {
     private String questionSubjectName;
     private String questionTypeName;
     private String questionStageName;
+    private String questionTypeId;
+
+    public String getQuestionTypeId() {
+        return questionTypeId;
+    }
+
+    public void setQuestionTypeId(String questionTypeId) {
+        this.questionTypeId = questionTypeId;
+    }
 
     public String getQuestionStageName() {
         return questionStageName;

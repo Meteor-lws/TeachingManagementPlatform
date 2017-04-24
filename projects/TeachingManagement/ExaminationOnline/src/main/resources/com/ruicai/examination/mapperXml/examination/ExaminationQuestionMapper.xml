@@ -20,9 +20,10 @@
         <result column="QUESTION_ANSWER" property="questionAnswer" jdbcType="VARCHAR"/>
         <result column="QUESTION_SELECTIONS" property="questionSelections" jdbcType="DECIMAL"/>
         <result column="QUESTION_STAGE_NAME" property="questionStageName" jdbcType="VARCHAR"/>
-        <result column="QUESTION_SUBJECT_VALUE" property="questionSubject" jdbcType="VARCHAR"/>
+        <result column="QUESTION_SUBJECT_ID" property="questionSubject" jdbcType="VARCHAR"/>
         <result column="QUESTION_TYPE_VALUE" property="questionType" jdbcType="VARCHAR"/>
-        <result column="QUESTION_STAGE_VALUE" property="questionStage" jdbcType="VARCHAR"/>
+        <result column="QUESTION_STAGE_ID" property="questionStage" jdbcType="VARCHAR"/>
+        <result column="QUESTION_TYPE_ID" property="questionTypeId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -129,6 +130,9 @@
                 #{questionSelections,jdbcType=DECIMAL})
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.examination.po.examination.ExaminationQuestion">
+        <selectKey keyProperty="id" keyColumn="ID" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM dual
+        </selectKey>
         insert into RUICAI.EXAMINATION_QUESTION
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -152,6 +156,9 @@
             <if test="questionSelections != null">
                 QUESTION_SELECTIONS,
             </if>
+            <if test="questionStage != null">
+                QUESTION_STAGE,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -174,6 +181,9 @@
             </if>
             <if test="questionSelections != null">
                 #{questionSelections,jdbcType=DECIMAL},
+            </if>
+            <if test="questionStage != null">
+                #{questionStage,jdbcType=DECIMAL},
             </if>
         </trim>
     </insert>
@@ -247,6 +257,9 @@
             <if test="questionSelections != null">
                 QUESTION_SELECTIONS = #{questionSelections,jdbcType=DECIMAL},
             </if>
+            <if test="questionStage != null">
+                QUESTION_STAGE = #{questionStage,jdbcType=DECIMAL},
+            </if>
         </set>
         where ID = #{id,jdbcType=VARCHAR}
     </update>
@@ -264,9 +277,12 @@
         SELECT
             eq."ID",
             sd.DICTIONARY_NAME AS QUESTION_SUBJECT_NAME,
+        sd.ID AS QUESTION_SUBJECT_ID,
             sd1.DICTIONARY_NAME AS QUESTION_TYPE_NAME,
+        sd1.ID AS QUESTION_TYPE_ID,
             eq.QUESTION_SCORE,
             sd2.DICTIONARY_NAME AS QUESTION_STAGE_NAME,
+        sd2.ID AS QUESTION_STAGE_ID,
             eq.QUESTION_CONTENT,
             eq.QUESTION_ANSWER,
             sd.DICTIONARY_VALUE AS QUESTION_SUBJECT_VALUE,

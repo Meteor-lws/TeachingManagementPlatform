@@ -1,6 +1,7 @@
 package com.ruicai.examination.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruicai.examination.po.examination.ExaminationQuestion;
 import com.ruicai.examination.service.ProblemManagementService;
 import com.ruicai.examination.vo.question.Question;
 import com.ruicai.examination.vo.question.QuestionDatagrid;
@@ -44,12 +45,13 @@ public class ProblemManagementController {
     public String selectQuestion(int page, int rows, Question question) {
         System.err.println(question);
         QuestionDatagrid questionDatagrid = problemService.selectQuestion(page, rows, question);
+        System.out.print(1);
         return JSON.toJSONString(questionDatagrid);
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadFile(@RequestParam("myfiles") MultipartFile fileField,
+    public String uploadFile(@RequestParam("questionAnswer") MultipartFile fileField,
                              @RequestParam(value = "formFieldId", required = false, defaultValue = "pic_url") String formFieldId,
                              HttpServletRequest request) throws IOException {
         System.err.println(formFieldId);
@@ -133,5 +135,20 @@ public class ProblemManagementController {
         map.put("fileUrl", "/picture/" + curDateDir + "/" + fileName);
         map.put("message", "上传成功!");
         return JSON.toJSONString(map);
+    }
+
+    @RequestMapping(value = "/insertQuestion", method = RequestMethod.POST)
+    @ResponseBody
+    public String insertQuestion(ExaminationQuestion question) {
+        System.err.println(question);
+        problemService.insert(question);
+        return "添加试题成功";
+    }
+
+    @RequestMapping(value = "/updateQuestion", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateQuestion(ExaminationQuestion question) {
+        problemService.updateQuestion(question);
+        return "修改成功";
     }
 }

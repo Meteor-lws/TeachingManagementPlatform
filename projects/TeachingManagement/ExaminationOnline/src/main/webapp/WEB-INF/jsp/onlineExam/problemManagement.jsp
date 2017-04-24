@@ -21,16 +21,15 @@
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="js/problemManagement.js"></script>
-    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
     <script charset="utf-8" src="kindeditor/kindeditor.js"></script>
     <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
     <script>
         var editor;
         KindEditor.ready(function (K) {
-            editor = K.create('div[name="text"]', {
+            editor = K.create('textarea[name="questionContent"]', {
                 allowFileManage: true,
-                uploadJson: 'kindeditor/jsp/upload_json.jsp',
-                fileManagerJson: 'kindeditor/jsp/file_manager_json.jsp',
+                //uploadJson: 'kindeditor/jsp/upload_json.jsp',
+                //fileManagerJson: 'kindeditor/jsp/file_manager_json.jsp',
                 afterBlur: function () {
                     this.sync();
                     K.ctrl(document, 13, function () {
@@ -47,6 +46,7 @@
 </head>
 <body>
 <table id="table"></table>
+
 <div id="manager_tool" style="padding:5px;">
     <div style="margin-bottom:5px;">
         <a class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="manager_tool.add();">添加</a>
@@ -64,19 +64,31 @@
 </div>
 <div>
     <div id="chooseQuestionType" align="center" style="vertical-align: middle"></div>
-    <form id="addQuestion" name="myForm" style="margin:0;padding:5px 0 0 25px;color:#333;">
-        <%--<label for="classType">班级类型：</label><input id="classType" editable="false" style="width:125px;">
-        <label for="questionStage">适用阶段：</label><input id="questionStage" class="textbox" editable="false" style="width:125px;">
-        <label for="questionScores">题目分数：</label><input id="questionScores" class="textbox" style="width: 100px;"/>
-        <label >题目答案：<span id="answer"></span></label>--%>
-        <%--<div id="judgment"></div>
-        <input type="hidden" name="proposer" editable="false" value="徐明" style="width:125px;">
-        <input type="hidden" name="usageCount" editable="false" value="0" style="width:125px;">--%>
-        <div name="text" >
-
+    <div class="easyui-dialog" id="addQuestion">
+        <div id="one">
+            <label for="classType" style="padding-left: 20px">考试科目：</label><input id="classType" editable="false"
+                                                                                  style="width:125px;">
+            <label id="typeText" style="padding-left: 20px; display: none">题目类型：</label><span id="questionType2"
+                                                                                              style="padding-left: 20px; display: none"></span>
+            <label for="questionStage" style="padding-left: 20px">适用阶段：</label><input id="questionStage" class="textbox"
+                                                                                      editable="false"
+                                                                                      style="width:125px;">
+            <label for="questionScores" style="padding-left: 20px">题目分数：</label><input id="questionScores"
+                                                                                       class="textbox"
+                                                                                       style="width: 100px;"/>
+            <br/>
+            <label style="padding-left: 20px">题目答案：</label><span id="answer"></span>
+            <div id="judgment"></div>
+            <input type="hidden" name="proposer" editable="false" value="徐明" style="width:125px;">
+            <input type="hidden" name="usageCount" editable="false" value="0" style="width:125px;">
         </div>
-    </form>
+        <div id="test">
+                <textarea id="editor_id" name="questionContent" style="width:800px;height:300px;">
 
+                </textarea>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

@@ -103,4 +103,18 @@ public class ExaminationQuestion {
     public void setQuestionSelections(Integer questionSelections) {
         this.questionSelections = questionSelections;
     }
+
+    @Override
+    public String toString() {
+        return "ExaminationQuestion{" +
+                "id='" + id + '\'' +
+                ", questionSubject='" + questionSubject + '\'' +
+                ", questionType='" + questionType + '\'' +
+                ", questionScore=" + questionScore +
+                ", questionContent='" + questionContent + '\'' +
+                ", questionAnswer='" + questionAnswer + '\'' +
+                ", questionSelections=" + questionSelections +
+                ", questionStage='" + questionStage + '\'' +
+                '}';
+    }
 }
