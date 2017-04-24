@@ -10,6 +10,7 @@ import com.ruicai.evaluation.mapper.evaluation.EvaluationItemMapper;
 import com.ruicai.evaluation.mapper.evaluation.EvaluationMapper;
 import com.ruicai.evaluation.mapper.system.SystemUserMapper;
 import com.ruicai.evaluation.po.education.*;
+import com.ruicai.evaluation.po.education.EducationTeacherExample.Criteria;
 import com.ruicai.evaluation.po.evaluation.*;
 import com.ruicai.evaluation.po.system.SystemUserExample;
 import com.ruicai.evaluation.service.EvaluationAnalysisService;
@@ -78,12 +79,15 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
         this.itemExample = itemExample;
     }
 
-    public List<EvaluationAnalysisView> GetAnalysisResults() {
+    public List<EvaluationAnalysisView> GetAnalysisResults(String className, String teacherName, String studentName) {
         classExample.clear();
+        if (className != null) {
+            classExample.createCriteria().andClassNameLike("%" + className + "%");
+        }
         List<EducationClass> classes = classMapper.selectByExample(classExample);
         List<EvaluationAnalysisView> analysisViews = new ArrayList<>();
         for (EducationClass aClass : classes) {
-            List<EvaluationAnalysisView> analysisViewList = buildAnalysisViews(aClass);
+            List<EvaluationAnalysisView> analysisViewList = buildAnalysisViews(aClass, teacherName, studentName);
             analysisViews.addAll(analysisViewList);
         }
         return analysisViews;
@@ -126,40 +130,61 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
         return detailView;
     }
 
-    private List<EvaluationAnalysisView> buildAnalysisViews(EducationClass educationClass) {
+    private List<EvaluationAnalysisView> buildAnalysisViews(EducationClass educationClass, String teacherName, String studentName) {
         List<EvaluationAnalysisView> analysisViews = new ArrayList<>();
         teacherExample.clear();
-        teacherExample.createCriteria().andIdEqualTo(educationClass.getHeadTeacherId());
-        EducationTeacher headTeacher = teacherMapper.selectByExample(teacherExample).get(0);
-        EvaluationAnalysisView headTeacherView = buildAnalysisView(educationClass, headTeacher);
-        if (headTeacherView.getChildren().size() != 0) {
-            analysisViews.add(headTeacherView);
+        Criteria criteria = teacherExample.createCriteria().andIdEqualTo(educationClass.getHeadTeacherId());
+        if (teacherName != null) {
+            criteria.andTeacherNameLike("%" + teacherName + "%");
+        }
+        List<EducationTeacher> teachers = teacherMapper.selectByExample(teacherExample);
+        EvaluationAnalysisView analysisView = buildAnalysisViewFromTeachers(teachers, educationClass, studentName);
+        if (analysisView != null) {
+            analysisViews.add(analysisView);
         }
         teacherExample.clear();
-        teacherExample.createCriteria().andIdEqualTo(educationClass.getMainTeacherId());
-        EducationTeacher mainTeacher = teacherMapper.selectByExample(teacherExample).get(0);
-        EvaluationAnalysisView mainTeacherView = buildAnalysisView(educationClass, mainTeacher);
-        if (mainTeacherView.getChildren().size() != 0) {
-            analysisViews.add(mainTeacherView);
+        Criteria criteria1 = teacherExample.createCriteria().andIdEqualTo(educationClass.getMainTeacherId());
+        if (teacherName != null) {
+            criteria1.andTeacherNameLike("%" + teacherName + "%");
+        }
+        teachers = teacherMapper.selectByExample(teacherExample);
+        analysisView = buildAnalysisViewFromTeachers(teachers, educationClass, studentName);
+        if (analysisView != null) {
+            analysisViews.add(analysisView);
         }
         teacherExample.clear();
-        teacherExample.createCriteria().andIdEqualTo(educationClass.getAssistantId());
-        EducationTeacher assistant = teacherMapper.selectByExample(teacherExample).get(0);
-        EvaluationAnalysisView assistantView = buildAnalysisView(educationClass, assistant);
-        if (assistantView.getChildren().size() != 0) {
-            analysisViews.add(assistantView);
+        Criteria criteria2 = teacherExample.createCriteria().andIdEqualTo(educationClass.getAssistantId());
+        if (teacherName != null) {
+            criteria2.andTeacherNameLike("%" + teacherName + "%");
+        }
+        teachers = teacherMapper.selectByExample(teacherExample);
+        analysisView = buildAnalysisViewFromTeachers(teachers, educationClass, studentName);
+        if (analysisView != null) {
+            analysisViews.add(analysisView);
         }
         return analysisViews;
     }
 
-    private EvaluationAnalysisView buildAnalysisView(EducationClass educationClass, EducationTeacher teacher) {
+    private EvaluationAnalysisView buildAnalysisViewFromTeachers(List<EducationTeacher> teachers, EducationClass educationClass, String studentName) {
+        EvaluationAnalysisView analysisView = null;
+        if (teachers.size() != 0) {
+            EducationTeacher teacher = teachers.get(0);
+            analysisView = buildAnalysisView(educationClass, teacher, studentName);
+            if (analysisView.getChildren().size() == 0) {
+                analysisView = null;
+            }
+        }
+        return analysisView;
+    }
+
+    private EvaluationAnalysisView buildAnalysisView(EducationClass educationClass, EducationTeacher teacher, String studentName) {
         EvaluationAnalysisView analysisView = new EvaluationAnalysisView();
         userExample.clear();
         userExample.createCriteria().andIdEqualTo(teacher.getUserId());
         analysisView.setUserName(userMapper.selectByExample(userExample).get(0).getUserName());
         analysisView.setClassName(educationClass.getClassName());
-        analysisView.setId(UUID.randomUUID().toString().replace("-", ""));
-        List<EvaluationView> evaluationViews = buildAnalysisChildren(educationClass, teacher);
+        analysisView.setId(UUID.randomUUID().toString());
+        List<EvaluationView> evaluationViews = buildAnalysisChildren(educationClass, teacher, studentName);
         analysisView.setChildren(evaluationViews);
         if (evaluationViews.size() != 0) {
             analysisView.setEvaluationScore((short) 0);
@@ -171,10 +196,13 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
         return analysisView;
     }
 
-    private List<EvaluationView> buildAnalysisChildren(EducationClass educationClass, EducationTeacher teacher) {
+    private List<EvaluationView> buildAnalysisChildren(EducationClass educationClass, EducationTeacher teacher, String studentName) {
         List<EvaluationView> evaluationViews = new ArrayList<>();
         studentExample.clear();
-        studentExample.createCriteria().andClassIdEqualTo(educationClass.getId());
+        EducationStudentExample.Criteria criteria = studentExample.createCriteria().andClassIdEqualTo(educationClass.getId());
+        if (studentName != null) {
+            criteria.andStudentNameLike("%" + studentName + "%");
+        }
         List<EducationStudent> students = studentMapper.selectByExample(studentExample);
         if (students.size() != 0) {
             List<String> studentIds = new ArrayList<>();

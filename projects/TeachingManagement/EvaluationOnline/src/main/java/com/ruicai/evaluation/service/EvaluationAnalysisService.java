@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 public interface EvaluationAnalysisService {
-    List<EvaluationAnalysisView> GetAnalysisResults();
+    List<EvaluationAnalysisView> GetAnalysisResults(String className, String teacherName, String studentName);
 
     Datagrid<EvaluationDetailView> GetAnalysisDetails(int page, int rows, String evaluationId, String evaluationTime);
 }

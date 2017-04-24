@@ -31,11 +31,11 @@
 </div>
 <div id="analysis-tool" style="padding: 5px">
     <label for="analysis-search-class" style="padding-left: 10px">班级：</label>
-    <input id="analysis-search-class" class="easyui-searchbox" type="text">
+    <input id="analysis-search-class" class="analysis-search" type="text">
     <label for="analysis-search-teacher" style="padding-left: 15px">教师：</label>
-    <input id="analysis-search-teacher" class="easyui-searchbox" type="text">
+    <input id="analysis-search-teacher" class="analysis-search" type="text">
     <label for="analysis-search-student" style="padding-left: 15px">学生：</label>
-    <input id="analysis-search-student" class="easyui-searchbox" type="text">
+    <input id="analysis-search-student" class="analysis-search" type="text">
 </div>
 </body>
 </html>

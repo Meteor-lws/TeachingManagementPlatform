@@ -5,9 +5,16 @@
  */
 
 $(function () {
+    prepareTools();
     prepareResults();
     prepareDetail();
 });
+
+function prepareTools() {
+    $('.analysis-search').searchbox({
+        searcher: search
+    });
+}
 
 function prepareResults() {
     var columns = [
@@ -39,4 +46,23 @@ function prepareDetail() {
         {field: 'satisfaction', title: '满意度', width: 5}
     ];
     util.datagrid('analysis-detail', 'GetAnalysisDetails', [], columns);
+}
+
+function search() {
+    var searchText = getSearchText();
+    $('#analysis-result').treegrid({
+        queryParams: {
+            className: searchText.className,
+            teacherName: searchText.teacherName,
+            studentName: searchText.studentName
+        }
+    });
+}
+
+function getSearchText() {
+    return {
+        className: $('#analysis-search-class').searchbox('getValue').trim(),
+        teacherName: $('#analysis-search-teacher').searchbox('getValue').trim(),
+        studentName: $('#analysis-search-student').searchbox('getValue').trim()
+    };
 }

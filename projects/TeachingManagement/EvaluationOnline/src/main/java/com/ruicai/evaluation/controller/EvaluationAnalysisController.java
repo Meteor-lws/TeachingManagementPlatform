@@ -30,8 +30,8 @@ public class EvaluationAnalysisController {
 
     @ResponseBody
     @RequestMapping(value = "GetAnalysisResults", method = RequestMethod.POST)
-    public String GetAnalysisResults() {
-        return JSON.toJSONStringWithDateFormat(service.GetAnalysisResults(), "yyyy-MM-dd HH:mm:ss");
+    public String GetAnalysisResults(String className, String teacherName, String studentName) {
+        return JSON.toJSONStringWithDateFormat(service.GetAnalysisResults(className, teacherName, studentName), "yyyy-MM-dd HH:mm:ss");
     }
 
     @ResponseBody
