@@ -4,6 +4,7 @@ import com.ruicai.education.mapper.education.SystemRoleMapper;
 import com.ruicai.education.po.education.SystemRole;
 import com.ruicai.education.po.education.UserToRoleKey;
 import com.ruicai.education.server.RoleService;
+import com.ruicai.education.util.ReadProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,13 @@ public class RoleServerImpl implements RoleService {
 
     @Override
     public List<SystemRole> selectAllTeacherRole() {
-        return systemRoleMapper.selectAllTeacher();
+
+        return systemRoleMapper.selectRoleByCode(ReadProperties.read("teacherRoleCode"));
     }
 
     @Override
     public List<SystemRole> getTeacherRole(String userId) {
-
-        return systemRoleMapper.GetTeacherRole(userId);
+        return systemRoleMapper.getUserRole(userId);
     }
 
     @Override
@@ -37,5 +38,15 @@ public class RoleServerImpl implements RoleService {
     @Override
     public void addRole(UserToRoleKey utr) {
         systemRoleMapper.addRole(utr);
+    }
+
+    @Override
+    public List<SystemRole> getAllStudentRole() {
+        return systemRoleMapper.selectRoleByCode(ReadProperties.read("studentRoleCode"));
+    }
+
+    @Override
+    public List<SystemRole> getStudentRole(String userId) {
+        return systemRoleMapper.getUserRole(userId);
     }
 }

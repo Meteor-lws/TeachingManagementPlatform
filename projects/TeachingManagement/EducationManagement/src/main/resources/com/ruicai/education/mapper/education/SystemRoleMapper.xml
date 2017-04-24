@@ -229,21 +229,19 @@
             ROLE_INHERIT  = #{roleInherit,jdbcType=DECIMAL}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
-    <select id="selectAllTeacher" resultMap="BaseResultMap">
-        SELECT *
-        FROM SYSTEM_ROLE
-        WHERE PARENT_ID = (SELECT "ID"
-                           FROM SYSTEM_ROLE
-                           WHERE ROLE_CODE = 'teacher')
-    </select>
 
-    <select id="GetTeacherRole" resultMap="BaseResultMap" parameterType="string">
+    <select id="getUserRole" resultMap="BaseResultMap" parameterType="string">
         SELECT
-            sr.ID,
-            sr.ROLE_NAME
-        FROM SYSTEM_ROLE sr LEFT JOIN USER_TO_ROLE utr ON sr.ID = utr.ROLE_ID
-            JOIN EDUCATION_TEACHER et ON et.USER_ID = utr.USER_ID
-        WHERE et.USER_ID = #{userId}
+        SR."ID",
+        SR.ROLE_NAME
+        FROM
+        (
+        USER_TO_ROLE utr
+        LEFT JOIN SYSTEM_ROLE sr ON SR."ID" = UTR.ROLE_ID
+        )
+        LEFT JOIN SYSTEM_USER su ON SU."ID" = utr.USER_ID
+        WHERE
+        SU."ID" = #{userId}
     </select>
     <delete id="deleteRoleByUserID" parameterType="string">
         DELETE FROM USER_TO_ROLE
@@ -255,5 +253,12 @@
 
     </insert>
 
+    <select id="selectRoleByCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT *
+        FROM SYSTEM_ROLE
+        WHERE PARENT_ID = (SELECT "ID"
+                           FROM SYSTEM_ROLE
+                           WHERE ROLE_CODE = #{RoleCode})
+    </select>
 
 </mapper>

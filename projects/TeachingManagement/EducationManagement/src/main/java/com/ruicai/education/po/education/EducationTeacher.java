@@ -26,7 +26,9 @@ public class EducationTeacher {
     private String teacherTypeView;
 
     private String teacherPicture;
+
     private String[] role;
+
     private List<UserToRoleKey> roles;
 
     public String getTeacherSexView() {

@@ -188,9 +188,9 @@ $(function () {
     $("#removeTea").click(function () {
         var selects = $("#teaDg").datagrid("getSelections");
         if (selects.length == 0) {
-            $.messager.alert('警告', '请选择一个需要修改的列');
+            $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
-            $.messager.confirm('确认', '您确认想要这些记录吗？', function (choose) {
+            $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
                 var teacherIds = new Array();
                 var userIds = new Array();
                 if (choose) {
@@ -296,7 +296,7 @@ function showPic() {
     var uploadPath = "http://localhost:8081/Upload/";//文件服务器路径
     var formData = new FormData($("#teaForm")[0]);
     $.ajax({
-        url: '/education/getUpLoadPath',
+        url: '/education/UpLoadStudentPic',
         type: 'POST',
         data: formData,
         async: false,
@@ -306,8 +306,7 @@ function showPic() {
         success: function (returndata) {
             $("#pic").attr("src", uploadPath + returndata);
             $("#teacherPicture").val(returndata);
-        },
-        error: function (returndata) {
         }
     });
+
 }

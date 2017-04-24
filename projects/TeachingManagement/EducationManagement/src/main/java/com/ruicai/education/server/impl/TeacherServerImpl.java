@@ -2,15 +2,13 @@ package com.ruicai.education.server.impl;
 
 import com.ruicai.education.mapper.education.EducationTeacherMapper;
 import com.ruicai.education.po.education.*;
-import com.ruicai.education.server.DictionaryServer;
-import com.ruicai.education.server.RoleService;
-import com.ruicai.education.server.TeacherServer;
-import com.ruicai.education.server.UserServer;
+import com.ruicai.education.server.*;
 import com.ruicai.education.util.PageBean;
 import com.ruicai.education.util.ReadProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +29,8 @@ public class TeacherServerImpl implements TeacherServer {
     private DictionaryServer dictionaryServer;//注入字典服务
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private UploadService uploadService;
 
     @Override
     public int selectTeaByConditionCount(TeacherCondition condition) {
@@ -55,7 +55,7 @@ public class TeacherServerImpl implements TeacherServer {
 
     @Override
     public void saveOrUpdate(EducationTeacher teacher) {
-        if (null != teacher.getId()) {
+        if (null != teacher.getId() && !teacher.getUserId().equals("")) {
             updateTea(teacher);
         } else {
             saveTea(teacher);
@@ -139,6 +139,11 @@ public class TeacherServerImpl implements TeacherServer {
         }
 
 
+    }
+
+    @Override
+    public String uploadPic(HttpServletRequest request) {
+        return uploadService.uploadPic(request);
     }
 
 

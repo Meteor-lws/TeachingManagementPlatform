@@ -32,9 +32,11 @@ public interface SystemRoleMapper {
 
     List<SystemRole> selectAllTeacher();
 
-    List<SystemRole> GetTeacherRole(String userId);
+    List<SystemRole> getUserRole(String userId);
 
     void deleteRoleByUserID(String userId);
 
     void addRole(UserToRoleKey utr);
+
+    List<SystemRole> selectRoleByCode(String RoleCode);
 }

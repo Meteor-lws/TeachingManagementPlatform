@@ -201,7 +201,7 @@
     )
     JOIN SYSTEM_DICTIONARY sd2 ON ET.TEACHER_TYPE = SD2."ID"
     )
-    where ROWNUM &lt; ${endNum}
+      where ROWNUM &lt; #{endNum}
     <if test="id != null and id != ''">
       and id = #{id}
     </if>
@@ -214,7 +214,7 @@
     ) a1
     )
     WHERE
-    rn &gt; ${startNum}
+      rn &gt; #{startNum}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     SELECT

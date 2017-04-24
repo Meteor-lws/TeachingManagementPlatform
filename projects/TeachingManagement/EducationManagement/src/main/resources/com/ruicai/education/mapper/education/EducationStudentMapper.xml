@@ -15,8 +15,12 @@
     <result column="STUDENT_PHONE" property="studentPhone" jdbcType="VARCHAR" />
     <result column="STUDENT_FAMILY_PHONE" property="studentFamilyPhone" jdbcType="VARCHAR" />
     <result column="STUDENT_PICTURE" property="studentPicture" jdbcType="VARCHAR" />
-    <result column="STUDENT_INSURANCE" property="studentInsurance" jdbcType="DECIMAL" />
+      <result column="STUDENT_INSURANCE" property="studentInsurance" jdbcType="VARCHAR"/>
     <result column="STUDENT_CONDUCT" property="studentConduct" jdbcType="DECIMAL" />
+      <result column="STUDENT_SPECIALTY_VIEW" property="studentSpecialtyView"></result>
+      <result column="STUDENT_SEX_VIEW" property="studentSexView"></result>
+      <result column="STUDENT_INSURANCE_VIEW" property="studentInsuranceView"></result>
+      <result column="STUDENT_EDUCATION_VIEW" property="studentEducationView"></result>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -112,6 +116,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ruicai.education.po.education.EducationStudent" >
+      <selectKey order="BEFORE" resultType="string" keyColumn="ID" keyProperty="id">
+          select sys_guid() from dual
+      </selectKey>
     insert into RUICAI.EDUCATION_STUDENT (ID, USER_ID, CLASS_ID, 
       STUDENT_EDUCATION, STUDENT_SEX, STUDENT_NAME, 
       STUDENT_ID_NUMBER, STUDENT_SCHOOL, STUDENT_SPECIALTY, 
@@ -121,8 +128,8 @@
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, 
       #{studentEducation,jdbcType=VARCHAR}, #{studentSex,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
       #{studentIdNumber,jdbcType=VARCHAR}, #{studentSchool,jdbcType=VARCHAR}, #{studentSpecialty,jdbcType=VARCHAR}, 
-      #{studentGraduation,jdbcType=TIMESTAMP}, #{studentPhone,jdbcType=VARCHAR}, #{studentFamilyPhone,jdbcType=VARCHAR}, 
-      #{studentPicture,jdbcType=VARCHAR}, #{studentInsurance,jdbcType=DECIMAL}, #{studentConduct,jdbcType=DECIMAL}
+      #{studentGraduation,jdbcType=TIMESTAMP}, #{studentPhone,jdbcType=VARCHAR}, #{studentFamilyPhone,jdbcType=VARCHAR},
+      #{studentPicture,jdbcType=VARCHAR}, #{studentInsurance,jdbcType=VARCHAR}, #{studentConduct,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ruicai.education.po.education.EducationStudent" >
@@ -364,14 +371,83 @@
       STUDENT_PHONE = #{studentPhone,jdbcType=VARCHAR},
       STUDENT_FAMILY_PHONE = #{studentFamilyPhone,jdbcType=VARCHAR},
       STUDENT_PICTURE = #{studentPicture,jdbcType=VARCHAR},
-      STUDENT_INSURANCE = #{studentInsurance,jdbcType=DECIMAL},
+      STUDENT_INSURANCE = #{studentInsurance,jdbcType=VARCHAR},
       STUDENT_CONDUCT = #{studentConduct,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectStudentByconditionCount" parameterType="com.ruicai.education.po.education.StudentCondition">
-
+    <select id="selectStudentByconditionCount" parameterType="com.ruicai.education.po.education.StudentCondition"
+            resultType="int">
+        select count(id) from EDUCATION_STUDENT
+        <where>
+            <if test="studentName != null and studentName != ''">
+                STUDENT_NAME like '%${studentName}%'
+            </if>
+            <if test="classId != null and classId != ''">
+                AND CLASS_ID = #{classId}
+            </if>
+            <if test="studentGraduation != null and studentGraduation != ''">
+                AND STUDENT_GRADUATION &gt; to_date(#{studentGraduation},'yyyy-mm-dd hh24:mi:ss')
+            </if>
+        </where>
   </select>
-
+    <select id="selectStudentBycondition" resultMap="BaseResultMap"
+            parameterType="com.ruicai.education.po.education.StudentCondition">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        A .*, ROWNUM rn
+        FROM
+        (
+        SELECT
+        ES.ID,
+        ES.USER_ID,
+        ES.CLASS_ID,
+        ES.STUDENT_EDUCATION,
+        ES.STUDENT_SEX,
+        ES.STUDENT_NAME,
+        ES.STUDENT_ID_NUMBER,
+        ES.STUDENT_SCHOOL,
+        ES.STUDENT_SPECIALTY,
+        ES.STUDENT_GRADUATION,
+        ES.STUDENT_PHONE,
+        ES.STUDENT_FAMILY_PHONE,
+        ES.STUDENT_PICTURE,
+        ES.STUDENT_INSURANCE,
+        ES.STUDENT_CONDUCT,
+        sd1.DICTIONARY_NAME AS STUDENT_SEX_VIEW ,
+        sd2.DICTIONARY_NAME AS STUDENT_EDUCATION_VIEW ,
+        sd3.DICTIONARY_NAME AS STUDENT_INSURANCE_VIEW ,
+        sd4.DICTIONARY_NAME AS STUDENT_SPECIALTY_VIEW
+        FROM
+        (
+        (
+        (
+        EDUCATION_STUDENT es
+        JOIN SYSTEM_DICTIONARY sd1 ON ES.STUDENT_SEX = SD1."ID"
+        )
+        JOIN SYSTEM_DICTIONARY sd2 ON ES.STUDENT_EDUCATION = SD2."ID"
+        )
+        JOIN SYSTEM_DICTIONARY sd3 ON ES.STUDENT_INSURANCE = SD3."ID"
+        )
+        JOIN SYSTEM_DICTIONARY sd4 ON ES.STUDENT_SPECIALTY = SD4."ID"
+        WHERE
+        ROWNUM &lt; #{endNum}
+        <if test="studentName != null and studentName != ''">
+            AND STUDENT_NAME like '%${studentName}%'
+        </if>
+        <if test="classId != null and classId != ''">
+            AND CLASS_ID = #{classId}
+        </if>
+        <if test="studentGraduation != null and studentGraduation != ''">
+            AND STUDENT_GRADUATION &gt; to_date(#{studentGraduation},'yyyy-mm-dd hh24:mi:ss')
+        </if>
+        ) A
+        )
+        WHERE
+        rn &gt; #{startNum}
+    </select>
 
 </mapper>

@@ -22,9 +22,18 @@ public interface RoleService {
      * @param userId
      * @return
      */
-    List<SystemRole> getTeacherRole(String userId);
+    public List<SystemRole> getTeacherRole(String userId);
 
-    void deleteRoleByUserID(String userId);
+    public void deleteRoleByUserID(String userId);
 
-    void addRole(UserToRoleKey utr);
+    public void addRole(UserToRoleKey utr);
+
+    /**
+     * 获取所有学生角色列表
+     *
+     * @return 学生角色列表
+     */
+    public List<SystemRole> getAllStudentRole();
+
+    public List<SystemRole> getStudentRole(String userId);
 }

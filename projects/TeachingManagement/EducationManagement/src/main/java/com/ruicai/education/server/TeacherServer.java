@@ -4,6 +4,7 @@ import com.ruicai.education.po.education.EducationTeacher;
 import com.ruicai.education.po.education.TeacherCondition;
 import com.ruicai.education.util.PageBean;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -61,4 +62,6 @@ public interface TeacherServer {
      * @param uids 用户id集合
      */
     void deleteTeacherByBatch(List<String> tids, List<String> uids);
+
+    public String uploadPic(HttpServletRequest request);
 }

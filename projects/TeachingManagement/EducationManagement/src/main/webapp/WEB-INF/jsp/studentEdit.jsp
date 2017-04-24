@@ -33,29 +33,36 @@
         <a id="removeStu" href="javascript:void(0)" class="easyui-linkbutton"
            data-options="iconCls:'icon-edit',plain:true">刪除</a>
         </div>
-    学生姓名 <input id="stuName" class="easyui-validatebox" name="stuName" style="width: 120px;"/> </input> &nbsp
-    &nbsp班&nbsp &nbsp&nbsp级
-    <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
-    毕业时间 <input id="entranceTime" name="entranceTime" type="text" class="easyui-datebox" style="width: 120px;">
+    学生姓名
+    <input id="stuName" class="easyui-validatebox" name="studentName" style="width: 120px;"/> </input> &nbsp
+    班级
+    <select id="classSel" name="classID" class="easyui-combotree" style="width:120px;"></select>
+    毕业时间
+    <input id="studentGraduation" name="studentGraduation" type="text" class="easyui-datetimebox" style="width: 120px;">
     <%--搜索按鈕--%>
-    <a id="search" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+    <a id="search" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
+       onclick="loadStuDg()">搜索</a>
     </div>
     <span></span>
 
 <%--学生修改添加框--%>
 <div id="stuDialog" class="easyui-dialog" title="学生修改"
-         data-options="modal:true,closed:true,iconCls:'icon-save'"
-         style="width:700px;height:500px;padding:10px;">
-    <form id="stuForm" method="post" action="/asa">
+     data-options="modal:true,closable:false,iconCls:'icon-save'"
+     style="width:700px;height:600px;padding:10px;">
+    <form id="stuForm" method="post" enctype="multipart/form-data">
         <table style="height:100%" width="100% " align="center">
             <tr>
                 <td class="tdLabel" align="right"><label>姓名</label></td>
                 <td class="tdValue">
-                    <input class="easyui-textbox" type="text" data-options="required:true">
+                    <%--隐藏域--%>
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="userId" id="userId">
+                    <input id="studentName" name="studentName" class="easyui-textbox" type="text"
+                           data-options="required:true">
                 </td>
                 <td class="tdLabel" align="right"><label>毕业学校</label></td>
                 <td class="tdValue">
-                    <input id="schoolName" class="easyui-textbox" type="text">
+                    <input id="schoolName" name="studentSchool" class="easyui-textbox" type="text">
                     <%-- <input type="text" id="schoolName" readonly class="easyui-validatebox"/>--%>
                     <div id="proSchool" class="easyui-window">
                         <div class="title">
@@ -73,52 +80,95 @@
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>状态</label></td>
+                <td class="tdLabel" align="right"><label>专业</label></td>
                 <td class="tdValue">
-                    <select id="state" class="easyui-combobox"
-                                style="width:170px;" data-options="panelHeight:'80px'">
+                    <select id="studentSpecialty" name="studentSpecialty" class="easyui-combobox"
+                            style="width:170px;" data-options="panelHeight:'80px'">
                     </select>
                 </td>
                 <td class="tdLabel" align="right"><label>班级</label></td>
                 <td class="tdValue">
-                    <select id="personClass" class="easyui-combotree" style="width:170px;"></select>
+                    <select id="classId" name="classId" class="easyui-combotree" style="width:170px;"></select>
                 </td>
             </tr>
             <tr>
                 <td class="tdLabel" align="right"><label>毕业时间</label></td>
                 <td class="tdValue">
-                    <input id="graduateTime" type="text" class="easyui-datebox" required="required"></input>
+                    <input id="graduateTime" name="studentGraduation" type="text" class="easyui-datetimebox"
+                           required="required"></input>
                 </td>
                 <td class="tdLabel" align="right"><label>操行分</label></td>
                 <td class="tdValue">
-                    <input id="score" class="easyui-textbox" type="text" name="name"
+                    <input id="studentConduct" name="studentConduct" class="easyui-textbox" type="text"
                            data-options="required:true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdLabel" align="right">
+                    学生编号
+                </td>
+                <td class="tdValue">
+                    <input id="studentIdNumber" name="studentIdNumber" class="easyui-textbox" type="text"
+                           data-options="required:true"></input>
+                </td>
+                <td class="tdLabel" align="right">
+                    学历
+                </td>
+                <td class="tdValue">
+                    <select id="studentEducation" name="studentEducation" class="easyui-combobox"
+                            style="width:170px;"></select>
                 </td>
             </tr>
 
             <tr>
                 <td class="tdLabel" align="right"><label>家长联系方式</label></td>
                 <td class="tdValue">
-                    <input id="parentPhone" class="easyui-textbox" type="text" data-options="required:true"></input>
+                    <input id="studentFamilyPhone" name="studentFamilyPhone" class="easyui-textbox" type="text"
+                           data-options="required:true"></input>
                 </td>
                 <td class="tdLabel" align="right"><label>本人联系方式</label></td>
                 <td class="tdValue">
-                    <input id="selfPhone" class="easyui-textbox" type="text" data-options="required:true"></input>
+                    <input id="studentPhone" name="studentPhone" class="easyui-textbox" type="text"
+                           data-options="required:true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <img id="pic">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    照片
+                </td>
+                <td colspan="3">
+                    <input type="hidden" name="studentPicture" id="studentPicture">
+                    <input type="file" id="file" name="stuPic" onchange="uploadPic()">
                 </td>
             </tr>
 
 
             <tr>
-                <td class="tdLabel" align="right"><label>身份号码</label></td>
+                <td class="tdLabel" align="right"><label>性别</label></td>
                 <td class="tdValue">
-                    <input id="idCar" class="easyui-textbox" type="text" data-options="required:true"></input>
+                    <div id="sexDiv">
+                    </div>
                 </td>
                 <td class="tdLabel" align="right"><label>保险是否缴纳</label></td>
                 <td class="tdValue">
-                    <input name="gender" type="radio" value="1"/>是 </label>  <label><input name="gander" type="radio"
-                                                                                           value="0"/>否</label>
+                    <div id="insuranceDiv">
+                    </div>
+
                 </td>
 
+            </tr>
+            <tr>
+                <td>角色</td>
+                <td colspan="3">
+                    <div id="roleDiv">
+
+                    </div>
+                </td>
             </tr>
 
             <tr align="center">
@@ -131,10 +181,8 @@
                        onclick="cancel()">取消</a>
                 </td>
             </tr>
-
         </table>
         </form>
-
     </div>
 
 </body>

@@ -1,6 +1,8 @@
 package com.ruicai.education.po.education;
 
-import java.util.Date;
+import com.ruicai.education.util.MyDateFormate;
+
+import java.sql.Timestamp;
 
 public class EducationStudent {
     private String id;
@@ -21,7 +23,7 @@ public class EducationStudent {
 
     private String studentSpecialty;
 
-    private Date studentGraduation;
+    private Timestamp studentGraduation;
 
     private String studentPhone;
 
@@ -29,9 +31,59 @@ public class EducationStudent {
 
     private String studentPicture;
 
-    private Short studentInsurance;
+    private String studentInsurance;
 
     private Integer studentConduct;
+
+    private String studentSpecialtyView;
+
+    private String studentSexView;
+
+    private String studentInsuranceView;
+
+    private String studentEducationView;
+
+    private String[] role;
+
+    private String studentGraduationView;
+
+
+    public String getStudentGraduationView() {
+        return studentGraduationView;
+    }
+
+
+    public String getStudentSpecialtyView() {
+        return studentSpecialtyView;
+    }
+
+    public void setStudentSpecialtyView(String studentSpecialtyView) {
+        this.studentSpecialtyView = studentSpecialtyView;
+    }
+
+    public String getStudentSexView() {
+        return studentSexView;
+    }
+
+    public void setStudentSexView(String studentSexView) {
+        this.studentSexView = studentSexView;
+    }
+
+    public String getStudentInsuranceView() {
+        return studentInsuranceView;
+    }
+
+    public void setStudentInsuranceView(String studentInsuranceView) {
+        this.studentInsuranceView = studentInsuranceView;
+    }
+
+    public String getStudentEducationView() {
+        return studentEducationView;
+    }
+
+    public void setStudentEducationView(String studentEducationView) {
+        this.studentEducationView = studentEducationView;
+    }
 
     public String getId() {
         return id;
@@ -73,6 +125,14 @@ public class EducationStudent {
         this.studentSex = studentSex == null ? null : studentSex.trim();
     }
 
+    public String[] getRole() {
+        return role;
+    }
+
+    public void setRole(String[] role) {
+        this.role = role;
+    }
+
     public String getStudentName() {
         return studentName;
     }
@@ -105,12 +165,13 @@ public class EducationStudent {
         this.studentSpecialty = studentSpecialty == null ? null : studentSpecialty.trim();
     }
 
-    public Date getStudentGraduation() {
+    public Timestamp getStudentGraduation() {
         return studentGraduation;
     }
 
-    public void setStudentGraduation(Date studentGraduation) {
+    public void setStudentGraduation(Timestamp studentGraduation) {
         this.studentGraduation = studentGraduation;
+        this.studentGraduationView = MyDateFormate.timeStampToString(studentGraduation);
     }
 
     public String getStudentPhone() {
@@ -137,11 +198,11 @@ public class EducationStudent {
         this.studentPicture = studentPicture == null ? null : studentPicture.trim();
     }
 
-    public Short getStudentInsurance() {
+    public String getStudentInsurance() {
         return studentInsurance;
     }
 
-    public void setStudentInsurance(Short studentInsurance) {
+    public void setStudentInsurance(String studentInsurance) {
         this.studentInsurance = studentInsurance;
     }
 

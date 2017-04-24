@@ -8,6 +8,7 @@ import com.ruicai.education.po.education.TeacherCondition;
 import com.ruicai.education.server.DictionaryServer;
 import com.ruicai.education.server.RoleService;
 import com.ruicai.education.server.TeacherServer;
+import com.ruicai.education.server.UploadService;
 import com.ruicai.education.util.PageBean;
 import com.ruicai.education.util.ReadProperties;
 import org.apache.commons.fileupload.FileUploadException;
@@ -16,17 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 教师管理
@@ -41,6 +36,8 @@ public class TeacherAction {
     private TeacherServer teacherServer;//注入教师服务
     @Autowired
     private RoleService roleService;//注入角色服务
+    @Autowired
+    private UploadService uploadService;//注入上传服务
 
     /**
      * 教师管理页面
@@ -90,37 +87,19 @@ public class TeacherAction {
      * 教师图片上传
      *
      * @param request
-     * @param respon
+     * @param response
      * @throws FileUploadException
      */
     @RequestMapping("/getUpLoadPath")
-    public void getUpLoadPath(HttpServletRequest request, HttpServletResponse respon) throws FileUploadException {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        String path;
-        boolean flag = resolver.isMultipart(request);
-        if (resolver.isMultipart(request)) {
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            Iterator<String> fileNames = multiRequest.getFileNames();
-            while (fileNames.hasNext()) {
-                MultipartFile file = multiRequest.getFile(fileNames.next());
-                if (file != null) {
-                    String FileName = file.getOriginalFilename();
-                    if (!FileName.trim().equals("")) {
-                        try {
-                            String suffix = FileName.substring(FileName.lastIndexOf("."));
-                            String upLoadName = UUID.randomUUID().toString();
-                            file.transferTo(new File("D:\\Tomcat\\Upload\\apache-tomcat-7.0.75\\webapps\\Upload\\" + upLoadName + suffix));
-                            path = upLoadName + suffix;
-                            respon.getWriter().write(path);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-
+    public void getUpLoadPath(HttpServletRequest request, HttpServletResponse response) {
+        String path = teacherServer.uploadPic(request);
+        try {
+            response.getWriter().write(path);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
 
     /**
      * 教师专业

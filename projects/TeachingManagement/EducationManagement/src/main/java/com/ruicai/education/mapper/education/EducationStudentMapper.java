@@ -32,5 +32,5 @@ public interface EducationStudentMapper {
 
     List<EducationStudent> selectStudentBycondition(StudentCondition condition);
 
-    int selectStudentByconditionCount();
+    int selectStudentByconditionCount(StudentCondition condition);
 }

@@ -508,10 +508,77 @@ var proSchool = {
 $(function () {
     //定义一个变量接受选中列对象
     var rowValue;
+    var roleList;
     var schoolName = $("input", $("#schoolName").next("span")).val();
 
+    $.ajax({
+        url: "/education/getAllStudentRole",
+        type: "post",
+        async: false,
+        success: function (data) {
+            roleList = $.parseJSON(data);
+            var content = "";
+            $("#stuForm").form("clear");
+            $("#pic").attr("src", "");
+            for (var i = 0; i < roleList.length; i++) {
+                content += "<input type='checkbox' name='role' id='" + roleList[i].id + "' value='" + roleList[i].id + "'>" + roleList[i].roleName;
+            }
+            $("#roleDiv").html(content);
+        }
+    });
+
+    //保险
+    $.ajax({
+        url: "/education/getInsurance",
+        type: "post",
+        success: function (data) {
+            var content = "";
+            var insuranceList = $.parseJSON(data);
+            for (var i = 0; i < insuranceList.length; i++) {
+                content += "<input type='radio' name='studentInsurance' id='" + insuranceList[i].id + "' value='" + insuranceList[i].id + "'>" + insuranceList[i].dictionaryName;
+            }
+            $("#insuranceDiv").html(content);
+        }
+    });
+
+    //学历
+    $("#studentEducation").combobox({
+        url: "/education/getEducation",
+        valueField: 'id',
+        textField: 'dictionaryName'
+    });
+
+    $("#stuDialog").dialog("close");
+
+    //性别
+    $.ajax({
+        url: "/education/getStudentSex",
+        type: "post",
+        success: function (data) {
+            var content = "";
+            var sexList = $.parseJSON(data);
+            for (var i = 0; i < sexList.length; i++) {
+                content += "<input type='radio' id='" + sexList[i].id + "' name='studentSex' value='" + sexList[i].id + "'>" + sexList[i].dictionaryName;
+            }
+            $("#sexDiv").html(content);
+        }
+
+    });
+
+
+    var data = {};
+    if ($("#studentGraduation").val() != null && $("#studentGraduation").val() != "") {
+        data.studentGraduation = $("#studentGraduation").val();
+    }
+    if ($("#stuName").val() != null && $("#stuName").val() != "") {
+        data.studentName = $("#stuName").val();
+    }
+    if ($("#classSel").val() != null && $("#classSel").val() != "") {
+        data.ClassId = $("#classSel").val();
+    }
+
     $('#stuDg').datagrid({
-        url: 'datagrid_data1.json',
+        url: '/education/studentSelect',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -521,18 +588,19 @@ $(function () {
         pageSize: 20,
         pageNumber: 1,
         columns: [[
-            {field: 'productname', itemid: 'ID', checkbox: true, width: 10},
-            {field: 'productid', title: '姓名', width: 10},
-            {field: 'productid', title: '性别', width: 10},
-            {field: 'productid', title: '毕业学校', width: 10},
-            {field: 'productid', title: '毕业时间', width: 10},
-            {field: 'productid', title: '操行分', width: 10},
-            {field: 'productid', title: '本人联系方式', width: 10},
-            {field: 'productid', title: '家长联系方式', width: 10},
-            {field: 'productid', title: '身份证号码', width: 10},
-            {field: 'productid', title: '保险是否缴纳', width: 10},
+            {field: 'id', itemid: 'ID', checkbox: true, width: 10},
+            {field: 'studentName', title: '姓名', width: 10},
+            {field: 'studentSexView', title: '性别', width: 10},
+            {field: 'studentSchool', title: '毕业学校', width: 10},
+            {field: 'studentGraduation', title: '毕业时间', width: 10},
+            {field: 'studentConduct', title: '操行分', width: 10},
+            {field: 'studentPhone', title: '本人联系方式', width: 10},
+            {field: 'studentFamilyPhone', title: '家长联系方式', width: 10},
+            {field: 'studentInsuranceView', title: '保险是否缴纳', width: 10},
+            {field: 'studentSpecialtyView', title: '专业', width: 10}
         ]],
-        toolbar: '#stuTb'
+        toolbar: '#stuTb',
+        queryParams: data
     });
 
 
@@ -542,10 +610,41 @@ $(function () {
 
     $('#stuDg').datagrid({
         //双击列
-        onDblClickCell: function (index, field, value) {
+        onDblClickRow: function (index, row) {
             //弹出信息框
+            var uploadPath = "http://localhost:8081/Upload/";
             $('#stuDialog').dialog('open');
-            $("#name").val(rowValue.itemid);
+            $("#id").val(row.id);
+            $("#userId").val(row.userId);
+            $("#studentName").textbox("setValue", row.studentName);
+            $("#schoolName").textbox("setValue", row.studentSchool);
+            $("#studentSpecialty").combobox("select", row.studentSpecialty);
+            $('#classId').combotree('setValue', row.classId);
+            $("#graduateTime").datetimebox("setValue", row.studentGraduationView);
+            $("#studentConduct").textbox("setValue", row.studentConduct);
+            $("#studentIdNumber").textbox("setValue", row.studentIdNumber);
+            $("#studentEducation").combobox("select", row.studentEducation);
+            $("#studentPhone").textbox("setValue", row.studentPhone);
+            $("#studentFamilyPhone").textbox("setValue", row.studentFamilyPhone);
+            $("#studentPicture").val(row.studentPicture);
+            $("#pic").attr("src", uploadPath + row.studentPicture);
+            var sex = row.studentSex;
+            var insurance = row.studentInsurance;
+            $("#" + sex).attr("checked", "checked");
+            $("#" + insurance).attr("checked", "checked");
+            var studentRole;
+            $.ajax({
+                url: "/education/getStudentRole",
+                type: "post",
+                data: {"userId": row.userId},
+                success: function (data) {
+                    studentRole = $.parseJSON(data);
+                    for (var i = 0; i < studentRole.length; i++) {
+                        $("#" + studentRole[i].id).attr("checked", "checked")
+                    }
+                }
+            })
+
 
         },
         onSelect: function (rowIndex, rowData) {
@@ -567,6 +666,7 @@ $(function () {
     $("#editStu").click(function () {
 
         var selects = $("#stuDg").datagrid("getSelections");
+        $("#stuForm").form("clear");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
@@ -590,7 +690,38 @@ $(function () {
                 title: "学生修改"
             });
             $("#stuDialog").dialog('open');
-            var selectRow = selects[0]
+            var uploadPath = "http://localhost:8081/Upload/";
+            var selectRow = selects[0];
+            $("#id").val(selectRow.id);
+            $("#userId").val(selectRow.userId);
+            $("#studentName").textbox("setValue", selectRow.studentName);
+            $("#schoolName").textbox("setValue", selectRow.studentSchool);
+            $("#studentSpecialty").combobox("select", selectRow.studentSpecialty);
+            $('#classId').combotree('setValue', selectRow.classId);
+            $("#graduateTime").datetimebox("setValue", selectRow.studentGraduationView);
+            $("#studentConduct").textbox("setValue", selectRow.studentConduct);
+            $("#studentIdNumber").textbox("setValue", selectRow.studentIdNumber);
+            $("#studentEducation").combobox("select", selectRow.studentEducation);
+            $("#studentPhone").textbox("setValue", selectRow.studentPhone);
+            $("#studentFamilyPhone").textbox("setValue", selectRow.studentFamilyPhone);
+            $("#studentPicture").val(selectRow.studentPicture);
+            $("#pic").attr("src", uploadPath + selectRow.studentPicture);
+            var sex = selectRow.studentSex;
+            var insurance = selectRow.studentInsurance;
+            $("#" + sex).attr("checked", "checked");
+            $("#" + insurance).attr("checked", "checked");
+            var studentRole;
+            $.ajax({
+                url: "/education/getStudentRole",
+                type: "post",
+                data: {"userId": selectRow.userId},
+                success: function (data) {
+                    studentRole = $.parseJSON(data);
+                    for (var i = 0; i < studentRole.length; i++) {
+                        $("#" + studentRole[i].id).attr("checked", "checked")
+                    }
+                }
+            })
 
         }
     });
@@ -602,7 +733,30 @@ $(function () {
         } else {
             $.messager.confirm('确认', '您确认想要这些记录吗？', function (choose) {
                 if (choose) {
-                    $.messager.alert('提示', '删除成功');
+                    var studentIds = [];
+                    var userIds = [];
+
+                    for (var i = 0; i < selects.length; i++) {
+                        studentIds.push(selects[i].id);
+                        userIds.push(selects[i].userId);
+                    }
+                    $.ajax({
+                        url: "/education/deleteStudent",
+                        data: {
+
+                            "studentIds": JSON.stringify(studentIds),
+                            "userIds": JSON.stringify(userIds)
+                        },
+                        type: "post",
+                        success: function () {
+                            $("#stuDg").datagrid("reload");
+                            $.messager.alert('提示', '删除成功');
+                        }
+
+
+                    });
+
+
                 }
             });
 
@@ -610,44 +764,15 @@ $(function () {
 
     });
 
-    $("#search").click(function () {
-        var no = $("#noSearch").val();
-        $('#stuDg').datagrid('load', {
-            'no': no
-        });
-    });
 
     //班级下拉框数据
     $('#classSel').combotree('tree').tree({
         url: "/education/getClass"
     });
     //班级下拉框数据
-    $('#personClass').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }
-
-        ]
+    $('#classId').combotree('tree').tree({
+        url: "/education/getClass"
     });
-
 
     //毕业学校框
     $("input", $("#schoolName").next("span")).focus(function () {
@@ -734,13 +859,11 @@ $(function () {
         $("#proSchool").window("close");
     });
 
-    $("#state").combobox({
-        url: "/education/getStudentStatu",
+    $("#studentSpecialty").combobox({
+        url: "/education/getStudentSpeciality",
         valueField: 'id',
         textField: 'dictionaryName'
     })
-
-
 
 
 });
@@ -749,8 +872,8 @@ $(function () {
 //提交按钮
 function submitForm() {
     $.messager.progress(); // 显示进度条
-    $('#ff').form('submit', {
-        url: "/asada",
+    $('#stuForm').form('submit', {
+        url: "/education/saveOrUpdateStudent",
         onSubmit: function () {
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -760,6 +883,9 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
+            $("#stuForm").form("clear");
+            $("#pic").attr("src", "");
+            $("#stuDg").datagrid("reload");
             $("#stuDialog").dialog("close")
         }
     });
@@ -767,5 +893,42 @@ function submitForm() {
 //取消按钮
 function cancel() {
     $("#stuDialog").dialog("close");
+    $("#pic").attr("src", "");
+    $("#stuForm").form("clear");
+}
+
+//上传照片
+function uploadPic() {
+    var uploadPath = "http://localhost:8081/Upload/";//文件服务器路径
+    var formData = new FormData($("#stuForm")[0]);
+    $.ajax({
+        url: '/education/UpLoadStudentPic',
+        type: 'POST',
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (returndata) {
+            $("#pic").attr("src", uploadPath + returndata);
+            $("#studentPicture").val(returndata);
+        }
+    });
+
+}
+
+function loadStuDg() {
+    var data = {};
+    if ($("#studentGraduation").val() != null && $("#studentGraduation").val() != "") {
+        data.studentGraduation = $("#studentGraduation").val();
+    }
+    if ($("#stuName").val() != null && $("#stuName").val() != "") {
+        data.studentName = $("#stuName").val();
+    }
+    if ($("#classSel").combotree("getValue") != null && $("#classSel").combotree("getValue") != "") {
+        data.ClassId = $("#classSel").combotree("getValue");
+    }
+
+    $("#stuDg").datagrid("load", data);
 }
 	
