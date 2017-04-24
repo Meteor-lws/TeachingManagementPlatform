@@ -19,6 +19,7 @@
     <script src="easyui/jquery.min.js"></script>
     <script src="easyui/jquery.easyui.min.js"></script>
     <script src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/MessageReview.js"></script>
 </head>
 <body>

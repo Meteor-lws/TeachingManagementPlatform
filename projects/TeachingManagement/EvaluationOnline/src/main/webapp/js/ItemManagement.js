@@ -24,25 +24,13 @@ function prepareDialog() {
 }
 
 function prepareDatagrid() {
-    $('#item-data').datagrid({
-        url: 'getEvaluationItems',
-        fit: true,
-        fitColumns: true,
-        striped: true,
-        remoteSort: false,
-        rownumbers: true,
-        pagination: true,
-        pageSize: 25,
-        pageList: [10, 15, 20, 25, 30],
-        pageNumber: 1,
-        columns: [[
-            {field: 'id', checkbox: true},
-            {field: 'itemContent', title: '评价项', width: 70},
-            {field: 'enable', title: '是否启用', width: 10},
-            {field: 'type', title: '评价类型', width: 20, sortable: true}
-        ]],
-        toolbar: '#item-tool'
-    });
+    var columns = [
+        {field: 'id', checkbox: true},
+        {field: 'itemContent', title: '评价项', width: 70},
+        {field: 'enable', title: '是否启用', width: 10},
+        {field: 'type', title: '评价类型', width: 20, sortable: true}
+    ];
+    util.datagrid('item-data', 'getEvaluationItems', [], columns, '#item-tool');
 }
 
 function prepareTools() {

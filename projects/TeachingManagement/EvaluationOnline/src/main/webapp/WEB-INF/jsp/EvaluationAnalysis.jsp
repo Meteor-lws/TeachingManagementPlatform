@@ -29,10 +29,13 @@
 <div data-options="region:'south'" style="height: 28%">
     <div id="analysis-detail"></div>
 </div>
-<div id="analysis-search-option">
-    <div data-options="name:'teacher'">教师</div>
-    <div data-options="name:'class'">班级</div>
-    <div data-options="name:'student'">学生</div>
+<div id="analysis-tool" style="padding: 5px">
+    <label for="analysis-search-class" style="padding-left: 10px">班级：</label>
+    <input id="analysis-search-class" class="easyui-searchbox" type="text">
+    <label for="analysis-search-teacher" style="padding-left: 15px">教师：</label>
+    <input id="analysis-search-teacher" class="easyui-searchbox" type="text">
+    <label for="analysis-search-student" style="padding-left: 15px">学生：</label>
+    <input id="analysis-search-student" class="easyui-searchbox" type="text">
 </div>
 </body>
 </html>
