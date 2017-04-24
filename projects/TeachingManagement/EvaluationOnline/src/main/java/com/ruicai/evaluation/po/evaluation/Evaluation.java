@@ -62,4 +62,16 @@ public class Evaluation {
     public void setEvaluationScore(Short evaluationScore) {
         this.evaluationScore = evaluationScore;
     }
+
+    @Override
+    public String toString() {
+        return "Evaluation{" +
+                "id='" + id + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", teacherId='" + teacherId + '\'' +
+                ", evaluationTime=" + evaluationTime +
+                ", evaluationFeedback='" + evaluationFeedback + '\'' +
+                ", evaluationScore=" + evaluationScore +
+                '}';
+    }
 }

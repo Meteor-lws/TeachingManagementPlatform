@@ -1,21 +1,17 @@
 package com.ruicai.evaluation.vo;
 
-import com.ruicai.evaluation.po.education.EducationTeacher;
-
-import java.util.List;
+import com.ruicai.evaluation.po.evaluation.Evaluation;
 
 /**
- * 评价分析视图类
+ * 评价视图类
  *
  * Created by lws on 2017/4/24.
  */
-public class EvaluationAnalysisView extends EducationTeacher {
+public class EvaluationView extends Evaluation {
     private String state;
     private String userName;
     private String className;
-    private Short evaluationScore;
     private Short averageScore;
-    private List<EvaluationView> children;
 
     public String getState() {
         return state;
@@ -41,14 +37,6 @@ public class EvaluationAnalysisView extends EducationTeacher {
         this.className = className;
     }
 
-    public Short getEvaluationScore() {
-        return evaluationScore;
-    }
-
-    public void setEvaluationScore(Short evaluationScore) {
-        this.evaluationScore = evaluationScore;
-    }
-
     public Short getAverageScore() {
         return averageScore;
     }
@@ -57,23 +45,13 @@ public class EvaluationAnalysisView extends EducationTeacher {
         this.averageScore = averageScore;
     }
 
-    public List<EvaluationView> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<EvaluationView> children) {
-        this.children = children;
-    }
-
     @Override
     public String toString() {
-        return "EvaluationAnalysisView{" +
+        return "EvaluationView{" +
                 "state='" + state + '\'' +
                 ", userName='" + userName + '\'' +
                 ", className='" + className + '\'' +
-                ", evaluationScore=" + evaluationScore +
                 ", averageScore=" + averageScore +
-                ", children=" + children +
                 "} " + super.toString();
     }
 }

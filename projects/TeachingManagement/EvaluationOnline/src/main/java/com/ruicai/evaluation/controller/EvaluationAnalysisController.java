@@ -1,5 +1,7 @@
 package com.ruicai.evaluation.controller;
 
+import com.ruicai.evaluation.vo.EvaluationAnalysisView;
+import com.ruicai.evaluation.vo.EvaluationView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,9 @@ public class EvaluationAnalysisController {
     @ResponseBody
     @RequestMapping(value = "GetAnalysisResults", method = RequestMethod.POST)
     public String GetAnalysisResults() {
+        EvaluationView evaluationView = new EvaluationView();
+        EvaluationAnalysisView analysisView = new EvaluationAnalysisView();
+        System.out.println(evaluationView + ":" + analysisView);
         return "";
     }
 }

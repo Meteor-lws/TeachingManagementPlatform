@@ -11,8 +11,8 @@ $(function () {
 
 function prepareResult() {
     var frozenColumns = [
-        {field: 'name', title: '姓名', width: 160},
-        {field: 'class', title: '班级', width: 150},
+        {field: 'name', title: '姓名', width: 200},
+        {field: 'class', title: '班级', width: 120},
         {field: 'total', title: '总分', width: 80},
         {field: 'average', title: '平均分', width: 80}
     ];
