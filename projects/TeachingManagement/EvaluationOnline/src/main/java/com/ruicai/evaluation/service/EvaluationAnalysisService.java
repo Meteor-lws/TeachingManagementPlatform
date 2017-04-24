@@ -1,6 +1,8 @@
 package com.ruicai.evaluation.service;
 
+import com.ruicai.evaluation.vo.Datagrid;
 import com.ruicai.evaluation.vo.EvaluationAnalysisView;
+import com.ruicai.evaluation.vo.EvaluationDetailView;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +15,6 @@ import java.util.List;
 @Service
 public interface EvaluationAnalysisService {
     List<EvaluationAnalysisView> GetAnalysisResults();
+
+    Datagrid<EvaluationDetailView> GetAnalysisDetails(int page, int rows, String evaluationId, String evaluationTime);
 }

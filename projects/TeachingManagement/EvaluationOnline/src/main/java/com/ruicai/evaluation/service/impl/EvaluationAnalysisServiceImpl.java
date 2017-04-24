@@ -1,18 +1,21 @@
 package com.ruicai.evaluation.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ruicai.evaluation.mapper.education.EducationClassMapper;
 import com.ruicai.evaluation.mapper.education.EducationStudentMapper;
 import com.ruicai.evaluation.mapper.education.EducationTeacherMapper;
 import com.ruicai.evaluation.mapper.evaluation.EvaluationDetailMapper;
+import com.ruicai.evaluation.mapper.evaluation.EvaluationItemMapper;
 import com.ruicai.evaluation.mapper.evaluation.EvaluationMapper;
 import com.ruicai.evaluation.mapper.system.SystemUserMapper;
 import com.ruicai.evaluation.po.education.*;
-import com.ruicai.evaluation.po.evaluation.Evaluation;
-import com.ruicai.evaluation.po.evaluation.EvaluationDetailExample;
-import com.ruicai.evaluation.po.evaluation.EvaluationExample;
+import com.ruicai.evaluation.po.evaluation.*;
 import com.ruicai.evaluation.po.system.SystemUserExample;
 import com.ruicai.evaluation.service.EvaluationAnalysisService;
+import com.ruicai.evaluation.vo.Datagrid;
 import com.ruicai.evaluation.vo.EvaluationAnalysisView;
+import com.ruicai.evaluation.vo.EvaluationDetailView;
 import com.ruicai.evaluation.vo.EvaluationView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +56,12 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
 
     private final EvaluationDetailExample detailExample;
 
+    private final EvaluationItemMapper itemMapper;
+
+    private final EvaluationItemExample itemExample;
+
     @Autowired
-    public EvaluationAnalysisServiceImpl(EducationStudentExample studentExample, EducationClassMapper classMapper, EducationClassExample classExample, EducationTeacherMapper teacherMapper, EducationTeacherExample teacherExample, EducationStudentMapper studentMapper, SystemUserMapper userMapper, SystemUserExample userExample, EvaluationDetailExample detailExample, EvaluationMapper evaluationMapper, EvaluationExample evaluationExample, EvaluationDetailMapper detailMapper) {
+    public EvaluationAnalysisServiceImpl(EducationStudentExample studentExample, EducationClassMapper classMapper, EducationClassExample classExample, EducationTeacherMapper teacherMapper, EducationTeacherExample teacherExample, EducationStudentMapper studentMapper, SystemUserMapper userMapper, SystemUserExample userExample, EvaluationDetailExample detailExample, EvaluationMapper evaluationMapper, EvaluationExample evaluationExample, EvaluationDetailMapper detailMapper, EvaluationItemMapper itemMapper, EvaluationItemExample itemExample) {
         this.studentExample = studentExample;
         this.classMapper = classMapper;
         this.classExample = classExample;
@@ -67,6 +74,8 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
         this.evaluationMapper = evaluationMapper;
         this.evaluationExample = evaluationExample;
         this.detailMapper = detailMapper;
+        this.itemMapper = itemMapper;
+        this.itemExample = itemExample;
     }
 
     public List<EvaluationAnalysisView> GetAnalysisResults() {
@@ -78,6 +87,43 @@ public class EvaluationAnalysisServiceImpl implements EvaluationAnalysisService 
             analysisViews.addAll(analysisViewList);
         }
         return analysisViews;
+    }
+
+    public Datagrid<EvaluationDetailView> GetAnalysisDetails(int page, int rows, String evaluationId, String evaluationTime) {
+        detailExample.clear();
+        detailExample.createCriteria().andEvaluationIdEqualTo(evaluationId);
+        PageHelper.startPage(page, rows);
+        List<EvaluationDetail> details = detailMapper.selectByExample(detailExample);
+        Datagrid<EvaluationDetailView> datagrid = new Datagrid<>();
+        datagrid.setTotal(new PageInfo<>(details).getTotal());
+        List<EvaluationDetailView> detailViews = new ArrayList<>();
+        for (EvaluationDetail detail : details) {
+            detailViews.add(buildEvaluationDetailView(detail, evaluationTime));
+        }
+        datagrid.setRows(detailViews);
+        return datagrid;
+    }
+
+    private EvaluationDetailView buildEvaluationDetailView(EvaluationDetail detail, String evaluationTime) {
+        EvaluationDetailView detailView = new EvaluationDetailView();
+        detailView.setId(detail.getId());
+        detailView.setEvaluationId(detail.getEvaluationId());
+        detailView.setItemId(detail.getItemId());
+        detailView.setEvaluationTime(evaluationTime);
+        detailView.setEvaluationScore(detail.getEvaluationScore());
+        itemExample.clear();
+        itemExample.createCriteria().andIdEqualTo(detail.getItemId());
+        detailView.setEvaluationItem(itemMapper.selectByExample(itemExample).get(0).getItemContent());
+        if (detailView.getEvaluationScore() < 5) {
+            detailView.setSatisfaction("不满意");
+        } else if (detailView.getEvaluationScore() < 7) {
+            detailView.setSatisfaction("一般满意");
+        } else if (detailView.getEvaluationScore() < 9) {
+            detailView.setSatisfaction("比较满意");
+        } else {
+            detailView.setSatisfaction("非常满意");
+        }
+        return detailView;
     }
 
     private List<EvaluationAnalysisView> buildAnalysisViews(EducationClass educationClass) {

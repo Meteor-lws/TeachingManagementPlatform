@@ -31,6 +31,16 @@ public class EvaluationAnalysisController {
     @ResponseBody
     @RequestMapping(value = "GetAnalysisResults", method = RequestMethod.POST)
     public String GetAnalysisResults() {
-        return JSON.toJSONString(service.GetAnalysisResults());
+        return JSON.toJSONStringWithDateFormat(service.GetAnalysisResults(), "yyyy-MM-dd HH:mm:ss");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "GetAnalysisDetails", method = RequestMethod.POST)
+    public String GetAnalysisDetails(int page, int rows, String id, String time) {
+        String result = "";
+        if (time != null) {
+            result = JSON.toJSONString(service.GetAnalysisDetails(page, rows, id, time));
+        }
+        return result;
     }
 }

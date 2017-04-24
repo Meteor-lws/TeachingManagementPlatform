@@ -10,24 +10,33 @@ $(function () {
 });
 
 function prepareResults() {
-    var frozenColumns = [
+    var columns = [
         {field: 'userName', title: '姓名', width: 200},
         {field: 'className', title: '班级', width: 120},
         {field: 'evaluationScore', title: '总分', width: 80},
-        {field: 'averageScore', title: '平均分', width: 80}
-    ];
-    var columns = [
+        {field: 'averageScore', title: '平均分', width: 80},
         {field: 'evaluationFeedback', title: '建议'}
     ];
-    util.treegrid('analysis-result', 'GetAnalysisResults', frozenColumns, columns, '#analysis-tool', 'id', 'userName');
+    util.treegrid('analysis-result', 'GetAnalysisResults', [], columns, '#analysis-tool', 'id', 'userName');
+    $('#analysis-result').treegrid({
+        onClickRow: function (row) {
+            console.log(row);
+            $('#analysis-detail').datagrid({
+                queryParams: {
+                    id: row.id,
+                    time: row.evaluationTime
+                }
+            });
+        }
+    });
 }
 
 function prepareDetail() {
     var columns = [
-        {field: 'evaluation', title: '评价项', width: 30},
-        {field: 'time', title: '评价时间', width: 20},
-        {field: 'score', title: '评分', width: 20},
-        {field: 'satisfaction', title: '满意度', width: 20}
+        {field: 'evaluationItem', title: '评价项', width: 50},
+        {field: 'evaluationTime', title: '评价时间', width: 10},
+        {field: 'evaluationScore', title: '评分', width: 5},
+        {field: 'satisfaction', title: '满意度', width: 5}
     ];
-    util.datagrid('analysis-detail', '', [], columns);
+    util.datagrid('analysis-detail', 'GetAnalysisDetails', [], columns);
 }
