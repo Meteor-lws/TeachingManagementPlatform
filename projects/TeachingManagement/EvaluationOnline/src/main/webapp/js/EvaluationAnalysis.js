@@ -12,14 +12,14 @@ $(function () {
 function prepareResult() {
     var frozenColumns = [
         {field: 'name', title: '姓名', width: 160},
-        {field: 'class', title: '所属班级', width: 150},
+        {field: 'class', title: '班级', width: 150},
         {field: 'total', title: '总分', width: 80},
         {field: 'average', title: '平均分', width: 80}
     ];
     var columns = [
         {field: 'advice', title: '建议'}
     ];
-    util.treegrid('analysis-result', '', frozenColumns, columns, '#analysis-tool', 'id', 'name');
+    util.treegrid('analysis-result', 'GetAnalysisResults', frozenColumns, columns, '#analysis-tool', 'id', 'name');
 }
 
 function prepareDetail() {
