@@ -5,21 +5,21 @@
  */
 
 $(function () {
-    prepareResult();
+    prepareResults();
     prepareDetail();
 });
 
-function prepareResult() {
+function prepareResults() {
     var frozenColumns = [
-        {field: 'name', title: '姓名', width: 200},
-        {field: 'class', title: '班级', width: 120},
-        {field: 'total', title: '总分', width: 80},
-        {field: 'average', title: '平均分', width: 80}
+        {field: 'userName', title: '姓名', width: 200},
+        {field: 'className', title: '班级', width: 120},
+        {field: 'evaluationScore', title: '总分', width: 80},
+        {field: 'averageScore', title: '平均分', width: 80}
     ];
     var columns = [
-        {field: 'advice', title: '建议'}
+        {field: 'evaluationFeedback', title: '建议'}
     ];
-    util.treegrid('analysis-result', 'GetAnalysisResults', frozenColumns, columns, '#analysis-tool', 'id', 'name');
+    util.treegrid('analysis-result', 'GetAnalysisResults', frozenColumns, columns, '#analysis-tool', 'id', 'userName');
 }
 
 function prepareDetail() {

@@ -14,7 +14,7 @@ public class EvaluationAnalysisView extends EducationTeacher {
     private String userName;
     private String className;
     private Short evaluationScore;
-    private Short averageScore;
+    private double averageScore;
     private List<EvaluationView> children;
 
     public String getState() {
@@ -49,11 +49,11 @@ public class EvaluationAnalysisView extends EducationTeacher {
         this.evaluationScore = evaluationScore;
     }
 
-    public Short getAverageScore() {
+    public double getAverageScore() {
         return averageScore;
     }
 
-    public void setAverageScore(Short averageScore) {
+    public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
 

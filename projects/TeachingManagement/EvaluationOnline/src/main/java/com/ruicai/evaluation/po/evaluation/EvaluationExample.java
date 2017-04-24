@@ -1,9 +1,12 @@
 package com.ruicai.evaluation.po.evaluation;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class EvaluationExample {
     protected String orderByClause;
 

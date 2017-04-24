@@ -1,7 +1,8 @@
 package com.ruicai.evaluation.controller;
 
-import com.ruicai.evaluation.vo.EvaluationAnalysisView;
-import com.ruicai.evaluation.vo.EvaluationView;
+import com.alibaba.fastjson.JSON;
+import com.ruicai.evaluation.service.impl.EvaluationAnalysisServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SuppressWarnings("SameReturnValue")
 @Controller
 public class EvaluationAnalysisController {
+    private final EvaluationAnalysisServiceImpl service;
+
+    @Autowired
+    public EvaluationAnalysisController(EvaluationAnalysisServiceImpl service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "EvaluationAnalysis", method = RequestMethod.GET)
     public String EvaluationAnalysis() {
@@ -24,9 +31,6 @@ public class EvaluationAnalysisController {
     @ResponseBody
     @RequestMapping(value = "GetAnalysisResults", method = RequestMethod.POST)
     public String GetAnalysisResults() {
-        EvaluationView evaluationView = new EvaluationView();
-        EvaluationAnalysisView analysisView = new EvaluationAnalysisView();
-        System.out.println(evaluationView + ":" + analysisView);
-        return "";
+        return JSON.toJSONString(service.GetAnalysisResults());
     }
 }

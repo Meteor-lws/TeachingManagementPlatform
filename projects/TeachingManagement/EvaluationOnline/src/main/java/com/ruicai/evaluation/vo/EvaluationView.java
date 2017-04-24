@@ -11,7 +11,7 @@ public class EvaluationView extends Evaluation {
     private String state;
     private String userName;
     private String className;
-    private Short averageScore;
+    private double averageScore;
 
     public String getState() {
         return state;
@@ -37,11 +37,11 @@ public class EvaluationView extends Evaluation {
         this.className = className;
     }
 
-    public Short getAverageScore() {
+    public double getAverageScore() {
         return averageScore;
     }
 
-    public void setAverageScore(Short averageScore) {
+    public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
 
