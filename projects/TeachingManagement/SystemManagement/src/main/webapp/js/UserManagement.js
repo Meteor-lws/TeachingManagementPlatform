@@ -5,5 +5,25 @@
  */
 
 $(function () {
-    alert('');
+    prepareTools();
 });
+
+function prepareTools() {
+    $('#user-search-type').combobox({
+        url: '',
+        valueField: 'id',
+        textField: 'text'
+    });
+    $('#user-search-status').combobox({
+        url: '',
+        valueField: 'id',
+        textField: 'text'
+    });
+    $('.user-search').searchbox({
+        searcher: search
+    });
+}
+
+function search() {
+    alert('');
+}
