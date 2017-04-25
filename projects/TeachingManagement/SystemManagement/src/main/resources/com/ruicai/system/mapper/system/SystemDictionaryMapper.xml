@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruicai.system.mapper.system.SystemDictionaryMapper">
     <resultMap id="BaseResultMap" type="com.ruicai.system.po.system.SystemDictionary">
-        <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_TYPE_ID" property="dictionaryTypeId" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_NAME" property="dictionaryName" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_VALUE" property="dictionaryValue" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_DESCRIBE" property="dictionaryDescribe" jdbcType="VARCHAR"/>
-        <result column="DICTIONARY_SORT_NUMBER" property="dictionarySortNumber" jdbcType="DECIMAL"/>
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DICTIONARY_TYPE_ID" jdbcType="VARCHAR" property="dictionaryTypeId"/>
+        <result column="DICTIONARY_NAME" jdbcType="VARCHAR" property="dictionaryName"/>
+        <result column="DICTIONARY_VALUE" jdbcType="VARCHAR" property="dictionaryValue"/>
+        <result column="DICTIONARY_DESCRIBE" jdbcType="VARCHAR" property="dictionaryDescribe"/>
+        <result column="DICTIONARY_SORT_NUMBER" jdbcType="DECIMAL" property="dictionarySortNumber"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -27,7 +27,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -42,7 +43,7 @@
         <where>
             <foreach collection="example.oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -56,7 +57,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -70,7 +72,8 @@
     <sql id="Base_Column_List">
         ID, DICTIONARY_TYPE_ID, DICTIONARY_NAME, DICTIONARY_VALUE, DICTIONARY_DESCRIBE, DICTIONARY_SORT_NUMBER
     </sql>
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ruicai.system.po.system.SystemDictionaryExample">
+    <select id="selectByExample" parameterType="com.ruicai.system.po.system.SystemDictionaryExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -84,7 +87,238 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from RUICAI.SYSTEM_DICTIONARY
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        DELETE FROM RUICAI.SYSTEM_DICTIONARY
+        WHERE ID = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ruicai.system.po.system.SystemDictionaryExample">
+        delete from RUICAI.SYSTEM_DICTIONARY
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ruicai.system.po.system.SystemDictionary">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+            SELECT sys_guid() FROM dual
+        </selectKey>
+        insert into RUICAI.SYSTEM_DICTIONARY (ID, DICTIONARY_TYPE_ID, DICTIONARY_NAME,
+        DICTIONARY_VALUE, DICTIONARY_DESCRIBE, DICTIONARY_SORT_NUMBER
+        )
+        values (#{id,jdbcType=VARCHAR}, #{dictionaryTypeId,jdbcType=VARCHAR}, #{dictionaryName,jdbcType=VARCHAR},
+        #{dictionaryValue,jdbcType=VARCHAR}, #{dictionaryDescribe,jdbcType=VARCHAR},
+        #{dictionarySortNumber,jdbcType=DECIMAL}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ruicai.system.po.system.SystemDictionary">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+            SELECT sys_guid() FROM dual
+        </selectKey>
+        insert into RUICAI.SYSTEM_DICTIONARY
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="dictionaryTypeId != null">
+                DICTIONARY_TYPE_ID,
+            </if>
+            <if test="dictionaryName != null">
+                DICTIONARY_NAME,
+            </if>
+            <if test="dictionaryValue != null">
+                DICTIONARY_VALUE,
+            </if>
+            <if test="dictionaryDescribe != null">
+                DICTIONARY_DESCRIBE,
+            </if>
+            <if test="dictionarySortNumber != null">
+                DICTIONARY_SORT_NUMBER,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=VARCHAR},
+            <if test="dictionaryTypeId != null">
+                #{dictionaryTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryName != null">
+                #{dictionaryName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryValue != null">
+                #{dictionaryValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryDescribe != null">
+                #{dictionaryDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionarySortNumber != null">
+                #{dictionarySortNumber,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruicai.system.po.system.SystemDictionaryExample"
+            resultType="java.lang.Integer">
+        select count(*) from RUICAI.SYSTEM_DICTIONARY
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update RUICAI.SYSTEM_DICTIONARY
+        <set>
+            <if test="record.id != null">
+                ID = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dictionaryTypeId != null">
+                DICTIONARY_TYPE_ID = #{record.dictionaryTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dictionaryName != null">
+                DICTIONARY_NAME = #{record.dictionaryName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dictionaryValue != null">
+                DICTIONARY_VALUE = #{record.dictionaryValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dictionaryDescribe != null">
+                DICTIONARY_DESCRIBE = #{record.dictionaryDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dictionarySortNumber != null">
+                DICTIONARY_SORT_NUMBER = #{record.dictionarySortNumber,jdbcType=DECIMAL},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update RUICAI.SYSTEM_DICTIONARY
+        set ID = #{record.id,jdbcType=VARCHAR},
+        DICTIONARY_TYPE_ID = #{record.dictionaryTypeId,jdbcType=VARCHAR},
+        DICTIONARY_NAME = #{record.dictionaryName,jdbcType=VARCHAR},
+        DICTIONARY_VALUE = #{record.dictionaryValue,jdbcType=VARCHAR},
+        DICTIONARY_DESCRIBE = #{record.dictionaryDescribe,jdbcType=VARCHAR},
+        DICTIONARY_SORT_NUMBER = #{record.dictionarySortNumber,jdbcType=DECIMAL}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruicai.system.po.system.SystemDictionary">
+        update RUICAI.SYSTEM_DICTIONARY
+        <set>
+            <if test="dictionaryTypeId != null">
+                DICTIONARY_TYPE_ID = #{dictionaryTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryName != null">
+                DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryValue != null">
+                DICTIONARY_VALUE = #{dictionaryValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryDescribe != null">
+                DICTIONARY_DESCRIBE = #{dictionaryDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionarySortNumber != null">
+                DICTIONARY_SORT_NUMBER = #{dictionarySortNumber,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruicai.system.po.system.SystemDictionary">
+        UPDATE RUICAI.SYSTEM_DICTIONARY
+        SET DICTIONARY_TYPE_ID     = #{dictionaryTypeId,jdbcType=VARCHAR},
+            DICTIONARY_NAME        = #{dictionaryName,jdbcType=VARCHAR},
+            DICTIONARY_VALUE       = #{dictionaryValue,jdbcType=VARCHAR},
+            DICTIONARY_DESCRIBE    = #{dictionaryDescribe,jdbcType=VARCHAR},
+            DICTIONARY_SORT_NUMBER = #{dictionarySortNumber,jdbcType=DECIMAL}
+        WHERE ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <resultMap id="BaseResultMap" type="com.ruicai.system.po.system.SystemDictionary">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DICTIONARY_TYPE_ID" jdbcType="VARCHAR" property="dictionaryTypeId"/>
+        <result column="DICTIONARY_NAME" jdbcType="VARCHAR" property="dictionaryName"/>
+        <result column="DICTIONARY_VALUE" jdbcType="VARCHAR" property="dictionaryValue"/>
+        <result column="DICTIONARY_DESCRIBE" jdbcType="VARCHAR" property="dictionaryDescribe"/>
+        <result column="DICTIONARY_SORT_NUMBER" jdbcType="DECIMAL" property="dictionarySortNumber"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        ID, DICTIONARY_TYPE_ID, DICTIONARY_NAME, DICTIONARY_VALUE, DICTIONARY_DESCRIBE, DICTIONARY_SORT_NUMBER
+    </sql>
+    <select id="selectByExample" parameterType="com.ruicai.system.po.system.SystemDictionaryExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from RUICAI.SYSTEM_DICTIONARY
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from RUICAI.SYSTEM_DICTIONARY

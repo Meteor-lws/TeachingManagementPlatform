@@ -33,7 +33,7 @@ public class WorkServerImpl implements WorkServer {
     public PageBean<EducationWork> getResByCondition(WorkCondition condition, PageBean<EducationWork> pageBean) {
         condition.setStartNum((condition.getPage() - 1) * condition.getRows());
         condition.setEndNum(condition.getPage() * condition.getRows() + 1);
-        List<EducationWork> works = educationWorkMapper.selectResBycondition(condition);
+        List<EducationWork> works = educationWorkMapper.selectWorkBycondition(condition);
         pageBean.setRows(works);
         int total = getResByConditionCount(condition);
         pageBean.setTotal(total);
@@ -42,7 +42,7 @@ public class WorkServerImpl implements WorkServer {
 
     @Override
     public int getResByConditionCount(WorkCondition condition) {
-        return educationWorkMapper.selectResByconditionCount(condition);
+        return educationWorkMapper.selectWorkByconditionCount(condition);
     }
 
     @Override
@@ -50,6 +50,25 @@ public class WorkServerImpl implements WorkServer {
         for (int i = 0; i < rids.size(); i++) {
             educationWorkMapper.deleteByPrimaryKey(rids.get(i));
         }
+    }
+
+    @Override
+    public void deleteWeeByBatch(List<String> idList) {
+        for (int i = 0; i < idList.size(); i++) {
+            educationWorkMapper.deleteByPrimaryKey(idList.get(i));
+        }
+    }
+
+    @Override
+    public PageBean<EducationWork> selectWeeByCondition(WorkCondition condition) {
+        condition.setStartNum((condition.getPage() - 1) * condition.getRows());
+        condition.setEndNum(condition.getPage() * condition.getRows() + 1);
+        List<EducationWork> works = educationWorkMapper.selectWorkBycondition(condition);
+        PageBean<EducationWork> pageBean = new PageBean<>();
+        pageBean.setRows(works);
+        int total = getResByConditionCount(condition);
+        pageBean.setTotal(total);
+        return pageBean;
     }
 
 

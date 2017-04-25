@@ -1,7 +1,9 @@
 package com.ruicai.education.controler;
 
+import com.alibaba.fastjson.JSON;
 import com.ruicai.education.po.education.ClassCondition;
 import com.ruicai.education.po.education.EducationClass;
+import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.server.ClassServer;
 import com.ruicai.education.server.DictionaryServer;
 import com.ruicai.education.util.PageBean;
@@ -45,6 +47,30 @@ public class ClassAction {
     PageBean<EducationClass> selectClassByCondition(ClassCondition condition) {
         return classServer.selectByCondition(condition);
 
+    }
+
+    /**
+     * 获取班级类型
+     *
+     * @return
+     */
+    @RequestMapping("/getClassType")
+    public @ResponseBody
+    List<SystemDictionary> getClassType() {
+        return classServer.getClassType();
+    }
+
+    @RequestMapping("/saveOrUpdateClass")
+    public @ResponseBody
+    void saveOrUpdate(EducationClass educationClass) {
+        classServer.saveOrUpdate(educationClass);
+    }
+
+    @RequestMapping("/deleteClassByBatch")
+    public @ResponseBody
+    void deleteClassByBatch(String ids) {
+        List<String> idlist = JSON.parseArray(ids, String.class);
+        classServer.deleteClassByBatch(idlist);
     }
 
 }

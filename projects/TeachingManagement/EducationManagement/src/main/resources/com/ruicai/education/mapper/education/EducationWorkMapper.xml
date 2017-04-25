@@ -109,7 +109,7 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectResBycondition" parameterType="com.ruicai.education.po.education.WorkCondition"
+  <select id="selectWorkBycondition" parameterType="com.ruicai.education.po.education.WorkCondition"
           resultMap="BaseResultMap">
     SELECT
     *
@@ -154,7 +154,7 @@
   </select>
 
 
-  <select id="selectResByconditionCount" parameterType="com.ruicai.education.po.education.WorkCondition"
+  <select id="selectWorkByconditionCount" parameterType="com.ruicai.education.po.education.WorkCondition"
           resultType="int">
     SELECT
     "COUNT"(EW."ID")

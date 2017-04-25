@@ -1,8 +1,7 @@
 ﻿$(function () {
     //定义变量接受行内容
     var rowValue;
-
-
+    $("#classDialog").dialog("close");
     $('#classDg').datagrid({
         url: '/education/selectClassByCondition',
         fit: true,
@@ -33,10 +32,16 @@
 
 
     $('#classDg').datagrid({
-        onDblClickCell: function (index, field, value) {
+        onDblClickRow: function (index, row) {
             $('#classDialog').dialog('open');
-            $("#name").val(rowValue.itemid);
-
+            $("#className").textbox("setValue", row.className);
+            $("#classType").combobox("select", row.classType);
+            $("#assistantId").combobox("select", row.assistantId);
+            $("#headTeacherId").combobox("select", row.headTeacherId);
+            $("#mainTeacherId").combobox("select", row.mainTeacherId);
+            $("#classdEndDateForm").datetimebox("setValue", row.classEndDateView);
+            $("#classStartDateForm").datetimebox("setValue", row.classStartDateView);
+            $("#id").val(row.id);
         },
         onSelect: function (rowIndex, rowData) {
             rowValue = rowData;
@@ -69,7 +74,15 @@
             });
             $("#classDialog").dialog('open');
             var selectRow = selects[0];
-
+            $('#classDialog').dialog('open');
+            $("#className").textbox("setValue", selectRow.className);
+            $("#classType").combobox("select", selectRow.classType);
+            $("#assistantId").combobox("select", selectRow.assistantId);
+            $("#headTeacherId").combobox("select", selectRow.headTeacherId);
+            $("#mainTeacherId").combobox("select", selectRow.mainTeacherId);
+            $("#classdEndDateForm").datetimebox("setValue", selectRow.classEndDateView);
+            $("#classStartDateForm").datetimebox("setValue", selectRow.classStartDateView);
+            $("#id").val(selectRow.id);
         }
     });
 
@@ -80,7 +93,25 @@
         } else {
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
                 if (choose) {
-                    $.messager.alert('提示', '删除成功');
+                    var ids = new Array();
+                    for (var i = 0; i < selects.length; i++) {
+                        ids[i] = selects[i].id;
+                    }
+
+                    $.ajax({
+                        url: "/education/deleteClassByBatch",
+                        data: {
+                            ids: JSON.stringify(ids),
+                        },
+                        type: "post",
+                        success: function (data) {
+                            $.messager.alert('提示', '删除成功');
+                            $("#classDg").datagrid("reload");
+
+                        }
+
+                    });
+
                 }
             });
 
@@ -94,6 +125,43 @@
         });
     });
 
+    $("#classType").combobox({
+        url: "/education/getClassType",
+        valueField: 'id',
+        textField: 'dictionaryName'
+    });
+
+    $("#mainTeacherId").combobox({
+        url: "/education/getAllMainTeacher",
+        valueField: 'id',
+        textField: 'teacherName'
+    });
+
+    $("#headTeacherId").combobox({
+        url: "/education/getAllHeadTeacher",
+        valueField: 'id',
+        textField: 'teacherName'
+    });
+
+    $("#assistantId").combobox({
+        url: "/education/getAllAssiTeacher",
+        valueField: 'id',
+        textField: 'teacherName'
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });
@@ -104,8 +172,8 @@ function clearForm() {
 }
 function submitForm() {
     $.messager.progress(); // 显示进度条
-    $('#ff').form('submit', {
-        url: "/asada",
+    $('#classForm').form('submit', {
+        url: "/education/saveOrUpdateClass",
         onSubmit: function () {
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -115,6 +183,8 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
+            $("#classForm").form("clear");
+            $("#classDg").datagrid("reload");
             $("#classDialog").dialog("close")
         }
     });
@@ -122,6 +192,7 @@ function submitForm() {
 }
 
 function cancel() {
+    $("#classForm").form("clear");
     $("#classDialog").dialog("close");
 }
 		

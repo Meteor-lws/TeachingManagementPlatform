@@ -60,6 +60,7 @@ public class TeacherAction {
 
     /**
      * teacherType职教类型下拉框数据
+     *
      * @return
      */
     @RequestMapping("/teachingTypeList")
@@ -72,6 +73,7 @@ public class TeacherAction {
 
     /**
      * 教师查询
+     *
      * @param condtition 条件
      * @param pageBean   分页BEAN
      * @return 符合条件数据
@@ -103,6 +105,7 @@ public class TeacherAction {
 
     /**
      * 教师专业
+     *
      * @return
      */
     @RequestMapping("/getTeacherSpeciality")
@@ -161,6 +164,40 @@ public class TeacherAction {
         teacherServer.deleteTeacherByBatch(tids, uids);
         return "success";
 
+    }
+
+
+    /**
+     * 获得所有主讲教师
+     *
+     * @return
+     */
+    @RequestMapping("/getAllMainTeacher")
+    public @ResponseBody
+    List<EducationTeacher> getAllMainTeacher() {
+        return teacherServer.getAllMainTeacher();
+    }
+
+    /**
+     * 获得所有班主任
+     *
+     * @return
+     */
+    @RequestMapping("/getAllHeadTeacher")
+    public @ResponseBody
+    List<EducationTeacher> getAllHeadTeacher() {
+        return teacherServer.getAllHeadTeacher();
+    }
+
+    /**
+     * 获得所有助教
+     *
+     * @return
+     */
+    @RequestMapping("/getAllAssiTeacher")
+    public @ResponseBody
+    List<EducationTeacher> getAllAssiTeacher() {
+        return teacherServer.getAllAssiTeacher();
     }
 
 

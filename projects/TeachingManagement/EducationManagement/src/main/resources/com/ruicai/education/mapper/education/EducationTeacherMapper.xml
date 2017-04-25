@@ -227,4 +227,15 @@
     INSERT INTO USER_TO_ROLE VALUES (#{userId},#{roleId})
   </insert>
 
+    <select id="selectAllTeacherByType" parameterType="string" resultMap="BaseResultMap">
+        SELECT *
+        FROM
+            EDUCATION_TEACHER et
+            JOIN SYSTEM_DICTIONARY sd ON ET.TEACHER_TYPE = SD."ID"
+        WHERE
+            SD.DICTIONARY_VALUE = #{type}
+
+    </select>
+
+
 </mapper>

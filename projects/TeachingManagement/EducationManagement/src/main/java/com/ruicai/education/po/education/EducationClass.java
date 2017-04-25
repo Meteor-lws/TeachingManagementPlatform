@@ -14,9 +14,7 @@ public class EducationClass {
     private String assistantId;
 
     private String assistantView;
-
     private String classType;
-
     private String classTypeView;
     private String className;
     private Timestamp classStartDate;
@@ -25,6 +23,14 @@ public class EducationClass {
     private String headTeacher;
     private String classStartDateView;
     private String classEndDateView;
+
+    public String getAssistantView() {
+        return assistantView;
+    }
+
+    public void setAssistantView(String assistantView) {
+        this.assistantView = assistantView;
+    }
 
     public String getClassTypeView() {
         return classTypeView;

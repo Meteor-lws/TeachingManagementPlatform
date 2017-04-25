@@ -146,5 +146,20 @@ public class TeacherServerImpl implements TeacherServer {
         return uploadService.uploadPic(request);
     }
 
+    @Override
+    public List<EducationTeacher> getAllMainTeacher() {
+        return educationTeacherMapper.selectAllTeacherByType(ReadProperties.read("mainTeacher"));
+    }
+
+    @Override
+    public List<EducationTeacher> getAllHeadTeacher() {
+        return educationTeacherMapper.selectAllTeacherByType(ReadProperties.read("headTeacher"));
+    }
+
+    @Override
+    public List<EducationTeacher> getAllAssiTeacher() {
+        return educationTeacherMapper.selectAllTeacherByType(ReadProperties.read("assistantTeacher"));
+    }
+
 
 }

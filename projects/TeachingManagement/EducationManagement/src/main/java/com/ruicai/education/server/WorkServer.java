@@ -38,4 +38,7 @@ public interface WorkServer {
 
     public void deleteResByBatch(List<String> rids);
 
+    public void deleteWeeByBatch(List<String> idList);
+
+    public PageBean<EducationWork> selectWeeByCondition(WorkCondition condition);
 }

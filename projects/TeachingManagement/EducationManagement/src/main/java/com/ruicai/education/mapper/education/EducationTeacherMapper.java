@@ -29,4 +29,10 @@ public interface EducationTeacherMapper {
 
     void grantRole(Map<String, String> s);
 
+    /**
+     * 查询教师根据教师类型 讲师 ，班主任， 助教
+     *
+     * @return
+     */
+    List<EducationTeacher> selectAllTeacherByType(String type);
 }

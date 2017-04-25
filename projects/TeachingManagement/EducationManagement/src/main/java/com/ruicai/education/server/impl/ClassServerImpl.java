@@ -7,6 +7,7 @@ import com.ruicai.education.po.education.SystemDictionary;
 import com.ruicai.education.server.ClassServer;
 import com.ruicai.education.server.DictionaryServer;
 import com.ruicai.education.util.PageBean;
+import com.ruicai.education.util.ReadProperties;
 import com.ruicai.education.util.TreeBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,28 @@ public class ClassServerImpl implements ClassServer {
     @Override
     public int selectByConditionCount(ClassCondition condition) {
         return educationClassMapper.selectByConditionCount(condition);
+    }
+
+    @Override
+    public List<SystemDictionary> getClassType() {
+        return dictionaryServer.selectDicByName(ReadProperties.read("classType"));
+    }
+
+    @Override
+    public void saveOrUpdate(EducationClass educationClass) {
+        if (educationClass.getId() != null && !educationClass.getId().equals("")) {
+            educationClassMapper.updateByPrimaryKeySelective(educationClass);
+        } else {
+            educationClassMapper.insert(educationClass);
+        }
+    }
+
+    @Override
+    public void deleteClassByBatch(List<String> idlist) {
+
+        for (int i = 0; i < idlist.size(); i++) {
+            educationClassMapper.deleteByPrimaryKey(idlist.get(i));
+        }
     }
 
 }

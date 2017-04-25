@@ -60,16 +60,4 @@ public class SystemDictionary {
     public void setDictionarySortNumber(Short dictionarySortNumber) {
         this.dictionarySortNumber = dictionarySortNumber;
     }
-
-    @Override
-    public String toString() {
-        return "SystemDictionary{" +
-                "id='" + id + '\'' +
-                ", dictionaryTypeId='" + dictionaryTypeId + '\'' +
-                ", dictionaryName='" + dictionaryName + '\'' +
-                ", dictionaryValue='" + dictionaryValue + '\'' +
-                ", dictionaryDescribe='" + dictionaryDescribe + '\'' +
-                ", dictionarySortNumber=" + dictionarySortNumber +
-                '}';
-    }
 }

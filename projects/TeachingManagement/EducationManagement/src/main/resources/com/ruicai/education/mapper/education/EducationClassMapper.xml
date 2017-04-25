@@ -108,6 +108,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ruicai.education.po.education.EducationClass" >
+      <selectKey order="BEFORE" keyColumn="ID" keyProperty="id" resultType="string">
+          select sys_guid() from dual
+      </selectKey>
     insert into RUICAI.EDUCATION_CLASS (ID, HEAD_TEACHER_ID, MAIN_TEACHER_ID, 
       ASSISTANT_ID, CLASS_TYPE, CLASS_NAME, 
       CLASS_START_DATE, CLASS_END_DATE)
@@ -279,8 +282,10 @@
     (
     SELECT
     EC."ID",
-    ec.ASSISTANT_ID,
     ec.CLASS_START_DATE,
+      ec.MAIN_TEACHER_ID,
+      ec.ASSISTANT_ID,
+      ec.HEAD_TEACHER_ID,
     ec.CLASS_NAME,
     ec.CLASS_TYPE,
     ec.CLASS_END_DATE,
@@ -306,7 +311,7 @@
     <if test="classStartDate != null and classStartDate != ''">
       AND CLASS_START_DATE &gt; to_date(#{classStartDate},'yyyy-mm-dd hh24:mi:ss')
     </if>
-    <if test="classStartDate != null and classStartDate != ''">
+      <if test="classEndDate != null and classEndDate != ''">
       AND CLASS_START_DATE &lt; to_date(#{classEndDate},'yyyy-mm-dd hh24:mi:ss')
     </if>
     ) A
@@ -325,7 +330,7 @@
       <if test="classStartDate != null and classStartDate != ''">
         CLASS_START_DATE &gt; to_date(#{classStartDate},'yyyy-mm-dd hh24:mi:ss')
       </if>
-      <if test="classStartDate != null and classStartDate != ''">
+        <if test="classEndDate != null and classEndDate != ''">
         AND CLASS_START_DATE &lt; to_date(#{classEndDate},'yyyy-mm-dd hh24:mi:ss')
       </if>
     </where>

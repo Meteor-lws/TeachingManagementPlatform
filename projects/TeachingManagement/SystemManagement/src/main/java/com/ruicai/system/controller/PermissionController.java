@@ -12,4 +12,6 @@ public class PermissionController {
     public String index() {
         return "permissionEdit";
     }
+
+
 }

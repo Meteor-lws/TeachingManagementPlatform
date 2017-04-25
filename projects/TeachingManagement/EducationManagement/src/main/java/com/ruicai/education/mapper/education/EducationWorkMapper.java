@@ -19,7 +19,7 @@ public interface EducationWorkMapper {
 
     int updateByPrimaryKey(EducationWork record);
 
-    List<EducationWork> selectResBycondition(WorkCondition condition);
+    List<EducationWork> selectWorkBycondition(WorkCondition condition);
 
-    int selectResByconditionCount(WorkCondition condition);
+    int selectWorkByconditionCount(WorkCondition condition);
 }

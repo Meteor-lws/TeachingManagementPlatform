@@ -37,46 +37,64 @@
         </div>
     </div>
 <div id="classDialog" class="easyui-dialog" title="班级修改"
-     data-options="modal:true,closed:true,iconCls:'icon-save'"
+     data-options="modal:true,closable:false,iconCls:'icon-save'"
      style="width:500px;height:450px;padding:10px;">
-        <form id="ff" method="post" action="/asa">
+    <form id="classForm" method="post">
+        <input type="hidden" id="id" name="id">
             <table style="height: 100%" width="100%" align="center">
                 <tr>
                     <td class="tdLabel" align="center"><label>班级名称</label></td>
-                    <td class="tdValue" align="left"><input id="className" class="easyui-validatebox"
+                    <td class="tdValue" align="left"><input id="className" name="className" class="easyui-textbox"
                                                             data-options="required:true"/></td>
+                    <td class="tdLabel" align="center"><label>班级类型</label></td>
+                    <td class="tdValue" align="left">
+                        <select id="classType" class="easyui-combobox" name="classType"
+                                style="width:170px;" data-options="panelHeight:'80px'">
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td class="tdLabel" align="center"><label>开班时间</label></td>
-                    <td class="tdValue" align="left"><input id="classStartTime" type="text"
-                                                            class="easyui-datebox"></input></td>
+                    <td class="tdValue" align="left"><input id="classStartDateForm" name="classStartDate" type="text"
+                                                            class="easyui-datetimebox"></input></td>
+                    <td class="tdLabel" align="center"><label>结业时间</label></td>
+                    <td class="tdValue" align="left"><input id="classdEndDateForm" name="classEndDate" type="text"
+                                                            class="easyui-datetimebox"></input></td>
                 </tr>
                 <tr>
-                    <td class="tdLabel" align="center"><label>结业时间</label></td>
-                    <td class="tdValue" align="left"><input id="classdEndTime" type="text"
-                                                            class="easyui-datebox"></input></td>
+
                 </tr>
                 <tr>
-                    <td class="tdLabel" align="center"><label>结业时间</label></td>
+                    <td class="tdLabel" align="center"><label>主讲教师</label></td>
                     <td class="tdValue" align="left">
-                        <select id="state" class="easyui-combobox" name="dept"
+                        <select id="mainTeacherId" class="easyui-combobox" name="mainTeacherId"
                                 style="width:170px;" data-options="panelHeight:'80px'">
-                            <option value="1">已开课</option>
-                            <option value="0">待开课</option>
-                            <option value="0">已结业</option>
+                        </select>
+                    </td>
+                    <td class="tdLabel" align="center"><label>班主任</label></td>
+                    <td class="tdValue" align="left">
+                        <select id="headTeacherId" class="easyui-combobox" name="headTeacherId"
+                                style="width:170px;" data-options="panelHeight:'80px'">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdLabel" align="center"><label>助教</label></td>
+                    <td class="tdValue" align="left">
+                        <select id="assistantId" class="easyui-combobox" name="assistantId"
+                                style="width:170px;" data-options="panelHeight:'80px'">
                         </select>
                     </td>
                 </tr>
                 <tr align="center">
-                    <td class="tdLabel">
+                    <td class="tdLabel" colspan="2" align="center">
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                            onclick="submitForm()">保存</a>
                     </td>
-                    <td class="tdValue">
+                    <td class="tdValue" colspan="2" align="center">
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
                            onclick="cancel()">取消</a>
                     </td>
-
                 </tr>
             </table>
         </form>

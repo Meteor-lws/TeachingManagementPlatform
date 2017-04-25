@@ -24,7 +24,6 @@ public class ResourcesAction {
     private WorkServer workServer;
 
     /**
-     * 首页
      *
      * @return
      */

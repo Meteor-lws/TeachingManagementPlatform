@@ -24,16 +24,13 @@
                data-options="iconCls:'icon-remove',plain:true">批量删除</a>
         </div>
         <div align="left">
-            <label>
-                部门
-            </label>
-            <select id="depSel" class="easyui-combotree" style="width:120px;"></select>
             上传者
-            <select id="uploderSel" class="easyui-combotree" style="width:120px;"></select>
+            <select id="teacherId" class="easyui-combotree" style="width:120px;"></select>
             日期
-            <input id="time" type="text" class="easyui-datebox" style="width: 120px"></input>
+            <input id="workUploadTime" type="text" class="easyui-datebox" style="width: 120px"></input>
             &nbsp&nbsp&nbsp
-            <a href="otherpage.php" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            <input id="workType" type="hidden" value="weekly">
         </div>
 
     </div>

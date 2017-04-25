@@ -64,4 +64,25 @@ public interface TeacherServer {
     void deleteTeacherByBatch(List<String> tids, List<String> uids);
 
     public String uploadPic(HttpServletRequest request);
+
+    /**
+     * 查询所有讲师
+     *
+     * @return
+     */
+    public List<EducationTeacher> getAllMainTeacher();
+
+    /**
+     * 查询所有班主任
+     *
+     * @return
+     */
+    public List<EducationTeacher> getAllHeadTeacher();
+
+    /**
+     * 查询所有助教
+     *
+     * @return
+     */
+    public List<EducationTeacher> getAllAssiTeacher();
 }
