@@ -3,14 +3,14 @@ package com.ruicai.system.po.system;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemDictionaryTypeExample {
+public class SystemRoleExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SystemDictionaryTypeExample() {
+    public SystemRoleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -44,16 +44,16 @@ public class SystemDictionaryTypeExample {
         return criteria;
     }
 
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
+        return criteria;
+    }
+
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
-        return criteria;
-    }
-
-    protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
         return criteria;
     }
 
@@ -83,30 +83,16 @@ public class SystemDictionaryTypeExample {
             return criteria;
         }
 
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
+        }
+
         protected void addCriterion(String condition) {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
-        }
-
-        protected void addCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value));
-        }
-
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
-            return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
@@ -117,6 +103,13 @@ public class SystemDictionaryTypeExample {
         public Criteria andIdEqualTo(String value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
         }
 
         public Criteria andIdNotEqualTo(String value) {
@@ -167,6 +160,13 @@ public class SystemDictionaryTypeExample {
         public Criteria andIdBetween(String value1, String value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
         }
 
         public Criteria andIdNotBetween(String value1, String value2) {
@@ -244,203 +244,273 @@ public class SystemDictionaryTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameIsNull() {
-            addCriterion("DICTIONARY_TYPE_NAME is null");
+        public Criteria andRoleCodeIsNull() {
+            addCriterion("ROLE_CODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameIsNotNull() {
-            addCriterion("DICTIONARY_TYPE_NAME is not null");
+        public Criteria andRoleCodeIsNotNull() {
+            addCriterion("ROLE_CODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME =", value, "dictionaryTypeName");
+        public Criteria andRoleCodeEqualTo(String value) {
+            addCriterion("ROLE_CODE =", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameNotEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME <>", value, "dictionaryTypeName");
+        public Criteria andRoleCodeNotEqualTo(String value) {
+            addCriterion("ROLE_CODE <>", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameGreaterThan(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME >", value, "dictionaryTypeName");
+        public Criteria andRoleCodeGreaterThan(String value) {
+            addCriterion("ROLE_CODE >", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameGreaterThanOrEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME >=", value, "dictionaryTypeName");
+        public Criteria andRoleCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("ROLE_CODE >=", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameLessThan(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME <", value, "dictionaryTypeName");
+        public Criteria andRoleCodeLessThan(String value) {
+            addCriterion("ROLE_CODE <", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameLessThanOrEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME <=", value, "dictionaryTypeName");
+        public Criteria andRoleCodeLessThanOrEqualTo(String value) {
+            addCriterion("ROLE_CODE <=", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameLike(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME like", value, "dictionaryTypeName");
+        public Criteria andRoleCodeLike(String value) {
+            addCriterion("ROLE_CODE like", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameNotLike(String value) {
-            addCriterion("DICTIONARY_TYPE_NAME not like", value, "dictionaryTypeName");
+        public Criteria andRoleCodeNotLike(String value) {
+            addCriterion("ROLE_CODE not like", value, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameIn(List<String> values) {
-            addCriterion("DICTIONARY_TYPE_NAME in", values, "dictionaryTypeName");
+        public Criteria andRoleCodeIn(List<String> values) {
+            addCriterion("ROLE_CODE in", values, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameNotIn(List<String> values) {
-            addCriterion("DICTIONARY_TYPE_NAME not in", values, "dictionaryTypeName");
+        public Criteria andRoleCodeNotIn(List<String> values) {
+            addCriterion("ROLE_CODE not in", values, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameBetween(String value1, String value2) {
-            addCriterion("DICTIONARY_TYPE_NAME between", value1, value2, "dictionaryTypeName");
+        public Criteria andRoleCodeBetween(String value1, String value2) {
+            addCriterion("ROLE_CODE between", value1, value2, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeNameNotBetween(String value1, String value2) {
-            addCriterion("DICTIONARY_TYPE_NAME not between", value1, value2, "dictionaryTypeName");
+        public Criteria andRoleCodeNotBetween(String value1, String value2) {
+            addCriterion("ROLE_CODE not between", value1, value2, "roleCode");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeIsNull() {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE is null");
+        public Criteria andRoleNameIsNull() {
+            addCriterion("ROLE_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeIsNotNull() {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE is not null");
+        public Criteria andRoleNameIsNotNull() {
+            addCriterion("ROLE_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE =", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameEqualTo(String value) {
+            addCriterion("ROLE_NAME =", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeNotEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE <>", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameNotEqualTo(String value) {
+            addCriterion("ROLE_NAME <>", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeGreaterThan(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE >", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameGreaterThan(String value) {
+            addCriterion("ROLE_NAME >", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeGreaterThanOrEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE >=", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameGreaterThanOrEqualTo(String value) {
+            addCriterion("ROLE_NAME >=", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeLessThan(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE <", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameLessThan(String value) {
+            addCriterion("ROLE_NAME <", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeLessThanOrEqualTo(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE <=", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameLessThanOrEqualTo(String value) {
+            addCriterion("ROLE_NAME <=", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeLike(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE like", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameLike(String value) {
+            addCriterion("ROLE_NAME like", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeNotLike(String value) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE not like", value, "dictionaryTypeDescribe");
+        public Criteria andRoleNameNotLike(String value) {
+            addCriterion("ROLE_NAME not like", value, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeIn(List<String> values) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE in", values, "dictionaryTypeDescribe");
+        public Criteria andRoleNameIn(List<String> values) {
+            addCriterion("ROLE_NAME in", values, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeNotIn(List<String> values) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE not in", values, "dictionaryTypeDescribe");
+        public Criteria andRoleNameNotIn(List<String> values) {
+            addCriterion("ROLE_NAME not in", values, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeBetween(String value1, String value2) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE between", value1, value2, "dictionaryTypeDescribe");
+        public Criteria andRoleNameBetween(String value1, String value2) {
+            addCriterion("ROLE_NAME between", value1, value2, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeDescribeNotBetween(String value1, String value2) {
-            addCriterion("DICTIONARY_TYPE_DESCRIBE not between", value1, value2, "dictionaryTypeDescribe");
+        public Criteria andRoleNameNotBetween(String value1, String value2) {
+            addCriterion("ROLE_NAME not between", value1, value2, "roleName");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberIsNull() {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER is null");
+        public Criteria andRoleDescribeIsNull() {
+            addCriterion("ROLE_DESCRIBE is null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberIsNotNull() {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER is not null");
+        public Criteria andRoleDescribeIsNotNull() {
+            addCriterion("ROLE_DESCRIBE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberEqualTo(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER =", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeEqualTo(String value) {
+            addCriterion("ROLE_DESCRIBE =", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberNotEqualTo(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <>", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeNotEqualTo(String value) {
+            addCriterion("ROLE_DESCRIBE <>", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberGreaterThan(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER >", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeGreaterThan(String value) {
+            addCriterion("ROLE_DESCRIBE >", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberGreaterThanOrEqualTo(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER >=", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("ROLE_DESCRIBE >=", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberLessThan(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeLessThan(String value) {
+            addCriterion("ROLE_DESCRIBE <", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberLessThanOrEqualTo(Short value) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER <=", value, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeLessThanOrEqualTo(String value) {
+            addCriterion("ROLE_DESCRIBE <=", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberIn(List<Short> values) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER in", values, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeLike(String value) {
+            addCriterion("ROLE_DESCRIBE like", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberNotIn(List<Short> values) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER not in", values, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeNotLike(String value) {
+            addCriterion("ROLE_DESCRIBE not like", value, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberBetween(Short value1, Short value2) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER between", value1, value2, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeIn(List<String> values) {
+            addCriterion("ROLE_DESCRIBE in", values, "roleDescribe");
             return (Criteria) this;
         }
 
-        public Criteria andDictionaryTypeSortNumberNotBetween(Short value1, Short value2) {
-            addCriterion("DICTIONARY_TYPE_SORT_NUMBER not between", value1, value2, "dictionaryTypeSortNumber");
+        public Criteria andRoleDescribeNotIn(List<String> values) {
+            addCriterion("ROLE_DESCRIBE not in", values, "roleDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleDescribeBetween(String value1, String value2) {
+            addCriterion("ROLE_DESCRIBE between", value1, value2, "roleDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleDescribeNotBetween(String value1, String value2) {
+            addCriterion("ROLE_DESCRIBE not between", value1, value2, "roleDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritIsNull() {
+            addCriterion("ROLE_INHERIT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritIsNotNull() {
+            addCriterion("ROLE_INHERIT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritEqualTo(Short value) {
+            addCriterion("ROLE_INHERIT =", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritNotEqualTo(Short value) {
+            addCriterion("ROLE_INHERIT <>", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritGreaterThan(Short value) {
+            addCriterion("ROLE_INHERIT >", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritGreaterThanOrEqualTo(Short value) {
+            addCriterion("ROLE_INHERIT >=", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritLessThan(Short value) {
+            addCriterion("ROLE_INHERIT <", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritLessThanOrEqualTo(Short value) {
+            addCriterion("ROLE_INHERIT <=", value, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritIn(List<Short> values) {
+            addCriterion("ROLE_INHERIT in", values, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritNotIn(List<Short> values) {
+            addCriterion("ROLE_INHERIT not in", values, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritBetween(Short value1, Short value2) {
+            addCriterion("ROLE_INHERIT between", value1, value2, "roleInherit");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleInheritNotBetween(Short value1, Short value2) {
+            addCriterion("ROLE_INHERIT not between", value1, value2, "roleInherit");
             return (Criteria) this;
         }
     }
@@ -476,6 +546,10 @@ public class SystemDictionaryTypeExample {
             this.noValue = true;
         }
 
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
+        }
+
         protected Criterion(String condition, Object value, String typeHandler) {
             super();
             this.condition = condition;
@@ -488,8 +562,8 @@ public class SystemDictionaryTypeExample {
             }
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
         }
 
         protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
@@ -499,10 +573,6 @@ public class SystemDictionaryTypeExample {
             this.secondValue = secondValue;
             this.typeHandler = typeHandler;
             this.betweenValue = true;
-        }
-
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
         }
 
         public String getCondition() {
