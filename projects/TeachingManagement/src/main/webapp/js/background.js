@@ -23,7 +23,7 @@ $(function () {
                     url = '/education/class';
                     break;
                 case '用户管理':
-                    url = '/system/user';
+                    url = '/system/UserManagement';
                     break;
                 case '角色管理':
                     url = '/system/role';
