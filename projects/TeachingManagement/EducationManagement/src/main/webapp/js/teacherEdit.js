@@ -218,12 +218,6 @@ $(function () {
         }
 
     });
-    $("#search").click(function () {
-        var no = $("#noSearch").val();
-        $('#teaDg').datagrid('load', {
-            'no': no
-        });
-    });
 
     $('#teaDg').datagrid({
         url: '/education/teacherSelect',
@@ -253,11 +247,12 @@ $(function () {
 
     $("#selectTea").click(function()
     {
-
+        alert($("#teacherName").textbox("getValue"));
         var id = $("#teacherNo").val();//教师id
         var teacherName = $("#teacherName").val();//教师姓名
         $('#teaDg').datagrid('load', {
             id: id,
+            teacherName:$("#teacherName").textbox("getValue"),
             teacherType: teachingType
         });
     });

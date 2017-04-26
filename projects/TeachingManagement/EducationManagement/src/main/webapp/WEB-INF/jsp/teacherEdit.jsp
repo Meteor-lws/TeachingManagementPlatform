@@ -37,7 +37,7 @@
     <div>
     教师编号 <input id="teacherNo" name="id" type="text" class="easyui-numberbox"
                 data-options="min:0,precision:2" style="width: 120px"></input>
-    教师姓名 <input id="teacherName" name="teacherName" class="easyui-validatebox" style="width: 120px"/>
+    教师姓名 <input id="teacherName" name="teacherName" class="easyui-textbox" style="width: 120px"/>
     职教类型 <input id="teachingType" name="teacherType" />
 
 <%--查询教师--%>

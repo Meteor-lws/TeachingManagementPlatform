@@ -2,7 +2,7 @@
     //定义变量接受行内容
     var rowValue;
     $('#preDg').datagrid({
-        url: 'datagrid_data1.json',
+        url: "/system/getPerByCondition",
         fit: true,
         fitColumns: false,
         striped: true,
@@ -12,12 +12,25 @@
         pageSize: 20,
         pageNumber: 1,
         columns: [[
-            {field: 'code', itemid: 'ID', checkbox: true, width: 100},
-            {field: 'productid', title: '权限名称', width: 520},
-            {field: 'productid', title: '权限描述', width: 520}
+            {field: 'id', itemid: 'ID', checkbox: true, width: 100},
+            {field: 'resourceName', title: '权限名称', width: 520},
+            {field: 'resourceValue', title: '权限代码', width: 520},
+            {field: 'resourceTypeView', title: '权限类型', width: 520}
         ]],
+        queryParams: {
+            resourceName: $("#resourceName").textbox("getValue"),
+            resourceValue:$("#resourceValue").textbox("getValue")
+        },
         toolbar: '#preTb'
     });
+
+    $("#search").click(function(){
+        $('#preDg').datagrid("load",{
+            resourceName: $("#resourceName").textbox("getValue"),
+            resourceValue:$("#resourceValue").textbox("getValue")
+        });
+    });
+
 
 
     $('#preDg').datagrid({
@@ -82,31 +95,6 @@
         });
     });
 
-    $('#preNameSel').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }
-
-        ]
-    });
 
 
 });

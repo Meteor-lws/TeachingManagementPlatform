@@ -7,13 +7,33 @@ public class SystemResource {
 
     private String resourceType;
 
+    private String resourceTypeView;
+
     private String resourceName;
+
+    private String resourceDescribe;
 
     private String resourceValue;
 
     private Short resourceVisible;
 
     private Short resourceEnable;
+
+    public String getResourceDescribe() {
+        return resourceDescribe;
+    }
+
+    public void setResourceDescribe(String resourceDescribe) {
+        this.resourceDescribe = resourceDescribe;
+    }
+
+    public String getResourceTypeView() {
+        return resourceTypeView;
+    }
+
+    public void setResourceTypeView(String resourceTypeView) {
+        this.resourceTypeView = resourceTypeView;
+    }
 
     public String getId() {
         return id;

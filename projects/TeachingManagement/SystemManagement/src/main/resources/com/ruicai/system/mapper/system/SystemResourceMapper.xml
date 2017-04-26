@@ -9,6 +9,9 @@
         <result column="RESOURCE_VALUE" property="resourceValue" jdbcType="VARCHAR"/>
         <result column="RESOURCE_VISIBLE" property="resourceVisible" jdbcType="DECIMAL"/>
         <result column="RESOURCE_ENABLE" property="resourceEnable" jdbcType="DECIMAL"/>
+        <result column="RESOURCE_TYPE_VIEW" property="resourceTypeView" jdbcType="DECIMAL"/>
+        <result column="RESOURCE_DESCRIBE" property="resourceDescribe" jdbcType="DECIMAL"/>
+
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -110,10 +113,10 @@
         </selectKey>
         insert into RUICAI.SYSTEM_RESOURCE (ID, PARENT_ID, RESOURCE_TYPE,
         RESOURCE_NAME, RESOURCE_VALUE, RESOURCE_VISIBLE,
-        RESOURCE_ENABLE)
+        RESOURCE_ENABLE,RESOURCE_DESCRIBE)
         values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR},
         #{resourceName,jdbcType=VARCHAR}, #{resourceValue,jdbcType=VARCHAR}, #{resourceVisible,jdbcType=DECIMAL},
-        #{resourceEnable,jdbcType=DECIMAL})
+        #{resourceEnable,jdbcType=DECIMAL},#{resourceDescribe,jdbcType=DECIMAL})
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.system.po.system.SystemResource">
         <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
@@ -246,4 +249,57 @@
             RESOURCE_ENABLE  = #{resourceEnable,jdbcType=DECIMAL}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="selectPreByCondition" parameterType="com.ruicai.system.po.system.ResourceCondition" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        A .*, ROWNUM rn
+        FROM
+        (
+        SELECT
+        SR.*,
+        SD.DICTIONARY_NAME AS RESOURCE_TYPE_VIEW
+        FROM
+        SYSTEM_RESOURCE sr
+        JOIN SYSTEM_DICTIONARY sd ON SR.RESOURCE_TYPE = SD."ID"
+        WHERE ROWNUM &lt; #{endNum}
+
+        <if test="resourceName != null and resourceName != ''">
+            AND  RESOURCE_NAME LIKE  '%${resourceName}%'
+        </if>
+
+        <if test="resourceValue != null and resourceValue != ''">
+            AND RESOURCE_VALUE LIKE  '%${resourceValue}%'
+        </if>
+
+
+        ) A
+        )
+        WHERE rn  &gt; #{startNum}
+    </select>
+
+    <select id="selectPreByConditionCount" parameterType="com.ruicai.system.po.system.ResourceCondition" resultType="int">
+        SELECT
+            "COUNT" ("ID")
+        FROM
+            SYSTEM_RESOURCE sr
+        <where>
+            <if test="resourceName != null and resourceName != ''">
+               RESOURCE_NAME LIKE  '%${resourceName}%'
+            </if>
+
+            <if test="resourceValue != null and resourceValue != ''">
+                AND RESOURCE_VALUE LIKE  '%${resourceValue}%'
+            </if>
+        </where>
+
+
+    </select>
+
+
+
+
 </mapper>

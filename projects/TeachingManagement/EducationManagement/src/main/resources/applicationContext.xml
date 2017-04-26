@@ -9,7 +9,7 @@
     <!--Oracle数据源-->
     <bean id="dataSource"  class="org.apache.commons.dbcp2.BasicDataSource">
         <!--<property name="url" value="jdbc:oracle:thin:@192.168.53.104:1521:orcl"/>-->
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+        <property name="url" value="jdbc:oracle:thin:@1921.168.53.104:1521:orcl"/>
         <property name="password" value="ruicai"/>
         <property name="username" value="ruicai"/>
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>

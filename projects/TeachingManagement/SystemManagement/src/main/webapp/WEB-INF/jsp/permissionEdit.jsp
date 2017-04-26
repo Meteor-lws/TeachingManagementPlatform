@@ -33,15 +33,15 @@
            data-options="iconCls:'icon-remove',plain:true">删除</a>
     </div>
     <div align="left" style="margin-top:5px">
-        角色名称 <select id="preNameSel" class="easyui-combotree" style="width:120px;"></select>
-        角色编码 <input id="precode" class="easyui-validatebox" name="stuName" style="width: 120px;"/>
-        <a id="search" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+        权限名称 <input id="resourceName" class="easyui-textbox"  style="width: 120px;"/>
+        权限编码 <input id="resourceValue" class="easyui-textbox"  style="width: 120px;"/>
+        <a id="search"  class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
     </div>
 </div>
 <div id="preDialog" class="easyui-dialog" title="权限修改"
      data-options="modal:true,closed:true,iconCls:'icon-save'"
      style="width:500px;height:300px;padding:10px;">
-    <form id="ff" method="post" action="/asa">
+    <form id="preForm" method="post" >
         <table style="height:100%" width="100%">
             <tr>
                 <td><label>权限名称</label></td>

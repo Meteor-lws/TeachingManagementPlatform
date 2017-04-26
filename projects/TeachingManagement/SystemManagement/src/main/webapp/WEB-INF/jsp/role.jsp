@@ -50,17 +50,27 @@
                                                    data-options="required:true"></td>
                 </tr>
                 <tr>
+                    <td class="tdRoleCodeLabel"><label>角色代码</label></td>
+                    <td class="tdRoleCodeValue"><input id="roleCodes" class="easyui-textbox" type="text"
+                                                   data-options="required:true"></td>
+                </tr>
+                <tr>
                     <td class="tdPreRoleLabel"><label>角色权限选择</label></td>
                     <!-- 用json来append -->
-                    <td class="tdPreRoleValue"><input type="checkbox" name="qx" value="1"/>用户管理
-                        <input type="checkbox" name="qx" value="2"/>业务模板定制管理<br/><br/>
-                        <input type="checkbox" name="qx" value="1"/>用户管理
-                        <input type="checkbox" name="qx" value="2"/>业务模板定制管理<br/>
+                    <td class="tdPreRoleValue">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdRoleInheritLabel"><label>是否继承父角色资源</label></td>
+                    <!-- 用json来append -->
+                    <td class="tdRoleInheritValue">
+                        <label>是</label><input checked="checked" type="radio" name="roleInherit" value="是"/>
+                        <label>否</label><input type="radio" name="roleInherit" value="否"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="tdDesRoleLabel"><label>角色描述:</label></td>
-                    <td class="tdDesRoleValue"><input id="" class="easyui-textbox" data-options="multiline:true"
+                    <td class="tdDesRoleValue"><input id="roleDescribe" class="easyui-textbox" data-options="multiline:true"
                                                       value=""
                                                       style="width:300px;height:100px"></td>
                 </tr>
@@ -68,7 +78,7 @@
                     <td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                            onclick="submitForm()">保存</a></td>
                     <td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
-                           onclick="cancel()">取消</a></td>
+                           onclick="clearForm()">取消</a></td>
                 </tr>
             </table>
         </form>
