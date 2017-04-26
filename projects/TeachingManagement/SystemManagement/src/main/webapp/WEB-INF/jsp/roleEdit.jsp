@@ -51,10 +51,11 @@
             <tr>
                 <td class="tdRoleLabel"><label>角色名称</label></td>
                 <td class="tdRoleValue"><input id="idCar" class="easyui-textbox" type="text"
-                                               data-options="required:true"></input></td>
+                                               data-options="required:true"></td>
             </tr>
             <tr>
                 <td class="tdPreRoleLabel"><label>角色权限选择</label></td>
+                <!-- 用json来append -->
                 <td class="tdPreRoleValue"><input type="checkbox" name="qx" value="1"/>用户管理
                     <input type="checkbox" name="qx" value="2"/>业务模板定制管理<br/><br/>
                     <input type="checkbox" name="qx" value="1"/>用户管理

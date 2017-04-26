@@ -3,9 +3,11 @@ package com.ruicai.system.mapper.system;
 import com.ruicai.system.po.system.SystemRole;
 import com.ruicai.system.po.system.SystemRoleExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SystemRoleMapper {
     int countByExample(SystemRoleExample example);
 
@@ -28,4 +30,6 @@ public interface SystemRoleMapper {
     int updateByPrimaryKeySelective(SystemRole record);
 
     int updateByPrimaryKey(SystemRole record);
+
+    List<SystemRole> findRole(String parentId);
 }

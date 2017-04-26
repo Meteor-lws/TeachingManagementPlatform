@@ -34,7 +34,7 @@
         }
     });
 
-    var pager = $('#roleDg').datagrid().datagrid('getPager'); // get the pager of datagrid
+    //var pager = $('#roleDg').datagrid().datagrid('getPager'); // get the pager of datagrid
 
     $("#addRole").click(function () {
         $('#roleDialog').dialog({

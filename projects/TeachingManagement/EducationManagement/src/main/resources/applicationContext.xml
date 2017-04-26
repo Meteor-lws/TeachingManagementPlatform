@@ -61,11 +61,8 @@
     </tx:advice>
 
     <aop:config>
-
         <aop:pointcut expression="execution(*  com.ruicai.education.server.*.*(..))" id="point"/>
-
         <aop:advisor advice-ref="interceptor" pointcut-ref="point"/>
-
     </aop:config>
 
 </beans>

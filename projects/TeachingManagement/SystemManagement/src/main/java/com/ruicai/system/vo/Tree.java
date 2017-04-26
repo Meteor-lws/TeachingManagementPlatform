@@ -8,9 +8,10 @@ import java.util.List;
  * Created by lws on 2017/4/9.
  */
 public class Tree {
+
     private String id;
     private String text;
-    private String state;
+    private String state;//closed 代表根节点
     private String iconCls;
     private boolean checked;
     private List<Tree> children;

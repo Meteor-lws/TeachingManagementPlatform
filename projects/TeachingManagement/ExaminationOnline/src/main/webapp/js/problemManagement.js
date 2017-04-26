@@ -446,7 +446,6 @@ function checkQuestionType(id, objStr, typeValue, answerValue) {
         }
     });
 }
-
 function chooseType(questionValue, answerValue) {
 
     if (questionValue === "single-choice") {

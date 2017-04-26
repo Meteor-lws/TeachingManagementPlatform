@@ -1,8 +1,14 @@
 package com.ruicai.system.po.system;
 
 public class UserToRoleKey {
+    /**
+     * 用户ID
+     */
     private String userId;
 
+    /**
+     * 角色ID
+     */
     private String roleId;
 
     public String getUserId() {

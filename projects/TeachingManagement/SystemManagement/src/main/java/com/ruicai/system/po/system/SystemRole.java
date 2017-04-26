@@ -1,16 +1,34 @@
 package com.ruicai.system.po.system;
 
 public class SystemRole {
+    /**
+     * 角色ID
+     */
     private String id;
 
+    /**
+     * 父角色ID
+     */
     private String parentId;
 
+    /**
+     * 角色表示符
+     */
     private String roleCode;
 
+    /**
+     * 角色名称
+     */
     private String roleName;
 
+    /**
+     * 角色描述
+     */
     private String roleDescribe;
 
+    /**
+     * 是否继承父角色资源
+     */
     private Short roleInherit;
 
     public String getId() {
@@ -59,5 +77,17 @@ public class SystemRole {
 
     public void setRoleInherit(Short roleInherit) {
         this.roleInherit = roleInherit;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemRole{" +
+                "id='" + id + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", roleCode='" + roleCode + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", roleDescribe='" + roleDescribe + '\'' +
+                ", roleInherit=" + roleInherit +
+                '}';
     }
 }
