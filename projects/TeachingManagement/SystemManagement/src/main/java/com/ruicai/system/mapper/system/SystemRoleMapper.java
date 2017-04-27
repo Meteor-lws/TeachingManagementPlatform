@@ -40,4 +40,6 @@ public interface SystemRoleMapper {
     List<RoleShow> findRoleDetails(RoleShow roleShow);
 
     void deleteResourceByIds(RoleToResourceKey roleToResourceKey);
+
+    void deleteRoleToRes(String roleId);
 }

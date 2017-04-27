@@ -21,4 +21,6 @@ public interface RoleService {
     void deleteRoleById(String id);
 
     void deleteResourceByIds(RoleToResourceKey roleToResourceKey);
+
+    void updateRole(SystemRole role, String resourceId);
 }

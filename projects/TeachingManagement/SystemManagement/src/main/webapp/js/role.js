@@ -4,28 +4,35 @@
 $(function () {
     showTree("treeRole", "findRole", true);
     $("#addRole").click(function () {
-        ajax("findPermission", "", function (data) {
-            $(".tdPreRoleValue").html('');
-            var obj = $.parseJSON(data);
-            $.each(obj, function (index, value) {
-                $(".tdPreRoleValue").append('<label for=""></label>'+ value.resourceName + '<input id='+value.id+' type="checkbox" name="qx" value='+value.id+'>');
-            });
-
-        }, function () {
-            $.messager.alert("错误","未知问题导致错误,请联系系统管理员","error");
-        });
-        $('#roleDialog').dialog({
-            title: "班级添加",
-            onClose : function () {
-                $("#roleDescribe").textbox("clear");
-                $("#idCar").textbox("clear");
-                $("#roleCodes").textbox("clear");
-            }
-        });
-        $("#roleDialog").dialog('open');
+        showCheckBox();
+        showDialog("添加角色");
     });
     $("#editRole").click(function () {
+        var parentObj = $("#treeRole").tree("getSelected");
+        if (parentObj != null) {
+            showDialog("修改角色信息");
+            showCheckBox();
 
+            var data = {
+                id: parentObj.id
+            };
+            ajax("findRoleDetails", data, function (data) {
+                var obj = $.parseJSON(data);
+                console.log(obj);
+                $("#roleCodes").textbox("setValue", obj[0].roleCode);
+                if (obj[0] !== undefined) {
+                    $("#roleDescribe").textbox("setValue", obj[0].roleDescribe);
+                }
+                $("#" + obj[0].roleInherit).attr("checked", true);
+                $.each(obj, function (index, value) {
+                    $("#" + value.id).attr("checked", true);
+                })
+            }, "查询失败");
+            console.log(parentObj);
+            $("#idCar").textbox("setValue", parentObj.text);
+        } else {
+            alert("为选择修改对象");
+        }
     });
     $("#removeRole").click(function () {
         var parentObj = $("#treeRole").tree("getSelected");
@@ -85,6 +92,9 @@ $(function () {
 });
 function submitForm() {
     $.messager.progress();
+    var title = $('#roleDialog').panel('options').title;
+    console.log(title);
+    var url = "";
     var parentObj = $("#treeRole").tree("getSelected");
     var resourceObj = $("input[name='qx']:checked");
     var resourceId = "";
@@ -96,17 +106,26 @@ function submitForm() {
         }
     }
     var data = {
-        parentId: "",
         roleName : $("#idCar").textbox("getValue"),
         roleCode : $("#roleCodes").textbox("getValue"),
         roleDescribe : $("#roleDescribe").textbox("getValue"),
         resourceId : resourceId,
         roleInherit: $("input[name='roleInherit']:checked").val()
     };
-    if (parentObj != null){
-        data.parentId = parentObj.id
+    var text;
+    if ("添加角色" === title) {
+        url = "addRole";
+        text = "添加角色失败";
+        if (parentObj != null) {
+            data.parentId = parentObj.id
+        }
+    } else {
+        url = "updateRole";
+        data.id = parentObj.id;
+        text = "修改角色信息失败";
     }
-    ajax("addRole", data, function (data) {
+    console.log(data);
+    ajax(url, data, function (data) {
         $("#treeRole").tree("reload");
         $.messager.progress("close");
         $.messager.show({
@@ -116,7 +135,7 @@ function submitForm() {
             showType:'slide'
         });
         $("#roleDialog").dialog('close');
-    }, "添加角色失败")
+    }, text)
 }
 function showTree(id, url, flag) {
     $("#" + id).tree({
@@ -124,7 +143,6 @@ function showTree(id, url, flag) {
         required: flag,//是否必填
         lines: true,//是否显示虚线
         onBeforeSelect: function (node) {
-            console.log(node);
             $('#dictionary-detail').datagrid({
                 url: 'findRoleDetails',
                 queryParams: {
@@ -180,5 +198,28 @@ function prepareDatagrid() {
             {field: 'resEnableName', title: '是否启用', width: 40, sortable: true},
             {field: 'resourceDescribe', title: '资源描述', width: 60}
         ]]
+    });
+}
+function showDialog(title) {
+    $('#roleDialog').dialog({
+        title: title,
+        onClose: function () {
+            $("#roleDescribe").textbox("clear");
+            $("#idCar").textbox("clear");
+            $("#roleCodes").textbox("clear");
+        }
+    });
+    $("#roleDialog").dialog('open');
+}
+function showCheckBox() {
+    ajax("findPermission", "", function (data) {
+        $(".tdPreRoleValue").html('');
+        var obj = $.parseJSON(data);
+        $.each(obj, function (index, value) {
+            $(".tdPreRoleValue").append('<label for=""></label>' + value.resourceName + '<input id=' + value.id + ' type="checkbox" name="qx" value=' + value.id + '>');
+        });
+
+    }, function () {
+        $.messager.alert("错误", "未知问题导致错误,请联系系统管理员", "error");
     });
 }

@@ -39,16 +39,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void addRole(SystemRole role, String resourceIds) {
-        String[] resourceId = resourceIds.split(",");
         roleMapper.insert(role);
-        List<RoleToResourceKey> list = new ArrayList<>();
-        for (int i = 0; i < resourceId.length; i++) {
-            RoleToResourceKey toResourceKey = new RoleToResourceKey();
-            toResourceKey.setRoleId(role.getId());
-            toResourceKey.setResId(resourceId[i]);
-            list.add(toResourceKey);
-        }
-        int i = roleMapper.addResToRoleBatch(list);
+        int i = roleMapper.addResToRoleBatch(getRoleToRes(role, resourceIds));
         System.err.println("i = " + i);
     }
 
@@ -72,6 +64,16 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.deleteResourceByIds(roleToResourceKey);
     }
 
+    @Override
+    public void updateRole(SystemRole role, String resourceIds) {
+        SystemRoleExample roleExample = new SystemRoleExample();
+        roleExample.clear();
+        roleExample.createCriteria().andIdEqualTo(role.getId());
+        roleMapper.updateByPrimaryKeySelective(role);
+        roleMapper.deleteRoleToRes(role.getId());
+        roleMapper.addResToRoleBatch(getRoleToRes(role, resourceIds));
+    }
+
     public Tree buildTree(SystemRole role) {
         Tree tree = new Tree();
         tree.setId(role.getId());
@@ -91,5 +93,17 @@ public class RoleServiceImpl implements RoleService {
         }
 
         return treeList;
+    }
+
+    public List<RoleToResourceKey> getRoleToRes(SystemRole role, String resourceIds) {
+        String[] resourceId = resourceIds.split(",");
+        List<RoleToResourceKey> list = new ArrayList<>();
+        for (int i = 0; i < resourceId.length; i++) {
+            RoleToResourceKey toResourceKey = new RoleToResourceKey();
+            toResourceKey.setRoleId(role.getId());
+            toResourceKey.setResId(resourceId[i]);
+            list.add(toResourceKey);
+        }
+        return list;
     }
 }

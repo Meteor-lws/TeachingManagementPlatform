@@ -14,6 +14,9 @@
         <result column="RESOURCE_DESCRIBE" property="resourceDescribe" jdbcType="VARCHAR"/>
         <result column="DICTIONARY_NAME" property="resVisibleName" jdbcType="VARCHAR"/>
         <result column="RESOURCE_ENABLE" property="resEnableName" jdbcType="VARCHAR"/>
+        <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR"/>
+        <result column="ROLE_DESCRIBE" property="roleDescribe" jdbcType="VARCHAR"/>
+        <result column="ROLE_INHERIT" property="roleInherit" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -175,9 +178,6 @@
             <if test="record.id != null">
                 ID = #{record.id,jdbcType=VARCHAR},
             </if>
-            <if test="record.parentId != null">
-                PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
-            </if>
             <if test="record.roleCode != null">
                 ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
             </if>
@@ -262,7 +262,10 @@
             sres.RESOURCE_NAME,
             sres.RESOURCE_DESCRIBE,
             sd.DICTIONARY_NAME,
-            sd1.DICTIONARY_NAME AS RESOURCE_ENABLE
+        sd1.DICTIONARY_NAME AS RESOURCE_ENABLE,
+        sr.ROLE_CODE,
+        sr.ROLE_DESCRIBE,
+        sr.ROLE_INHERIT
         FROM
             SYSTEM_ROLE sr
             INNER JOIN ROLE_TO_RESOURCE rtr ON SR."ID" = RTR.ROLE_ID
@@ -282,5 +285,8 @@
         <foreach item="ids" collection="ids" open="(" separator="," close=")">
             #{ids}
         </foreach>
+    </delete>
+    <delete id="deleteRoleToRes" parameterType="String">
+        DELETE FROM RUICAI.ROLE_TO_RESOURCE WHERE ROLE_ID = #{roleId}
     </delete>
 </mapper>

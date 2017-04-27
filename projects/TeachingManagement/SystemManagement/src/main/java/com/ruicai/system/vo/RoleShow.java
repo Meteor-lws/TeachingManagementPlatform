@@ -11,6 +11,36 @@ public class RoleShow extends SystemResource {
 
     private String resEnableName;
 
+    private String roleCode;
+
+    private String roleDescribe;
+
+    private String roleInherit;
+
+    public String getRoleInherit() {
+        return roleInherit;
+    }
+
+    public void setRoleInherit(String roleInherit) {
+        this.roleInherit = roleInherit;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public String getRoleDescribe() {
+        return roleDescribe;
+    }
+
+    public void setRoleDescribe(String roleDescribe) {
+        this.roleDescribe = roleDescribe;
+    }
+
     public String getResVisibleName() {
         return resVisibleName;
     }

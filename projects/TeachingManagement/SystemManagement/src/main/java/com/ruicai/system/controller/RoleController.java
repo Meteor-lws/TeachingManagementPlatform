@@ -42,6 +42,14 @@ public class RoleController {
         return "添加角色成功";
     }
 
+    @RequestMapping(value = "/updateRole", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateRole(SystemRole role, String resourceId) {
+        System.err.println(role);
+        System.err.println(resourceId);
+        roleService.updateRole(role, resourceId);
+        return "修改角色信息成功";
+    }
     @RequestMapping("/findRole")
     @ResponseBody
     public String findRole() {
@@ -72,5 +80,12 @@ public class RoleController {
         System.err.println(roleToResourceKey);
         roleService.deleteResourceByIds(roleToResourceKey);
         return "删除角色资源成功";
+    }
+
+    @RequestMapping(value = "/findRoleById", method = RequestMethod.POST)
+    @ResponseBody
+    public String findRoleById(String id) {
+
+        return "查询角色成功";
     }
 }

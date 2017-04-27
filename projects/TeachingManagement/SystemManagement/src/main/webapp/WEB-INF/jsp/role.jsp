@@ -58,8 +58,8 @@
                     <td class="tdRoleInheritLabel"><label>是否继承父角色资源</label></td>
                     <!-- 用json来append -->
                     <td class="tdRoleInheritValue">
-                        <label>是</label><input checked="checked" type="radio" name="roleInherit" value="1"/>
-                        <label>否</label><input type="radio" name="roleInherit" value="0"/>
+                        <label>是</label><input id="1" checked="checked" type="radio" name="roleInherit" value="1"/>
+                        <label>否</label><input id="0" type="radio" name="roleInherit" value="0"/>
                     </td>
                 </tr>
                 <tr>
