@@ -41,7 +41,6 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ruicai.education.mapper.education"/>
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
-
     </bean>
 
 

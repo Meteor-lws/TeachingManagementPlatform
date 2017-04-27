@@ -31,14 +31,8 @@
             <a id="removeRole" href="javascript:void(0)" class="easyui-linkbutton"
                data-options="iconCls:'icon-remove',plain:true">删除</a>
         </div>
-
-        <div align="left" style="margin-top:5px">
-            角色名称 <select id="roleNameSel" class="easyui-combotree" style="width:120px;"></select>
-            角色编码 <input id="rolecode" class="easyui-validatebox" name="stuName" style="width: 120px;"/>
-            <a id="search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
-        </div>
-
     </div>
+    <div id="dictionary-detail"></div>
     <div id="roleDialog" class="easyui-dialog" title="角色修改"
          data-options="modal:true,closed:true,iconCls:'icon-save'"
          style="width:600px;height:450px;padding:100px;">
@@ -64,8 +58,8 @@
                     <td class="tdRoleInheritLabel"><label>是否继承父角色资源</label></td>
                     <!-- 用json来append -->
                     <td class="tdRoleInheritValue">
-                        <label>是</label><input checked="checked" type="radio" name="roleInherit" value="是"/>
-                        <label>否</label><input type="radio" name="roleInherit" value="否"/>
+                        <label>是</label><input checked="checked" type="radio" name="roleInherit" value="1"/>
+                        <label>否</label><input type="radio" name="roleInherit" value="0"/>
                     </td>
                 </tr>
                 <tr>

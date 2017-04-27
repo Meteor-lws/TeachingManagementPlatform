@@ -8,9 +8,12 @@
         <result column="ROLE_DESCRIBE" property="roleDescribe" jdbcType="VARCHAR"/>
         <result column="ROLE_INHERIT" property="roleInherit" jdbcType="DECIMAL"/>
     </resultMap>
-    <resultMap id="TreeRole" type="com.ruicai.system.vo.Tree">
+    <resultMap id="TreeRole" type="com.ruicai.system.vo.RoleShow">
         <id column="ID" property="id" jdbcType="VARCHAR"/>
-        <result column="ROLE_NAME" property="text" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_DESCRIBE" property="resourceDescribe" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_NAME" property="resVisibleName" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_ENABLE" property="resEnableName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -244,4 +247,40 @@
             PARENT_ID = #{parentId}
         ORDER BY ROLE_CODE
     </select>
+    <insert id="addResToRoleBatch" parameterType="java.util.List">
+        INSERT INTO RUICAI.ROLE_TO_RESOURCE (ROLE_ID, RES_ID)
+        <foreach close=")" collection="list" item="item" index="index" open="(" separator="union">
+            select
+            #{item.roleId,jdbcType=VARCHAR},
+            #{item.resId,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+    </insert>
+    <select id="findRoleDetails" parameterType="com.ruicai.system.vo.RoleShow" resultMap="TreeRole">
+        SELECT
+            sres.ID,
+            sres.RESOURCE_NAME,
+            sres.RESOURCE_DESCRIBE,
+            sd.DICTIONARY_NAME,
+            sd1.DICTIONARY_NAME AS RESOURCE_ENABLE
+        FROM
+            SYSTEM_ROLE sr
+            INNER JOIN ROLE_TO_RESOURCE rtr ON SR."ID" = RTR.ROLE_ID
+            INNER JOIN SYSTEM_RESOURCE sres ON rtr.RES_ID = sres.ID
+            INNER JOIN SYSTEM_DICTIONARY sd ON sres.RESOURCE_VISIBLE = sd.id
+            INNER JOIN SYSTEM_DICTIONARY sd1 ON sres.RESOURCE_ENABLE = sd1.id
+        WHERE
+            sr."ID" = #{id}
+    </select>
+    <delete id="deleteResourceByIds" parameterType="com.ruicai.system.po.system.RoleToResourceKey">
+        DELETE
+        FROM
+        ROLE_TO_RESOURCE
+        WHERE
+        ROLE_ID = #{roleId} AND
+        RES_ID IN
+        <foreach item="ids" collection="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 </mapper>

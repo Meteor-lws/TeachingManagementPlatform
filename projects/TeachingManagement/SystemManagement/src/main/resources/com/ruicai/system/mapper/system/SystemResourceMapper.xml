@@ -7,8 +7,8 @@
         <result column="RESOURCE_TYPE" property="resourceType" jdbcType="VARCHAR"/>
         <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR"/>
         <result column="RESOURCE_VALUE" property="resourceValue" jdbcType="VARCHAR"/>
-        <result column="RESOURCE_VISIBLE" property="resourceVisible" jdbcType="DECIMAL"/>
-        <result column="RESOURCE_ENABLE" property="resourceEnable" jdbcType="DECIMAL"/>
+        <result column="RESOURCE_VISIBLE" property="resourceVisible" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_ENABLE" property="resourceEnable" jdbcType="VARCHAR"/>
         <result column="RESOURCE_TYPE_VIEW" property="resourceTypeView" jdbcType="DECIMAL"/>
         <result column="RESOURCE_DESCRIBE" property="resourceDescribe" jdbcType="DECIMAL"/>
 

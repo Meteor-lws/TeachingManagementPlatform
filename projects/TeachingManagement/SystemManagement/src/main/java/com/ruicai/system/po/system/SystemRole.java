@@ -4,32 +4,32 @@ public class SystemRole {
     /**
      * 角色ID
      */
-    private String id;
+    protected String id;
 
     /**
      * 父角色ID
      */
-    private String parentId;
+    protected String parentId;
 
     /**
      * 角色表示符
      */
-    private String roleCode;
+    protected String roleCode;
 
     /**
      * 角色名称
      */
-    private String roleName;
+    protected String roleName;
 
     /**
      * 角色描述
      */
-    private String roleDescribe;
+    protected String roleDescribe;
 
     /**
      * 是否继承父角色资源
      */
-    private Short roleInherit;
+    protected Short roleInherit;
 
     public String getId() {
         return id;

@@ -1,7 +1,9 @@
 package com.ruicai.system.mapper.system;
 
+import com.ruicai.system.po.system.RoleToResourceKey;
 import com.ruicai.system.po.system.SystemRole;
 import com.ruicai.system.po.system.SystemRoleExample;
+import com.ruicai.system.vo.RoleShow;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,4 +34,10 @@ public interface SystemRoleMapper {
     int updateByPrimaryKey(SystemRole record);
 
     List<SystemRole> findRole(String parentId);
+
+    int addResToRoleBatch(List<RoleToResourceKey> resourceKeys);
+
+    List<RoleShow> findRoleDetails(RoleShow roleShow);
+
+    void deleteResourceByIds(RoleToResourceKey roleToResourceKey);
 }

@@ -24,7 +24,64 @@ $(function () {
         });
         $("#roleDialog").dialog('open');
     });
+    $("#editRole").click(function () {
 
+    });
+    $("#removeRole").click(function () {
+        var parentObj = $("#treeRole").tree("getSelected");
+        var resObj = $("#dictionary-detail").datagrid("getChecked");
+        if (parentObj !== null && resObj.length === 0) {
+            $.messager.confirm("删除确认对话窗", "您确定要删除" + parentObj.text + "这个角色？", function (flag) {
+                if (flag) {
+                    $.messager.progress();
+                    var data = {
+                        id: parentObj.id
+                    };
+                    ajax("deleteRole", data, function (data) {
+                        $.messager.progress("close");
+                        $.messager.show({
+                            title: '提示',
+                            msg: data,
+                            timeout: 5000,
+                            showType: 'slide'
+                        });
+                        $("#treeRole").tree("reload");
+                    }, "删除角色失败")
+                }
+            })
+        } else if (parentObj !== null && resObj.length > 0) {
+            $.messager.confirm("删除确认对话窗", "您确定要删除这些资源吗？", function (flag) {
+                if (flag) {
+                    $.messager.progress();
+                    var ids = "";
+                    for (var i = 0; i < resObj.length; i++) {
+                        if (i === resObj.length - 1) {
+                            ids = ids + resObj[i].id;
+                        } else {
+                            ids = ids + resObj[i].id + ",";
+                        }
+                    }
+                    var data = {
+                        roleId: parentObj.id,
+                        resId: ids
+                    };
+                    ajax("deleteResource", data, function () {
+                        $.messager.progress("close");
+                        $.messager.show({
+                            title: '提示',
+                            msg: data,
+                            timeout: 5000,
+                            showType: 'slide'
+                        });
+                        $("#dictionary-detail").datagrid("load");
+                    }, "删除资源失败")
+                }
+            });
+        } else {
+            alert("还未选择删除对象");
+        }
+    });
+    prepareDatagrid();
 });
 function submitForm() {
     $.messager.progress();
@@ -39,17 +96,18 @@ function submitForm() {
         }
     }
     var data = {
-        parentId : null,
+        parentId: "",
         roleName : $("#idCar").textbox("getValue"),
         roleCode : $("#roleCodes").textbox("getValue"),
         roleDescribe : $("#roleDescribe").textbox("getValue"),
         resourceId : resourceId,
-        roleInherit : $("input[name='roleInherit']:checkbox").val()
+        roleInherit: $("input[name='roleInherit']:checked").val()
     };
     if (parentObj != null){
         data.parentId = parentObj.id
     }
     ajax("addRole", data, function (data) {
+        $("#treeRole").tree("reload");
         $.messager.progress("close");
         $.messager.show({
             title:'提示',
@@ -57,7 +115,7 @@ function submitForm() {
             timeout:5000,
             showType:'slide'
         });
-
+        $("#roleDialog").dialog('close');
     }, "添加角色失败")
 }
 function showTree(id, url, flag) {
@@ -65,32 +123,18 @@ function showTree(id, url, flag) {
         url: url,
         required: flag,//是否必填
         lines: true,//是否显示虚线
-        onlyLeafCheck: flag,//只能选取叶子结点
-        //不为叶子节点不让选上
         onBeforeSelect: function (node) {
-            //node.target代表的是选取的结点
-            //node代表整个结点对象
-            if (!$(this).tree('isLeaf', node.target)) {
-                return !flag;
-            }
-        },
-        onClick: function (node) {
-            if (flag) {
-                if (!$(this).tree('isLeaf', node.target)) {
-                    //idObject.combo('showPanel');
+            console.log(node);
+            $('#dictionary-detail').datagrid({
+                url: 'findRoleDetails',
+                queryParams: {
+                    id: node.id
                 }
-            }
-        },
-        onLoadSuccess: function (node, data) {
-            var _this = this;
-            if (data) {
-                $(data).each(function () {
-                    if (this.state === 'closed') {
-                        $(_this).tree('expandAll');
-                    }
-                });
-            }
+            });
         }
+        /*onSelect : function (node) {
+         console.log(node);
+         }*/
     })
 }
 function ajax(url, data, success, error) {
@@ -116,4 +160,25 @@ function ajax(url, data, success, error) {
 }
 function clearForm() {
     $("#roleDialog").dialog('close');
+}
+function prepareDatagrid() {
+    $('#dictionary-detail').datagrid({
+        url: 'getDictionaries',
+        fit: true,
+        fitColumns: true,
+        striped: true,
+        remoteSort: false,
+        rownumbers: true,
+        pagination: true,
+        pageSize: 25,
+        pageList: [10, 15, 20, 25, 30],
+        pageNumber: 1,
+        columns: [[
+            {field: 'id', checkbox: true},
+            {field: 'resourceName', title: '资源名', width: 40},
+            {field: 'resVisibleName', title: '是否显示', width: 20, sortable: true},
+            {field: 'resEnableName', title: '是否启用', width: 40, sortable: true},
+            {field: 'resourceDescribe', title: '资源描述', width: 60}
+        ]]
+    });
 }

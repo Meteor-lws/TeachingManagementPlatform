@@ -10,7 +10,13 @@
     <packaging>war</packaging>
     <name>system-management</name>
     <url>http://maven.apache.org</url>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>system</finalName>
     </build>

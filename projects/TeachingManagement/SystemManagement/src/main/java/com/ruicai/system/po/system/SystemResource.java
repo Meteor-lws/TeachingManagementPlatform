@@ -1,23 +1,23 @@
 package com.ruicai.system.po.system;
 
 public class SystemResource {
-    private String id;
+    protected String id;
 
-    private String parentId;
+    protected String parentId;
 
-    private String resourceType;
+    protected String resourceType;
 
-    private String resourceTypeView;
+    protected String resourceTypeView;
 
-    private String resourceName;
+    protected String resourceName;
 
-    private String resourceDescribe;
+    protected String resourceDescribe;
 
-    private String resourceValue;
+    protected String resourceValue;
 
-    private Short resourceVisible;
+    protected String resourceVisible;
 
-    private Short resourceEnable;
+    protected String resourceEnable;
 
     public String getResourceDescribe() {
         return resourceDescribe;
@@ -75,19 +75,19 @@ public class SystemResource {
         this.resourceValue = resourceValue == null ? null : resourceValue.trim();
     }
 
-    public Short getResourceVisible() {
+    public String getResourceVisible() {
         return resourceVisible;
     }
 
-    public void setResourceVisible(Short resourceVisible) {
+    public void setResourceVisible(String resourceVisible) {
         this.resourceVisible = resourceVisible;
     }
 
-    public Short getResourceEnable() {
+    public String getResourceEnable() {
         return resourceEnable;
     }
 
-    public void setResourceEnable(Short resourceEnable) {
+    public void setResourceEnable(String resourceEnable) {
         this.resourceEnable = resourceEnable;
     }
 }
