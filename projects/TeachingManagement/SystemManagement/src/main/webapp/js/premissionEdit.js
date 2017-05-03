@@ -1,6 +1,57 @@
 ﻿$(function () {
     //定义变量接受行内容
     var rowValue;
+    var visList; //权限是否可视列表
+    var enableList; // 权限启用列表
+    $("#preDialog").dialog("close");
+    $.ajax({
+        url: "/system/getResourceVisible",
+        type: "post",
+        async: false,
+        success: function (data) {
+            visList = $.parseJSON(data);
+        }
+
+    });
+
+    $("#resourceVisibleForm").switchbutton({
+        onText: visList[1].dictionaryName,
+        offText: visList[0].dictionaryName,
+        onChange: function (change) {
+            if (change) {
+                $("#resourceVisible").val(visList[1].id);
+            }
+            else {
+                $("#resourceVisible").val(visList[0].id);
+            }
+        }
+    });
+
+
+    $.ajax({
+        url: "/system/getResourceEnable",
+        type: "post",
+        async: false,
+        success: function (data) {
+            enableList = $.parseJSON(data);
+        }
+
+    });
+
+    $("#resourceEnableFrom").switchbutton({
+        onText: enableList[1].dictionaryName,
+        offText: enableList[0].dictionaryName,
+        onChange: function (change) {
+            if (change) {
+                $("#resourceEnable").val(enableList[1].id);
+            }
+            else {
+                $("#resourceEnable").val(enableList[0].id);
+            }
+        }
+    });
+
+
     $('#preDg').datagrid({
         url: "/system/getPerByCondition",
         fit: true,
@@ -34,13 +85,29 @@
 
 
     $('#preDg').datagrid({
-        onDblClickCell: function (index, field, value) {
+        onDblClickRow: function (index, row) {
             $('#preDialog').dialog('open');
-            $("#name").val(rowValue.itemid);
-
-        },
-        onSelect: function (rowIndex, rowData) {
-            rowValue = rowData;
+            $("#id").val(row.id);
+            $("#resourceNameForm").textbox("setValue", row.resourceName);
+            $("#resourceValueForm").textbox("setValue", row.resourceValue);
+            $("#resourceType").combobox("select", row.resourceType);
+            $("#resourceEnable").val(row.resourceEnable);
+            $("#resourceVisible").val(row.resourceVisible);
+            $("#resourceDescribe").textbox("setValue", row.resourceDescribe);
+            var visi = row.resourceVisible;
+            var enable = row.resourceEnable;
+            if (visi == visList[1].id) {
+                $("#resourceVisibleForm").switchbutton("check");
+            }
+            else {
+                $("#resourceVisibleForm").switchbutton("uncheck");
+            }
+            if (enable == enableList[1].id) {
+                $("#resourceEnableFrom").switchbutton("check");
+            }
+            else {
+                $("#resourceEnableFrom").switchbutton("uncheck");
+            }
         }
     });
 
@@ -50,6 +117,8 @@
         $('#preDialog').dialog({
             title: "权限添加"
         });
+        $("#resourceVisible").val(visList[0].id);
+        $("#resourceEnable").val(enableList[0].id);
         $("#preDialog").dialog('open');
     });
     $("#editPre").click(function () {
@@ -95,6 +164,12 @@
         });
     });
 
+    $("#resourceType").combobox({
+        url: "/system/getAllResourceType",
+        valueField: 'id',
+        textField: 'dictionaryName'
+    });
+
 
 
 });
@@ -105,8 +180,8 @@ function clearForm() {
 }
 function submitForm() {
     $.messager.progress(); // 显示进度条
-    $('#ff').form('submit', {
-        url: "/asada",
+    $('#preForm').form('submit', {
+        url: "/system/saveOrUpdateResource",
         onSubmit: function () {
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -116,6 +191,8 @@ function submitForm() {
         },
         success: function () {
             $.messager.progress("close"); // 如果提交成功则隐藏进度条
+            $("#preForm").form("clear");
+            $("#preDg").datagrid("reload");
             $("#preDialog").dialog("close")
         }
     });
@@ -123,6 +200,6 @@ function submitForm() {
 }
 
 function cancel() {
+    $("#preForm").form("clear");
     $("#preDialog").dialog("close");
 }
-		

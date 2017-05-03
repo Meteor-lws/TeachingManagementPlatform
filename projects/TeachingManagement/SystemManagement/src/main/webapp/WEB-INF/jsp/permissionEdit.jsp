@@ -39,23 +39,48 @@
     </div>
 </div>
 <div id="preDialog" class="easyui-dialog" title="权限修改"
-     data-options="modal:true,closed:true,iconCls:'icon-save'"
-     style="width:500px;height:300px;padding:10px;">
+     data-options="modal:true,closable:false,iconCls:'icon-save'"
+     style="width:500px;height:450px;padding:10px;">
     <form id="preForm" method="post" >
         <table style="height:100%" width="100%">
             <tr>
+                <input type="hidden" name="id" id="id">
                 <td><label>权限名称</label></td>
-                <td><input id="preName" class="easyui-validatebox"/></td>
+                <td><input id="resourceNameForm" name="resourceName" class="easyui-textbox"/></td>
             </tr>
             <tr>
-                <td><label>权限URL</label></td>
-                <td><input id="preUrl" class="easyui-validatebox"/></td>
+                <td><label>权限代码</label></td>
+                <td><input id="resourceValueForm" name="resourceValue" class="easyui-textbox"/></td>
             </tr>
+            <tr>
+                <td>权限类型</td>
+                <td>
+                    <select id="resourceType" name="resourceType" class="easyui-combotree"
+                            style="width:170px;"></select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>权限状态</label></td>
+                <td>
+                    <input id="resourceEnableFrom" class="easyui-switchbutton" data-options="onText:'启用',offText:'不启用'">
+                    <input id="resourceEnable" type="hidden" name="resourceEnable">
+            </tr>
+
+            <tr>
+                <td><label>权限显示</label></td>
+                <td>
+                    <input id="resourceVisibleForm" class="easyui-switchbutton">
+                    <input id="resourceVisible" type="hidden" name="resourceVisible">
+            </tr>
+
             <tr>
                 <td><label>权限描述</label></td>
-                <td><input id="preDes" class="easyui-textbox" data-options="multiline:true" value=""
+                <td><input id="resourceDescribe" name="resourceDescribe" class="easyui-textbox"
+                           data-options="multiline:true" value=""
                            style="width:300px;height:100px"></td>
             </tr>
+
             <tr align="center">
                 <td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                        onclick="submitForm()">保存</a></td>

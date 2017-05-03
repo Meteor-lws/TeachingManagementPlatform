@@ -1,16 +1,17 @@
 package com.ruicai.system.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
 import com.ruicai.system.po.system.ResourceCondition;
+import com.ruicai.system.po.system.SystemDictionary;
 import com.ruicai.system.po.system.SystemResource;
 import com.ruicai.system.service.PermissionService;
-import com.ruicai.system.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by XuMing on 2017/4/4.
@@ -39,4 +40,33 @@ public class PermissionController {
         System.err.println(json);
         return json;
     }
+
+    @RequestMapping(value = "/getAllResourceType", method = RequestMethod.POST)
+    @ResponseBody
+    public String getAllResourceType() {
+        List<SystemDictionary> list = permissionService.getAllResourcetype();
+        return JSON.toJSONString(list);
+    }
+
+    @RequestMapping(value = "/getResourceEnable", method = RequestMethod.POST)
+    @ResponseBody
+    public String getResourceEnable() {
+        List<SystemDictionary> list = permissionService.getResourceEnable();
+        return JSON.toJSONString(list);
+    }
+
+    @RequestMapping(value = "/getResourceVisible", method = RequestMethod.POST)
+    @ResponseBody
+    public String getResourceVisible() {
+        List<SystemDictionary> list = permissionService.getResourceVisible();
+        return JSON.toJSONString(list);
+    }
+
+    @RequestMapping(value = "/saveOrUpdateResource", method = RequestMethod.POST)
+    @ResponseBody
+    public void saveOrUpdateResource(SystemResource resource) {
+        permissionService.saveOrUpdateResource(resource);
+    }
+
+
 }

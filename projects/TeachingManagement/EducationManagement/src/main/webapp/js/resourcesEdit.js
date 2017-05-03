@@ -34,12 +34,12 @@ $(function () {
 
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
                 if (choose) {
-                    var ids = new Array();
+                    var ids = [];
                     for (var i = 0; i < selects.length; i++) {
                         ids[i] = selects[i].id;
                     }
                     $.ajax({
-                        url: "/education/deleteResByBatch",
+                        url: "/education/deleteCourseByBatch",
                         data: {
                             ids: JSON.stringify(ids)
                         },
@@ -58,17 +58,20 @@ $(function () {
         var selects = $("#resDg").datagrid("getSelections");
         if (selects.length == 0) {
             $.messager.alert('警告', '请选择一个需要下载的列');
-        } else {
+        }
+        if (selects.length > 1) {
+            $.messager.alert('警告', '请勿选择多个下载的列');
+        }
+        else {
             $.messager.confirm('确认', '您确认想要下载这些记录吗？', function (choose) {
                 if (choose) {
-                    var paths = new Array();
-                    for (var i = 0; i < selects.length; i++) {
-                        paths[i] = selects[i].workUrl;
-                    }
+                    var path = selects[0].workUrl;
 
                     $.ajax({
-                        url: "downloadByBatch",
-                        type: "get"
+                        url: "/education/downloadByBatch",
+                        data: {
+                            path: path
+                        },
                     });
 
                 }

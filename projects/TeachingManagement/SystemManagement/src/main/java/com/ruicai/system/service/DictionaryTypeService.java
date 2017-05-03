@@ -22,4 +22,5 @@ public interface DictionaryTypeService {
     SystemDictionaryType getDictionaryTypeById(String id);
 
     List<Tree> getDictionaryTypes();
+
 }

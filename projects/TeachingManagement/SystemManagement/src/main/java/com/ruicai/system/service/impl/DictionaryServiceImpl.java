@@ -25,6 +25,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     private final SystemDictionaryExample example;
 
+
     @Autowired
     public DictionaryServiceImpl(SystemDictionaryMapper mapper, SystemDictionaryExample example) {
         this.mapper = mapper;
@@ -80,6 +81,12 @@ public class DictionaryServiceImpl implements DictionaryService {
         }
         return datagrid;
     }
+
+    @Override
+    public List<SystemDictionary> selectDicByType(String typeName) {
+        return mapper.selectDicByType(typeName);
+    }
+
 
     private String fixString(String string) {
         return "%" + string + "%";

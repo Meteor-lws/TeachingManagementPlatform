@@ -38,7 +38,7 @@
     </div>
 <div id="classDialog" class="easyui-dialog" title="班级修改"
      data-options="modal:true,closable:false,iconCls:'icon-save'"
-     style="width:500px;height:450px;padding:10px;">
+     style="width:500px;height:400px;padding:10px;">
     <form id="classForm" method="post">
         <input type="hidden" id="id" name="id">
             <table style="height: 100%" width="100%" align="center">
@@ -49,17 +49,19 @@
                     <td class="tdLabel" align="center"><label>班级类型</label></td>
                     <td class="tdValue" align="left">
                         <select id="classType" class="easyui-combobox" name="classType"
-                                style="width:170px;" data-options="panelHeight:'80px'">
+                                style="width:170px;" data-options="panelHeight:'80px',required:true">
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td class="tdLabel" align="center"><label>开班时间</label></td>
                     <td class="tdValue" align="left"><input id="classStartDateForm" name="classStartDate" type="text"
-                                                            class="easyui-datetimebox"></input></td>
+                                                            class="easyui-datetimebox"
+                                                            data-options="required:true"></input></td>
                     <td class="tdLabel" align="center"><label>结业时间</label></td>
                     <td class="tdValue" align="left"><input id="classdEndDateForm" name="classEndDate" type="text"
-                                                            class="easyui-datetimebox"></input></td>
+                                                            class="easyui-datetimebox"
+                                                            data-options="required:true"></input></td>
                 </tr>
                 <tr>
 
@@ -68,13 +70,13 @@
                     <td class="tdLabel" align="center"><label>主讲教师</label></td>
                     <td class="tdValue" align="left">
                         <select id="mainTeacherId" class="easyui-combobox" name="mainTeacherId"
-                                style="width:170px;" data-options="panelHeight:'80px'">
+                                style="width:170px;" data-options="panelHeight:'80px',required:true">
                         </select>
                     </td>
                     <td class="tdLabel" align="center"><label>班主任</label></td>
                     <td class="tdValue" align="left">
                         <select id="headTeacherId" class="easyui-combobox" name="headTeacherId"
-                                style="width:170px;" data-options="panelHeight:'80px'">
+                                style="width:170px;" data-options="panelHeight:'80px',required:true">
                         </select>
                     </td>
                 </tr>
@@ -82,16 +84,14 @@
                     <td class="tdLabel" align="center"><label>助教</label></td>
                     <td class="tdValue" align="left">
                         <select id="assistantId" class="easyui-combobox" name="assistantId"
-                                style="width:170px;" data-options="panelHeight:'80px'">
+                                style="width:170px;" data-options="panelHeight:'80px',required:true">
                         </select>
                     </td>
                 </tr>
                 <tr align="center">
-                    <td class="tdLabel" colspan="2" align="center">
+                    <td colspan="4" align="right">
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                            onclick="submitForm()">保存</a>
-                    </td>
-                    <td class="tdValue" colspan="2" align="center">
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
                            onclick="cancel()">取消</a>
                     </td>

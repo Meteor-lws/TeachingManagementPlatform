@@ -22,4 +22,6 @@ public interface DictionaryService {
     SystemDictionary getDictionaryById(String id);
 
     Datagrid<SystemDictionary> getDictionaries(String type, String name, String value, String describe, int page, int rows);
+
+    List<SystemDictionary> selectDicByType(String typeName);
 }

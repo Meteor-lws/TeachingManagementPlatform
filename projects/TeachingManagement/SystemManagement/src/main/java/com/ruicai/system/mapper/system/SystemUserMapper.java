@@ -2,6 +2,7 @@ package com.ruicai.system.mapper.system;
 
 import com.ruicai.system.po.system.SystemUser;
 import com.ruicai.system.po.system.SystemUserExample;
+import com.ruicai.system.po.system.UserCondition;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,8 @@ public interface SystemUserMapper {
     int updateByPrimaryKeySelective(SystemUser record);
 
     int updateByPrimaryKey(SystemUser record);
+
+    List<SystemUser> selectUserByCondition(UserCondition condition);
+
+    int selectUserByConditionCount(UserCondition condition);
 }

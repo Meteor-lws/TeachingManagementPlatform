@@ -80,18 +80,19 @@ public class StudentServiceImpl implements StudentServer {
         user.setUserStatus(enableDic.getId());
         user.setUserType(studentDic.getId());
         user.setUserPwd("123456");
-        user.setUserNumber(UUID.randomUUID().toString().substring(0, 9));
         //保存用户表
         userServer.insertUser(user);
         student.setUserId(user.getId());
         //学生角色
         String[] roles = student.getRole();
-        for (int i = 0; i < roles.length; i++) {
-            UserToRoleKey utr = new UserToRoleKey();
-            utr.setUserId(student.getUserId());
-            utr.setRoleId(roles[i]);
-            //添加至用户角色表
-            roleService.addRole(utr);
+        if (roles != null) {
+            for (int i = 0; i < roles.length; i++) {
+                UserToRoleKey utr = new UserToRoleKey();
+                utr.setUserId(student.getUserId());
+                utr.setRoleId(roles[i]);
+                //添加至用户角色表
+                roleService.addRole(utr);
+            }
         }
         //保存学生表
         student.setStudentIdNumber(UUID.randomUUID().toString().substring(0, 9));
@@ -108,11 +109,14 @@ public class StudentServiceImpl implements StudentServer {
         educationStudentMapper.updateByPrimaryKeySelective(student);
         String[] role = student.getRole();
         roleService.deleteRoleByUserID(student.getUserId());
-        for (int i = 0; i < role.length; i++) {
-            UserToRoleKey utr = new UserToRoleKey();
-            utr.setUserId(student.getUserId());
-            utr.setRoleId(role[i]);
-            roleService.addRole(utr);
+        if (role != null) {
+
+            for (int i = 0; i < role.length; i++) {
+                UserToRoleKey utr = new UserToRoleKey();
+                utr.setUserId(student.getUserId());
+                utr.setRoleId(role[i]);
+                roleService.addRole(utr);
+            }
         }
     }
 

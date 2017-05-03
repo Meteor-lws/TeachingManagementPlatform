@@ -17,8 +17,9 @@
             src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="js/studentEdit.js" charset="utf-8">
     </script>
+    <!--
     <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/css/student.css">
+          href="${pageContext.request.contextPath}/css/student.css"> -->
 </head>
 <body>
 <table id="stuDg">
@@ -47,20 +48,20 @@
 
 <%--学生修改添加框--%>
 <div id="stuDialog" class="easyui-dialog" title="学生修改"
-     data-options="modal:true,closable:false,iconCls:'icon-save'"
-     style="width:700px;height:600px;padding:10px;">
+     data-options="modal:true,closable:true,iconCls:'icon-save',onClose:function(){$('#stuForm').form('clear'); $('#pic').attr('src','') }"
+     style="width:700px;height:400px;padding:10px;">
     <form id="stuForm" method="post" enctype="multipart/form-data">
-        <table style="height:100%" width="100% " align="center">
+        <table style="height:100%" border="2px" width="100% " align="center">
             <tr>
-                <td class="tdLabel" align="right"><label>姓名</label></td>
+                <td class="tdLabel" align="right"><label>姓名:</label></td>
                 <td class="tdValue">
                     <%--隐藏域--%>
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="userId" id="userId">
                     <input id="studentName" name="studentName" class="easyui-textbox" type="text"
-                           data-options="required:true">
+                           data-options="required:true,width:170">
                 </td>
-                <td class="tdLabel" align="right"><label>毕业学校</label></td>
+                <td class="tdLabel" align="right"><label>毕业学校:</label></td>
                 <td class="tdValue">
                     <input id="schoolName" name="studentSchool" class="easyui-textbox" type="text">
                     <%-- <input type="text" id="schoolName" readonly class="easyui-validatebox"/>--%>
@@ -80,24 +81,25 @@
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>专业</label></td>
+                <td class="tdLabel" align="right"><label>专业:</label></td>
                 <td class="tdValue">
                     <select id="studentSpecialty" name="studentSpecialty" class="easyui-combobox"
-                            style="width:170px;" data-options="panelHeight:'80px'">
+                            style="width:170px;" data-options="panelHeight:'80px',required:true">
                     </select>
                 </td>
-                <td class="tdLabel" align="right"><label>班级</label></td>
+                <td class="tdLabel" align="right"><label>班级:</label></td>
                 <td class="tdValue">
-                    <select id="classId" name="classId" class="easyui-combotree" style="width:170px;"></select>
+                    <select id="classId" name="classId" class="easyui-combotree" style="width:170px;"
+                            data-options="required:true"></select>
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>毕业时间</label></td>
+                <td class="tdLabel" align="right"><label>毕业时间:</label></td>
                 <td class="tdValue">
                     <input id="graduateTime" name="studentGraduation" type="text" class="easyui-datetimebox"
                            required="required"></input>
                 </td>
-                <td class="tdLabel" align="right"><label>操行分</label></td>
+                <td class="tdLabel" align="right"><label>操行分:</label></td>
                 <td class="tdValue">
                     <input id="studentConduct" name="studentConduct" class="easyui-textbox" type="text"
                            data-options="required:true"></input>
@@ -105,56 +107,54 @@
             </tr>
             <tr>
                 <td class="tdLabel" align="right">
-                    学生编号
+                    学生编号:
                 </td>
                 <td class="tdValue">
                     <input id="studentIdNumber" name="studentIdNumber" class="easyui-textbox" type="text"
                            data-options="required:true"></input>
                 </td>
                 <td class="tdLabel" align="right">
-                    学历
+                    学历:
                 </td>
                 <td class="tdValue">
                     <select id="studentEducation" name="studentEducation" class="easyui-combobox"
-                            style="width:170px;"></select>
+                            style="width:170px;" data-options="required:true"></select>
                 </td>
             </tr>
 
             <tr>
-                <td class="tdLabel" align="right"><label>家长联系方式</label></td>
+                <td class="tdLabel" align="right"><label>家长联系方式:</label></td>
                 <td class="tdValue">
                     <input id="studentFamilyPhone" name="studentFamilyPhone" class="easyui-textbox" type="text"
                            data-options="required:true"></input>
                 </td>
-                <td class="tdLabel" align="right"><label>本人联系方式</label></td>
+                <td class="tdLabel" align="right"><label>本人联系方式:</label></td>
                 <td class="tdValue">
                     <input id="studentPhone" name="studentPhone" class="easyui-textbox" type="text"
                            data-options="required:true"></input>
                 </td>
             </tr>
             <tr>
-                <td colspan="4">
-                    <img id="pic">
-                </td>
-            </tr>
-            <tr>
                 <td colspan="1">
-                    照片
+                    照片:
                 </td>
-                <td colspan="3">
+                <td colspan="1">
                     <input type="hidden" name="studentPicture" id="studentPicture">
                     <input type="file" id="file" name="stuPic" onchange="uploadPic()">
                 </td>
+                <td colspan="2">
+                    <img id="pic" width="100px" height="100px">
+                </td>
             </tr>
 
 
             <tr>
-                <td class="tdLabel" align="right"><label>性别</label></td>
+                <td class="tdLabel" align="right"><label>性别:</label></td>
                 <td class="tdValue">
                     <div id="sexDiv">
                     </div>
                 </td>
-                <td class="tdLabel" align="right"><label>保险是否缴纳</label></td>
+                <td class="tdLabel" align="right"><label>保险是否缴纳:</label></td>
                 <td class="tdValue">
                     <div id="insuranceDiv">
                     </div>
@@ -163,7 +163,7 @@
 
             </tr>
             <tr>
-                <td>角色</td>
+                <td>角色:</td>
                 <td colspan="3">
                     <div id="roleDiv">
 
@@ -172,11 +172,9 @@
             </tr>
 
             <tr align="center">
-                <td colspan="2" class="tdValue">
+                <td colspan="4" class="tdValue" align="right">
                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                        onclick="submitForm()">保存</a>
-                </td>
-                <td colspan="2" class="tdValue">
                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
                        onclick="cancel()">取消</a>
                 </td>

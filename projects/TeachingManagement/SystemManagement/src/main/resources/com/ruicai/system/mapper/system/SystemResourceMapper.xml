@@ -230,6 +230,9 @@
             <if test="resourceValue != null">
                 RESOURCE_VALUE = #{resourceValue,jdbcType=VARCHAR},
             </if>
+            <if test="resourceDescribe != null">
+                RESOURCE_DESCRIBE = #{resourceDescribe,jdbcType=DECIMAL},
+            </if>
             <if test="resourceVisible != null">
                 RESOURCE_VISIBLE = #{resourceVisible,jdbcType=DECIMAL},
             </if>

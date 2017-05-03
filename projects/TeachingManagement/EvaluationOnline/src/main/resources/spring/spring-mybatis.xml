@@ -52,4 +52,35 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="https://localhost:8443/cas/login?service=https://localhost:8444/evaluation/"/>
+        <property name="filters">
+            <map>
+                <entry key="cas" value-ref="casFilter"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                / = cas
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <bean id="casRealm" class="com.ruicai.evaluation.CustomRealm.CasRealm">
+        <property name="casServerUrlPrefix" value="https://localhost:8443/cas"/>
+        <property name="casService" value="https://localhost:8444/evaluation/"/>
+    </bean>
+
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="casRealm"/>
+    </bean>
+
+
 </beans>

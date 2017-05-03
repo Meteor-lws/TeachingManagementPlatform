@@ -30,4 +30,7 @@ public interface SystemDictionaryMapper {
     int updateByPrimaryKeySelective(SystemDictionary record);
 
     int updateByPrimaryKey(SystemDictionary record);
+
+    List<SystemDictionary> selectDicByType(String typeName);
+
 }

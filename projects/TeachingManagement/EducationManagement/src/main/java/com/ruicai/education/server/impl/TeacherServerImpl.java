@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by XM on 2017/4/13.
@@ -71,18 +70,19 @@ public class TeacherServerImpl implements TeacherServer {
         SystemUser user = new SystemUser();
         String phone = teacher.getTeacherPhone();
         user.setUserName(phone);//将手机号码设为用户名
-        user.setUserNumber(UUID.randomUUID().toString().substring(0, 9));
         user.setUserStatus(enableDic.getId());
         user.setUserPwd("123456");
         user.setUserType(teacherDic.getId());
         String userId = userServer.insertUser(user);
         teacher.setUserId(userId);
         String[] role = teacher.getRole();
-        for (int i = 0; i < role.length; i++) {
-            Map<String, String> userToRole = new HashMap<>();
-            userToRole.put("userId", user.getId());
-            userToRole.put("roleId", role[i]);
-            educationTeacherMapper.grantRole(userToRole);
+        if (role != null) {
+            for (int i = 0; i < role.length; i++) {
+                Map<String, String> userToRole = new HashMap<>();
+                userToRole.put("userId", user.getId());
+                userToRole.put("roleId", role[i]);
+                educationTeacherMapper.grantRole(userToRole);
+            }
         }
         educationTeacherMapper.insert(teacher);
     }
@@ -94,14 +94,15 @@ public class TeacherServerImpl implements TeacherServer {
         roleService.deleteRoleByUserID(teacher.getUserId());
         String[] roles = teacher.getRole();
         //遍历添加
-        for (int i = 0; i < roles.length; i++) {
-            //生成 用户——角色 中间表所对应的对象
-            UserToRoleKey utr = new UserToRoleKey();
-            utr.setRoleId(roles[i]);
-            utr.setUserId(teacher.getUserId());
-            roleService.addRole(utr);
+        if (roles != null) {
+            for (int i = 0; i < roles.length; i++) {
+                //生成 用户——角色 中间表所对应的对象
+                UserToRoleKey utr = new UserToRoleKey();
+                utr.setRoleId(roles[i]);
+                utr.setUserId(teacher.getUserId());
+                roleService.addRole(utr);
+            }
         }
-
 
     }
 

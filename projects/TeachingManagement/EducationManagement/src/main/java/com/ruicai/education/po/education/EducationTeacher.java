@@ -31,6 +31,16 @@ public class EducationTeacher {
 
     private List<UserToRoleKey> roles;
 
+    private String teacherNumber;
+
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public void setTeacherNumber(String teacherNumber) {
+        this.teacherNumber = teacherNumber;
+    }
+
     public String getTeacherSexView() {
         return teacherSexView;
     }

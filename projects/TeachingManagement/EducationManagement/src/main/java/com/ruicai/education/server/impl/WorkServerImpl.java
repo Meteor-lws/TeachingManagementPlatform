@@ -71,5 +71,24 @@ public class WorkServerImpl implements WorkServer {
         return pageBean;
     }
 
+    @Override
+    public PageBean<EducationWork> selectCourseByCondition(WorkCondition condition) {
+        PageBean<EducationWork> pageBean = new PageBean<>();
+        condition.setStartNum((condition.getPage() - 1) * condition.getRows());
+        condition.setEndNum(condition.getPage() * condition.getRows() + 1);
+        List<EducationWork> works = educationWorkMapper.selectWorkBycondition(condition);
+        pageBean.setRows(works);
+        int total = getResByConditionCount(condition);
+        pageBean.setTotal(total);
+        return pageBean;
+    }
+
+    @Override
+    public void deleteCouByBatch(List<String> rids) {
+        for (int i = 0; i < rids.size(); i++) {
+            educationWorkMapper.deleteByPrimaryKey(rids.get(i));
+        }
+    }
+
 
 }

@@ -9,7 +9,7 @@
     <!--Oracle数据源-->
     <bean id="dataSource"  class="org.apache.commons.dbcp2.BasicDataSource">
         <!--<property name="url" value="jdbc:oracle:thin:@192.168.53.104:1521:orcl"/>-->
-        <property name="url" value="jdbc:oracle:thin:@1921.168.53.104:1521:orcl"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
         <property name="password" value="ruicai"/>
         <property name="username" value="ruicai"/>
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
@@ -63,5 +63,38 @@
         <aop:pointcut expression="execution(*  com.ruicai.education.server.*.*(..))" id="point"/>
         <aop:advisor advice-ref="interceptor" pointcut-ref="point"/>
     </aop:config>
+
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="successUrl" value="http://localhost:8080/education/teacher"></property>
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="https://localhost:8443/cas/login?service=http://localhost:8080/education/"/>
+        <property name="filters">
+            <map>
+                <entry key="cas" value-ref="casFilter"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                / = cas
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <bean id="casRealm" class="com.ruicai.education.CustomRealm.CasRealm">
+        <property name="casServerUrlPrefix" value="https://localhost:8443/cas"/>
+        <property name="casService" value="http://localhost:8080/education/"/>
+    </bean>
+
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+    </bean>
+
+    <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="casRealm"/>
+        <property name="subjectFactory" ref="casSubjectFactory"/>
+    </bean>
 
 </beans>

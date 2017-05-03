@@ -9,9 +9,30 @@ public class SystemUser {
 
     private String userName;
 
+    private String userStatusView;
+
+    private String userTypeView;
+
+
     private String userPwd;
 
     private String userNumber;
+
+    public String getUserStatusView() {
+        return userStatusView;
+    }
+
+    public void setUserStatusView(String userStatusView) {
+        this.userStatusView = userStatusView;
+    }
+
+    public String getUserTypeView() {
+        return userTypeView;
+    }
+
+    public void setUserTypeView(String userTypeView) {
+        this.userTypeView = userTypeView;
+    }
 
     public String getId() {
         return id;

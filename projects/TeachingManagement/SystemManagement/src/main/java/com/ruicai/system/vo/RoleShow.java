@@ -60,17 +60,11 @@ public class RoleShow extends SystemResource {
     @Override
     public String toString() {
         return "RoleShow{" +
-                "id='" + id + '\'' +
-                ", parentId='" + parentId + '\'' +
-                ", resourceType='" + resourceType + '\'' +
-                ", resourceTypeView='" + resourceTypeView + '\'' +
-                ", resVisibleName='" + resVisibleName + '\'' +
-                ", resourceName='" + resourceName + '\'' +
+                "resVisibleName='" + resVisibleName + '\'' +
                 ", resEnableName='" + resEnableName + '\'' +
-                ", resourceDescribe='" + resourceDescribe + '\'' +
-                ", resourceValue='" + resourceValue + '\'' +
-                ", resourceVisible='" + resourceVisible + '\'' +
-                ", resourceEnable='" + resourceEnable + '\'' +
-                '}';
+                ", roleCode='" + roleCode + '\'' +
+                ", roleDescribe='" + roleDescribe + '\'' +
+                ", roleInherit='" + roleInherit + '\'' +
+                "} " + super.toString();
     }
 }

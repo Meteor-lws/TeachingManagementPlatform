@@ -71,4 +71,6 @@ public class DictionaryController {
     public String getDictionaries(String type, String name, String value, String describe, int page, int rows) {
         return JSON.toJSONString(service.getDictionaries(type, name, value, describe, page, rows));
     }
+
+
 }

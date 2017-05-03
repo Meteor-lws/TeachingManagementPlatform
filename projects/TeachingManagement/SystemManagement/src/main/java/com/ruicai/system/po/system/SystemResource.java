@@ -1,23 +1,23 @@
 package com.ruicai.system.po.system;
 
 public class SystemResource {
-    protected String id;
+    private String id;
 
-    protected String parentId;
+    private String parentId;
 
-    protected String resourceType;
+    private String resourceType;
 
-    protected String resourceTypeView;
+    private String resourceTypeView;
 
-    protected String resourceName;
+    private String resourceName;
 
-    protected String resourceDescribe;
+    private String resourceDescribe;
 
-    protected String resourceValue;
+    private String resourceValue;
 
-    protected String resourceVisible;
+    private String resourceVisible;
 
-    protected String resourceEnable;
+    private String resourceEnable;
 
     public String getResourceDescribe() {
         return resourceDescribe;
@@ -89,5 +89,20 @@ public class SystemResource {
 
     public void setResourceEnable(String resourceEnable) {
         this.resourceEnable = resourceEnable;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemResource{" +
+                "id='" + id + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", resourceType='" + resourceType + '\'' +
+                ", resourceTypeView='" + resourceTypeView + '\'' +
+                ", resourceName='" + resourceName + '\'' +
+                ", resourceDescribe='" + resourceDescribe + '\'' +
+                ", resourceValue='" + resourceValue + '\'' +
+                ", resourceVisible='" + resourceVisible + '\'' +
+                ", resourceEnable='" + resourceEnable + '\'' +
+                '}';
     }
 }

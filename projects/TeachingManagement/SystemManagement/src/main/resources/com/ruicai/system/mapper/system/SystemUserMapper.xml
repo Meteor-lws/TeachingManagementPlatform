@@ -8,6 +8,8 @@
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
         <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR"/>
         <result column="USER_NUMBER" property="userNumber" jdbcType="VARCHAR"/>
+        <result column="USER_STATUS_VIEW" property="userStatusView" jdbcType="VARCHAR"/>
+        <result column="USER_TYPE_VIEW" property="userTypeView" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -231,4 +233,56 @@
             USER_NUMBER = #{userNumber,jdbcType=VARCHAR}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
+    <select id="selectUserByCondition" parameterType="com.ruicai.system.po.system.UserCondition"
+            resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        A .*, ROWNUM rn
+        FROM
+        (
+        SELECT
+        su.*, SD.DICTIONARY_NAME AS USER_STATUS_VIEW,
+        SD1.DICTIONARY_NAME AS USER_TYPE_VIEW
+        FROM
+        (SYSTEM_USER su join SYSTEM_DICTIONARY sd on SU.USER_STATUS = SD."ID")
+        join SYSTEM_DICTIONARY sd1 ON SU.USER_TYPE = SD1."ID"
+        WHERE
+        ROWNUM &lt; #{endNum}
+        <if test="userType != null and userType !=''">
+            AND USER_TYPE = #{userType}
+        </if>
+        <if test="userStatus != null and userStatus !=''">
+            AND USER_STATUS = #{userStatus}
+        </if>
+        <if test="userName != null and userName !=''">
+            AND USER_NAME LIKE '%${userName}%'
+        </if>
+        ) A
+        )
+        WHERE
+        rn &gt; #{startNum}
+    </select>
+
+    <select id="selectUserByConditionCount" parameterType="com.ruicai.system.po.system.UserCondition" resultType="int">
+        SELECT
+        count(id)
+        FROM
+        SYSTEM_USER
+        <where>
+            <if test="userType != null and userType !=''">
+                USER_TYPE = #{userType}
+            </if>
+            <if test="userStatus != null and userStatus !=''">
+                AND USER_STATUS = #{userStatus}
+            </if>
+            <if test="userName != null and userName !=''">
+                AND USER_NAME LIKE '%${userName}%'
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

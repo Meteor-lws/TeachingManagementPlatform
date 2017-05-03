@@ -27,18 +27,18 @@
                href="javascript:void(0)" class="easyui-linkbutton"
                data-options="iconCls:'icon-remove',plain:true">批量删除</a>
         </div>
-        <div align="left">
-            班级 <select id="classSel" class="easyui-combotree" style="width:120px;"></select>
-            上传者 <select id="scheduleSel" class="easyui-combotree" style="width:120px;"></select>
-            日期 <input id="dd" type="text" class="easyui-datebox" style="width: 120px;"></input> &nbsp&nbsp&nbsp <a
-                href="javascript:void(0)" class="easyui-linkbutton"
-                data-options="iconCls:'icon-search',plain:true">搜索</a>
-
+        <div style="margin-top:5px" align="left">
+            上传者
+            <select id="teacherId" class="easyui-combobox" style="width:120px;"></select>
+            日期
+            <input id="workUploadTime" type="text" class="easyui-datetimebox" style="width: 120px;"></input>
+            &nbsp&nbsp&nbsp
+            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            <input id="workType" type="hidden" name="workType" value="course">
         </div>
 
     </div>
     </thead>
 </table>
-<script type="text/javascript" src="js/scheduleEdit.js"/>
 </body>
 </html>

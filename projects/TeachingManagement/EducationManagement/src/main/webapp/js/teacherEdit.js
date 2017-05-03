@@ -6,7 +6,7 @@ $(function () {
     var teachingType ;
     var rowValue;
     var roleList;//教师角色列表
-    var uploadPath = "http://localhost:8081/Upload/"
+    var uploadPath = "http://localhost:8081/Upload/";
 
     $.ajax({
         url: '/education/getSexRadion',
@@ -79,6 +79,7 @@ $(function () {
             $("#pic").attr("src", uploadPath + row.teacherPicture);
             $("#teacherPicture").val(row.teacherPicture);
             $("#teacherIntroductionForm").textbox("setValue", row.teacherIntroduction);
+            $("#teacherNumber").textbox("setValue", row.teacherNumber);
             var teacherSex = row.teacherSex;
             $("#" + teacherSex).attr("checked", "checked");
 
@@ -87,7 +88,7 @@ $(function () {
                 data: {"userId": row.userId},
                 success: function (data) {
                     var teacherRole = $.parseJSON(data);
-                    var roles = new Array();
+                    var roles = [];
                     //将教师高喊的角色的ID存入数组
                     for (var i = 0; i < teacherRole.length; i++) {
                         roles[i] = teacherRole[i].id;
@@ -155,7 +156,7 @@ $(function () {
                 data: {"userId": selRow.userId},
                 success: function (data) {
                     var teacherRole = $.parseJSON(data);
-                    var roles = new Array();
+                    var roles = [];
                     //将教师高喊的角色的ID存入数组
                     for (var i = 0; i < teacherRole.length; i++) {
                         roles[i] = teacherRole[i].id;
@@ -181,7 +182,7 @@ $(function () {
             $("#teacherSpecialityForm").combobox("select", selRow.teacherSpeciality);
             $("#teacherPhoneForm").textbox("setValue", selRow.teacherPhone);
             $("#teacherIntroductionForm").textbox("setValue", selRow.teacherIntroduction);
-
+            $("#teacherName").textbox("setValue", selRow.teacherNumber);
         }
     });
 //删除
@@ -191,8 +192,8 @@ $(function () {
             $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
-                var teacherIds = new Array();
-                var userIds = new Array();
+                var teacherIds = [];
+                var userIds = [];
                 if (choose) {
                     for (var i = 0; i < selects.length; i++) {
                         teacherIds[i] = selects[i].id;
@@ -266,6 +267,7 @@ function submitForm() {
         url: "/education/saveOrUpdate",
         onSubmit: function () {
             var isValid = $(this).form('validate');
+
             if (!isValid) {
                 $.messager.progress('close'); // 如果表单是无效的则隐藏进度条
             }

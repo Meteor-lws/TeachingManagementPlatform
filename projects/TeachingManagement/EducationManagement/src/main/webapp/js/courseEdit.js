@@ -1,23 +1,12 @@
 ﻿$(function () {
-    $('#classSel').combotree('tree').tree({
-        data: [
-            {
-                text: "JAVA",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            },
-            {
-                text: "UI",
-                state: "closed",
-                children: [{text: "1611"}, {text: "1612"}, {text: "1701"}]
-            }
-
-        ]
+    $('#teacherId').combobox({
+        url: "/education/getUploader",
+        valueField: 'id',
+        textField: 'teacherName'
     });
 
-
     $('#couDg').datagrid({
-        url: 'datagrid_data1.json',
+        url: '/education/selectCourseByCondition',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -27,11 +16,15 @@
         pageSize: 20,
         pageNumber: 1,
         columns: [[
-            {field: 'code', itemid: 'ID', checkbox: true, width: 10},
-            {field: 'productid', title: '班级', width: 10},
-            {field: 'productid', title: '上传者', width: 10},
-            {field: 'productid', title: '上传时间', width: 10}
+            {field: 'id', itemid: 'ID', checkbox: true, width: 10},
+            {field: 'teacherView', title: '上传者', width: 10},
+            {field: 'workUploadTimeView', title: '上传时间', width: 10}
         ]],
+        queryParams: {
+            workType: $("#workType").val(),
+            teacherId: $("#teacherId").combobox("getValue"),
+            workUploadTime: $("#workUploadTime").datetimebox("getValue")
+        },
         toolbar: '#couTb'
     });
 
@@ -48,7 +41,21 @@
 
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
                 if (choose) {
-                    $.messager.alert('提示', '删除成功');
+                    var ids = [];
+                    for (var i = 0; i < selects.length; i++) {
+                        ids[i] = selects[i].id;
+                    }
+                    $.ajax({
+                        url: "/education/deleteCouByBatch",
+                        data: {
+                            ids: JSON.stringify(ids)
+                        },
+                        type: "post",
+                        success: function (data) {
+                            $.messager.alert('提示', '删除成功');
+                            $("#couDg").datagrid("reload");
+                        }
+                    });
                 }
             });
         }
@@ -71,31 +78,14 @@
     });
 
 
-    //   上传者 树形下拉列表
-    $('#scheduleSel').combotree('tree').tree({
-        data: [{
-            text: "JAVA",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }, {
-            text: "UI",
-            state: "closed",
-            children: [{
-                text: "1611"
-            }, {
-                text: "1612"
-            }, {
-                text: "1701"
-            }]
-        }
+    $("#search").click(function () {
+        $("#couDg").datagrid("load", {
+            workType: $("#workType").val(),
+            teacherId: $("#teacherId").combobox("getValue"),
+            workUploadTime: $("#workUploadTime").datetimebox("getValue")
+        });
 
-        ]
     });
+
 
 });

@@ -7,7 +7,6 @@
         <result column="USER_TYPE" property="userType" jdbcType="VARCHAR"/>
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
         <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR"/>
-        <result column="USER_NUMBER" property="userNumber" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -108,10 +107,10 @@
             select sys_guid() from dual
         </selectKey>
         insert into RUICAI.SYSTEM_USER (ID, USER_STATUS, USER_TYPE,
-        USER_NAME, USER_PWD, USER_NUMBER
+        USER_NAME, USER_PWD
         )
         values (#{id,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR},
-        #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userNumber,jdbcType=VARCHAR}
+        #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.ruicai.education.po.education.SystemUser">
@@ -216,9 +215,6 @@
             </if>
             <if test="userPwd != null">
                 USER_PWD = #{userPwd,jdbcType=VARCHAR},
-            </if>
-            <if test="userNumber != null">
-                USER_NUMBER = #{userNumber,jdbcType=VARCHAR},
             </if>
         </set>
         where ID = #{id,jdbcType=VARCHAR}

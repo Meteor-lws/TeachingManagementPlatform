@@ -232,4 +232,11 @@
             DICTIONARY_SORT_NUMBER = #{dictionarySortNumber,jdbcType=DECIMAL}
         WHERE ID = #{id,jdbcType=VARCHAR}
     </update>
+    <select id="selectDicByType" parameterType="string" resultMap="BaseResultMap">
+        SELECT sd.*
+        FROM SYSTEM_DICTIONARY sd, SYSTEM_DICTIONARY_TYPE sdt
+        WHERE SD.DICTIONARY_TYPE_ID = sdt."ID" AND SDT.DICTIONARY_TYPE_NAME = #{name}
+        ORDER BY SD.DICTIONARY_SORT_NUMBER
+    </select>
+
 </mapper>

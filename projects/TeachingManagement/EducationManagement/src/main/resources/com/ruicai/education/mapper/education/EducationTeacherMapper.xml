@@ -14,6 +14,7 @@
     <result column="TEACHER_PHONE" property="teacherPhone" jdbcType="VARCHAR" />
     <result column="TEACHER_INTRODUCTION" property="teacherIntroduction" jdbcType="VARCHAR" />
     <result column="TEACHER_PICTURE" property="teacherPicture" jdbcType="VARCHAR" />
+      <result column="TEACHER_NUMBER" property="teacherNumber" jdbcType="VARCHAR"/>
     <collection property="roles" javaType="list" ofType="com.ruicai.education.po.education.UserToRoleKey">
       <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
       <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
@@ -41,12 +42,13 @@
       select sys_guid() from dual
     </selectKey>
     insert into RUICAI.EDUCATION_TEACHER (ID, USER_ID, TEACHER_TYPE,
-      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME, 
-      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE
+      TEACHER_SPECIALITY, TEACHER_SEX, TEACHER_NAME,
+      TEACHER_PHONE, TEACHER_INTRODUCTION, TEACHER_PICTURE,TEACHER_NUMBER
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{teacherType,jdbcType=VARCHAR},
-      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
-      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR}, #{teacherPicture,jdbcType=VARCHAR}
+      #{teacherSpeciality,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR},
+      #{teacherPhone,jdbcType=VARCHAR}, #{teacherIntroduction,jdbcType=VARCHAR},
+      #{teacherPicture,jdbcType=VARCHAR},#{teacherNumber,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ruicai.education.po.education.EducationTeacher" >
@@ -137,6 +139,9 @@
       <if test="teacherPicture != null" >
         TEACHER_PICTURE = #{teacherPicture,jdbcType=VARCHAR},
       </if>
+        <if test="teacherNumber != null">
+            TEACHER_NUMBER = #{teacherNumber,jdbcType=VARCHAR},
+        </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -187,6 +192,7 @@
     et.TEACHER_SPECIALITY,
     et.TEACHER_SEX,
     et.TEACHER_TYPE,
+      et.TEACHER_NUMBER,
     sd.DICTIONARY_NAME as TEACHER_SEX_VIEW,
     sd1.DICTIONARY_NAME as TEACHER_SPECIALITY_VIEW,
     sd2.DICTIONARY_NAME as TEACHER_TYPE_VIEW

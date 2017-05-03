@@ -17,7 +17,7 @@ public interface WorkServer {
      *
      * @return
      */
-    public List<EducationTeacher> selectAllTeacher();
+    List<EducationTeacher> selectAllTeacher();
 
     /**
      * 条件分页查询
@@ -26,7 +26,7 @@ public interface WorkServer {
      * @param pageBean
      * @return
      */
-    public PageBean<EducationWork> getResByCondition(WorkCondition condition, PageBean<EducationWork> pageBean);
+    PageBean<EducationWork> getResByCondition(WorkCondition condition, PageBean<EducationWork> pageBean);
 
     /**
      * 查询满足条件的课件有多少
@@ -34,11 +34,15 @@ public interface WorkServer {
      * @param condition
      * @return
      */
-    public int getResByConditionCount(WorkCondition condition);
+    int getResByConditionCount(WorkCondition condition);
 
-    public void deleteResByBatch(List<String> rids);
+    void deleteResByBatch(List<String> rids);
 
-    public void deleteWeeByBatch(List<String> idList);
+    void deleteWeeByBatch(List<String> idList);
 
-    public PageBean<EducationWork> selectWeeByCondition(WorkCondition condition);
+    PageBean<EducationWork> selectWeeByCondition(WorkCondition condition);
+
+    PageBean<EducationWork> selectCourseByCondition(WorkCondition condition);
+
+    void deleteCouByBatch(List<String> rids);
 }

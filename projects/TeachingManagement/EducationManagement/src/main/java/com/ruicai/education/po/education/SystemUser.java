@@ -11,7 +11,6 @@ public class SystemUser {
 
     private String userPwd;
 
-    private String userNumber;
 
     public String getId() {
         return id;
@@ -53,11 +52,5 @@ public class SystemUser {
         this.userPwd = userPwd == null ? null : userPwd.trim();
     }
 
-    public String getUserNumber() {
-        return userNumber;
-    }
 
-    public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber == null ? null : userNumber.trim();
-    }
 }
