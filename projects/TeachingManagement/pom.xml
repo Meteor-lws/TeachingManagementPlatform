@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ruicai</groupId>
-    <artifactId>teaching-management</artifactId>
+    <artifactId>teaching</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
@@ -12,7 +12,7 @@
         <module>SystemManagement</module>
         <module>MybatisGenerator</module>
     </modules>
-    <name>teaching-management</name>
+    <name>teaching</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -173,7 +173,7 @@
     </dependencies>
 
     <build>
-        <finalName>teaching-management</finalName>
+        <finalName>teaching</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

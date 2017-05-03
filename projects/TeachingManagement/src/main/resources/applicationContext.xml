@@ -6,7 +6,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="successUrl" value="http://localhost:8080/teaching/"></property>
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="https://localhost:8443/cas/login?service=http://localhost:8080/education/"/>
+        <property name="loginUrl" value="https://localhost:8443/cas/login?service=http://localhost:8081/education/"/>
         <property name="filters">
             <map>
                 <entry key="cas" value-ref="casFilter"/>
@@ -22,7 +22,7 @@
 
     <bean id="casRealm" class="com.ruicai.teaching.controller.customRealm.CasRealm">
         <property name="casServerUrlPrefix" value="https://localhost:8443/cas"/>
-        <property name="casService" value="http://localhost:8080/teaching/"/>
+        <property name="casService" value="http://localhost:8081/teaching/"/>
     </bean>
 
     <bean id="casFilter" class="org.apache.shiro.cas.CasFilter"/>
