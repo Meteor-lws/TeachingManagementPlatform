@@ -52,9 +52,6 @@ $(function () {
                 case '评分分析':
                     url = '/examination/analysis';
                     break;
-                case '考勤管理':
-                    url = '/education/attendance';
-                    break;
                 case '周报管理':
                     url = '/education/weekly';
                     break;

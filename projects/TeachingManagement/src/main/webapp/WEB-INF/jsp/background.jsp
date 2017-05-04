@@ -51,7 +51,6 @@
                 <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">考勤管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">周报管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">课表管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">课件管理</a></li>
