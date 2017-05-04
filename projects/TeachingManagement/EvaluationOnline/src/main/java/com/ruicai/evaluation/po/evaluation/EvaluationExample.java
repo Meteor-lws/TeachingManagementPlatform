@@ -1,9 +1,12 @@
 package com.ruicai.evaluation.po.evaluation;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class EvaluationExample {
     protected String orderByClause;
 
@@ -442,6 +445,66 @@ public class EvaluationExample {
 
         public Criteria andEvaluationFeedbackNotBetween(String value1, String value2) {
             addCriterion("EVALUATION_FEEDBACK not between", value1, value2, "evaluationFeedback");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreIsNull() {
+            addCriterion("EVALUATION_SCORE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreIsNotNull() {
+            addCriterion("EVALUATION_SCORE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreEqualTo(Short value) {
+            addCriterion("EVALUATION_SCORE =", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreNotEqualTo(Short value) {
+            addCriterion("EVALUATION_SCORE <>", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreGreaterThan(Short value) {
+            addCriterion("EVALUATION_SCORE >", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreGreaterThanOrEqualTo(Short value) {
+            addCriterion("EVALUATION_SCORE >=", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreLessThan(Short value) {
+            addCriterion("EVALUATION_SCORE <", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreLessThanOrEqualTo(Short value) {
+            addCriterion("EVALUATION_SCORE <=", value, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreIn(List<Short> values) {
+            addCriterion("EVALUATION_SCORE in", values, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreNotIn(List<Short> values) {
+            addCriterion("EVALUATION_SCORE not in", values, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreBetween(Short value1, Short value2) {
+            addCriterion("EVALUATION_SCORE between", value1, value2, "evaluationScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluationScoreNotBetween(Short value1, Short value2) {
+            addCriterion("EVALUATION_SCORE not between", value1, value2, "evaluationScore");
             return (Criteria) this;
         }
     }

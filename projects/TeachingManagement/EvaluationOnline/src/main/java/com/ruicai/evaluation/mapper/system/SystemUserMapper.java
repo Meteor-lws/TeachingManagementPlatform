@@ -3,9 +3,11 @@ package com.ruicai.evaluation.mapper.system;
 import com.ruicai.evaluation.po.system.SystemUser;
 import com.ruicai.evaluation.po.system.SystemUserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SystemUserMapper {
     int countByExample(SystemUserExample example);
 

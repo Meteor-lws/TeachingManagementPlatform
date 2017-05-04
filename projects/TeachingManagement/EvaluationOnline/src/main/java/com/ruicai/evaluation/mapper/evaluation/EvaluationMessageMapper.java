@@ -3,9 +3,11 @@ package com.ruicai.evaluation.mapper.evaluation;
 import com.ruicai.evaluation.po.evaluation.EvaluationMessage;
 import com.ruicai.evaluation.po.evaluation.EvaluationMessageExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EvaluationMessageMapper {
     int countByExample(EvaluationMessageExample example);
 
