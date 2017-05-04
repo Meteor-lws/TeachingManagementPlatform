@@ -82,18 +82,4 @@ public class EducationClass {
     public void setClassEndDate(Date classEndDate) {
         this.classEndDate = classEndDate;
     }
-
-    @Override
-    public String toString() {
-        return "EducationClass{" +
-                "id='" + id + '\'' +
-                ", headTeacherId='" + headTeacherId + '\'' +
-                ", mainTeacherId='" + mainTeacherId + '\'' +
-                ", assistantId='" + assistantId + '\'' +
-                ", classType='" + classType + '\'' +
-                ", className='" + className + '\'' +
-                ", classStartDate=" + classStartDate +
-                ", classEndDate=" + classEndDate +
-                '}';
-    }
 }

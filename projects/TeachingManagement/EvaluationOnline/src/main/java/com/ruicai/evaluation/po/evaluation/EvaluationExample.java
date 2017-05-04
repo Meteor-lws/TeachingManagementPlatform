@@ -1,12 +1,9 @@
 package com.ruicai.evaluation.po.evaluation;
 
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
 public class EvaluationExample {
     protected String orderByClause;
 
@@ -48,16 +45,16 @@ public class EvaluationExample {
         return criteria;
     }
 
-    protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
-    }
-
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
         return criteria;
     }
 
@@ -87,16 +84,30 @@ public class EvaluationExample {
             return criteria;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
-            return (Criteria) this;
-        }
-
         protected void addCriterion(String condition) {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
@@ -107,13 +118,6 @@ public class EvaluationExample {
         public Criteria andIdEqualTo(String value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value));
         }
 
         public Criteria andIdNotEqualTo(String value) {
@@ -164,13 +168,6 @@ public class EvaluationExample {
         public Criteria andIdBetween(String value1, String value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value1, value2));
         }
 
         public Criteria andIdNotBetween(String value1, String value2) {
@@ -447,66 +444,6 @@ public class EvaluationExample {
             addCriterion("EVALUATION_FEEDBACK not between", value1, value2, "evaluationFeedback");
             return (Criteria) this;
         }
-
-        public Criteria andEvaluationScoreIsNull() {
-            addCriterion("EVALUATION_SCORE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreIsNotNull() {
-            addCriterion("EVALUATION_SCORE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreEqualTo(Short value) {
-            addCriterion("EVALUATION_SCORE =", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreNotEqualTo(Short value) {
-            addCriterion("EVALUATION_SCORE <>", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreGreaterThan(Short value) {
-            addCriterion("EVALUATION_SCORE >", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreGreaterThanOrEqualTo(Short value) {
-            addCriterion("EVALUATION_SCORE >=", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreLessThan(Short value) {
-            addCriterion("EVALUATION_SCORE <", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreLessThanOrEqualTo(Short value) {
-            addCriterion("EVALUATION_SCORE <=", value, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreIn(List<Short> values) {
-            addCriterion("EVALUATION_SCORE in", values, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreNotIn(List<Short> values) {
-            addCriterion("EVALUATION_SCORE not in", values, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreBetween(Short value1, Short value2) {
-            addCriterion("EVALUATION_SCORE between", value1, value2, "evaluationScore");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvaluationScoreNotBetween(Short value1, Short value2) {
-            addCriterion("EVALUATION_SCORE not between", value1, value2, "evaluationScore");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -540,10 +477,6 @@ public class EvaluationExample {
             this.noValue = true;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
-        }
-
         protected Criterion(String condition, Object value, String typeHandler) {
             super();
             this.condition = condition;
@@ -556,8 +489,8 @@ public class EvaluationExample {
             }
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
         }
 
         protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
@@ -567,6 +500,10 @@ public class EvaluationExample {
             this.secondValue = secondValue;
             this.typeHandler = typeHandler;
             this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
         }
 
         public String getCondition() {

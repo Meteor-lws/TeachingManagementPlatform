@@ -1,13 +1,13 @@
 package com.ruicai.evaluation.po.evaluation;
 
 public class EvaluationItem {
-    protected String id;
+    private String id;
 
-    protected String itemType;
+    private String itemType;
 
-    protected String itemContent;
+    private String itemContent;
 
-    protected Short itemEnable;
+    private Short itemEnable;
 
     public String getId() {
         return id;
@@ -39,15 +39,5 @@ public class EvaluationItem {
 
     public void setItemEnable(Short itemEnable) {
         this.itemEnable = itemEnable;
-    }
-
-    @Override
-    public String toString() {
-        return "EvaluationItem{" +
-                "id='" + id + '\'' +
-                ", itemType='" + itemType + '\'' +
-                ", itemContent='" + itemContent + '\'' +
-                ", itemEnable=" + itemEnable +
-                '}';
     }
 }

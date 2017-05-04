@@ -3,11 +3,9 @@ package com.ruicai.evaluation.mapper.education;
 import com.ruicai.evaluation.po.education.EducationStudent;
 import com.ruicai.evaluation.po.education.EducationStudentExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface EducationStudentMapper {
     int countByExample(EducationStudentExample example);
 

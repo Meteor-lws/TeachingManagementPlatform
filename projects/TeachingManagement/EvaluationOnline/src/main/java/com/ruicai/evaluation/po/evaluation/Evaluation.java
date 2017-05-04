@@ -13,8 +13,6 @@ public class Evaluation {
 
     private String evaluationFeedback;
 
-    private Short evaluationScore;
-
     public String getId() {
         return id;
     }
@@ -53,25 +51,5 @@ public class Evaluation {
 
     public void setEvaluationFeedback(String evaluationFeedback) {
         this.evaluationFeedback = evaluationFeedback == null ? null : evaluationFeedback.trim();
-    }
-
-    public Short getEvaluationScore() {
-        return evaluationScore;
-    }
-
-    public void setEvaluationScore(Short evaluationScore) {
-        this.evaluationScore = evaluationScore;
-    }
-
-    @Override
-    public String toString() {
-        return "Evaluation{" +
-                "id='" + id + '\'' +
-                ", studentId='" + studentId + '\'' +
-                ", teacherId='" + teacherId + '\'' +
-                ", evaluationTime=" + evaluationTime +
-                ", evaluationFeedback='" + evaluationFeedback + '\'' +
-                ", evaluationScore=" + evaluationScore +
-                '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.ruicai.evaluation.po.education;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class EducationStudent {
@@ -29,9 +30,9 @@ public class EducationStudent {
 
     private String studentPicture;
 
-    private Short studentInsurance;
+    private BigDecimal studentConduct;
 
-    private Integer studentConduct;
+    private String studentInsurance;
 
     public String getId() {
         return id;
@@ -137,19 +138,19 @@ public class EducationStudent {
         this.studentPicture = studentPicture == null ? null : studentPicture.trim();
     }
 
-    public Short getStudentInsurance() {
-        return studentInsurance;
-    }
-
-    public void setStudentInsurance(Short studentInsurance) {
-        this.studentInsurance = studentInsurance;
-    }
-
-    public Integer getStudentConduct() {
+    public BigDecimal getStudentConduct() {
         return studentConduct;
     }
 
-    public void setStudentConduct(Integer studentConduct) {
+    public void setStudentConduct(BigDecimal studentConduct) {
         this.studentConduct = studentConduct;
+    }
+
+    public String getStudentInsurance() {
+        return studentInsurance;
+    }
+
+    public void setStudentInsurance(String studentInsurance) {
+        this.studentInsurance = studentInsurance == null ? null : studentInsurance.trim();
     }
 }

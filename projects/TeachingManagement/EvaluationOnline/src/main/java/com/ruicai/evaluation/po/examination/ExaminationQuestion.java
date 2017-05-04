@@ -15,6 +15,8 @@ public class ExaminationQuestion {
 
     private Integer questionSelections;
 
+    private String questionStage;
+
     public String getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class ExaminationQuestion {
 
     public void setQuestionSelections(Integer questionSelections) {
         this.questionSelections = questionSelections;
+    }
+
+    public String getQuestionStage() {
+        return questionStage;
+    }
+
+    public void setQuestionStage(String questionStage) {
+        this.questionStage = questionStage == null ? null : questionStage.trim();
     }
 }

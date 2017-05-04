@@ -1,11 +1,8 @@
 package com.ruicai.evaluation.po.education;
 
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class EducationTeacherExample {
     protected String orderByClause;
 
@@ -47,16 +44,16 @@ public class EducationTeacherExample {
         return criteria;
     }
 
-    protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
-    }
-
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
         return criteria;
     }
 
@@ -86,16 +83,30 @@ public class EducationTeacherExample {
             return criteria;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
-            return (Criteria) this;
-        }
-
         protected void addCriterion(String condition) {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
@@ -106,13 +117,6 @@ public class EducationTeacherExample {
         public Criteria andIdEqualTo(String value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value));
         }
 
         public Criteria andIdNotEqualTo(String value) {
@@ -163,13 +167,6 @@ public class EducationTeacherExample {
         public Criteria andIdBetween(String value1, String value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value1, value2));
         }
 
         public Criteria andIdNotBetween(String value1, String value2) {
@@ -736,6 +733,76 @@ public class EducationTeacherExample {
             addCriterion("TEACHER_PICTURE not between", value1, value2, "teacherPicture");
             return (Criteria) this;
         }
+
+        public Criteria andTeacherNumberIsNull() {
+            addCriterion("TEACHER_NUMBER is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberIsNotNull() {
+            addCriterion("TEACHER_NUMBER is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberEqualTo(String value) {
+            addCriterion("TEACHER_NUMBER =", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberNotEqualTo(String value) {
+            addCriterion("TEACHER_NUMBER <>", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberGreaterThan(String value) {
+            addCriterion("TEACHER_NUMBER >", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("TEACHER_NUMBER >=", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberLessThan(String value) {
+            addCriterion("TEACHER_NUMBER <", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberLessThanOrEqualTo(String value) {
+            addCriterion("TEACHER_NUMBER <=", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberLike(String value) {
+            addCriterion("TEACHER_NUMBER like", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberNotLike(String value) {
+            addCriterion("TEACHER_NUMBER not like", value, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberIn(List<String> values) {
+            addCriterion("TEACHER_NUMBER in", values, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberNotIn(List<String> values) {
+            addCriterion("TEACHER_NUMBER not in", values, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberBetween(String value1, String value2) {
+            addCriterion("TEACHER_NUMBER between", value1, value2, "teacherNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTeacherNumberNotBetween(String value1, String value2) {
+            addCriterion("TEACHER_NUMBER not between", value1, value2, "teacherNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -769,10 +836,6 @@ public class EducationTeacherExample {
             this.noValue = true;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
-        }
-
         protected Criterion(String condition, Object value, String typeHandler) {
             super();
             this.condition = condition;
@@ -785,8 +848,8 @@ public class EducationTeacherExample {
             }
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
         }
 
         protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
@@ -796,6 +859,10 @@ public class EducationTeacherExample {
             this.secondValue = secondValue;
             this.typeHandler = typeHandler;
             this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
         }
 
         public String getCondition() {

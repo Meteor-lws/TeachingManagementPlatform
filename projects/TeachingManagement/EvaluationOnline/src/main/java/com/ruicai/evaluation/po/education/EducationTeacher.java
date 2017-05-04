@@ -19,6 +19,8 @@ public class EducationTeacher {
 
     private String teacherPicture;
 
+    private String teacherNumber;
+
     public String getId() {
         return id;
     }
@@ -91,18 +93,11 @@ public class EducationTeacher {
         this.teacherPicture = teacherPicture == null ? null : teacherPicture.trim();
     }
 
-    @Override
-    public String toString() {
-        return "EducationTeacher{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", teacherType='" + teacherType + '\'' +
-                ", teacherSpeciality='" + teacherSpeciality + '\'' +
-                ", teacherSex='" + teacherSex + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", teacherPhone='" + teacherPhone + '\'' +
-                ", teacherIntroduction='" + teacherIntroduction + '\'' +
-                ", teacherPicture='" + teacherPicture + '\'' +
-                '}';
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public void setTeacherNumber(String teacherNumber) {
+        this.teacherNumber = teacherNumber == null ? null : teacherNumber.trim();
     }
 }

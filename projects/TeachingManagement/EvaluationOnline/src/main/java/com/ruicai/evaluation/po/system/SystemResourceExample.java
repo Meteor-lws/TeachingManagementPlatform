@@ -44,16 +44,16 @@ public class SystemResourceExample {
         return criteria;
     }
 
-    protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
-    }
-
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
         return criteria;
     }
 
@@ -83,16 +83,30 @@ public class SystemResourceExample {
             return criteria;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
-            return (Criteria) this;
-        }
-
         protected void addCriterion(String condition) {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
@@ -103,13 +117,6 @@ public class SystemResourceExample {
         public Criteria andIdEqualTo(String value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value));
         }
 
         public Criteria andIdNotEqualTo(String value) {
@@ -160,13 +167,6 @@ public class SystemResourceExample {
         public Criteria andIdBetween(String value1, String value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value1, value2));
         }
 
         public Criteria andIdNotBetween(String value1, String value2) {
@@ -454,6 +454,76 @@ public class SystemResourceExample {
             return (Criteria) this;
         }
 
+        public Criteria andResourceDescribeIsNull() {
+            addCriterion("RESOURCE_DESCRIBE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeIsNotNull() {
+            addCriterion("RESOURCE_DESCRIBE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeEqualTo(String value) {
+            addCriterion("RESOURCE_DESCRIBE =", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeNotEqualTo(String value) {
+            addCriterion("RESOURCE_DESCRIBE <>", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeGreaterThan(String value) {
+            addCriterion("RESOURCE_DESCRIBE >", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("RESOURCE_DESCRIBE >=", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeLessThan(String value) {
+            addCriterion("RESOURCE_DESCRIBE <", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeLessThanOrEqualTo(String value) {
+            addCriterion("RESOURCE_DESCRIBE <=", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeLike(String value) {
+            addCriterion("RESOURCE_DESCRIBE like", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeNotLike(String value) {
+            addCriterion("RESOURCE_DESCRIBE not like", value, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeIn(List<String> values) {
+            addCriterion("RESOURCE_DESCRIBE in", values, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeNotIn(List<String> values) {
+            addCriterion("RESOURCE_DESCRIBE not in", values, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeBetween(String value1, String value2) {
+            addCriterion("RESOURCE_DESCRIBE between", value1, value2, "resourceDescribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceDescribeNotBetween(String value1, String value2) {
+            addCriterion("RESOURCE_DESCRIBE not between", value1, value2, "resourceDescribe");
+            return (Criteria) this;
+        }
+
         public Criteria andResourceVisibleIsNull() {
             addCriterion("RESOURCE_VISIBLE is null");
             return (Criteria) this;
@@ -464,52 +534,62 @@ public class SystemResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleEqualTo(Short value) {
+        public Criteria andResourceVisibleEqualTo(String value) {
             addCriterion("RESOURCE_VISIBLE =", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleNotEqualTo(Short value) {
+        public Criteria andResourceVisibleNotEqualTo(String value) {
             addCriterion("RESOURCE_VISIBLE <>", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleGreaterThan(Short value) {
+        public Criteria andResourceVisibleGreaterThan(String value) {
             addCriterion("RESOURCE_VISIBLE >", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleGreaterThanOrEqualTo(Short value) {
+        public Criteria andResourceVisibleGreaterThanOrEqualTo(String value) {
             addCriterion("RESOURCE_VISIBLE >=", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleLessThan(Short value) {
+        public Criteria andResourceVisibleLessThan(String value) {
             addCriterion("RESOURCE_VISIBLE <", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleLessThanOrEqualTo(Short value) {
+        public Criteria andResourceVisibleLessThanOrEqualTo(String value) {
             addCriterion("RESOURCE_VISIBLE <=", value, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleIn(List<Short> values) {
+        public Criteria andResourceVisibleLike(String value) {
+            addCriterion("RESOURCE_VISIBLE like", value, "resourceVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceVisibleNotLike(String value) {
+            addCriterion("RESOURCE_VISIBLE not like", value, "resourceVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceVisibleIn(List<String> values) {
             addCriterion("RESOURCE_VISIBLE in", values, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleNotIn(List<Short> values) {
+        public Criteria andResourceVisibleNotIn(List<String> values) {
             addCriterion("RESOURCE_VISIBLE not in", values, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleBetween(Short value1, Short value2) {
+        public Criteria andResourceVisibleBetween(String value1, String value2) {
             addCriterion("RESOURCE_VISIBLE between", value1, value2, "resourceVisible");
             return (Criteria) this;
         }
 
-        public Criteria andResourceVisibleNotBetween(Short value1, Short value2) {
+        public Criteria andResourceVisibleNotBetween(String value1, String value2) {
             addCriterion("RESOURCE_VISIBLE not between", value1, value2, "resourceVisible");
             return (Criteria) this;
         }
@@ -524,52 +604,62 @@ public class SystemResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableEqualTo(Short value) {
+        public Criteria andResourceEnableEqualTo(String value) {
             addCriterion("RESOURCE_ENABLE =", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableNotEqualTo(Short value) {
+        public Criteria andResourceEnableNotEqualTo(String value) {
             addCriterion("RESOURCE_ENABLE <>", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableGreaterThan(Short value) {
+        public Criteria andResourceEnableGreaterThan(String value) {
             addCriterion("RESOURCE_ENABLE >", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableGreaterThanOrEqualTo(Short value) {
+        public Criteria andResourceEnableGreaterThanOrEqualTo(String value) {
             addCriterion("RESOURCE_ENABLE >=", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableLessThan(Short value) {
+        public Criteria andResourceEnableLessThan(String value) {
             addCriterion("RESOURCE_ENABLE <", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableLessThanOrEqualTo(Short value) {
+        public Criteria andResourceEnableLessThanOrEqualTo(String value) {
             addCriterion("RESOURCE_ENABLE <=", value, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableIn(List<Short> values) {
+        public Criteria andResourceEnableLike(String value) {
+            addCriterion("RESOURCE_ENABLE like", value, "resourceEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceEnableNotLike(String value) {
+            addCriterion("RESOURCE_ENABLE not like", value, "resourceEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceEnableIn(List<String> values) {
             addCriterion("RESOURCE_ENABLE in", values, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableNotIn(List<Short> values) {
+        public Criteria andResourceEnableNotIn(List<String> values) {
             addCriterion("RESOURCE_ENABLE not in", values, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableBetween(Short value1, Short value2) {
+        public Criteria andResourceEnableBetween(String value1, String value2) {
             addCriterion("RESOURCE_ENABLE between", value1, value2, "resourceEnable");
             return (Criteria) this;
         }
 
-        public Criteria andResourceEnableNotBetween(Short value1, Short value2) {
+        public Criteria andResourceEnableNotBetween(String value1, String value2) {
             addCriterion("RESOURCE_ENABLE not between", value1, value2, "resourceEnable");
             return (Criteria) this;
         }
@@ -606,10 +696,6 @@ public class SystemResourceExample {
             this.noValue = true;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
-        }
-
         protected Criterion(String condition, Object value, String typeHandler) {
             super();
             this.condition = condition;
@@ -622,8 +708,8 @@ public class SystemResourceExample {
             }
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
         }
 
         protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
@@ -633,6 +719,10 @@ public class SystemResourceExample {
             this.secondValue = secondValue;
             this.typeHandler = typeHandler;
             this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
         }
 
         public String getCondition() {

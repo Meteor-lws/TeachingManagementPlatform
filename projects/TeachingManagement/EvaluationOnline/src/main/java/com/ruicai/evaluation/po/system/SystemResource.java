@@ -11,9 +11,11 @@ public class SystemResource {
 
     private String resourceValue;
 
-    private Short resourceVisible;
+    private String resourceDescribe;
 
-    private Short resourceEnable;
+    private String resourceVisible;
+
+    private String resourceEnable;
 
     public String getId() {
         return id;
@@ -55,19 +57,27 @@ public class SystemResource {
         this.resourceValue = resourceValue == null ? null : resourceValue.trim();
     }
 
-    public Short getResourceVisible() {
+    public String getResourceDescribe() {
+        return resourceDescribe;
+    }
+
+    public void setResourceDescribe(String resourceDescribe) {
+        this.resourceDescribe = resourceDescribe == null ? null : resourceDescribe.trim();
+    }
+
+    public String getResourceVisible() {
         return resourceVisible;
     }
 
-    public void setResourceVisible(Short resourceVisible) {
-        this.resourceVisible = resourceVisible;
+    public void setResourceVisible(String resourceVisible) {
+        this.resourceVisible = resourceVisible == null ? null : resourceVisible.trim();
     }
 
-    public Short getResourceEnable() {
+    public String getResourceEnable() {
         return resourceEnable;
     }
 
-    public void setResourceEnable(Short resourceEnable) {
-        this.resourceEnable = resourceEnable;
+    public void setResourceEnable(String resourceEnable) {
+        this.resourceEnable = resourceEnable == null ? null : resourceEnable.trim();
     }
 }

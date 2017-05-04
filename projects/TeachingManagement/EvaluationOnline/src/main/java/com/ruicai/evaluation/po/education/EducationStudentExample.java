@@ -1,12 +1,10 @@
 package com.ruicai.evaluation.po.education;
 
-import org.springframework.stereotype.Service;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
 public class EducationStudentExample {
     protected String orderByClause;
 
@@ -48,16 +46,16 @@ public class EducationStudentExample {
         return criteria;
     }
 
-    protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
-    }
-
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
         return criteria;
     }
 
@@ -87,16 +85,30 @@ public class EducationStudentExample {
             return criteria;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
-            return (Criteria) this;
-        }
-
         protected void addCriterion(String condition) {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
@@ -107,13 +119,6 @@ public class EducationStudentExample {
         public Criteria andIdEqualTo(String value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value));
         }
 
         public Criteria andIdNotEqualTo(String value) {
@@ -164,13 +169,6 @@ public class EducationStudentExample {
         public Criteria andIdBetween(String value1, String value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
-        }
-
-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            criteria.add(new Criterion(condition, value1, value2));
         }
 
         public Criteria andIdNotBetween(String value1, String value2) {
@@ -1008,66 +1006,6 @@ public class EducationStudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andStudentInsuranceIsNull() {
-            addCriterion("STUDENT_INSURANCE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceIsNotNull() {
-            addCriterion("STUDENT_INSURANCE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceEqualTo(Short value) {
-            addCriterion("STUDENT_INSURANCE =", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceNotEqualTo(Short value) {
-            addCriterion("STUDENT_INSURANCE <>", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceGreaterThan(Short value) {
-            addCriterion("STUDENT_INSURANCE >", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceGreaterThanOrEqualTo(Short value) {
-            addCriterion("STUDENT_INSURANCE >=", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceLessThan(Short value) {
-            addCriterion("STUDENT_INSURANCE <", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceLessThanOrEqualTo(Short value) {
-            addCriterion("STUDENT_INSURANCE <=", value, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceIn(List<Short> values) {
-            addCriterion("STUDENT_INSURANCE in", values, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceNotIn(List<Short> values) {
-            addCriterion("STUDENT_INSURANCE not in", values, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceBetween(Short value1, Short value2) {
-            addCriterion("STUDENT_INSURANCE between", value1, value2, "studentInsurance");
-            return (Criteria) this;
-        }
-
-        public Criteria andStudentInsuranceNotBetween(Short value1, Short value2) {
-            addCriterion("STUDENT_INSURANCE not between", value1, value2, "studentInsurance");
-            return (Criteria) this;
-        }
-
         public Criteria andStudentConductIsNull() {
             addCriterion("STUDENT_CONDUCT is null");
             return (Criteria) this;
@@ -1078,53 +1016,123 @@ public class EducationStudentExample {
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductEqualTo(Integer value) {
+        public Criteria andStudentConductEqualTo(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT =", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductNotEqualTo(Integer value) {
+        public Criteria andStudentConductNotEqualTo(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT <>", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductGreaterThan(Integer value) {
+        public Criteria andStudentConductGreaterThan(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT >", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStudentConductGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT >=", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductLessThan(Integer value) {
+        public Criteria andStudentConductLessThan(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT <", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductLessThanOrEqualTo(Integer value) {
+        public Criteria andStudentConductLessThanOrEqualTo(BigDecimal value) {
             addCriterion("STUDENT_CONDUCT <=", value, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductIn(List<Integer> values) {
+        public Criteria andStudentConductIn(List<BigDecimal> values) {
             addCriterion("STUDENT_CONDUCT in", values, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductNotIn(List<Integer> values) {
+        public Criteria andStudentConductNotIn(List<BigDecimal> values) {
             addCriterion("STUDENT_CONDUCT not in", values, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductBetween(Integer value1, Integer value2) {
+        public Criteria andStudentConductBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("STUDENT_CONDUCT between", value1, value2, "studentConduct");
             return (Criteria) this;
         }
 
-        public Criteria andStudentConductNotBetween(Integer value1, Integer value2) {
+        public Criteria andStudentConductNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("STUDENT_CONDUCT not between", value1, value2, "studentConduct");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceIsNull() {
+            addCriterion("STUDENT_INSURANCE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceIsNotNull() {
+            addCriterion("STUDENT_INSURANCE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceEqualTo(String value) {
+            addCriterion("STUDENT_INSURANCE =", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceNotEqualTo(String value) {
+            addCriterion("STUDENT_INSURANCE <>", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceGreaterThan(String value) {
+            addCriterion("STUDENT_INSURANCE >", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceGreaterThanOrEqualTo(String value) {
+            addCriterion("STUDENT_INSURANCE >=", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceLessThan(String value) {
+            addCriterion("STUDENT_INSURANCE <", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceLessThanOrEqualTo(String value) {
+            addCriterion("STUDENT_INSURANCE <=", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceLike(String value) {
+            addCriterion("STUDENT_INSURANCE like", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceNotLike(String value) {
+            addCriterion("STUDENT_INSURANCE not like", value, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceIn(List<String> values) {
+            addCriterion("STUDENT_INSURANCE in", values, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceNotIn(List<String> values) {
+            addCriterion("STUDENT_INSURANCE not in", values, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceBetween(String value1, String value2) {
+            addCriterion("STUDENT_INSURANCE between", value1, value2, "studentInsurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andStudentInsuranceNotBetween(String value1, String value2) {
+            addCriterion("STUDENT_INSURANCE not between", value1, value2, "studentInsurance");
             return (Criteria) this;
         }
     }
@@ -1160,10 +1168,6 @@ public class EducationStudentExample {
             this.noValue = true;
         }
 
-        protected Criterion(String condition, Object value) {
-            this(condition, value, null);
-        }
-
         protected Criterion(String condition, Object value, String typeHandler) {
             super();
             this.condition = condition;
@@ -1176,8 +1180,8 @@ public class EducationStudentExample {
             }
         }
 
-        protected Criterion(String condition, Object value, Object secondValue) {
-            this(condition, value, secondValue, null);
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
         }
 
         protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
@@ -1187,6 +1191,10 @@ public class EducationStudentExample {
             this.secondValue = secondValue;
             this.typeHandler = typeHandler;
             this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
         }
 
         public String getCondition() {
