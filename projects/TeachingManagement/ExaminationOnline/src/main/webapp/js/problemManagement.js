@@ -348,9 +348,6 @@ function dialogOption(id, title, save, redo, close) {
         ],
         onClose: function () {
             close();
-            /*clearComboboxValue("classType");
-            clearComboboxValue("questionType");
-            clearComboboxValue("questionStageName");*/
         }
 
     });

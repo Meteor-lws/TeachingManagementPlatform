@@ -63,7 +63,7 @@
     </aop:config>-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="https://localhost:8443/cas/login?service=http://localhost:8080/system/"/>
+        <property name="loginUrl" value="https://localhost:8443/cas/login?service=http://localhost:8081/system/"/>
         <property name="filters">
             <map>
                 <entry key="cas" value-ref="casFilter"/>
@@ -78,7 +78,7 @@
     </bean>
     <bean id="casRealm" class="com.ruicai.system.CustomRealm.CasRealm">
         <property name="casServerUrlPrefix" value="https://localhost:8443/cas"/>
-        <property name="casService" value="http://localhost:8080/system/"/>
+        <property name="casService" value="http://localhost:8081/system/"/>
     </bean>
 
     <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
