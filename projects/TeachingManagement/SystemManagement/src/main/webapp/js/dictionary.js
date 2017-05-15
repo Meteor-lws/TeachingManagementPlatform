@@ -145,15 +145,15 @@ function showTypeDialog(type) {
         resizable: false,
         modal: true,
         buttons: [{
-            text: '重置',
-            width: 65,
-            iconCls: 'icon-reload',
-            handler: clearTypeDialog
-        }, {
             text: buttonTitle,
             width: 65,
             iconCls: buttonIcon,
             handler: buttonHandler
+        }, {
+            text: '重置',
+            width: 65,
+            iconCls: 'icon-reload',
+            handler: clearTypeDialog
         }],
         onClose: clearTypeDialog
     });
@@ -221,15 +221,15 @@ function showDictionaryDialog(dictionary) {
         resizable: false,
         modal: true,
         buttons: [{
-            text: '重置',
-            width: 65,
-            iconCls: 'icon-reload',
-            handler: clearDictionaryDialog
-        }, {
             text: buttonTitle,
             width: 65,
             iconCls: buttonIcon,
             handler: buttonHandler
+        }, {
+            text: '重置',
+            width: 65,
+            iconCls: 'icon-reload',
+            handler: clearDictionaryDialog
         }],
         onClose: clearDictionaryDialog
     });

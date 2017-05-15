@@ -9,7 +9,7 @@ $(function () {
     });
     $("#editRole").click(function () {
         var parentObj = $("#treeRole").tree("getSelected");
-        if (parentObj != null) {
+        if (parentObj !== null) {
             showDialog("修改角色信息");
             showCheckBox();
 
@@ -91,7 +91,6 @@ $(function () {
     prepareDatagrid();
 });
 function submitForm() {
-    $.messager.progress();
     var title = $('#roleDialog').panel('options').title;
     console.log(title);
     var url = "";
@@ -116,7 +115,7 @@ function submitForm() {
     if ("添加角色" === title) {
         url = "addRole";
         text = "添加角色失败";
-        if (parentObj != null) {
+        if (parentObj !== null) {
             data.parentId = parentObj.id
         }
     } else {
@@ -191,6 +190,7 @@ function prepareDatagrid() {
         pageSize: 25,
         pageList: [10, 15, 20, 25, 30],
         pageNumber: 1,
+        toolbar: "#roleTb",
         columns: [[
             {field: 'id', checkbox: true},
             {field: 'resourceName', title: '资源名', width: 40},

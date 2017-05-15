@@ -25,33 +25,59 @@
 <table id="stuDg">
 </table>
 <%--工具條--%>
-<div id="stuTb" align="left" style="height:50px">
-    <div align="left">
-        <a id="addStu" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
-        <a id="editStu" href="javascript:void(0)" class="easyui-linkbutton"
-           data-options="iconCls:'icon-edit',plain:true">修改</a>
-        <%--批量删除--%>
-        <a id="removeStu" href="javascript:void(0)" class="easyui-linkbutton"
-           data-options="iconCls:'icon-edit',plain:true">刪除</a>
-        </div>
+<div id="stuTb" align="left">
+    <a id="addStu" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+    <a id="editStu" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
+    <a id="removeStu" href="javascript:void(0)" class="easyui-linkbutton"
+       data-options="iconCls:'icon-edit',plain:true">刪除</a>
     学生姓名
     <input id="stuName" class="easyui-validatebox" name="studentName" style="width: 120px;"/> </input> &nbsp
     班级
     <select id="classSel" name="classID" class="easyui-combotree" style="width:120px;"></select>
     毕业时间
     <input id="studentGraduation" name="studentGraduation" type="text" class="easyui-datetimebox" style="width: 120px;">
-    <%--搜索按鈕--%>
     <a id="search" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
        onclick="loadStuDg()">搜索</a>
-    </div>
-    <span></span>
-
-<%--学生修改添加框--%>
+</div>
 <div id="stuDialog" class="easyui-dialog" title="学生修改"
-     data-options="modal:true,closable:true,iconCls:'icon-save',onClose:function(){$('#stuForm').form('clear'); $('#pic').attr('src','') }"
+     data-options="modal:true,closable:true,iconCls:'icon-save',onClose:function(){$('#stuForm').form('clear'); $('#pic').attr('src','') },buttons:[{
+				text:'保存',
+				iconCls:'icon-ok',
+				handler:function(){
+				  $.messager.progress(); // 显示进度条
+             $('#stuForm').form('submit', {
+        url: '/education/saveOrUpdateStudent',
+        onSubmit: function () {
+            var isValid = $(this).form('validate');
+            if (!isValid) {
+                $.messager.progress('close'); // 如果表单是无效的则隐藏进度条
+            }
+            return isValid; // 返回false终止表单提交
+        },
+        success: function () {
+            $.messager.progress('close'); // 如果提交成功则隐藏进度条
+            $('#stuForm').form('clear');
+            $('#pic').attr('src', '');
+            $('#stuDg').datagrid('reload');
+            $('#stuDialog').dialog('close');
+        }
+    });
+
+
+
+				}
+			},{
+				text:'关闭',
+				iconCls:'icon-no',
+				handler:function(){
+				 $('#stuDialog').dialog('close');
+    $('#pic').attr('src', '');
+    $('#stuForm').form('clear');
+				}
+			}]" ,
      style="width:700px;height:400px;padding:10px;">
     <form id="stuForm" method="post" enctype="multipart/form-data">
-        <table style="height:100%" border="2px" width="100% " align="center">
+        <table style="height:100%" width="100% " align="center">
             <tr>
                 <td class="tdLabel" align="right"><label>姓名:</label></td>
                 <td class="tdValue">
@@ -97,12 +123,12 @@
                 <td class="tdLabel" align="right"><label>毕业时间:</label></td>
                 <td class="tdValue">
                     <input id="graduateTime" name="studentGraduation" type="text" class="easyui-datetimebox"
-                           required="required"></input>
+                           required="required"/>
                 </td>
                 <td class="tdLabel" align="right"><label>操行分:</label></td>
                 <td class="tdValue">
                     <input id="studentConduct" name="studentConduct" class="easyui-textbox" type="text"
-                           data-options="required:true"></input>
+                           data-options="required:true"/>
                 </td>
             </tr>
             <tr>
@@ -111,7 +137,7 @@
                 </td>
                 <td class="tdValue">
                     <input id="studentIdNumber" name="studentIdNumber" class="easyui-textbox" type="text"
-                           data-options="required:true"></input>
+                           data-options="required:true"/>
                 </td>
                 <td class="tdLabel" align="right">
                     学历:
@@ -126,19 +152,19 @@
                 <td class="tdLabel" align="right"><label>家长联系方式:</label></td>
                 <td class="tdValue">
                     <input id="studentFamilyPhone" name="studentFamilyPhone" class="easyui-textbox" type="text"
-                           data-options="required:true"></input>
+                           data-options="required:true"/>
                 </td>
                 <td class="tdLabel" align="right"><label>本人联系方式:</label></td>
                 <td class="tdValue">
                     <input id="studentPhone" name="studentPhone" class="easyui-textbox" type="text"
-                           data-options="required:true"></input>
+                           data-options="required:true"/>
                 </td>
             </tr>
             <tr>
-                <td colspan="1">
+                <td align="right">
                     照片:
                 </td>
-                <td colspan="1">
+                <td>
                     <input type="hidden" name="studentPicture" id="studentPicture">
                     <input type="file" id="file" name="stuPic" onchange="uploadPic()">
                 </td>
@@ -163,7 +189,7 @@
 
             </tr>
             <tr>
-                <td>角色:</td>
+                <td align="right">角色:</td>
                 <td colspan="3">
                     <div id="roleDiv">
 
@@ -171,14 +197,6 @@
                 </td>
             </tr>
 
-            <tr align="center">
-                <td colspan="4" class="tdValue" align="right">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
-                       onclick="submitForm()">保存</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
-                       onclick="cancel()">取消</a>
-                </td>
-            </tr>
         </table>
         </form>
     </div>

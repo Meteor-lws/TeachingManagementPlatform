@@ -76,7 +76,10 @@ function updateMessagesStatus(status) {
     if (selections) {
         $.messager.confirm('提示', '确认当前审核结果正确？', function (choice) {
             if (choice) {
-                ajax('UpdateMessagesStatus', {selections: JSON.stringify(selections), status: status}, function () {
+                util.ajax('UpdateMessagesStatus', {
+                    selections: JSON.stringify(selections),
+                    status: status
+                }, function () {
                     $('#message-data').datagrid('reload');
                 }, '更新留言审核结果失败');
             }
@@ -89,34 +92,4 @@ function updateMessagesStatus(status) {
 function getSelections() {
     var selections = $('#message-data').datagrid('getSelections');
     return selections.length > 0 ? selections : null;
-}
-
-function ajax(url, data, success, error) {
-    $.ajax({
-        type: 'post',
-        url: url,
-        data: data,
-        beforeSend: function () {
-            $('<div class="datagrid-mask"></div>').css({
-                display: 'block',
-                width: '100%',
-                height: $(window).height()
-            }).appendTo('body');
-            $('<div class="datagrid-mask-msg"></div>').html('正在处理，请稍候。。。').appendTo('body').css({
-                display: 'block',
-                left: ($(document.body).outerWidth - 190) / 2,
-                top: ($(window).height() - 45) / 2
-            });
-        },
-        success: function (data) {
-            success(data);
-        },
-        error: function () {
-            $.messager.alert('错误', error, 'error');
-        },
-        complete: function () {
-            $('.datagrid-mask').remove();
-            $('.datagrid-mask-msg').remove();
-        }
-    });
 }

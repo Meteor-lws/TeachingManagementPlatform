@@ -20,17 +20,16 @@ import java.util.List;
  */
 @Controller
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @RequestMapping("/user")
-    public String index() {
-        return "userEdit";
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "UserManagement", method = RequestMethod.GET)
     public String UserManagement() {
-        return "UserManagement";
+        return "user";
     }
 
     @RequestMapping(value = "/getUserStatus")
@@ -66,6 +65,4 @@ public class UserController {
         List<String> idList = JSON.parseArray(ids, String.class);
         userService.initPass(idList);
     }
-
-
 }

@@ -55,7 +55,7 @@
     $('#preDg').datagrid({
         url: "/system/getPerByCondition",
         fit: true,
-        fitColumns: false,
+        fitColumns: true,
         striped: true,
         rownumbers: true,
         border: false,
@@ -96,13 +96,13 @@
             $("#resourceDescribe").textbox("setValue", row.resourceDescribe);
             var visi = row.resourceVisible;
             var enable = row.resourceEnable;
-            if (visi == visList[1].id) {
+            if (visi === visList[1].id) {
                 $("#resourceVisibleForm").switchbutton("check");
             }
             else {
                 $("#resourceVisibleForm").switchbutton("uncheck");
             }
-            if (enable == enableList[1].id) {
+            if (enable === enableList[1].id) {
                 $("#resourceEnableFrom").switchbutton("check");
             }
             else {
@@ -124,7 +124,7 @@
     $("#editPre").click(function () {
 
         var selects = $("#preDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
@@ -145,7 +145,7 @@
 
     $("#removePre").click(function () {
         var selects = $("#preDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {

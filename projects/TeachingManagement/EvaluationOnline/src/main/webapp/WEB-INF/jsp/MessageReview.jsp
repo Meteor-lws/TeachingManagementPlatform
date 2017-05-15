@@ -43,7 +43,7 @@
                 <a id="message-pass" class="easyui-linkbutton"
                    data-options="width:80,plain:true,iconCls:'icon-ok'">审核通过</a>
                 <a id="message-fail" class="easyui-linkbutton"
-                   data-options="width:80,plain:true,iconCls:'icon-no'">审核失败</a>
+                   data-options="width:80,plain:true,iconCls:'icon-no'">留言屏蔽</a>
             </td>
         </tr>
     </table>

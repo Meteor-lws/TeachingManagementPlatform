@@ -33,7 +33,7 @@ public class UploadServerImpl implements UploadService {
                         try {
                             String suffix = FileName.substring(FileName.lastIndexOf("."));
                             String upLoadName = UUID.randomUUID().toString();
-                            file.transferTo(new File("D:\\Tomcat\\Upload\\apache-tomcat-7.0.75\\webapps\\Upload\\" + upLoadName + suffix));
+                            file.transferTo(new File("D:\\Tomcat\\Tomcat-7.0.75\\webapps\\Upload\\" + upLoadName + suffix));
                             path = upLoadName + suffix;
                             return path;
                         } catch (IOException e) {

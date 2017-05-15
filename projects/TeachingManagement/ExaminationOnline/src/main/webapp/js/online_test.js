@@ -152,7 +152,7 @@ $(function () {
             var conditionInvigilator = $("#conditionInvigilator").combobox("getValue");
             var conditionPlace = $("#conditionPlace").textbox("getText");
             var cn = $("#condition_Name");
-            if(condition_Name == "" && conditionPhase == "" && conditionTime == "" && conditionInvigilator == "" && conditionPlace == ""){
+            if (condition_Name === "" && conditionPhase === "" && conditionTime === "" && conditionInvigilator === "" && conditionPlace === "") {
                 $.messager.alert('警告', "为选择查询条件，请重试", 'warning');
             }else {
                 var target = cn.combotree("tree").tree("getSelected");
@@ -166,7 +166,7 @@ $(function () {
                     page : page,
                     rows : rows
                 };
-                if(target != null){
+                if (target !== null) {
                     if(cn.combotree("tree").tree("isLeaf", target.target)){
                         data.classId = condition_Name;
                     }else {
@@ -183,7 +183,7 @@ $(function () {
             $("#conditionTime").datetimebox("setValue", "");
             $("#conditionInvigilator").combobox("clear");
             $("#conditionPlace").textbox("clear");
-            var data = {
+            _table.datagrid("options").queryParams = {
                 examinationStage : "",
                 testTime : "",
                 teacherId : "",
@@ -191,7 +191,6 @@ $(function () {
                 page : _table.datagrid("options").pageNumber,
                 rows : _table.datagrid("options").pageSize
             };
-            _table.datagrid("options").queryParams = data;
             _table.datagrid("load", "datagrid");
         }
     };
@@ -199,7 +198,6 @@ $(function () {
 function dialogOption(title, url, save, selectId) {
     var _manager_add = $("#manager_add");
     _manager_add.dialog({
-        width: 350,
         title: title,
         modal: true,
         closed: true,

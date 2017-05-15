@@ -10,7 +10,7 @@ $(function () {
     $('#userDg').datagrid({
         url: '/system/selectUserByCondition',
         fit: true,
-        fitColumns: false,
+        fitColumns: true,
         striped: true,
         rownumbers: true,
         border: false,
@@ -69,7 +69,7 @@ $(function () {
     $("#userEdit").click(function () {
 
         var selects = $("#userDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
@@ -94,7 +94,7 @@ $(function () {
 
     $("#initPass").click(function () {
         var selects = $("#userDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要初始化密码的用户');
         }
         else {
@@ -136,25 +136,4 @@ function prepareTools() {
 function cancel() {
     $("#userDialog").dialog("close");
     $("#userForm").form("clear");
-}
-
-function submitForm() {
-    $.messager.progress(); // 显示进度条
-    $('#userForm').form('submit', {
-        url: "/system/saveOrUpdateUser",
-        onSubmit: function () {
-            var isValid = $(this).form('validate');
-            if (!isValid) {
-                $.messager.progress('close'); // 如果表单是无效的则隐藏进度条
-            }
-            return isValid; // 返回false终止表单提交
-        },
-        success: function () {
-            $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#userForm").form("clear");
-            $("#userDg").datagrid("reload");
-            $("#userDialog").dialog("close")
-        }
-    });
-
 }

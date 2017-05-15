@@ -1,4 +1,4 @@
-package com.hjj.vo;
+package com.ruicai.examination.vo;
 
 import java.util.List;
 

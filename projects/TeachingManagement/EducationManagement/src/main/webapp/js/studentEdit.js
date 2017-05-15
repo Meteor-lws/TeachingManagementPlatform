@@ -567,13 +567,13 @@ $(function () {
 
 
     var data = {};
-    if ($("#studentGraduation").val() != null && $("#studentGraduation").val() != "") {
+    if ($("#studentGraduation").val() !== null && $("#studentGraduation").val() !== "") {
         data.studentGraduation = $("#studentGraduation").val();
     }
-    if ($("#stuName").val() != null && $("#stuName").val() != "") {
+    if ($("#stuName").val() !== null && $("#stuName").val() !== "") {
         data.studentName = $("#stuName").val();
     }
-    if ($("#classSel").val() != null && $("#classSel").val() != "") {
+    if ($("#classSel").val() !== null && $("#classSel").val() !== "") {
         data.ClassId = $("#classSel").val();
     }
 
@@ -667,7 +667,7 @@ $(function () {
 
         var selects = $("#stuDg").datagrid("getSelections");
         $("#stuForm").form("clear");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
@@ -728,7 +728,7 @@ $(function () {
 
     $("#removeStu").click(function () {
         var selects = $("#stuDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
         } else {
             $.messager.confirm('确认', '您确认想要这些记录吗？', function (choose) {
@@ -817,7 +817,7 @@ $(function () {
     $("div[class='proSelect'] select")
         .change(
             function () {
-                if ("99" != $(this).val()) {
+                if ("99" !== $(this).val()) {
                     $("div[class='proSelect'] span").show();
                     $("div[class='proSelect'] input").hide();
                     schoolUlStr = "";
@@ -873,7 +873,7 @@ $(function () {
 function submitForm() {
     $.messager.progress(); // 显示进度条
     $('#stuForm').form('submit', {
-        url: "/education/saveOrUpdateStudent",
+        url: '/education/saveOrUpdateStuden',
         onSubmit: function () {
             var isValid = $(this).form('validate');
             if (!isValid) {
@@ -882,19 +882,19 @@ function submitForm() {
             return isValid; // 返回false终止表单提交
         },
         success: function () {
-            $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#stuForm").form("clear");
-            $("#pic").attr("src", "");
-            $("#stuDg").datagrid("reload");
-            $("#stuDialog").dialog("close")
+            $.messager.progress('close'); // 如果提交成功则隐藏进度条
+            $('#stuForm').form('clear');
+            $('#pic').attr('src', '');
+            $('#stuDg').datagrid('reload');
+            $('#stuDialog').dialog('close')
         }
     });
 }
 //取消按钮
 function cancel() {
-    $("#stuDialog").dialog("close");
-    $("#pic").attr("src", "");
-    $("#stuForm").form("clear");
+    $('#stuDialog').dialog('close');
+    $('#pic').attr('src', '');
+    $('#stuForm').form('clear');
 }
 
 //上传照片
@@ -919,13 +919,13 @@ function uploadPic() {
 
 function loadStuDg() {
     var data = {};
-    if ($("#studentGraduation").val() != null && $("#studentGraduation").val() != "") {
+    if ($("#studentGraduation").val() !== null && $("#studentGraduation").val() !== "") {
         data.studentGraduation = $("#studentGraduation").val();
     }
-    if ($("#stuName").val() != null && $("#stuName").val() != "") {
+    if ($("#stuName").val() !== null && $("#stuName").val() !== "") {
         data.studentName = $("#stuName").val();
     }
-    if ($("#classSel").combotree("getValue") != null && $("#classSel").combotree("getValue") != "") {
+    if ($("#classSel").combotree("getValue") !== null && $("#classSel").combotree("getValue") !== "") {
         data.ClassId = $("#classSel").combotree("getValue");
     }
 

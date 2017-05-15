@@ -96,7 +96,7 @@ $(function () {
                     var content = "";
                     //教师角色复选框的回写
                     for (var i = 0; i < roleList.length; i++) {
-                        if (roles.indexOf(roleList[i].id) != -1) {
+                        if (roles.indexOf(roleList[i].id) !== -1) {
                             content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
                         }
                         else {
@@ -130,7 +130,7 @@ $(function () {
     //修改
     $("#editTea").click(function () {
         var selects = $("#teaDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
@@ -164,7 +164,7 @@ $(function () {
                     var content = "";
                     //教师角色复选框的回写
                     for (var i = 0; i < roleList.length; i++) {
-                        if (roles.indexOf(roleList[i].id) != -1) {
+                        if (roles.indexOf(roleList[i].id) !== -1) {
                             content += "<input type='checkbox' name='role' checked='checked' value='" + roleList[i].id + "'>" + roleList[i].roleName + "</input>";
                         }
                         else {
@@ -188,7 +188,7 @@ $(function () {
 //删除
     $("#removeTea").click(function () {
         var selects = $("#teaDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
@@ -222,7 +222,7 @@ $(function () {
 
     $('#teaDg').datagrid({
         url: '/education/teacherSelect',
-        fitColumns: false,
+        fitColumns: true,
         fit: true,
         striped: true,
         rownumbers: true,
@@ -264,7 +264,7 @@ $(function () {
 function submitForm() {
     $.messager.progress(); // 显示进度条
     $('#teaForm').form('submit', {
-        url: "/education/saveOrUpdate",
+        url: '/education/saveOrUpdate',
         onSubmit: function () {
             var isValid = $(this).form('validate');
 
@@ -274,19 +274,19 @@ function submitForm() {
             return isValid; // 返回false终止表单提交
         },
         success: function () {
-            $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#teaForm").form("clear");//清除表单内容
-            $("#pic").attr("src", "");
-            $("#teaDg").datagrid("reload");
-            $("#teaDialog").dialog("close")
+            $.messager.progress('close'); // 如果提交成功则隐藏进度条
+            $('#teaForm').form('clear');//清除表单内容
+            $('#pic').attr('src', '');
+            $('#teaDg').datagrid('reload');
+            $('#teaDialog').dialog('close')
         }
     });
 
 }
 function cancel() {
-    $("#teaDialog").dialog("close");
-    $("#teaForm").form("clear");
-    $("#pic").attr("src", "");
+    $('#teaDialog').dialog('close');
+    $('#teaForm').form('clear');
+    $('#pic').attr('src', '');
 }
 
 function showPic() {

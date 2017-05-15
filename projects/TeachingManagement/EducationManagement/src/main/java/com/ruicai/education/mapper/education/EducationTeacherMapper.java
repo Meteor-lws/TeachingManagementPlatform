@@ -2,10 +2,12 @@ package com.ruicai.education.mapper.education;
 
 import com.ruicai.education.po.education.EducationTeacher;
 import com.ruicai.education.po.education.TeacherCondition;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface EducationTeacherMapper {
 
     int deleteByPrimaryKey(String id);

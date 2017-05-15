@@ -20,24 +20,51 @@
 <body>
 <table id="classDg" style="width:100%;height:100%">
 </table>
-<div id="classTb" align="center" style="height:60px">
-    <div align="left">
-        <a id="addCla" href="javascript:void(0)" class="easyui-linkbutton"
-           data-options="iconCls:'icon-add',plain:true">添加</a>
-        <a id="editCla" href="javascript:void(0)" class="easyui-linkbutton"
-           data-options="iconCls:'icon-edit',plain:true">修改</a>
-        <a id="removeCla" href="javascript:void(0)" class="easyui-linkbutton"
-           data-options="iconCls:'icon-remove',plain:true">删除</a>
-        </div>
-
-        <div align="left" style="margin-top:5px">
-            开班时间 <input id="classStartDate" type="text" class="easyui-datebox" style="width: 120px"></input>
-            结业时间<input id="classEndDate" type="text" class="easyui-datebox" style="width: 120px"></input>
-            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
-        </div>
+<div id="classTb">
+    <a id="addCla" href="javascript:void(0)" class="easyui-linkbutton"
+       data-options="iconCls:'icon-add',plain:true">添加</a>
+    <a id="editCla" href="javascript:void(0)" class="easyui-linkbutton"
+       data-options="iconCls:'icon-edit',plain:true">修改</a>
+    <a id="removeCla" href="javascript:void(0)" class="easyui-linkbutton"
+       data-options="iconCls:'icon-remove',plain:true">删除</a>
+    开班时间 <input id="classStartDate" type="text" class="easyui-datebox" style="width: 120px"/>
+    结业时间<input id="classEndDate" type="text" class="easyui-datebox" style="width: 120px"/>
+    <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+</div>
     </div>
 <div id="classDialog" class="easyui-dialog" title="班级修改"
-     data-options="modal:true,closable:false,iconCls:'icon-save'"
+     data-options="modal:true,closable:false,iconCls:'icon-save',buttons:[{
+				text:'保存',
+				iconCls:'icon-ok',
+				handler:function(){
+				 $.messager.progress(); // 显示进度条
+    $('#classForm').form('submit', {
+        url: '/education/saveOrUpdateClass',
+        onSubmit: function () {
+            var isValid = $(this).form('validate');
+            if (!isValid) {
+                $.messager.progress('close'); // 如果表单是无效的则隐藏进度条
+            }
+            return isValid; // 返回false终止表单提交
+        },
+        success: function () {
+            $.messager.progress('close'); // 如果提交成功则隐藏进度条
+            $('#classForm').form('clear');
+            $('#classDg').datagrid('reload');
+            $('#classDialog').dialog('close');
+        }
+    });
+
+
+				}
+			},{
+				text:'关闭',
+				iconCls:'icon-no',
+				handler:function(){
+				$('#classForm').form('clear');
+                $('#classDialog').dialog('close');
+				}
+			}]"
      style="width:500px;height:400px;padding:10px;">
     <form id="classForm" method="post">
         <input type="hidden" id="id" name="id">
@@ -57,11 +84,11 @@
                     <td class="tdLabel" align="center"><label>开班时间</label></td>
                     <td class="tdValue" align="left"><input id="classStartDateForm" name="classStartDate" type="text"
                                                             class="easyui-datetimebox"
-                                                            data-options="required:true"></input></td>
+                                                            data-options="required:true"/></td>
                     <td class="tdLabel" align="center"><label>结业时间</label></td>
                     <td class="tdValue" align="left"><input id="classdEndDateForm" name="classEndDate" type="text"
                                                             class="easyui-datetimebox"
-                                                            data-options="required:true"></input></td>
+                                                            data-options="required:true"/></td>
                 </tr>
                 <tr>
 
@@ -86,14 +113,6 @@
                         <select id="assistantId" class="easyui-combobox" name="assistantId"
                                 style="width:170px;" data-options="panelHeight:'80px',required:true">
                         </select>
-                    </td>
-                </tr>
-                <tr align="center">
-                    <td colspan="4" align="right">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
-                           onclick="submitForm()">保存</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
-                           onclick="cancel()">取消</a>
                     </td>
                 </tr>
             </table>

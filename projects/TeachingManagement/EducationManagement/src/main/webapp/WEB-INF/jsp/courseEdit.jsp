@@ -18,25 +18,15 @@
 <body>
 <table id="couDg" style="width:100%;height:500px">
     <thead>
-    <div id="couTb" align="left" style="height:60px">
-        <div>
-            <a id="downSchedule"
-               href="javascript:void(0)" class="easyui-linkbutton"
-               data-options="iconCls:'icon-remove',plain:true">批量下载</a>
-            <a id="removeSchedule"
-               href="javascript:void(0)" class="easyui-linkbutton"
-               data-options="iconCls:'icon-remove',plain:true">批量删除</a>
-        </div>
-        <div style="margin-top:5px" align="left">
-            上传者
-            <select id="teacherId" class="easyui-combobox" style="width:120px;"></select>
-            日期
-            <input id="workUploadTime" type="text" class="easyui-datetimebox" style="width: 120px;"></input>
-            &nbsp&nbsp&nbsp
-            <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
-            <input id="workType" type="hidden" name="workType" value="course">
-        </div>
-
+    <div id="couTb">
+        <a id="downSchedule" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量下载</a>
+        <a id="removeSchedule" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
+        上传者
+        <select id="teacherId" class="easyui-combobox" style="width:120px;"></select>
+        日期
+        <input id="workUploadTime" type="text" class="easyui-datetimebox" style="width: 120px;"/>
+        <a id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+        <input id="workType" type="hidden" name="workType" value="course">
     </div>
     </thead>
 </table>

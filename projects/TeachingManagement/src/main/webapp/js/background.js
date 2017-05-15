@@ -37,10 +37,10 @@ $(function () {
                 case '评价项管理':
                     url = '/evaluation/ItemManagement';
                     break;
-                case '留言审核':
+                case '留 言 审 核':
                     url = '/evaluation/MessageReview';
                     break;
-                case '评价分析':
+                case '评 价 分 析':
                     url = '/evaluation/EvaluationAnalysis';
                     break;
                 case '考试安排':

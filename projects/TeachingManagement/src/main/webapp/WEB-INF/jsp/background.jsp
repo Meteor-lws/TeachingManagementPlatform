@@ -26,34 +26,34 @@
     <div id="back-nav" class="easyui-accordion" data-options="multiple:true,border:false" style="width: 100%">
         <div title="系统管理">
             <ul>
-                <li><a class="easyui-linkbutton" data-options="plain:true">用户管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">角色管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">权限管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">数据字典</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">权限管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">角色管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">用户管理</a></li>
             </ul>
         </div>
-        <div title="在线评教子系统">
+        <div title="教务管理">
+            <ul>
+                <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">课件管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">课表管理</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">周报管理</a></li>
+            </ul>
+        </div>
+        <div title="在线评教">
             <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">评价项管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">留言审核</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">评价分析</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">留 言 审 核</a></li>
+                <li><a class="easyui-linkbutton" data-options="plain:true">评 价 分 析</a></li>
             </ul>
         </div>
-        <div title="在线考试子系统">
+        <div title="在线考试">
             <ul>
                 <li><a class="easyui-linkbutton" data-options="plain:true">考试安排</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">试题管理</a></li>
                 <li><a class="easyui-linkbutton" data-options="plain:true">评分分析</a></li>
-            </ul>
-        </div>
-        <div title="教务管理子系统">
-            <ul>
-                <li><a class="easyui-linkbutton" data-options="plain:true">教师管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">学生管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">班级管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">周报管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">课表管理</a></li>
-                <li><a class="easyui-linkbutton" data-options="plain:true">课件管理</a></li>
             </ul>
         </div>
     </div>
@@ -65,7 +65,7 @@
 </div>
 <div data-options="region:'north'" style="height:85px">
     <div style="position: absolute;width: 100%;min-width: 700px;text-align: center"><h1>瑞才科技教学管理平台</h1></div>
-    <div style="position: absolute"><a href=""><img src="image/logo.png"></a></div>
+    <div style="position: absolute"><a href=""><img src="image/logo.png" border="0"></a></div>
 </div>
 <div data-options="region:'south'" style="height:36px;line-height:30px;text-align: center">&copy;2017-2027瑞才科技教学管理平台</div>
 </body>

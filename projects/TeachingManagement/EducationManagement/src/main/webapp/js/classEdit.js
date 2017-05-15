@@ -59,7 +59,7 @@
     $("#editCla").click(function () {
 
         var selects = $("#classDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要修改的列');
             return;
         }
@@ -88,12 +88,12 @@
 
     $("#removeCla").click(function () {
         var selects = $("#classDg").datagrid("getSelections");
-        if (selects.length == 0) {
+        if (selects.length === 0) {
             $.messager.alert('警告', '请选择一个需要删除的列');
         } else {
             $.messager.confirm('确认', '您确认想要删除这些记录吗？', function (choose) {
                 if (choose) {
-                    var ids = new Array();
+                    var ids = [];
                     for (var i = 0; i < selects.length; i++) {
                         ids[i] = selects[i].id;
                     }
@@ -171,28 +171,11 @@ function clearForm() {
     });
 }
 function submitForm() {
-    $.messager.progress(); // 显示进度条
-    $('#classForm').form('submit', {
-        url: "/education/saveOrUpdateClass",
-        onSubmit: function () {
-            var isValid = $(this).form('validate');
-            if (!isValid) {
-                $.messager.progress('close'); // 如果表单是无效的则隐藏进度条
-            }
-            return isValid; // 返回false终止表单提交
-        },
-        success: function () {
-            $.messager.progress("close"); // 如果提交成功则隐藏进度条
-            $("#classForm").form("clear");
-            $("#classDg").datagrid("reload");
-            $("#classDialog").dialog("close")
-        }
-    });
 
 }
 
 function cancel() {
-    $("#classForm").form("clear");
-    $("#classDialog").dialog("close");
+    $("#classForm").form('clear');
+    $("#classDialog").dialog('close');
 }
 		

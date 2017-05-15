@@ -19,12 +19,16 @@ import java.util.List;
 @Controller
 public class PermissionController {
 
+    private final PermissionService permissionService;
+
     @Autowired
-    private PermissionService permissionService;
+    public PermissionController(PermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
 
     @RequestMapping("/permission")
     public String index() {
-        return "permissionEdit";
+        return "permission";
     }
 
     @ResponseBody
@@ -36,9 +40,7 @@ public class PermissionController {
     @RequestMapping(value = "/findPermission", method = RequestMethod.POST)
     @ResponseBody
     public String findPermission(){
-        String json = JSON.toJSONString(permissionService.findResource());
-        System.err.println(json);
-        return json;
+        return JSON.toJSONString(permissionService.findResource());
     }
 
     @RequestMapping(value = "/getAllResourceType", method = RequestMethod.POST)
@@ -67,6 +69,4 @@ public class PermissionController {
     public void saveOrUpdateResource(SystemResource resource) {
         permissionService.saveOrUpdateResource(resource);
     }
-
-
 }

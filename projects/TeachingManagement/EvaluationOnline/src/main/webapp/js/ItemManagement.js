@@ -80,7 +80,7 @@ function showDialog(item) {
             }
             item.itemContent = content.content;
             item.itemType = content.type;
-            ajax('addEvaluationItem', item, function () {
+            util.ajax('addEvaluationItem', item, function () {
                 closeDialog();
                 $('#item-data').datagrid('reload');
             }, '添加评价项失败');
@@ -98,7 +98,7 @@ function showDialog(item) {
             }
             item.itemContent = content.content;
             item.itemType = content.type;
-            ajax('editEvaluationItem', item, function () {
+            util.ajax('editEvaluationItem', item, function () {
                 closeDialog();
                 $('#item-data').datagrid('reload');
             }, '修改评价项失败');
@@ -109,16 +109,17 @@ function showDialog(item) {
         height: 260,
         title: title,
         onClose: resetDialog,
+        modal: true,
         buttons: [{
-            width: 65,
-            iconCls: 'icon-reload',
-            text: '重置',
-            handler: resetDialog
-        }, {
             width: 65,
             iconCls: buttonIcon,
             text: buttonText,
             handler: buttonHandler
+        }, {
+            width: 65,
+            iconCls: 'icon-reload',
+            text: '重置',
+            handler: resetDialog
         }]
     });
 }
@@ -159,7 +160,7 @@ function removeItem() {
     if (selections) {
         $.messager.confirm('删除确认', '确认要删除选中的评价项吗？', function (choice) {
             if (choice) {
-                ajax('deleteEvaluationItems', {data: JSON.stringify(selections)}, function () {
+                util.ajax('deleteEvaluationItems', {data: JSON.stringify(selections)}, function () {
                     $('#item-data').datagrid('reload');
                 }, '删除评价项失败');
             }
@@ -207,34 +208,4 @@ function setDialogContent(item) {
         enableChoices[1].checked = false;
         enableChoices[0].checked = true;
     }
-}
-
-function ajax(url, data, success, error) {
-    $.ajax({
-        type: 'post',
-        url: url,
-        data: data,
-        beforeSend: function () {
-            $('<div class="datagrid-mask"></div>').css({
-                display: 'block',
-                width: '100%',
-                height: $(window).height()
-            }).appendTo('body');
-            $('<div class="datagrid-mask-msg"></div>').html('正在处理，请稍候。。。').appendTo('body').css({
-                display: 'block',
-                left: ($(document.body).outerWidth - 190) / 2,
-                top: ($(window).height() - 45) / 2
-            });
-        },
-        success: function (data) {
-            success(data);
-        },
-        error: function () {
-            $.messager.alert('错误', error, 'error');
-        },
-        complete: function () {
-            $('.datagrid-mask').remove();
-            $('.datagrid-mask-msg').remove();
-        }
-    });
 }

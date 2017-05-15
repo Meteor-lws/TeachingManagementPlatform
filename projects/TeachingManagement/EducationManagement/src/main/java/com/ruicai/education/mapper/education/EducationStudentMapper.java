@@ -4,9 +4,11 @@ import com.ruicai.education.po.education.EducationStudent;
 import com.ruicai.education.po.education.EducationStudentExample;
 import com.ruicai.education.po.education.StudentCondition;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EducationStudentMapper {
     int countByExample(EducationStudentExample example);
 

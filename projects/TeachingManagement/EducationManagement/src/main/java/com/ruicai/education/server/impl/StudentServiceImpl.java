@@ -10,24 +10,26 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by wy on 2017/4/19.
  */
 @Service
 public class StudentServiceImpl implements StudentServer {
-    @Autowired
-    private EducationStudentMapper educationStudentMapper;
-    @Autowired
-    private DictionaryServer dictionaryServer;
-    @Autowired
-    private UploadService uploadService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private UserServer userServer;
+    private final EducationStudentMapper educationStudentMapper;
+    private final DictionaryServer dictionaryServer;
+    private final UploadService uploadService;
+    private final RoleService roleService;
+    private final UserServer userServer;
 
+    @Autowired
+    public StudentServiceImpl(EducationStudentMapper educationStudentMapper, DictionaryServer dictionaryServer, UploadService uploadService, RoleService roleService, UserServer userServer) {
+        this.educationStudentMapper = educationStudentMapper;
+        this.dictionaryServer = dictionaryServer;
+        this.uploadService = uploadService;
+        this.roleService = roleService;
+        this.userServer = userServer;
+    }
 
 
     /**
@@ -76,7 +78,7 @@ public class StudentServiceImpl implements StudentServer {
         //学生的字典对象
         SystemDictionary studentDic = dictionaryServer.selectDicByValue(ReadProperties.read("student"));
         SystemUser user = new SystemUser();
-        user.setUserName(student.getStudentPhone());
+        user.setUserName(student.getStudentIdNumber());
         user.setUserStatus(enableDic.getId());
         user.setUserType(studentDic.getId());
         user.setUserPwd("123456");
@@ -86,23 +88,20 @@ public class StudentServiceImpl implements StudentServer {
         //学生角色
         String[] roles = student.getRole();
         if (roles != null) {
-            for (int i = 0; i < roles.length; i++) {
+            for (String role : roles) {
                 UserToRoleKey utr = new UserToRoleKey();
                 utr.setUserId(student.getUserId());
-                utr.setRoleId(roles[i]);
+                utr.setRoleId(role);
                 //添加至用户角色表
                 roleService.addRole(utr);
             }
         }
         //保存学生表
-        student.setStudentIdNumber(UUID.randomUUID().toString().substring(0, 9));
         educationStudentMapper.insert(student);
     }
 
     /**
      * 更新学生信息
-     *
-     * @param student
      */
     @Override
     public void updateStudent(EducationStudent student) {
@@ -111,10 +110,10 @@ public class StudentServiceImpl implements StudentServer {
         roleService.deleteRoleByUserID(student.getUserId());
         if (role != null) {
 
-            for (int i = 0; i < role.length; i++) {
+            for (String aRole : role) {
                 UserToRoleKey utr = new UserToRoleKey();
                 utr.setUserId(student.getUserId());
-                utr.setRoleId(role[i]);
+                utr.setRoleId(aRole);
                 roleService.addRole(utr);
             }
         }
@@ -157,22 +156,20 @@ public class StudentServiceImpl implements StudentServer {
 
     /**
      * 批量删除学生
-     *
-     * @param studentIds
      */
     @Override
     public void deleteByBatch(List<String> studentIds, List<String> userIds) {
         //删除学生表
-        for (int i = 0; i < studentIds.size(); i++) {
-            educationStudentMapper.deleteByPrimaryKey(studentIds.get(i));
+        for (String studentId : studentIds) {
+            educationStudentMapper.deleteByPrimaryKey(studentId);
         }
         //删除用户表
-        for (int i = 0; i < userIds.size(); i++) {
-            userServer.deleteByPrimaryKey(userIds.get(i));
+        for (String userId : userIds) {
+            userServer.deleteByPrimaryKey(userId);
         }
         //删除角色表
-        for (int i = 0; i < userIds.size(); i++) {
-            roleService.deleteRoleByUserID(userIds.get(i));
+        for (String userId : userIds) {
+            roleService.deleteRoleByUserID(userId);
         }
 
 

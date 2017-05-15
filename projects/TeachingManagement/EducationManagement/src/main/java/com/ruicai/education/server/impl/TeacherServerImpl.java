@@ -19,17 +19,21 @@ import java.util.Map;
 @Service
 public class TeacherServerImpl implements TeacherServer {
 
-    @Autowired
-    private EducationTeacherMapper educationTeacherMapper;
+    private final EducationTeacherMapper educationTeacherMapper;
+
+    private final UserServer userServer; //注入用户服务
+    private final DictionaryServer dictionaryServer;//注入字典服务
+    private final RoleService roleService;
+    private final UploadService uploadService;
 
     @Autowired
-    private UserServer userServer; //注入用户服务
-    @Autowired
-    private DictionaryServer dictionaryServer;//注入字典服务
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private UploadService uploadService;
+    public TeacherServerImpl(EducationTeacherMapper educationTeacherMapper, UserServer userServer, DictionaryServer dictionaryServer, RoleService roleService, UploadService uploadService) {
+        this.educationTeacherMapper = educationTeacherMapper;
+        this.userServer = userServer;
+        this.dictionaryServer = dictionaryServer;
+        this.roleService = roleService;
+        this.uploadService = uploadService;
+    }
 
     @Override
     public int selectTeaByConditionCount(TeacherCondition condition) {
@@ -68,8 +72,7 @@ public class TeacherServerImpl implements TeacherServer {
         //查询可用对应的字典
         SystemDictionary enableDic = dictionaryServer.selectDicByValue(ReadProperties.read("enable"));
         SystemUser user = new SystemUser();
-        String phone = teacher.getTeacherPhone();
-        user.setUserName(phone);//将手机号码设为用户名
+        user.setUserName(teacher.getTeacherNumber());
         user.setUserStatus(enableDic.getId());
         user.setUserPwd("123456");
         user.setUserType(teacherDic.getId());
@@ -77,10 +80,10 @@ public class TeacherServerImpl implements TeacherServer {
         teacher.setUserId(userId);
         String[] role = teacher.getRole();
         if (role != null) {
-            for (int i = 0; i < role.length; i++) {
+            for (String aRole : role) {
                 Map<String, String> userToRole = new HashMap<>();
                 userToRole.put("userId", user.getId());
-                userToRole.put("roleId", role[i]);
+                userToRole.put("roleId", aRole);
                 educationTeacherMapper.grantRole(userToRole);
             }
         }
@@ -95,10 +98,10 @@ public class TeacherServerImpl implements TeacherServer {
         String[] roles = teacher.getRole();
         //遍历添加
         if (roles != null) {
-            for (int i = 0; i < roles.length; i++) {
+            for (String role : roles) {
                 //生成 用户——角色 中间表所对应的对象
                 UserToRoleKey utr = new UserToRoleKey();
-                utr.setRoleId(roles[i]);
+                utr.setRoleId(role);
                 utr.setUserId(teacher.getUserId());
                 roleService.addRole(utr);
             }
@@ -125,18 +128,18 @@ public class TeacherServerImpl implements TeacherServer {
     public void deleteTeacherByBatch(List<String> teacherIds, List<String> userIds) {
 
         //删除教师表信息
-        for (int i = 0; i < teacherIds.size(); i++) {
-            educationTeacherMapper.deleteByPrimaryKey(teacherIds.get(i));
+        for (String teacherId : teacherIds) {
+            educationTeacherMapper.deleteByPrimaryKey(teacherId);
         }
 
         //删除用户角色表
-        for (int i = 0; i < userIds.size(); i++) {
-            roleService.deleteRoleByUserID(userIds.get(i));
+        for (String userId : userIds) {
+            roleService.deleteRoleByUserID(userId);
         }
 
         //删除用户表信息
-        for (int i = 0; i < userIds.size(); i++) {
-            userServer.deleteByPrimaryKey(userIds.get(i));
+        for (String userId : userIds) {
+            userServer.deleteByPrimaryKey(userId);
         }
 
 

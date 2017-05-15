@@ -21,18 +21,16 @@
     <script type="text/javascript" src="easyui/jquery.min.js"></script>
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/ajaxEcharts.js"></script>
 </head>
 <body>
-<div id="manager_tool" style="padding:5px;">
-    <div style="padding:0 0 0 7px;color:#333;">
-        <label for="className">查询班级：</label><input type="text" id="className" class="textbox" name="className"
-                                                   style="width:125px">
-        <label for="testPhase">创建阶段：</label><input id="testPhase" type="text" name="testPhase" style="width:110px">
-        <label for="stuName">查询学生：</label><input type="text" id="stuName" name="stuName" style="width:110px">
-        <a id="search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
-    </div>
+<div id="manager_tool" style="padding:0 0 0 7px;color:#333;">
+    <label for="className">查询班级：</label><input type="text" id="className" class="textbox" name="className"
+                                               style="width:125px">
+    <label for="testPhase">创建阶段：</label><input id="testPhase" type="text" name="testPhase" style="width:110px">
+    <label for="stuName">查询学生：</label><input type="text" id="stuName" name="stuName" style="width:110px">
+    <a id="search" class="easyui-linkbutton" iconCls="icon-search" data-options="plain:true">查询</a>
 </div>
 <div style="position: absolute">
     <div id="main"></div>
