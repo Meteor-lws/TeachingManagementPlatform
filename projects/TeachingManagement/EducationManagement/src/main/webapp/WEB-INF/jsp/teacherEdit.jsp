@@ -24,7 +24,8 @@
     职教类型:<input id="teachingType" name="teacherType"/>
     <a id="selectTea" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
 </div>
-<div id="teaDialog" class="easyui-dialog" title="教师修改" data-options="modal:true,closed:true,iconCls:'icon-save',closable:true,onClose:function(){$('#teaForm').form('clear');$('#pic').attr('src','')},
+<div id="teaDialog" class="easyui-dialog" title="教师修改"
+     data-options="modal:true,closed:true,iconCls:'icon-save',closable:true,onClose:function(){$('#teaForm').form('clear');$('#pic').attr('src','')},
 
 buttons:[{
 				text:'保存',
@@ -65,35 +66,35 @@ buttons:[{
             <tr>
                 <input type="hidden" name="id" id="teaId">
                 <input type="hidden" name="userId" id="userId">
-                <td class="tdLabel" align="right"><label>姓名:</label></td>
-                <td class="tdValue">
+                <td align="right"><label>姓名:</label></td>
+                <td>
                     <input id="teacherNameForm" name="teacherName" class="easyui-textbox" type="text"
                            data-options="required:true,width:170">
                 </td>
-                <td class="tdLabel" align="right"><label>类型:</label></td>
-                <td class="tdValue">
+                <td align="right"><label>类型:</label></td>
+                <td>
                     <select id="teacherTypeForm" name="teacherType" class="easyui-combotree"
                             data-options="required:true,width:170"></select>
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>专业:</label></td>
-                <td class="tdValue"><select id="teacherSpecialityForm" name="teacherSpeciality" class="easyui-combotree"
+                <td align="right"><label>专业:</label></td>
+                <td><select id="teacherSpecialityForm" name="teacherSpeciality" class="easyui-combotree"
                                             data-options="required:true,width:170"></select>
                 </td>
-                <td class="tdLabel" align="right"><label>手机:</label></td>
-                <td class="tdValue"><input class="easyui-textbox" id="teacherPhoneForm" type="text" name="teacherPhone"
+                <td align="right"><label>手机:</label></td>
+                <td><input class="easyui-textbox" id="teacherPhoneForm" type="text" name="teacherPhone"
                                            data-options="required:true,width:170">
                 </td>
             </tr>
             <tr>
-                <td class="tdLabel" align="right"><label>教师编号:</label></td>
+                <td align="right"><label>教师编号:</label></td>
                 <td>
                     <input id="teacherNumber" name="teacherNumber" class="easyui-textbox"
                            data-options="required:true,width:170"/>
                 </td>
-                <td class="tdLabel" align="right"><label>性别:</label></td>
-                <td class="tdValue">
+                <td align="right"><label>性别:</label></td>
+                <td>
                     <div id="sex">
                     </div>
                 </td>

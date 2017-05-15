@@ -82,6 +82,7 @@ public class StudentServiceImpl implements StudentServer {
         user.setUserStatus(enableDic.getId());
         user.setUserType(studentDic.getId());
         user.setUserPwd("123456");
+        user.setUserNumber(student.getStudentIdNumber());
         //保存用户表
         userServer.insertUser(user);
         student.setUserId(user.getId());

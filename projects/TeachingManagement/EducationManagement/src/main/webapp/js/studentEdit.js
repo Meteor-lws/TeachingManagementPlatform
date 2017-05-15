@@ -511,7 +511,7 @@ $(function () {
     var roleList;
     var schoolName = $("input", $("#schoolName").next("span")).val();
 
-    $.ajax({
+    /* $.ajax({
         url: "/education/getAllStudentRole",
         type: "post",
         async: false,
@@ -525,7 +525,7 @@ $(function () {
             }
             $("#roleDiv").html(content);
         }
-    });
+     });*/
 
     //保险
     $.ajax({

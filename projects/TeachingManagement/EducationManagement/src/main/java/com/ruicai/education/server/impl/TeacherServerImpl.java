@@ -75,6 +75,7 @@ public class TeacherServerImpl implements TeacherServer {
         user.setUserName(teacher.getTeacherNumber());
         user.setUserStatus(enableDic.getId());
         user.setUserPwd("123456");
+        user.setUserNumber(teacher.getTeacherNumber());
         user.setUserType(teacherDic.getId());
         String userId = userServer.insertUser(user);
         teacher.setUserId(userId);
